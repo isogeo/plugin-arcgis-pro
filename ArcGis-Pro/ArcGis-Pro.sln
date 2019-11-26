@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29215.179
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArcGis-Pro-Add-In", "ArcGis-Pro-Add-In\ArcGis-Pro-Add-In.csproj", "{9F0FA6F7-9801-41CE-A1A5-88F8449A9417}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9F0FA6F7-9801-41CE-A1A5-88F8449A9417}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9F0FA6F7-9801-41CE-A1A5-88F8449A9417}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9F0FA6F7-9801-41CE-A1A5-88F8449A9417}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9F0FA6F7-9801-41CE-A1A5-88F8449A9417}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {DCA8C975-0CC8-4AC5-A881-454D1828DAC7}
+	EndGlobalSection
+EndGlobal
