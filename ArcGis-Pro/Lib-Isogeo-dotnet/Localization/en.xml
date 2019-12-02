@@ -1,0 +1,167 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<locale>
+  <Authentification_Title>Isogeo authentification settings</Authentification_Title>
+  <Action_type>Action type</Action_type>
+  <Action_type_default>Action type (default)</Action_type_default>  
+  <Action_type>Action type</Action_type>
+  <Action_type_view>View</Action_type_view>
+  <Action_type_download>Download</Action_type_download>
+  <Advanced_search>Advanced search</Advanced_search>
+  <Application_ID>Application ID</Application_ID>
+  <Application_SECRET>Application SECRET</Application_SECRET>
+  <Authentification_settings>Authentification settings</Authentification_settings>
+  <Cancel>Cancel</Cancel>
+  <Check>Check</Check>
+  <Contact>Contact</Contact>
+  <Contact_support>Contact support</Contact_support>  
+  <Coordinate_system_source>Coordinate system (source)</Coordinate_system_source>
+
+  <Credit_title>Plugin Isogeo - Credits</Credit_title>
+  <Credit_contenu>Contents</Credit_contenu>
+  <Credit_conception>Conception</Credit_conception>
+  <Credit_development>Development</Credit_development>
+  <Credit_contenu_label>Esri Addin based on the Isogeo REST API and realized in 2017 thanks to the particular support of the department of Indre-et-Loire</Credit_contenu_label>
+  <Credit_isogeo>Isogeo - all right reserved</Credit_isogeo>
+
+  <Credit_developedby>Développé par </Credit_developedby>
+  <Default_search>Default search</Default_search>
+  <Default_sort_order>Default sort order</Default_sort_order>
+  <Delete>Delete</Delete>
+  <Format_source>Format (source)</Format_source>
+  <FileSDE>SDE connection file</FileSDE>
+  <Geographic_filter>Geographic filter</Geographic_filter>
+  <Geographical_operator_applied_to_the_filter>Geographical operator (default)</Geographical_operator_applied_to_the_filter>
+  <Geopraphic_type_intersects>Intersect</Geopraphic_type_intersects>
+  <Geopraphic_type_within>Whithin</Geopraphic_type_within>
+  <Geopraphic_type_contains>Contains</Geopraphic_type_contains>
+  <INSPIRE_keywords>INSPIRE keywords</INSPIRE_keywords>
+  <Isogeo_authentification_settings>Isogeo authentification settings</Isogeo_authentification_settings>
+  <Keywords>Keywords</Keywords>
+  <Lang>Language</Lang>
+  <Licence>Licence</Licence>
+
+  <Map_canvas>Map canvas</Map_canvas>
+  <Metadata_owner>Metadata owner</Metadata_owner>
+  <Metadata_owner_default>Metadata owner (default)</Metadata_owner_default>
+
+  <Menu_load>Load data</Menu_load>
+  <Menu_Metadata>Metadata</Menu_Metadata>
+  <Menu_OpenCatalog>OpenCatalog</Menu_OpenCatalog>
+  <Menu_Download>Download</Menu_Download>
+
+  <New_search>New search</New_search>
+  <Open_plugin_credits>Open plugin credits</Open_plugin_credits>
+  <Open_help>Open online help</Open_help>
+  <Previous_search>Last search</Previous_search>
+  <Proxy_url>Proxy URL</Proxy_url>
+  <Proxy_user>User</Proxy_user>
+  <Proxy_password>Password</Proxy_password>
+  <Proxy_settings>Proxy Settings</Proxy_settings>
+
+  <Quicksearch_new>New quicksearch</Quicksearch_new>
+  <Quicksearch_name>Quicksearch name</Quicksearch_name>
+  <Quicksearch_rename>Rename quicksearch</Quicksearch_rename>
+  <Quicksearch_new_name>Quicksearch new name</Quicksearch_new_name>
+  <Quicksearch_name_mandatory>Name is mandatory.</Quicksearch_name_mandatory>
+  <Quicksearch_already_exist>Name already exist.</Quicksearch_already_exist>
+
+  <Reload_last_search>Reload last search</Reload_last_search>
+  <Reset_search>Reset all input fields</Reset_search>
+  <Rename>Rename</Rename>
+  <Ressource_type>Ressource type</Ressource_type>
+  <Ressources>Ressources</Ressources>
+  <Results>Load Results</Results>
+  <Save>Save</Save>
+  <Save_as> as...</Save_as>
+  <Search>Search</Search>
+  <Search_management>Search management</Search_management>
+  <Search_settings>Search settings</Search_settings>
+  <Search_terms>Terms search</Search_terms>
+  <Settings>Settings</Settings>
+  <Set_pluggin_authentification>Set pluggin authentification</Set_pluggin_authentification>
+  <Sorting_direction>Sorting direction</Sorting_direction>
+  <Sorting_method>Sorting method</Sorting_method>
+  <Set_pluggin_authentification>Set pluggin authentification</Set_pluggin_authentification>
+  <Sorting_direction>Sorting direction</Sorting_direction>
+  <Sorting_method>Sorting method</Sorting_method>
+  <Sorting_method_relevance>Relevance</Sorting_method_relevance>
+  <Sorting_method_title>Alphabetical order</Sorting_method_title>
+  <Sorting_method_modified>Data modified</Sorting_method_modified>
+  <Sorting_method_created>Data created</Sorting_method_created>
+  <Sorting_method_metadata_modified>Metadata modified</Sorting_method_metadata_modified>
+  <Sorting_method_metadata_created>Metadata created</Sorting_method_metadata_created>
+  <Sorting_method_descending>Descending</Sorting_method_descending>
+  <Sorting_method_ascending>Ascending</Sorting_method_ascending> 
+
+
+  <Lang_default>(default)</Lang_default>
+  <fr-FR>French</fr-FR>
+  <en-EN>English</en-EN>
+
+  <Message_Query_authentification_ok>Connexion is ok.</Message_Query_authentification_ok>
+  <Message_Query_authentification_ko>Connexion failed.</Message_Query_authentification_ko>
+  <Message_Query_authentification_ko_invalid>Invalid ID or SECRET</Message_Query_authentification_ko_invalid>
+  <Message_Query_authentification_ko_internet>Connection failed. Please check your internet connection and try again.</Message_Query_authentification_ko_internet>
+  <Message_Query_authentification_ko_proxy>Connection failed. Please check your proxy parameters</Message_Query_authentification_ko_proxy>
+  <Message_contact_support>You can contact support at 'support@isogeo.Fr'</Message_contact_support>
+
+  <Message_Query_authentification_id_mandatory>ID is mandatory</Message_Query_authentification_id_mandatory>
+  <Message_Query_authentification_secret_mandatory>SECRET must have 64 characters</Message_Query_authentification_secret_mandatory>
+
+  <Message_Settings_save>Settings saved</Message_Settings_save>
+
+  <Message_Data_file_not_found>File is not found</Message_Data_file_not_found>
+  <Message_Data_sde_not_configured>SDE login file not configured in the 'Settings' tab.</Message_Data_sde_not_configured>
+  <Message_Data_table_undefined>Table name is undefined</Message_Data_table_undefined>
+  <Message_Data_Error>The requested service is not compatible or has not been configured to work in ArcMap</Message_Data_Error>
+  <Message_Data_Type>Unmanaged data type</Message_Data_Type>
+  <Message_Data_layer_not_found>Layer not found</Message_Data_layer_not_found>
+
+  <Message_Metadata_Advanced>Advanced</Message_Metadata_Advanced>
+  <Message_Metadata_Licenses>Licenses</Message_Metadata_Licenses>
+  <Message_Metadata_Geography>Geography</Message_Metadata_Geography>
+  <Message_Metadata_History>History</Message_Metadata_History>
+  <Message_Metadata_Contacts>Contacts</Message_Metadata_Contacts>
+  <Message_Metadata_General>General</Message_Metadata_General>
+
+
+  <Metadata_Contacts_points_contacts>Point of contact</Metadata_Contacts_points_contacts>
+  <Metadata_Contacts_others_contacts>Others contact</Metadata_Contacts_others_contacts>
+  <Metadata_Licences_licence>Licences</Metadata_Licences_licence>
+  <Metadata_Licences_limitation>Limitations</Metadata_Licences_limitation>
+  <Metadata_History_history>Data history</Metadata_History_history>
+  <Metadata_History_context>Context</Metadata_History_context>
+  <Metadata_History_method>Méthod</Metadata_History_method>
+  <Metadata_History_lastupdatedata>Last modifications</Metadata_History_lastupdatedata>
+  <Metadata_History_datecreate>Creation date :</Metadata_History_datecreate>
+  <Metadata_History_lastupdate>LAst update :</Metadata_History_lastupdate>
+  <Metadata_History_updateevery>Mise à jour tous les :</Metadata_History_updateevery>
+  <Metadata_History_startvalid>Start validity :</Metadata_History_startvalid>
+  <Metadata_History_endvalid>End validity :</Metadata_History_endvalid>
+  <Metadata_History_comment>Comments :</Metadata_History_comment>
+
+  <Metadata_Geography_info>Technical informations</Metadata_Geography_info>
+  <Metadata_Geography_specification>Spzcification</Metadata_Geography_specification>
+  <Metadata_Geography_typology>Typology</Metadata_Geography_typology>
+  <Metadata_Geography_format>Format :</Metadata_Geography_format>
+  <Metadata_Geography_nbobjects>Features count :</Metadata_Geography_nbobjects>
+  <Metadata_Geography_geometrytype>Geometry type :</Metadata_Geography_geometrytype>
+  <Metadata_Geography_srs>SRS :</Metadata_Geography_srs>
+  <Metadata_Geography_scale>Scale :</Metadata_Geography_scale>
+  <Metadata_Geography_resolution>Resolution :</Metadata_Geography_resolution>
+
+  <Metadata_General_owner>Owner :</Metadata_General_owner>
+  <Metadata_General_keywords>Keywords :</Metadata_General_keywords>
+  <Metadata_General_themes>Theme :</Metadata_General_themes>
+  <Metadata_General_conformity>Conformity :</Metadata_General_conformity>
+  <Metadata_General_description>Description :</Metadata_General_description>
+
+  <Metadata_Advanced_owner>Metadata owner</Metadata_Advanced_owner>
+  <Metadata_Advanced_details>Metadata properties</Metadata_Advanced_details>
+  <Metadata_Advanced_lang>Language :</Metadata_Advanced_lang>
+  <Metadata_Advanced_create>Created :</Metadata_Advanced_create>
+  <Metadata_Advanced_last_update>Last update :</Metadata_Advanced_last_update>
+  
+
+
+</locale>
