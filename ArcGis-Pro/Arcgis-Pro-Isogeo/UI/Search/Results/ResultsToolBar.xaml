@@ -1,0 +1,24 @@
+﻿<UserControl x:Class="Arcgis_Pro_Isogeo.UI.Search.Results.ResultsToolBar"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Arcgis_Pro_Isogeo.UI.Search.Results"
+             mc:Ignorable="d" 
+             d:DesignHeight="27" d:DesignWidth="605">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+        <Button Grid.Row="0" Grid.Column="0" Content="Results" Margin="3,3,3,3"/>
+        <Button Grid.Row="0" Grid.Column="1" Content="Rrefresh" Margin="3,3,3,3"/>
+        <ComboBox Grid.Row="0" Grid.Column="2" Margin="3,3,3,3"/>
+        <ComboBox Grid.Row="0" Grid.Column="3" Margin="3,3,3,3"/>
+    </Grid>
+</UserControl>
