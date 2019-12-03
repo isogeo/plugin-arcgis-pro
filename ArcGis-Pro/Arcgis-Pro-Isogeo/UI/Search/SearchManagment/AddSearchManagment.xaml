@@ -1,0 +1,19 @@
+﻿<Window x:Class="Arcgis_Pro_Isogeo.UI.Search.SearchManagment.AddSearchManagment"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Arcgis_Pro_Isogeo.UI.Search.SearchManagment"
+        mc:Ignorable="d"
+        Title="AddSearchManagment" Height="107" Width="324">
+    <StackPanel>
+        <StackPanel Orientation="Horizontal">
+                <Label Content="Nom de la recherche rapide : "/>
+                <TextBox Height="20" Width="117" />
+        </StackPanel>
+        <StackPanel Orientation="Horizontal">
+            <Button HorizontalAlignment="Right" Height="23" Width="75" Margin="10, 10, 10, 10" Content="Save" />
+            <Button HorizontalAlignment="Right" Height="23" Width="75" Content="Cancel"/>
+        </StackPanel>
+    </StackPanel>
+</Window>

@@ -1,0 +1,15 @@
+﻿<UserControl x:Class="Arcgis_Pro_Isogeo.UI.Metadata.MetadataHistory"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Arcgis_Pro_Isogeo.UI.Metadata"
+             mc:Ignorable="d" 
+             d:DesignHeight="587" d:DesignWidth="602">
+    <StackPanel>
+        <GroupBox Header="Data history" HorizontalAlignment="Left" Height="95" Margin="0,0,0,0" VerticalAlignment="Top" Width="590"/>
+        <GroupBox Header="Contexte de collecte" HorizontalAlignment="Left" Height="95" Margin="0,0,0,0" VerticalAlignment="Top" Width="590"/>
+        <GroupBox Header="Méthode de collecte" HorizontalAlignment="Left" Height="95" Margin="0,0,0,0" VerticalAlignment="Top" Width="590"/>
+        <GroupBox Header="Dernières modifications sur la donnée" HorizontalAlignment="Left" Height="95" Margin="0,0,0,0" VerticalAlignment="Top" Width="590"/>
+    </StackPanel>
+</UserControl>
