@@ -5,8 +5,53 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Arcgis_Pro_Isogeo.UI.Settings"
              mc:Ignorable="d" 
-             d:DesignHeight="289" d:DesignWidth="626">
+             d:DesignHeight="189" d:DesignWidth="626">
     <Grid>
-        <GroupBox Header="Search settings" Width="626" Height="289"></GroupBox>
+        <GroupBox Header="Search settings" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                </Grid.RowDefinitions>
+                <Label HorizontalAlignment="Right" Content="Langue : " Grid.Row="0" Grid.Column="0" />
+                <Label HorizontalAlignment="Right" Content="Propriétaire de la métadonnée (défaut) : " Grid.Row="1" Grid.Column="0" />
+                <Label HorizontalAlignment="Right" Content="Opérateur géographique (défaut) : " Grid.Row="2" Grid.Column="0" />
+                <Label HorizontalAlignment="Right" Content="Tri par défault : " Grid.Row="3" Grid.Column="0" />
+                <Label HorizontalAlignment="Right" Content="Fichier de connexion SDE " Grid.Row="4" Grid.Column="0" />
+
+                <ComboBox Margin="3, 3, 3, 3" Grid.Row="0" Grid.Column="1" />
+                <ComboBox Margin="3, 3, 3, 3" Grid.Row="1" Grid.Column="1" />
+                <ComboBox Margin="3, 3, 3, 3" Grid.Row="2" Grid.Column="1" />
+                <Grid Grid.Row="3" Grid.Column="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="1*"/>
+                    </Grid.RowDefinitions>
+                    <ComboBox Margin="3, 3, 3, 3" Grid.Row="0" Grid.Column="0" />
+                    <ComboBox Margin="3, 3, 3, 3" Grid.Row="0" Grid.Column="1" />
+                </Grid>
+                <Grid Grid.Row="4" Grid.Column="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="1*"/>
+                    </Grid.RowDefinitions>
+                    <TextBox IsReadOnly="True" Margin="3, 3, 3, 3" Grid.Row="0" Grid.Column="0" />
+                    <Button Content=" ... " Margin="3, 3, 3, 3" Grid.Row="0" Grid.Column="1" />
+                </Grid>
+            </Grid>
+        </GroupBox>
     </Grid>
 </UserControl>

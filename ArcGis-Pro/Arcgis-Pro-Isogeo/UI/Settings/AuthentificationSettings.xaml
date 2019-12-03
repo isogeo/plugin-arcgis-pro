@@ -6,8 +6,18 @@
              xmlns:local="clr-namespace:Arcgis_Pro_Isogeo.UI.Settings"
              mc:Ignorable="d" 
              d:DesignHeight="262" d:DesignWidth="408">
-    <StackPanel>
-        <GroupBox Header="Authentification settings" Height="257" Width="408"/>
 
-    </StackPanel>
+        <GroupBox Header="Authentification settings" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Label HorizontalAlignment="Left" Grid.Row="0" Grid.Column="0" Content="Changer les paramètres d'authentification : "/>
+                <Button Grid.Row="0" Grid.Column="1" Padding="20, 2, 20, 2" Margin="2, 2, 2, 2" Content="Key"/>
+            </Grid>
+        </GroupBox>
 </UserControl>

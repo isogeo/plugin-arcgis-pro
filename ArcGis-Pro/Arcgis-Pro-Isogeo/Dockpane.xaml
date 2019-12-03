@@ -19,31 +19,44 @@
     <DockPanel>
         <TabControl DockPanel.Dock="Top">
             <TabItem Header="Search">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="1*"/>
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="1*"/>
-                    </Grid.RowDefinitions>
-                    <SearchManagment:MenuSearchManagment Grid.Row="0" Grid.Column="0"/>
-                    <PrincipalSearch:PrincipalSearch Grid.Row="1" Grid.Column="0"/>
-                    <AdvancedSearch:AdvancedSearch Grid.Row="2" Grid.Column="0"/>
-                    <Results:ResultsToolBar Grid.Row="3" Grid.Column="0"/>
-                    <Results:Results Grid.Row="4" Grid.Column="0"/>
-                </Grid>
+                <ScrollViewer VerticalScrollBarVisibility="Auto">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="1*"/>
+                        </Grid.RowDefinitions>
+                        <SearchManagment:MenuSearchManagment Grid.Row="0" Grid.Column="0"/>
+                        <PrincipalSearch:PrincipalSearch Grid.Row="1" Grid.Column="0"/>
+                        <AdvancedSearch:AdvancedSearch Grid.Row="2" Grid.Column="0"/>
+                        <Results:ResultsToolBar Grid.Row="3" Grid.Column="0"/>
+                        <Results:Results Grid.Row="4" Grid.Column="0"/>
+                    </Grid>
+                </ScrollViewer>
             </TabItem>
             <TabItem Header="Settings">
-                <StackPanel>
-                    <Settings:SearchSettings />
-                    <Settings:ProxySettings />
-                    <Settings:AuthentificationSettings />
-                    <Settings:ResourcesSettings />
-                </StackPanel>
+                <ScrollViewer VerticalScrollBarVisibility="Auto">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="1*"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Settings:SearchSettings Grid.Row="0" Grid.Column="0" />
+                        <Settings:ProxySettings Grid.Row="1" Grid.Column="0" />
+                        <Settings:AuthentificationSettings Grid.Row="2" Grid.Column="0" />
+                        <Settings:ResourcesSettings Grid.Row="3" Grid.Column="0" />
+                    </Grid>
+                </ScrollViewer>
             </TabItem>
         </TabControl>
     </DockPanel>

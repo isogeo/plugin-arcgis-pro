@@ -40,7 +40,7 @@ namespace Arcgis_Pro_Isogeo
         /// <summary>
         /// Text shown near the top of the DockPane.
         /// </summary>
-        private string _heading = "My DockPane";
+        private string _heading = "Isogeo";
         public string Heading
         {
             get { return _heading; }
