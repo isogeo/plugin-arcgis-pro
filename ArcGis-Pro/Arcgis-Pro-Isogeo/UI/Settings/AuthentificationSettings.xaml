@@ -17,7 +17,7 @@
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
                 <Label HorizontalAlignment="Left" Grid.Row="0" Grid.Column="0" Content="Changer les paramètres d'authentification : "/>
-                <Button Grid.Row="0" Grid.Column="1" Padding="20, 2, 20, 2" Margin="2, 2, 2, 2" Content="Key"/>
+                <Button Grid.Row="0" Grid.Column="1" Padding="20, 3, 20, 3" Margin="3, 3, 3, 3" Content="Key"/>
             </Grid>
         </GroupBox>
 </UserControl>
