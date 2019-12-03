@@ -1,0 +1,36 @@
+﻿<UserControl x:Class="Arcgis_Pro_Isogeo.UI.Metadata.MetadataGeneral"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Arcgis_Pro_Isogeo.UI.Metadata"
+             mc:Ignorable="d" 
+             d:DesignHeight="587" d:DesignWidth="602">
+    <StackPanel>
+            <Label HorizontalAlignment="Center" Content="Titre" x:Name="LblTitle" FontSize="16" FontWeight="Bold"/>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                </Grid.RowDefinitions>
+            <Label Grid.Row="0" Grid.Column="0" Content="Propriétaire :"/>
+            <Label Grid.Row="1" Grid.Column="0" Content="Mots clés :"/>
+            <Label Grid.Row="2" Grid.Column="0" Content="Thème :"/>
+            <Label Grid.Row="3" Grid.Column="0" Content="Conforme :"/>
+            <Label Grid.Row="4" Grid.Column="0"  Content="Description :"/>
+
+            <Label Grid.Row="0" Grid.Column="1" Content="LblOwner" x:Name="LblOwner"/>
+            <Label Grid.Row="1" Grid.Column="1" Content="LblKeywords" x:Name="LblKeywords"/>
+            <Label Grid.Row="2" Grid.Column="1" Content="LblThemes" x:Name="LblThemes" />
+            <Label Grid.Row="3" Grid.Column="1" Content="LblConformity" x:Name="LblConformity" />
+            <Label Grid.Row="4" Grid.Column="1"  Content="LblDescription" x:Name="LblDescription" />
+        </Grid>
+    </StackPanel>
+</UserControl>

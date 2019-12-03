@@ -1,0 +1,12 @@
+﻿<UserControl x:Class="Arcgis_Pro_Isogeo.UI.Settings.SearchSettings"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Arcgis_Pro_Isogeo.UI.Settings"
+             mc:Ignorable="d" 
+             d:DesignHeight="289" d:DesignWidth="626">
+    <Grid>
+        <GroupBox Header="Search settings" Width="626" Height="289"></GroupBox>
+    </Grid>
+</UserControl>

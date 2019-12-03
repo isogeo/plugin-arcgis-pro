@@ -1,0 +1,12 @@
+﻿<Window x:Class="Arcgis_Pro_Isogeo.UI.Settings.Credits"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Arcgis_Pro_Isogeo.UI.Settings"
+        mc:Ignorable="d"
+        Title="Credits" Height="523" Width="366">
+    <StackPanel>
+        <GroupBox Width="337" Height="268" Content="Contenu"></GroupBox>
+    </StackPanel>
+</Window>

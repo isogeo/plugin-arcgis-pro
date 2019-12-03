@@ -135,6 +135,93 @@
     <Compile Include="UI\Metadata\ContactItem.xaml.cs">
       <DependentUpon>ContactItem.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UI\Metadata\LicenceItem.xaml.cs">
+      <DependentUpon>LicenceItem.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Metadata\LimitationItem.xaml.cs">
+      <DependentUpon>LimitationItem.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Metadata\Metadata.xaml.cs">
+      <DependentUpon>Metadata.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Metadata\MetadataAdvanced.xaml.cs">
+      <DependentUpon>MetadataAdvanced.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Metadata\MetadataContacts.xaml.cs">
+      <DependentUpon>MetadataContacts.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Metadata\MetadataDetails.xaml.cs">
+      <DependentUpon>MetadataDetails.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Metadata\MetadataFeature.xaml.cs">
+      <DependentUpon>MetadataFeature.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Metadata\MetadataGeneral.xaml.cs">
+      <DependentUpon>MetadataGeneral.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Metadata\MetadataGeography.xaml.cs">
+      <DependentUpon>MetadataGeography.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Metadata\MetadataHistory.xaml.cs">
+      <DependentUpon>MetadataHistory.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Metadata\MetadataLicences.xaml.cs">
+      <DependentUpon>MetadataLicences.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Metadata\TabMetadataTitle.xaml.cs">
+      <DependentUpon>TabMetadataTitle.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Metadata\TabsMetadata.xaml.cs">
+      <DependentUpon>TabsMetadata.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Search\AdvancedSearch\AdvancedSearch.xaml.cs">
+      <DependentUpon>AdvancedSearch.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Search\AdvancedSearch\AdvancedSearchItem.xaml.cs">
+      <DependentUpon>AdvancedSearchItem.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Search\PrincipalSearch\Keywords.xaml.cs">
+      <DependentUpon>Keywords.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Search\PrincipalSearch\PrincipalSearch.xaml.cs">
+      <DependentUpon>PrincipalSearch.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Search\PrincipalSearch\SearchItems.xaml.cs">
+      <DependentUpon>SearchItems.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Search\Results\ResultItem.xaml.cs">
+      <DependentUpon>ResultItem.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Search\Results\ResultItemSeparator.xaml.cs">
+      <DependentUpon>ResultItemSeparator.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Search\Results\Results.xaml.cs">
+      <DependentUpon>Results.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Search\Results\ResultsToolBar.xaml.cs">
+      <DependentUpon>ResultsToolBar.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Search\SearchManagment\AddSearchManagment.xaml.cs">
+      <DependentUpon>AddSearchManagment.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Search\SearchManagment\MenuSearchManagment.xaml.cs">
+      <DependentUpon>MenuSearchManagment.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Settings\AuthentificationSettings.xaml.cs">
+      <DependentUpon>AuthentificationSettings.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Settings\Credits.xaml.cs">
+      <DependentUpon>Credits.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Settings\ProxySettings.xaml.cs">
+      <DependentUpon>ProxySettings.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Settings\ResourcesSettings.xaml.cs">
+      <DependentUpon>ResourcesSettings.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Settings\SearchSettings.xaml.cs">
+      <DependentUpon>SearchSettings.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Page Include="Dockpane.xaml">
@@ -146,6 +233,122 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UI\Metadata\ContactItem.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Metadata\LicenceItem.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Metadata\LimitationItem.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Metadata\Metadata.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Metadata\MetadataAdvanced.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Metadata\MetadataContacts.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Metadata\MetadataDetails.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Metadata\MetadataFeature.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Metadata\MetadataGeneral.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Metadata\MetadataGeography.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Metadata\MetadataHistory.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Metadata\MetadataLicences.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Metadata\TabMetadataTitle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Metadata\TabsMetadata.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Search\AdvancedSearch\AdvancedSearch.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Search\AdvancedSearch\AdvancedSearchItem.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Search\PrincipalSearch\Keywords.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Search\PrincipalSearch\PrincipalSearch.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Search\PrincipalSearch\SearchItems.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Search\Results\ResultItem.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Search\Results\ResultItemSeparator.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Search\Results\Results.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Search\Results\ResultsToolBar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Search\SearchManagment\AddSearchManagment.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Search\SearchManagment\MenuSearchManagment.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Settings\AuthentificationSettings.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Settings\Credits.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Settings\ProxySettings.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Settings\ResourcesSettings.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Settings\SearchSettings.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
