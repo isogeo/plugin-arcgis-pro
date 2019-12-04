@@ -6,8 +6,26 @@
              xmlns:local="clr-namespace:Arcgis_Pro_Isogeo.UI.Metadata"
              mc:Ignorable="d" 
              d:DesignHeight="626" d:DesignWidth="1255">
-    <Grid>
-        <TabControl TabStripPlacement="Left" HorizontalAlignment="Left" Height="626" Margin="0,0,0,0" VerticalAlignment="Top" Width="1255" >
+    <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+        <TabControl TabStripPlacement="Left" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+            <TabItem Header="Géneral">
+                <local:MetadataGeneral />
+            </TabItem>
+            <TabItem Header="Contacts">
+                <local:MetadataContacts />
+            </TabItem>
+            <TabItem Header="Historique">
+                <local:MetadataHistory />
+            </TabItem>
+            <TabItem Header="Géographie">
+                <local:MetadataGeography />
+            </TabItem>
+            <TabItem Header="Licence">
+                <local:MetadataLicences />
+            </TabItem>
+            <TabItem Header="Avancés">
+                <local:MetadataAdvanced />
+            </TabItem>
         </TabControl>
     </Grid>
 </UserControl>

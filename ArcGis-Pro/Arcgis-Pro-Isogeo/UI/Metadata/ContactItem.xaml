@@ -4,11 +4,12 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Arcgis_Pro_Isogeo.UI"
-             mc:Ignorable="d" d:DesignWidth="317" Height="105">
-    <StackPanel>
-        <Label x:Name="LblName" Content="lblName" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-        <Label x:Name="LblEmail" Content="lblEmail" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-        <Label x:Name="LblPhone" Content="lblPhone" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-        <Label x:Name="LblCity" Content="lblCity" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+             mc:Ignorable="d" d:DesignWidth="317" Height="135">
+    <StackPanel VerticalAlignment="Top">
+        <Label x:Name="LblName" Content="lblName"/>
+        <Label x:Name="LblEmail" Content="lblEmail"/>
+        <Label x:Name="LblPhone" Content="lblPhone"/>
+        <Label x:Name="LblAddress" Content="lblAddress"/>
+        <Label x:Name="LblCity" Content="lblCity"/>
     </StackPanel>
 </UserControl>

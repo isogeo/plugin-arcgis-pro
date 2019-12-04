@@ -44,6 +44,8 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -135,6 +137,12 @@
     <Compile Include="UI\Metadata\ContactItem.xaml.cs">
       <DependentUpon>ContactItem.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UI\Metadata\HistoryDataItem.xaml.cs">
+      <DependentUpon>HistoryDataItem.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Metadata\LastModificationMetaDataItem.xaml.cs">
+      <DependentUpon>LastModificationMetaDataItem.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UI\Metadata\LicenceItem.xaml.cs">
       <DependentUpon>LicenceItem.xaml</DependentUpon>
     </Compile>
@@ -168,11 +176,11 @@
     <Compile Include="UI\Metadata\MetadataLicences.xaml.cs">
       <DependentUpon>MetadataLicences.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UI\Metadata\TabMetadataTitle.xaml.cs">
-      <DependentUpon>TabMetadataTitle.xaml</DependentUpon>
-    </Compile>
     <Compile Include="UI\Metadata\TabsMetadata.xaml.cs">
       <DependentUpon>TabsMetadata.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Metadata\TechnicalInformationItem.xaml.cs">
+      <DependentUpon>TechnicalInformationItem.xaml</DependentUpon>
     </Compile>
     <Compile Include="UI\Search\AdvancedSearch\AdvancedSearch.xaml.cs">
       <DependentUpon>AdvancedSearch.xaml</DependentUpon>
@@ -236,6 +244,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="UI\Metadata\HistoryDataItem.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\Metadata\LastModificationMetaDataItem.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UI\Metadata\LicenceItem.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -280,11 +296,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UI\Metadata\TabMetadataTitle.xaml">
+    <Page Include="UI\Metadata\TabsMetadata.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UI\Metadata\TabsMetadata.xaml">
+    <Page Include="UI\Metadata\TechnicalInformationItem.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

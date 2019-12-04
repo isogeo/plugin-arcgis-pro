@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Arcgis_Pro_Isogeo.UI.Metadata;
 
 
 namespace Arcgis_Pro_Isogeo
@@ -24,6 +25,8 @@ namespace Arcgis_Pro_Isogeo
         public DockpaneView()
         {
             InitializeComponent();
+            Metadata metadata = new Metadata();
+            metadata.Show();
         }
     }
 }
