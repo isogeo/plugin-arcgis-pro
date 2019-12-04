@@ -6,10 +6,27 @@
              xmlns:local="clr-namespace:Arcgis_Pro_Isogeo.UI.Metadata"
              mc:Ignorable="d" 
              d:DesignHeight="587" d:DesignWidth="602">
-    <StackPanel>
-        <GroupBox Header="Data history" HorizontalAlignment="Left" Height="95" Margin="0,0,0,0" VerticalAlignment="Top" Width="590"/>
-        <GroupBox Header="Contexte de collecte" HorizontalAlignment="Left" Height="95" Margin="0,0,0,0" VerticalAlignment="Top" Width="590"/>
-        <GroupBox Header="Méthode de collecte" HorizontalAlignment="Left" Height="95" Margin="0,0,0,0" VerticalAlignment="Top" Width="590"/>
-        <GroupBox Header="Dernières modifications sur la donnée" HorizontalAlignment="Left" Height="95" Margin="0,0,0,0" VerticalAlignment="Top" Width="590"/>
-    </StackPanel>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+        <GroupBox Grid.Row="0" Grid.Column="0" Header="Data history" HorizontalAlignment="Stretch">
+            <local:HistoryDataItem />
+        </GroupBox>
+        <GroupBox Grid.Row="1" Grid.Column="0" Header="Contexte de collecte" HorizontalAlignment="Stretch">
+            <Label x:Name="LblContext" Content="LblContext" />
+        </GroupBox>
+        <GroupBox Grid.Row="2" Grid.Column="0" Header="Méthode de collecte" HorizontalAlignment="Stretch">
+            <Label Content="LblMethod" x:Name="LblMethod" />
+        </GroupBox>
+        <GroupBox Grid.Row="3" Grid.Column="0" Header="Dernières modifications sur la donnée" HorizontalAlignment="Stretch">
+            <local:LastModificationMetaDataItem />
+        </GroupBox>
+    </Grid>
 </UserControl>

@@ -6,9 +6,23 @@
              xmlns:local="clr-namespace:Arcgis_Pro_Isogeo.UI.Metadata"
              mc:Ignorable="d" 
              d:DesignHeight="587" d:DesignWidth="602">
-    <StackPanel>
-        <GroupBox Header="Informations techniques" Height="95" Width="590"/>
-        <GroupBox Header="Spécification" Height="137" Width="590"/>
-        <GroupBox Header="Typologie" Height="331" Width="590"/>
-    </StackPanel>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+        <GroupBox Grid.Row="0" Grid.Column="0" Header="Informations techniques">
+            <local:TechnicalInformationItem />
+        </GroupBox>
+        <GroupBox Grid.Row="1" Grid.Column="0" Header="Spécification">
+            <Label x:Name="LblSpecification" Content="LblSpecification" />
+        </GroupBox>
+        <GroupBox Grid.Row="2" Grid.Column="0" Header="Typologie">
+            <Label x:Name="LblTypology" Content="LblTypology" />
+        </GroupBox>
+    </Grid>
 </UserControl>
