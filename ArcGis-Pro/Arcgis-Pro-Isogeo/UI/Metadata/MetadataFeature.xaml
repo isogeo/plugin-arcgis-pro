@@ -6,11 +6,9 @@
              xmlns:local="clr-namespace:Arcgis_Pro_Isogeo.UI.Metadata"
              mc:Ignorable="d" 
              d:DesignHeight="587" d:DesignWidth="602">
-    <Grid>
-
-        <DataGrid CanUserAddRows="False"  
+    <DataGrid CanUserAddRows="False"  
                   AutoGenerateColumns="False"  
-                  HorizontalAlignment="Left" Height="563" Margin="13,13,3,3" VerticalAlignment="Top"  Width="582">
+                  HorizontalAlignment="Stretch" Margin="13,13,13,13" VerticalAlignment="Stretch">
             <DataGrid.Columns>
                 <DataGridTextColumn Width="1*" Header="Nom" />
                 <DataGridTextColumn Width="1*" Header="Alias"/>
@@ -18,5 +16,4 @@
                 <DataGridTextColumn Width="1*" Header="Description"/>
             </DataGrid.Columns>
         </DataGrid>
-    </Grid>
 </UserControl>

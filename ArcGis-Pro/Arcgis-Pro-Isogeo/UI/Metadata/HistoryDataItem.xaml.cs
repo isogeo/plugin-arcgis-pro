@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace Arcgis_Pro_Isogeo.UI.Metadata
 {
     /// <summary>
-    /// Logique d'interaction pour TabMetadataTitle.xaml
+    /// Logique d'interaction pour HistoryDataItem.xaml
     /// </summary>
-    public partial class TabMetadataTitle : UserControl
+    public partial class HistoryDataItem : UserControl
     {
-        public TabMetadataTitle()
+        public HistoryDataItem()
         {
             InitializeComponent();
         }

@@ -10,16 +10,17 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace Arcgis_Pro_Isogeo.UI.Metadata
 {
     /// <summary>
-    /// Logique d'interaction pour Metadata.xaml
+    /// Logique d'interaction pour LastModificationMetaDataItem.xaml
     /// </summary>
-    public partial class Metadata : Window
+    public partial class LastModificationMetaDataItem : UserControl
     {
-        public Metadata()
+        public LastModificationMetaDataItem()
         {
             InitializeComponent();
         }
