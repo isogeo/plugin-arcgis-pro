@@ -8,10 +8,10 @@
              d:DesignHeight="24" d:DesignWidth="607">
     <Grid>
         <Menu HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-            <MenuItem Header="Search management">
-                <MenuItem Header="Nouvelle recherche"/>
-                <MenuItem Header="Recherche précédente"></MenuItem>
-                <MenuItem Header="Enregistrer sous..."></MenuItem>
+            <MenuItem x:Name="MniSearchManagement" Header="Search management">
+                <MenuItem x:Name="MniNewSearch" Header="Nouvelle recherche"/>
+                <MenuItem x:Name="MniPrecedentSearch" Header="Recherche précédente"></MenuItem>
+                <MenuItem x:Name="MniSaveAs" Header="Enregistrer sous..."></MenuItem>
             </MenuItem>
         </Menu>
     </Grid>

@@ -7,7 +7,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="45" d:DesignWidth="263">
     <StackPanel>
-        <Label Content="Geographic filter"/>
-        <ComboBox/>
+        <Label x:Name="LblFilterName" Content="Geographic filter"/>
+        <ComboBox x:Name="CmbAdvancedSearchFilter"/>
     </StackPanel>
 </UserControl>

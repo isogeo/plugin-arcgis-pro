@@ -8,22 +8,22 @@
              d:DesignHeight="626" d:DesignWidth="1255">
     <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
         <TabControl TabStripPlacement="Left" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
-            <TabItem Header="Géneral">
+            <TabItem x:Name="TabiGeneral" Header="Géneral">
                 <local:MetadataGeneral />
             </TabItem>
-            <TabItem Header="Contacts">
+            <TabItem x:Name="TabiContacts" Header="Contacts">
                 <local:MetadataContacts />
             </TabItem>
-            <TabItem Header="Historique">
+            <TabItem x:Name="TabiHistory" Header="Historique">
                 <local:MetadataHistory />
             </TabItem>
-            <TabItem Header="Géographie">
+            <TabItem x:Name="TabiGeography" Header="Géographie">
                 <local:MetadataGeography />
             </TabItem>
-            <TabItem Header="Licence">
+            <TabItem x:Name="TabiLicence" Header="Licence">
                 <local:MetadataLicences />
             </TabItem>
-            <TabItem Header="Avancés">
+            <TabItem x:Name="TabiAdvanced" Header="Avancés">
                 <local:MetadataAdvanced />
             </TabItem>
         </TabControl>

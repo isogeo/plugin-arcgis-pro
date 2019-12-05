@@ -22,7 +22,7 @@ namespace ArcMapAddinIsogeo.Localization
         
         public void openLocalizationFile()
         {
-            /*String locale = Utils.Util.getLocale();
+            String locale = Utils.Util.getLocale();
             string dllPAth = this.GetType().Assembly.Location;
             string configPath = dllPAth.Substring(0, dllPAth.LastIndexOf("\\")) + "\\Localization\\" + locale + ".xml";
             if (File.Exists(configPath) == true)
@@ -33,7 +33,7 @@ namespace ArcMapAddinIsogeo.Localization
             {
                 configPath = dllPAth.Substring(0, dllPAth.LastIndexOf("\\")) + "\\Localization\\" + "en" + ".xml";
                 doc = XDocument.Load(configPath);
-            }*/
+            }
         }
 
         public void translatesAll()

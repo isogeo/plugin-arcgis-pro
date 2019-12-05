@@ -14,7 +14,7 @@
             <RowDefinition Height="1*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <ListBox Grid.Row="0" Grid.Column="0"/>
+        <ListBox x:Name="LstResults" Grid.Row="0" Grid.Column="0"/>
         <Label Grid.Row="1" Grid.Column="0" Content="Pagination here" HorizontalAlignment="Center"/>
     </Grid>
 </UserControl>

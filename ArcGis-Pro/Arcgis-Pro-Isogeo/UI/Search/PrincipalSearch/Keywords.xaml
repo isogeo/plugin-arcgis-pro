@@ -14,7 +14,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
-        <Label Grid.Row="0" Grid.Column="0" Content="Keywords : "/>
-        <ComboBox Grid.Row="0" Grid.Column="1" />
+        <Label x:Name="LblKeywords" Grid.Row="0" Grid.Column="0" Content="Keywords : "/>
+        <ComboBox x:Name="CmbKeywords" Grid.Row="0" Grid.Column="1" SelectionChanged="CmbKeywords_SelectionChanged" />
     </Grid>
 </UserControl>

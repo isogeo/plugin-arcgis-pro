@@ -15,13 +15,13 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
-        <GroupBox Grid.Row="0" Grid.Column="0" Header="Informations techniques">
+        <GroupBox Grid.Row="0" Grid.Column="0" x:Name="GrpTechnicalInformation" Header="Informations techniques">
             <local:TechnicalInformationItem />
         </GroupBox>
         <GroupBox Grid.Row="1" Grid.Column="0" Header="Spécification">
             <Label x:Name="LblSpecification" Content="LblSpecification" />
         </GroupBox>
-        <GroupBox Grid.Row="2" Grid.Column="0" Header="Typologie">
+        <GroupBox x:Name="GrpTypology" Grid.Row="2" Grid.Column="0" Header="Typologie">
             <Label x:Name="LblTypology" Content="LblTypology" />
         </GroupBox>
     </Grid>

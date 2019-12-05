@@ -24,5 +24,15 @@ namespace Arcgis_Pro_Isogeo.UI.Search.PrincipalSearch
         {
             InitializeComponent();
         }
+
+        private void Search_Click(object sender, RoutedEventArgs e)
+        {
+            ArcMapAddinIsogeo.Variables.restFunctions.reloadinfosAPI("", 0, false);
+        }
+
+        private void TxtSearch_OnMouseEnter(object sender, MouseEventArgs e)
+        {
+            ArcMapAddinIsogeo.Variables.restFunctions.reloadinfosAPI("", 0, false);
+        }
     }
 }

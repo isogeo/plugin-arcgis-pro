@@ -7,6 +7,6 @@
              mc:Ignorable="d" 
              d:DesignHeight="35" d:DesignWidth="531">
     <StackPanel Orientation="Horizontal">
-        <TextBox HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="Result Item" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="TxtResultItem" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="Result Item" VerticalAlignment="Top" Width="120"/>
     </StackPanel>
 </UserControl>

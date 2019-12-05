@@ -14,10 +14,10 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
-        <GroupBox Grid.Row="0" Grid.Column="0" Header="Licences">
+        <GroupBox x:Name="GrpLicences" Grid.Row="0" Grid.Column="0" Header="Licences">
             <local:LicenceItem />
         </GroupBox>
-        <GroupBox Grid.Row="1" Grid.Column="0" Header="Limitations">
+        <GroupBox x:Name="GrpLimitations" Grid.Row="1" Grid.Column="0" Header="Limitations">
             <local:LimitationItem />
         </GroupBox>
     </Grid>

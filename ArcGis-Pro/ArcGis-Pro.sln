@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.29215.179
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Arcgis-Pro-Isogeo", "Arcgis-Pro-Isogeo\Arcgis-Pro-Isogeo.csproj", "{D3CD9CD7-2008-4A27-BE55-DA1AEB26239F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lib-Isogeo-dotnet", "Lib-Isogeo-dotnet\Lib-Isogeo-dotnet.csproj", "{CE08D5A2-7AB7-485B-8B7D-35302796EEF1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArcGis-Pro-WPF-Library", "ArcGis-Pro-WPF-Library\ArcGis-Pro-WPF-Library.csproj", "{015C74FF-38B3-4FD5-A53F-FC0726CE270F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +17,10 @@ Global
 		{D3CD9CD7-2008-4A27-BE55-DA1AEB26239F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D3CD9CD7-2008-4A27-BE55-DA1AEB26239F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D3CD9CD7-2008-4A27-BE55-DA1AEB26239F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{CE08D5A2-7AB7-485B-8B7D-35302796EEF1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{CE08D5A2-7AB7-485B-8B7D-35302796EEF1}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{CE08D5A2-7AB7-485B-8B7D-35302796EEF1}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{CE08D5A2-7AB7-485B-8B7D-35302796EEF1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{015C74FF-38B3-4FD5-A53F-FC0726CE270F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{015C74FF-38B3-4FD5-A53F-FC0726CE270F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{015C74FF-38B3-4FD5-A53F-FC0726CE270F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{015C74FF-38B3-4FD5-A53F-FC0726CE270F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

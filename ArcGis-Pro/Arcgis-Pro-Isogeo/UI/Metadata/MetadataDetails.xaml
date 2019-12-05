@@ -16,11 +16,11 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <Label Grid.Row="0" Grid.Column="0" Content="Langue :" />
-        <Label Grid.Row="1" Grid.Column="0" Content="Crée le :" />
-        <Label Grid.Row="2" Grid.Column="0"  Content="Dernière modification :" />
-        <Label x:Name="LblLanguage" Grid.Row="0" Grid.Column="1" Content="LblLanguage" />
-        <Label x:Name="LblCreatedAt" Grid.Row="1" Grid.Column="1" Content="LblCreatedAt" />
-        <Label x:Name="LblLastModification" Grid.Row="2" Grid.Column="1"  Content="LblLastModification" />
+        <Label x:Name="LblLanguage" Grid.Row="0" Grid.Column="0" Content="Langue :" />
+        <Label x:Name="LblCreatedAt" Grid.Row="1" Grid.Column="0" Content="Crée le :" />
+        <Label x:Name="LblLastModification" Grid.Row="2" Grid.Column="0"  Content="Dernière modification :" />
+        <Label x:Name="LblLanguageValue" Grid.Row="0" Grid.Column="1" Content="LblLanguage" />
+        <Label x:Name="LblCreatedAtValue" Grid.Row="1" Grid.Column="1" Content="LblCreatedAt" />
+        <Label x:Name="LblLastModificationValue" Grid.Row="2" Grid.Column="1"  Content="LblLastModification" />
     </Grid>
 </UserControl>

@@ -24,12 +24,12 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
-            <Label Grid.Row="0" Grid.Column="0" Content="Format : " />
-            <Label Grid.Row="1" Grid.Column="0" Content="Nombre d'objets :" />
-            <Label Grid.Row="2" Grid.Column="0"  Content="Type de géométrie :" />
-            <Label x:Name="LblFormat" Grid.Row="0" Grid.Column="1" Content="LblFormat" />
-            <Label x:Name="LblFeatCount" Grid.Row="1" Grid.Column="1" Content="LblFeatCount" />
-            <Label x:Name="LblGeometryType" Grid.Row="2" Grid.Column="1"  Content="LblGeometryType" />
+            <Label x:Name="LblFormat" Grid.Row="0" Grid.Column="0" Content="Format : " />
+            <Label x:Name="LblFeatCount" Grid.Row="1" Grid.Column="0" Content="Nombre d'objets :" />
+            <Label x:Name="LblGeometryType" Grid.Row="2" Grid.Column="0"  Content="Type de géométrie :" />
+            <Label x:Name="LblFormatValue" Grid.Row="0" Grid.Column="1" Content="LblFormat" />
+            <Label x:Name="LblFeatCountValue" Grid.Row="1" Grid.Column="1" Content="LblFeatCount" />
+            <Label x:Name="LblGeometryTypeValue" Grid.Row="2" Grid.Column="1"  Content="LblGeometryType" />
         </Grid>
         <Grid  Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" Margin="10, 10, 10, 10">
             <Grid.ColumnDefinitions>
@@ -41,12 +41,12 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
-            <Label Grid.Row="0" Grid.Column="0" Content="SRS : " />
-            <Label Grid.Row="1" Grid.Column="0" Content="Echelle :" />
-            <Label Grid.Row="2" Grid.Column="0"  Content="Résolution :" />
-            <Label x:Name="LblSrs" Grid.Row="0" Grid.Column="1" Content="LblSrs" />
-            <Label x:Name="LblScale" Grid.Row="1" Grid.Column="1" Content="LblScale" />
-            <Label x:Name="LblResolution" Grid.Row="2" Grid.Column="1"  Content="LblResolution" />
+            <Label x:Name="LblSrs" Grid.Row="0" Grid.Column="0" Content="SRS : " />
+            <Label x:Name="LblScale" Grid.Row="1" Grid.Column="0" Content="Echelle :" />
+            <Label x:Name="LblResolution" Grid.Row="2" Grid.Column="0"  Content="Résolution :" />
+            <Label x:Name="LblSrsValue" Grid.Row="0" Grid.Column="1" Content="LblSrs" />
+            <Label x:Name="LblScaleValue" Grid.Row="1" Grid.Column="1" Content="LblScale" />
+            <Label x:Name="LblResolutionValue" Grid.Row="2" Grid.Column="1"  Content="LblResolution" />
         </Grid>
     </Grid>
 </UserControl>

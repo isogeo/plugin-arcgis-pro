@@ -4,8 +4,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Net;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
 using RestSharp;
 using Newtonsoft.Json;
+using UI = Arcgis_Pro_Isogeo.UI;
 
 namespace ArcMapAddinIsogeo.API
 {
@@ -20,7 +24,7 @@ namespace ArcMapAddinIsogeo.API
         public void reloadinfosAPI(String query, int page, Boolean isResult)
         {
             Variables.haveResult = isResult;
-           // saveLastSearch();
+            saveLastSearch();
 
             if (query=="")
             {
@@ -30,21 +34,21 @@ namespace ArcMapAddinIsogeo.API
                 isCustomQuery = true;
             }
             
-            //Variables.dockableWindowIsogeo.Enabled = false;
+            Variables.dockableWindowIsogeo.IsEnabled = false;
             setConnexion();
             
 
             //Variables.search = new API.Search();
             if (Variables.token.access_token != null)
             {
-               // sendRequestIsogeo(query,page,isResult);
-                //Variables.dockableWindowIsogeo.Enabled = true;
+                sendRequestIsogeo(query,page,isResult);
+                Variables.dockableWindowIsogeo.IsEnabled = true;
             }
             else
             {
-                //Variables.dockableWindowIsogeo.Enabled = true;
-                //Ui.Authentification.FrmAuthentification frmAuthentification = new Ui.Authentification.FrmAuthentification();
-                //frmAuthentification.ShowDialog();
+                Variables.dockableWindowIsogeo.IsEnabled = true;
+                UI.Authentification.Authentification frmAuthentification = new UI.Authentification.Authentification();
+                frmAuthentification.ShowDialog();
             }
         }
 
@@ -52,20 +56,20 @@ namespace ArcMapAddinIsogeo.API
         public void getDetails(String md_id)
         {
 
-//            Variables.dockableWindowIsogeo.Enabled = false;
+            Variables.dockableWindowIsogeo.IsEnabled = false;
             setConnexion();
 
 
             if (Variables.token.access_token != null)
             {
                 sendRequestIsogeoDetails(md_id);
-//                Variables.dockableWindowIsogeo.Enabled = true;
+                Variables.dockableWindowIsogeo.IsEnabled = true;
             }
             else
             {
-//                Variables.dockableWindowIsogeo.Enabled = true;
-//                Ui.Authentification.FrmAuthentification frmAuthentification = new Ui.Authentification.FrmAuthentification();
-//                frmAuthentification.ShowDialog();
+                Variables.dockableWindowIsogeo.IsEnabled = true;
+                UI.Authentification.Authentification frmAuthentification = new UI.Authentification.Authentification();
+                frmAuthentification.ShowDialog();
             }
         }
 
@@ -90,7 +94,7 @@ namespace ArcMapAddinIsogeo.API
                 if (Variables.isFirstLoad == false)
                 {
                     Variables.isFirstLoad = false;
-//                    MessageBox.Show(Variables.dockableWindowIsogeo, Variables.localisationManager.getValue(Localization.LocalizationItem.Message_Query_authentification_ko_invalid) + "\n" + Variables.localisationManager.getValue(Localization.LocalizationItem.Message_contact_support), "Isogeo");
+                    MessageBox.Show(Variables.dockableWindowIsogeo, Variables.localisationManager.getValue(Localization.LocalizationItem.Message_Query_authentification_ko_invalid) + "\n" + Variables.localisationManager.getValue(Localization.LocalizationItem.Message_contact_support), "Isogeo");
                 }
                 Variables.isFirstLoad = false;
                 return;
@@ -98,24 +102,24 @@ namespace ArcMapAddinIsogeo.API
             switch (Variables.token.StatusResult)
             {
                 case "NotFound":
-//                    MessageBox.Show(Variables.dockableWindowIsogeo, Variables.localisationManager.getValue(Localization.LocalizationItem.Message_Query_authentification_ko_internet) + "\n" + Variables.localisationManager.getValue(Localization.LocalizationItem.Message_contact_support), "Isogeo");
+                    MessageBox.Show(Variables.dockableWindowIsogeo, Variables.localisationManager.getValue(Localization.LocalizationItem.Message_Query_authentification_ko_internet) + "\n" + Variables.localisationManager.getValue(Localization.LocalizationItem.Message_contact_support), "Isogeo");
                     break;
                 case "OK":
 
                     break;
                 case "BadRequest":
-//                    MessageBox.Show(Variables.dockableWindowIsogeo, Variables.localisationManager.getValue(Localization.LocalizationItem.Message_Query_authentification_ko_invalid) + "\n" + Variables.localisationManager.getValue(Localization.LocalizationItem.Message_contact_support), "Isogeo");
+                    MessageBox.Show(Variables.dockableWindowIsogeo, Variables.localisationManager.getValue(Localization.LocalizationItem.Message_Query_authentification_ko_invalid) + "\n" + Variables.localisationManager.getValue(Localization.LocalizationItem.Message_contact_support), "Isogeo");
                     break;
                 case "0":
                     if (Variables.isFirstLoad == false)
                     {
                         Variables.isFirstLoad = false;
- //                       MessageBox.Show(Variables.dockableWindowIsogeo, Variables.localisationManager.getValue(Localization.LocalizationItem.Message_Query_authentification_ko_proxy) + "\n" + Variables.localisationManager.getValue(Localization.LocalizationItem.Message_contact_support), "Isogeo");
+                        MessageBox.Show(Variables.dockableWindowIsogeo, Variables.localisationManager.getValue(Localization.LocalizationItem.Message_Query_authentification_ko_proxy) + "\n" + Variables.localisationManager.getValue(Localization.LocalizationItem.Message_contact_support), "Isogeo");
                     }
                     
                     break;
                 default:
-//                    MessageBox.Show(Variables.dockableWindowIsogeo, Variables.localisationManager.getValue(Localization.LocalizationItem.Message_Query_authentification_ko_internet) + "\n" + Variables.localisationManager.getValue(Localization.LocalizationItem.Message_contact_support), "Isogeo");
+                    MessageBox.Show(Variables.dockableWindowIsogeo, Variables.localisationManager.getValue(Localization.LocalizationItem.Message_Query_authentification_ko_internet) + "\n" + Variables.localisationManager.getValue(Localization.LocalizationItem.Message_contact_support), "Isogeo");
                     break;
 
             }
@@ -151,11 +155,11 @@ namespace ArcMapAddinIsogeo.API
             }
             catch (Exception ex)
             {
-/*                Utils.Log.DockableWindowLogger.Debug(string.Concat(new object[]
+                Utils.Log.DockableWindowLogger.Debug(string.Concat(new object[]
 				{
 					"Erreur ",
 					ex.Message
-				}));   */
+				}));
             }
             return token;
         }
@@ -199,11 +203,11 @@ namespace ArcMapAddinIsogeo.API
             }
             catch (Exception ex)
             {
- /*               Utils.Log.DockableWindowLogger.Debug(string.Concat(new object[]
+                Utils.Log.DockableWindowLogger.Debug(string.Concat(new object[]
 				{
 					"Erreur ",
 					ex.Message
-				}));*/
+				}));
             }
             
         }
@@ -211,7 +215,7 @@ namespace ArcMapAddinIsogeo.API
         public void sendRequestIsogeo(String query,int page,Boolean isResult)
         {
             //nbresult = 99;
-            
+
             try
             {
                 int nbResult = 0;
@@ -219,47 +223,47 @@ namespace ArcMapAddinIsogeo.API
                 int nbpage = 0;
                 if (isResult == true)
                 {
-                   // nbResult = Convert.ToInt32(Math.Floor(Convert.ToDecimal((Variables.dockableWindowIsogeo.reultsPanel1.lst_results.Height - 10) / 35)));
+                    nbResult = Convert.ToInt32(Math.Floor(Convert.ToDecimal((Variables.dockableWindowIsogeo.Results.lstResults.Height - 10) / 35)));
                     nbpage = Convert.ToInt32(Math.Ceiling(Variables.search.total / nbResult));
                     if (Variables.currentPage > nbpage) Variables.currentPage = nbpage;
                     offset = (Variables.currentPage - 1) * nbResult;
-                    
+
 
                 }
                 else
                 {
-                //    Variables.dockableWindowIsogeo.reultsPanel1.clearPages();
+                    Variables.dockableWindowIsogeo.Result.clearPages();
                 }
 
 
                 Variables.search = new Search();
                 //Variables.currentPage
                 //Variables.search
-                
-                
 
-                    
+
+
+
 
                 String url = "https://v1.api.isogeo.com/resources/search"; //?&_limit=0
                 var client = new RestClient(url);
                 setProxy(client);
                 var request = new RestRequest(Method.GET);
-                /*if ((string)Variables.combo_lang.SelectedValue == "default")
+                if ((string)Variables.CmbLang.SelectedValue == "default")
                 {
                 }
                 else
                 {
-                }*/
+                }
 
                 //request.AddParameter("_include", "links");
                 request.AddParameter("_include", "layers");
                 request.AddParameter("_include", "serviceLayers");
-                
+
                 //request.AddParameter("_lang", Utils.Util.getLocale());
                 request.AddParameter("_limit", nbResult);
 
-//                request.AddParameter("ob", Variables.dockableWindowIsogeo.resultsToolBar1.cmb_sorting_method.SelectedValue);
-//                request.AddParameter("od", Variables.dockableWindowIsogeo.resultsToolBar1.cmb_sorting_direction.SelectedValue);
+                request.AddParameter("ob", Variables.dockableWindowIsogeo.ResultsToolBar.CmbSortingMethod.SelectedValue);
+                request.AddParameter("od", Variables.dockableWindowIsogeo.ResultsToolBar.CmbSortingDirection.SelectedValue);
 
                 //request.AddParameter("_include", "conditions");
                 //request.AddParameter("_include", "contacts");
@@ -274,10 +278,10 @@ namespace ArcMapAddinIsogeo.API
                 {
                     request.AddParameter("_offset", offset);
                 }
-                
+
                 if (query == "")
                 {
-                    query=getQueryCombos();
+                    query = getQueryCombos();
                 }
 
                 if (query.IndexOf("action:view") == -1)
@@ -288,7 +292,7 @@ namespace ArcMapAddinIsogeo.API
                 //temp test                
                 request.AddParameter("q", query.Replace("action:view", ""));
 
-/*                if (Variables.advancedSreachItem_geographicFilter.cmb_search.SelectedIndex == 1)
+                if (Variables.advancedSreachItemGeographicFilter.cmb_search.SelectedIndex == 1)
                 {
                     //request.AddParameter("coord", Utils.MapFunctions.getMapExtent());
 
@@ -300,9 +304,9 @@ namespace ArcMapAddinIsogeo.API
                     request.AddParameter("rel", Variables.configurationManager.config.geographicalOperator);
                 }
                 
-                if (Variables.advancedSreachItem_geographicFilter.cmb_search.SelectedIndex > 1)
+                if (Variables.advancedSreachItemGeographicFilter.cmb_search.SelectedIndex > 1)
                 {
-                    request.AddParameter("box", Utils.MapFunctions.getLayerExtent(Variables.layersVisible[Variables.advancedSreachItem_geographicFilter.cmb_search.SelectedIndex - 2]));
+                    request.AddParameter("box", Utils.MapFunctions.getLayerExtent(Variables.layersVisible[Variables.advancedSreachItemGeographicFilter.cmb_search.SelectedIndex - 2]));
                     request.AddParameter("rel", Variables.configurationManager.config.geographicalOperator);
                 }
                 //if (layer.Visible == true)
@@ -324,25 +328,24 @@ namespace ArcMapAddinIsogeo.API
 
                 setSearchList(query);
 
-                Variables.dockableWindowIsogeo.resultsToolBar1.setNbResults();
+                Variables.dockableWindowIsogeo.ResultsToolBar.setNbResults();
                 if (isResult==true)
                 {
-                    Variables.dockableWindowIsogeo.reultsPanel1.setData();
-                    Variables.dockableWindowIsogeo.reultsPanel1.setCombo(nbpage);
+                    Variables.dockableWindowIsogeo.Results.setData();
+                    Variables.dockableWindowIsogeo.Results.setCombo(nbpage);
 
                 }
-                */
 
             }
             catch (Exception ex)
             {
-                /*Utils.Log.DockableWindowLogger.Debug(string.Concat(new object[]
-				{
-					"Erreur ",
-					ex.Message
-				}));*/
+                Utils.Log.DockableWindowLogger.Debug(string.Concat(new object[]
+                {
+                    "Erreur ",
+                    ex.Message
+                }));
             }
-            
+
         }
         public void setProxy(RestClient client)
         {
@@ -376,11 +379,11 @@ namespace ArcMapAddinIsogeo.API
             Variables.searchLists.list.Add(new SearchList("license", true));
 
             
-            //foreach (SearchList item in Variables.searchLists.list)
-            //{
-            //    item.lstItem=new List<Objects.comboItem>;
-            //    item.lstItem.Add(new Objects.comboItem("","-");
-            //}
+            foreach (SearchList item in Variables.searchLists.list)
+            {
+                item.lstItem= new List<Objects.comboItem>();
+                item.lstItem.Add(new Objects.comboItem("","-"));
+            }
 
             
             
@@ -408,7 +411,7 @@ namespace ArcMapAddinIsogeo.API
                 {
                     lst.query = "-";
                 }
-                
+
                 foreach (string queryItem in queryItems)
                 {
                     Boolean find = false;
@@ -417,7 +420,7 @@ namespace ArcMapAddinIsogeo.API
                         foreach (SearchList lst in Variables.searchLists.list)
                         {
 
-                            if (queryItem.IndexOf(lst.filter+ ":") == 0)
+                            if (queryItem.IndexOf(lst.filter + ":") == 0)
                             {
                                 lst.query = queryItem;
                                 find = true;
@@ -425,38 +428,38 @@ namespace ArcMapAddinIsogeo.API
                             }
                         }
                     }
-                    
+
                     if (find == false)
                     {
                         if (textInput != "") textInput += " ";
                         textInput += queryItem;
                     }
 
-                    //string[] queryItemsKeyValue = queryItem.Split(':');
-                    //if (queryItemsKeyValue.Length == 2 || queryItemsKeyValue.Length == 3)
-                    //{
-                    //    String keyQuery = queryItemsKeyValue[0];
+                    string[] queryItemsKeyValue = queryItem.Split(':');
+                    if (queryItemsKeyValue.Length == 2 || queryItemsKeyValue.Length == 3)
+                    {
+                        String keyQuery = queryItemsKeyValue[0];
 
-                    //    foreach (SearchList lst in Variables.searchLists.list)
-                    //    {
-                    //        if (keyQuery.IndexOf(lst.filter) == 0)
-                    //        {
-                    //            lst.query = queryItem;
-                    //            break;
-                    //        }
-                    //    }
-                    //}
-                    //else
-                    //{
-                    //    if (textInput != "") textInput += " ";
-                    //    textInput += queryItem;
-                    //}
+                        foreach (SearchList lst in Variables.searchLists.list)
+                        {
+                            if (keyQuery.IndexOf(lst.filter) == 0)
+                            {
+                                lst.query = queryItem;
+                                break;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        if (textInput != "") textInput += " ";
+                        textInput += queryItem;
+                    }
                 }
-                
-            }
-            
 
-            
+            }
+
+
+
 
             foreach (SearchList lst in Variables.searchLists.list)
             {
@@ -472,8 +475,8 @@ namespace ArcMapAddinIsogeo.API
             }
 
             if (query != "")
-            {
-            //    Variables.dockableWindowIsogeo.principalSearchPanel1.searchItems1.txt_search.Text = textInput;
+            { 
+                Variables.dockableWindowIsogeo.PrincipalSearch.searchItems1.txt_search.Text = textInput;
             }
             
             Variables.ListLoading = false;
@@ -484,7 +487,7 @@ namespace ArcMapAddinIsogeo.API
         {
             String filter="";
 
-            /*foreach (ComboBox cmb in Variables.listComboFilter)
+            foreach (ComboBox cmb in Variables.listComboFilter)
             {
                 if (cmb.SelectedValue != null) 
                 {
@@ -495,14 +498,14 @@ namespace ArcMapAddinIsogeo.API
                         filter = filter + valcmbValue;
                     }
                 }
-            }*/
+            }
 
             if (filter.IndexOf("action:view") == -1)
             {
                 filter += " action:view";
             }
             
-           // filter += " " +Variables.dockableWindowIsogeo.principalSearchPanel1.searchItems1.txt_search.Text;
+            filter += " "  + Variables.dockableWindowIsogeo.PrincipalSearch.searchItems1.txt_search.Text;
          
    
             return filter;
@@ -519,20 +522,23 @@ namespace ArcMapAddinIsogeo.API
                     break;
                 }
             }
-            if (currentSearch==null) {
-            currentSearch=new ArcMapAddinIsogeo.Configuration.Search();
-            currentSearch.name="CurrentSearchSave";            
-            Variables.configurationManager.config.searchs.searchs.Add(currentSearch);
+            if (currentSearch==null) { 
+                currentSearch=new ArcMapAddinIsogeo.Configuration.Search(); 
+                currentSearch.name="CurrentSearchSave"; 
+                Variables.configurationManager.config.searchs.searchs.Add(currentSearch);
             }
             
-           // currentSearch.query = Variables.restFunctions.getQueryCombos();
+            currentSearch.query = Variables.restFunctions.getQueryCombos();
             Variables.configurationManager.save();
 
 
         }
-       /* public void setListCombo(ComboBox cmb,String listName)
+
+        public void setListCombo(ComboBox cmb, String listName)
         {
-            foreach (API.SearchList lst in Variables.searchLists.list)
+            cmb.SetBinding(ItemsControl.ItemsSourceProperty, new Binding {Source = lst.lstItem});
+
+            /*foreach (API.SearchList lst in Variables.searchLists.list)
             {
                 if (lst.filter == listName)
                 {
@@ -549,7 +555,7 @@ namespace ArcMapAddinIsogeo.API
                         {
                             valcmbValue = lst.query;
                         }
-                        cmb.DataSource = new BindingSource(lst.lstItem, null);
+                        cmb. .DataSource = new BindingSource(lst.lstItem, null);
                         cmb.ValueMember = "code";
                         cmb.DisplayMember = "value";
 
@@ -569,7 +575,7 @@ namespace ArcMapAddinIsogeo.API
                     }
 
                 }
-            }
-        }*/
+            }*/
+        }
     }
 }
