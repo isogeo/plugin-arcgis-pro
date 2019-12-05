@@ -24,12 +24,12 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
-            <Label Grid.Row="0" Grid.Column="0" Content="Date de création : " />
-            <Label Grid.Row="1" Grid.Column="0" Content="Dernière modification : " />
-            <Label Grid.Row="2" Grid.Column="0"  Content="Mise à jour tous les : " />
-            <Label x:Name="LblFormat" Grid.Row="0" Grid.Column="1" Content="LblDataCreation" />
-            <Label x:Name="LblDataUpdate" Grid.Row="1" Grid.Column="1" Content="LblDataUpdate" />
-            <Label x:Name="LblFrequency" Grid.Row="2" Grid.Column="1"  Content="LblFrequency" />
+            <Label x:Name="LblDataCreation" Grid.Row="0" Grid.Column="0" Content="Date de création : " />
+            <Label x:Name="LblDataUpdate" Grid.Row="1" Grid.Column="0" Content="Dernière modification : " />
+            <Label x:Name="LblFrequency" Grid.Row="2" Grid.Column="0"  Content="Mise à jour tous les : " />
+            <Label x:Name="LblDataCreationValue" Grid.Row="0" Grid.Column="1" Content="LblDataCreation" />
+            <Label x:Name="LblDataUpdateValue" Grid.Row="1" Grid.Column="1" Content="LblDataUpdate" />
+            <Label x:Name="LblFrequencyValue" Grid.Row="2" Grid.Column="1"  Content="LblFrequency" />
         </Grid>
         <Grid Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" Margin="10, 10, 10, 10">
             <Grid.ColumnDefinitions>
@@ -41,9 +41,9 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
-            <Label Grid.Row="0" Grid.Column="0" Content="Début de validité : " />
-            <Label Grid.Row="1" Grid.Column="0" Content="Fin de validité :" />
-            <Label Grid.Row="2" Grid.Column="0"  Content="Commentaire :" />
+            <Label x:Name="LblValidStartValue" Grid.Row="0" Grid.Column="0" Content="Début de validité : " />
+            <Label x:Name="LblValidEndValue" Grid.Row="1" Grid.Column="0" Content="Fin de validité :" />
+            <Label x:Name="LblValidCommentValue" Grid.Row="2" Grid.Column="0"  Content="Commentaire :" />
             <Label x:Name="LblValidStart" Grid.Row="0" Grid.Column="1" Content="LblValidStart" />
             <Label x:Name="LblValidEnd" Grid.Row="1" Grid.Column="1" Content="LblValidEnd" />
             <Label x:Name="LblValidComment" Grid.Row="2" Grid.Column="1"  Content="LblValidComment" />

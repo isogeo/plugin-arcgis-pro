@@ -27,17 +27,17 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
-            <Label Grid.Row="0" Grid.Column="0" Content="Propriétaire :"/>
-            <Label Grid.Row="1" Grid.Column="0" Content="Mots clés :"/>
-            <Label Grid.Row="2" Grid.Column="0" Content="Thème :"/>
-            <Label Grid.Row="3" Grid.Column="0" Content="Conforme :"/>
-            <Label Grid.Row="4" Grid.Column="0" Content="Description :"/>
+            <Label x:Name="LblOwner" Grid.Row="0" Grid.Column="0" Content="Propriétaire :"/>
+            <Label x:Name="LblKeywords"  Grid.Row="1" Grid.Column="0" Content="Mots clés :"/>
+            <Label x:Name="LblThemes"  Grid.Row="2" Grid.Column="0" Content="Thème :"/>
+            <Label x:Name="LblConformity" Grid.Row="3" Grid.Column="0" Content="Conforme :"/>
+            <Label x:Name="LblDescription" Grid.Row="4" Grid.Column="0" Content="Description :"/>
 
-            <Label Grid.Row="0" Grid.Column="1" Content="LblOwner" x:Name="LblOwner"/>
-            <Label Grid.Row="1" Grid.Column="1" Content="LblKeywords" x:Name="LblKeywords"/>
-            <Label Grid.Row="2" Grid.Column="1" Content="LblThemes" x:Name="LblThemes" />
-            <Label Grid.Row="3" Grid.Column="1" Content="LblConformity" x:Name="LblConformity" />
-            <Label Grid.Row="4" Grid.Column="1" Content="LblDescription" x:Name="LblDescription" />
+            <Label x:Name="LblOwnerValue" Grid.Row="0" Grid.Column="1" Content="LblOwner"/>
+            <Label x:Name="LblKeywordsValue" Grid.Row="1" Grid.Column="1" Content="LblKeywords"/>
+            <Label x:Name="LblThemesValue" Grid.Row="2" Grid.Column="1" Content="LblThemes"/>
+            <Label x:Name="LblConformityValue" Grid.Row="3" Grid.Column="1" Content="LblConformity"/>
+            <Label x:Name="LblDescriptionValue" Grid.Row="4" Grid.Column="1" Content="LblDescription"/>
         </Grid>
     </Grid>
 </UserControl>

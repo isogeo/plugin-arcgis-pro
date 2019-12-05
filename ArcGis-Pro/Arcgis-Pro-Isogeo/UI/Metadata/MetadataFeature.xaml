@@ -10,10 +10,10 @@
                   AutoGenerateColumns="False"  
                   HorizontalAlignment="Stretch" Margin="13,13,13,13" VerticalAlignment="Stretch">
             <DataGrid.Columns>
-                <DataGridTextColumn Width="1*" Header="Nom" />
-                <DataGridTextColumn Width="1*" Header="Alias"/>
-                <DataGridTextColumn Width="1*" Header="Type"/>
-                <DataGridTextColumn Width="1*" Header="Description"/>
+                <DataGridTextColumn Width="1*" x:Name="Name" Header="Nom" />
+                <DataGridTextColumn Width="1*" x:Name="Alias"  Header="Alias"/>
+                <DataGridTextColumn Width="1*" x:Name="Type" Header="Type"/>
+                <DataGridTextColumn Width="1*" x:Name="Description" Header="Description"/>
             </DataGrid.Columns>
         </DataGrid>
 </UserControl>

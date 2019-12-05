@@ -10,8 +10,8 @@
               AutoGenerateColumns="False"  
               HorizontalAlignment="Stretch" Margin="13,13,13,13" VerticalAlignment="Stretch">
         <DataGrid.Columns>
-            <DataGridTextColumn Width="1*" Header="Date" />
-            <DataGridTextColumn Width="1*" Header="Description"/>
+            <DataGridTextColumn Width="1*" Header="Date" x:Name="Date"/>
+            <DataGridTextColumn Width="1*" Header="Description" x:Name="Description"/>
         </DataGrid.Columns>
     </DataGrid>
 </UserControl>

@@ -18,7 +18,7 @@
     </UserControl.Resources>
     <DockPanel>
         <TabControl DockPanel.Dock="Top">
-            <TabItem Header="Search">
+            <TabItem x:Name="TabiSearch" Header="Search">
                 <ScrollViewer VerticalScrollBarVisibility="Auto">
                     <Grid>
                         <Grid.ColumnDefinitions>
@@ -31,15 +31,15 @@
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="1*"/>
                         </Grid.RowDefinitions>
-                        <SearchManagment:MenuSearchManagment Grid.Row="0" Grid.Column="0"/>
-                        <PrincipalSearch:PrincipalSearch Grid.Row="1" Grid.Column="0"/>
-                        <AdvancedSearch:AdvancedSearch Grid.Row="2" Grid.Column="0"/>
-                        <Results:ResultsToolBar Grid.Row="3" Grid.Column="0"/>
-                        <Results:Results Grid.Row="4" Grid.Column="0"/>
+                        <SearchManagment:MenuSearchManagment x:Name="MenuSearchManagment" Grid.Row="0" Grid.Column="0"/>
+                        <PrincipalSearch:PrincipalSearch x:Name="PrincipalSearch" Grid.Row="1" Grid.Column="0"/>
+                        <AdvancedSearch:AdvancedSearch x:Name="AdvancedSearch" Grid.Row="2" Grid.Column="0"/>
+                        <Results:ResultsToolBar x:Name="ResultsToolBar" Grid.Row="3" Grid.Column="0"/>
+                        <Results:Results x:Name="Results" Grid.Row="4" Grid.Column="0"/>
                     </Grid>
                 </ScrollViewer>
             </TabItem>
-            <TabItem Header="Settings">
+            <TabItem x:Name="TabiSettings" Header="Settings">
                 <ScrollViewer VerticalScrollBarVisibility="Auto">
                     <Grid>
                         <Grid.ColumnDefinitions>
@@ -51,10 +51,10 @@
                             <RowDefinition Height="1*"/>
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
-                        <Settings:SearchSettings Grid.Row="0" Grid.Column="0" />
-                        <Settings:ProxySettings Grid.Row="1" Grid.Column="0" />
-                        <Settings:AuthentificationSettings Grid.Row="2" Grid.Column="0" />
-                        <Settings:ResourcesSettings Grid.Row="3" Grid.Column="0" />
+                        <Settings:SearchSettings x:Name="SearchSettings" Grid.Row="0" Grid.Column="0" />
+                        <Settings:ProxySettings x:Name="ProxySettings" Grid.Row="1" Grid.Column="0" />
+                        <Settings:AuthentificationSettings  x:Name="AuthenticationSettings" Grid.Row="2" Grid.Column="0" />
+                        <Settings:ResourcesSettings x:Name="ResourcesSettings" Grid.Row="3" Grid.Column="0" />
                     </Grid>
                 </ScrollViewer>
             </TabItem>

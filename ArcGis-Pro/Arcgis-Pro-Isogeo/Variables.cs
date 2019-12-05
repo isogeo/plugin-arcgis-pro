@@ -1,7 +1,10 @@
 ﻿using System;
+using System.Windows.Controls;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Arcgis_Pro_Isogeo;
+
 //using System.Windows.Forms;
 //using ESRI.ArcGIS.Carto;
 
@@ -17,10 +20,10 @@ namespace ArcMapAddinIsogeo
 
         public static Configuration.ConfigurationManager configurationManager;
         public static Localization.LocalizationManager localisationManager;
-        //public static DockableWindowIsogeo dockableWindowIsogeo;
+        public static DockpaneView dockableWindowIsogeo;
         public static List<Action> functionsTranslate = new List<Action>();
         public static List<Action> functionsSetlist = new List<Action>();
-        //public static List<ComboBox> listComboFilter = new List<ComboBox>();
+        public static List<ComboBox> listComboFilter = new List<ComboBox>();
 
         public static Boolean isFirstLoad = true;
         

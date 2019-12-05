@@ -7,7 +7,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="262" d:DesignWidth="408">
 
-        <GroupBox Header="Authentification settings" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+    <GroupBox x:Name="GrpAuthenticationSettings" Header="Authentication settings" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="1*"/>
@@ -16,8 +16,8 @@
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
-                <Label HorizontalAlignment="Left" Grid.Row="0" Grid.Column="0" Content="Changer les paramètres d'authentification : "/>
-                <Button Grid.Row="0" Grid.Column="1" Padding="20, 3, 20, 3" Margin="3, 3, 3, 3" Content="Key"/>
+            <Label x:Name="LblAuthenticationParameters" HorizontalAlignment="Left" Grid.Row="0" Grid.Column="0" Content="Changer les paramètres d'authentification : "/>
+            <Button x:Name="BtnAuthentication" Grid.Row="0" Grid.Column="1" Padding="20, 3, 20, 3" Margin="3, 3, 3, 3" Content="Key"/>
             </Grid>
         </GroupBox>
 </UserControl>

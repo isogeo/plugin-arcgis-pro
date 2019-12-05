@@ -7,6 +7,6 @@
         mc:Ignorable="d"
         Title="Credits" Height="523" Width="366">
     <StackPanel>
-        <GroupBox Width="337" Height="268" Content="Contenu"></GroupBox>
+        <GroupBox x:Name="GrpCredits" Width="337" Height="268" Content="Contenu"></GroupBox>
     </StackPanel>
 </Window>

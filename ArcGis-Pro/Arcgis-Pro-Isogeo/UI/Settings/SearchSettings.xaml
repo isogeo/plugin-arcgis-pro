@@ -7,7 +7,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="189" d:DesignWidth="626">
     <Grid>
-        <GroupBox Header="Search settings" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+        <GroupBox x:Name="GrpSearchSettings" Header="Search settings" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
@@ -20,15 +20,15 @@
                     <RowDefinition Height="1*"/>
                     <RowDefinition Height="1*"/>
                 </Grid.RowDefinitions>
-                <Label HorizontalAlignment="Right" Content="Langue : " Grid.Row="0" Grid.Column="0" />
-                <Label HorizontalAlignment="Right" Content="Propriétaire de la métadonnée (défaut) : " Grid.Row="1" Grid.Column="0" />
-                <Label HorizontalAlignment="Right" Content="Opérateur géographique (défaut) : " Grid.Row="2" Grid.Column="0" />
-                <Label HorizontalAlignment="Right" Content="Tri par défault : " Grid.Row="3" Grid.Column="0" />
-                <Label HorizontalAlignment="Right" Content="Fichier de connexion SDE " Grid.Row="4" Grid.Column="0" />
+                <Label x:Name="LblLanguage" HorizontalAlignment="Right" Content="Langue : " Grid.Row="0" Grid.Column="0" />
+                <Label x:Name="LblOwnerProperty" HorizontalAlignment="Right" Content="Propriétaire de la métadonnée (défaut) : " Grid.Row="1" Grid.Column="0" />
+                <Label x:Name="LblGraphicOperator" HorizontalAlignment="Right" Content="Opérateur géographique (défaut) : " Grid.Row="2" Grid.Column="0" />
+                <Label x:Name="LblDefaultSorting" HorizontalAlignment="Right" Content="Tri par défault : " Grid.Row="3" Grid.Column="0" />
+                <Label x:Name="LblSdeConnectionFile" HorizontalAlignment="Right" Content="Fichier de connexion SDE " Grid.Row="4" Grid.Column="0" />
 
-                <ComboBox Margin="3, 3, 3, 3" Grid.Row="0" Grid.Column="1" />
-                <ComboBox Margin="3, 3, 3, 3" Grid.Row="1" Grid.Column="1" />
-                <ComboBox Margin="3, 3, 3, 3" Grid.Row="2" Grid.Column="1" />
+                <ComboBox x:Name="CmbLanguage" Margin="3, 3, 3, 3" Grid.Row="0" Grid.Column="1" />
+                <ComboBox x:Name="CmbOwnerProperty" Margin="3, 3, 3, 3" Grid.Row="1" Grid.Column="1" />
+                <ComboBox x:Name="CmbGraphicOperator" Margin="3, 3, 3, 3" Grid.Row="2" Grid.Column="1" />
                 <Grid Grid.Row="3" Grid.Column="1">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="1*"/>
@@ -37,8 +37,8 @@
                     <Grid.RowDefinitions>
                         <RowDefinition Height="1*"/>
                     </Grid.RowDefinitions>
-                    <ComboBox Margin="3, 3, 3, 3" Grid.Row="0" Grid.Column="0" />
-                    <ComboBox Margin="3, 3, 3, 3" Grid.Row="0" Grid.Column="1" />
+                    <ComboBox x:Name="CmbSortingMethod" Margin="3, 3, 3, 3" Grid.Row="0" Grid.Column="0" />
+                    <ComboBox x:Name="CmbSortingDirection" Margin="3, 3, 3, 3" Grid.Row="0" Grid.Column="1" />
                 </Grid>
                 <Grid Grid.Row="4" Grid.Column="1">
                     <Grid.ColumnDefinitions>
@@ -48,8 +48,8 @@
                     <Grid.RowDefinitions>
                         <RowDefinition Height="1*"/>
                     </Grid.RowDefinitions>
-                    <TextBox IsReadOnly="True" Margin="3, 3, 3, 3" Grid.Row="0" Grid.Column="0" />
-                    <Button Content=" ... " Margin="3, 3, 3, 3" Grid.Row="0" Grid.Column="1" />
+                    <TextBox x:Name="TxtSdeConnectionFile" IsReadOnly="True" Margin="3, 3, 3, 3" Grid.Row="0" Grid.Column="0" />
+                    <Button x:Name="BtnSdeConnectionFile" Content=" ... " Margin="3, 3, 3, 3" Grid.Row="0" Grid.Column="1" />
                 </Grid>
             </Grid>
         </GroupBox>

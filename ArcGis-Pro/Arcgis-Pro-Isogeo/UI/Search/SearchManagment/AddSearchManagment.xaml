@@ -8,12 +8,12 @@
         Title="AddSearchManagment" Height="107" Width="324">
     <StackPanel>
         <StackPanel Orientation="Horizontal">
-                <Label Content="Nom de la recherche rapide : "/>
-                <TextBox Height="20" Width="117" />
+                <Label x:Name="LblQuickSearch" Content="Nom de la recherche rapide : "/>
+                <TextBox x:Name="TxtQuickSearch" Height="20" Width="117" />
         </StackPanel>
         <StackPanel Orientation="Horizontal">
-            <Button HorizontalAlignment="Right" Height="23" Width="75" Margin="10, 10, 10, 10" Content="Save" />
-            <Button HorizontalAlignment="Right" Height="23" Width="75" Content="Cancel"/>
+            <Button x:Name="BtnSave" HorizontalAlignment="Right" Height="23" Width="75" Margin="10, 10, 10, 10" Content="Save" />
+            <Button x:Name="Cancel" HorizontalAlignment="Right" Height="23" Width="75" Content="Cancel"/>
         </StackPanel>
     </StackPanel>
 </Window>

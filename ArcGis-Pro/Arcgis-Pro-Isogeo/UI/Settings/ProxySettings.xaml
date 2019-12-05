@@ -7,7 +7,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="150" d:DesignWidth="649">
     <Grid>
-        <GroupBox Header="Paramètres du proxy" HorizontalAlignment="Stretch" Margin="0,0,0,0" VerticalAlignment="Stretch">
+        <GroupBox x:Name="GrpProxyParameter" Header="Paramètres du proxy" HorizontalAlignment="Stretch" Margin="0,0,0,0" VerticalAlignment="Stretch">
             <Expander>
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -27,16 +27,16 @@
                             <RowDefinition Height="1*"/>
                             <RowDefinition Height="1*"/>
                         </Grid.RowDefinitions>
-                        <Label Content="Url proxy : " Grid.Row="0" Grid.Column="0" />
-                        <Label Content="User : " Grid.Row="1" Grid.Column="0" />
-                        <Label Content="Password : " Grid.Row="2" Grid.Column="0" />
-                        <TextBox Margin="3, 3, 3, 3" Grid.Row="0" Grid.Column="1" />
-                        <TextBox Margin="3, 3, 3, 3" Grid.Row="1" Grid.Column="1" />
-                        <PasswordBox Margin="3, 3, 3, 3" Grid.Row="2" Grid.Column="1" />
+                        <Label x:Name="LblProxyUrl" Content="Url proxy : " Grid.Row="0" Grid.Column="0" />
+                        <Label x:Name="LblUser" Content="User : " Grid.Row="1" Grid.Column="0" />
+                        <Label x:Name="LblPassword" Content="Password : " Grid.Row="2" Grid.Column="0" />
+                        <TextBox x:Name="TxtProxyUrl" Margin="3, 3, 3, 3" Grid.Row="0" Grid.Column="1" />
+                        <TextBox x:Name="TxtUser" Margin="3, 3, 3, 3" Grid.Row="1" Grid.Column="1" />
+                        <PasswordBox x:Name="PwdPwd" Margin="3, 3, 3, 3" Grid.Row="2" Grid.Column="1" />
                     </Grid>
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Column="0" Grid.Row="1">
-                        <Button Margin="3, 3, 3, 3" Padding="20, 3, 20, 3" Content="Save"/>
-                        <Button Margin="3, 3, 3, 3" Padding="20, 3, 20, 3" Content="Cancel"/>
+                        <Button x:Name="BtnSave" Margin="3, 3, 3, 3" Padding="20, 3, 20, 3" Content="Save"/>
+                        <Button x:Name="BtnCancel" Margin="3, 3, 3, 3" Padding="20, 3, 20, 3" Content="Cancel"/>
                     </StackPanel>
                 </Grid>
             </Expander>

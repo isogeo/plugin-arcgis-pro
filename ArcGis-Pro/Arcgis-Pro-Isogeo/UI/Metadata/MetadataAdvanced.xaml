@@ -14,10 +14,10 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
-        <GroupBox Grid.Row="0" Grid.Column="0" Header="Propriété de la métadonnée" HorizontalAlignment="Stretch" Padding="6,6,6,6" Margin="3,3,3,3" VerticalAlignment="Stretch">
+        <GroupBox Grid.Row="0" Grid.Column="0" x:Name="GrpMetadataProperty" Header="Propriété de la métadonnée" HorizontalAlignment="Stretch" Padding="6,6,6,6" Margin="3,3,3,3" VerticalAlignment="Stretch">
             <UI:ContactItem />
         </GroupBox>
-        <GroupBox Grid.Row="1" Grid.Column="0" Header="Detail de la métadonnée" HorizontalAlignment="Stretch" Padding="6,6,6,6" Margin="3,3,3,3" VerticalAlignment="Stretch">
+        <GroupBox Grid.Row="1" Grid.Column="0" x:Name="GrpMetadataDetails" Header="Details de la métadonnée" HorizontalAlignment="Stretch" Padding="6,6,6,6" Margin="3,3,3,3" VerticalAlignment="Stretch">
             <local:MetadataDetails />
         </GroupBox>
     </Grid>

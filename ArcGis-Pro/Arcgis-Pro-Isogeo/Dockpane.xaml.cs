@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Arcgis_Pro_Isogeo.UI.Metadata;
+using Arcgis_Pro_Isogeo.UI.Search.Results;
 
 
 namespace Arcgis_Pro_Isogeo
