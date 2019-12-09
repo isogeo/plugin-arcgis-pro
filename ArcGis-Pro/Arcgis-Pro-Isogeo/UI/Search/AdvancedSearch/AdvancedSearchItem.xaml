@@ -1,13 +1,18 @@
-﻿<UserControl x:Class="Arcgis_Pro_Isogeo.UI.Search.AdvancedSearch.AdvancedSearchItem"
+﻿<UserControl
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Arcgis_Pro_Isogeo.UI.Search.AdvancedSearch"
+             xmlns:Metadata="clr-namespace:Arcgis_Pro_Isogeo.UI.Metadata" x:Class="Arcgis_Pro_Isogeo.UI.Search.AdvancedSearch.AdvancedSearchItem"
              mc:Ignorable="d" 
              d:DesignHeight="45" d:DesignWidth="263">
     <StackPanel>
-        <Label x:Name="LblFilterName" Content="Geographic filter"/>
+        <StackPanel Orientation="Horizontal">
+            <Image Height="12" Width="12" x:Name="ImgAdvancedSearch"/>
+            <Label x:Name="LblFilterName" Content="Geographic filter"/>
+        </StackPanel>
         <ComboBox x:Name="CmbAdvancedSearchFilter"/>
+        <Metadata:HistoryDataItem Height="100"/>
     </StackPanel>
 </UserControl>

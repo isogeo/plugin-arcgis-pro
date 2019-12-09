@@ -1,17 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+﻿using System.Windows.Controls;
+using API = ArcMapAddinIsogeo.API;
 
 namespace Arcgis_Pro_Isogeo.UI.Metadata
 {
@@ -23,6 +11,16 @@ namespace Arcgis_Pro_Isogeo.UI.Metadata
         public LimitationItem()
         {
             InitializeComponent();
+        }
+
+        public void Init(API.Limitation limitation)
+        {
+            LblLimitation.Content = limitation.type;
+            LblDescription.Content = limitation.description;
+            if (limitation.type == "legal")
+            {
+                LblDescription.Content += "\n" + limitation.restriction;
+            }
         }
     }
 }

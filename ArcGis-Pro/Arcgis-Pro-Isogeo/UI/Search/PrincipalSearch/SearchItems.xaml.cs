@@ -1,17 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using ArcMapAddinIsogeo;
 
 namespace Arcgis_Pro_Isogeo.UI.Search.PrincipalSearch
 {
@@ -23,16 +13,25 @@ namespace Arcgis_Pro_Isogeo.UI.Search.PrincipalSearch
         public SearchItems()
         {
             InitializeComponent();
+            Variables.functionsTranslate.Add(translate);
+        }
+
+        private void translate()
+        {
+            LblSearchTerms.Content = Variables.localisationManager.getValue(ArcMapAddinIsogeo.Localization.LocalizationItem.Search_terms) + " :";
         }
 
         private void Search_Click(object sender, RoutedEventArgs e)
-        {
-            ArcMapAddinIsogeo.Variables.restFunctions.reloadinfosAPI("", 0, false);
+        { 
+            Variables.restFunctions.reloadinfosAPI("", 0, false);
         }
 
-        private void TxtSearch_OnMouseEnter(object sender, MouseEventArgs e)
+        private void TxtSearch_OnKeyDown(object sender, KeyEventArgs e)
         {
-            ArcMapAddinIsogeo.Variables.restFunctions.reloadinfosAPI("", 0, false);
+            if (e.Key == Key.Return)
+            { 
+                Variables.restFunctions.reloadinfosAPI("", 0, false);
+            }
         }
     }
 }

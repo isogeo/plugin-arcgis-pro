@@ -8,10 +8,10 @@
              d:DesignHeight="602" d:DesignWidth="587">
     <StackPanel>
         <GroupBox x:Name="GrpContactPoint" Header="Point of contact" HorizontalAlignment="Stretch" Padding="6,6,6,6" Margin="3,3,3,3" VerticalAlignment="Top">
-            <UI:ContactItem />
+            <UI:ContactItem x:Name="ContactItemPoint" />
         </GroupBox>
         <GroupBox x:Name="GrpOthersContact" Header="Others contact" HorizontalAlignment="Stretch" Padding="6,6,6,6" Margin="3,3,3,3" VerticalAlignment="Top">
-            <UI:ContactItem />
+            <UI:ContactItem x:Name="OtherContactItem" />
         </GroupBox>
     </StackPanel>
 </UserControl>

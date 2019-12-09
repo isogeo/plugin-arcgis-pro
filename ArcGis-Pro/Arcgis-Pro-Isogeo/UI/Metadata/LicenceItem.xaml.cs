@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using  API = ArcMapAddinIsogeo.API;
 
 namespace Arcgis_Pro_Isogeo.UI.Metadata
 {
@@ -20,9 +21,29 @@ namespace Arcgis_Pro_Isogeo.UI.Metadata
     /// </summary>
     public partial class LicenceItem : UserControl
     {
+        private API.Condition condition;
+
         public LicenceItem()
         {
             InitializeComponent();
+        }
+
+        public void Init(API.Condition condition)
+        {
+            LblLicence.Content = "";
+            LblContent.Content = "";
+
+            this.condition = condition;
+            if (condition.licence != null)
+            {
+                LblLicence.Content = condition.licence.name;
+                LblContent.Content = condition.licence.content;
+            }
+            else
+            {
+                LblLicence.Content = "Pas de licence";
+            }
+            LblDescription.Content = condition.description;
         }
     }
 }

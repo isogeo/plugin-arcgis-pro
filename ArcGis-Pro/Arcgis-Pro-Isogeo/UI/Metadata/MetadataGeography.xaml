@@ -16,9 +16,9 @@
             <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
         <GroupBox Grid.Row="0" Grid.Column="0" x:Name="GrpTechnicalInformation" Header="Informations techniques">
-            <local:TechnicalInformationItem />
+            <local:TechnicalInformationItem x:Name="TechnicalInformationItem" />
         </GroupBox>
-        <GroupBox Grid.Row="1" Grid.Column="0" Header="Spécification">
+        <GroupBox x:Name="GrpSpecification" Grid.Row="1" Grid.Column="0" Header="Spécification">
             <Label x:Name="LblSpecification" Content="LblSpecification" />
         </GroupBox>
         <GroupBox x:Name="GrpTypology" Grid.Row="2" Grid.Column="0" Header="Typologie">

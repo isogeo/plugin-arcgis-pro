@@ -10,8 +10,8 @@
         <Menu HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
             <MenuItem x:Name="MniSearchManagement" Header="Search management">
                 <MenuItem x:Name="MniNewSearch" Header="Nouvelle recherche"/>
-                <MenuItem x:Name="MniPrecedentSearch" Header="Recherche précédente"></MenuItem>
-                <MenuItem x:Name="MniSaveAs" Header="Enregistrer sous..."></MenuItem>
+                <MenuItem x:Name="MniPrecedentSearch" Header="Recherche précédente"/>
+                <MenuItem x:Name="MniSaveAs" Header="Enregistrer sous..."/>
             </MenuItem>
         </Menu>
     </Grid>

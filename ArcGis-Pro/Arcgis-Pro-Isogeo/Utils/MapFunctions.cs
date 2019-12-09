@@ -10,6 +10,8 @@ using System.Linq;
 using System.Windows.Forms;
 //using ESRI.ArcGIS.Geodatabase;
 using System.IO;
+using ArcGIS.Desktop.Mapping;
+
 namespace ArcMapAddinIsogeo.Utils
 {
     class MapFunctions
@@ -21,10 +23,10 @@ namespace ArcMapAddinIsogeo.Utils
         /// <returns>le nom du système de coord</returns>
         public static string GetCoordSys()
         {
-
             try
             {
-
+                var a = ArcGIS.Core.Geometry.SpatialReference();
+                String srs_map = 
                 String srs_map = "EPSG:" + ArcMap.Document.ActiveView.FocusMap.SpatialReference.FactoryCode;
                 return srs_map;
             }
@@ -227,33 +229,6 @@ namespace ArcMapAddinIsogeo.Utils
                     }
 
                     break;
-                
-
-                //case "DXF": case "DGN": case "FILEGDB": case "TAB" :
-                    
-
-                    //if (System.IO.File.Exists(serviceType.url))
-                    //{
-
-                    //    IWorkspaceFactory workspaceFactory = new ESRI.ArcGIS.DataSourcesFile.CadWorkspaceFactoryClass();
-                    //    String dir = System.IO.Path.GetDirectoryName(System.IO.Path.GetFullPath(serviceType.url));
-                    //    IFeatureWorkspace featureWorkspace = (IFeatureWorkspace)workspaceFactory.OpenFromFile(dir, 0);
-                    //    IFeatureClass featureClass = featureWorkspace.OpenFeatureClass(System.IO.Path.GetFileName(serviceType.url));
-                    //    IGeoFeatureLayer pGeoFeatureLayer;
-                    //    pGeoFeatureLayer = new FeatureLayerClass();
-                    //    pGeoFeatureLayer.Name = featureClass.AliasName;
-                    //    pGeoFeatureLayer.FeatureClass = featureClass;
-
-                    //    ArcMap.Document.ActiveView.FocusMap.AddLayer((ILayer)pGeoFeatureLayer);
-                    //    IActiveView activeView = (IActiveView)ArcMap.Document.ActiveView.FocusMap;
-                    //    activeView.Refresh();
-
-                        
-                    //}
-                  //  break;
-                //case "RASTER":
-
-                //    break;
 
                 case "EFS":
                 case "EMS":
@@ -298,23 +273,6 @@ namespace ArcMapAddinIsogeo.Utils
                 
 
                     break;
-
-                //case "POSTGIS":
-                //    IPropertySet connectionProperties = new PropertySetClass();
-                //    connectionProperties.SetProperty("Database", System.Configuration.ConfigurationManager.AppSettings["Database"]);
-                //    connectionProperties.SetProperty("INSTANCE", "sde:sqlserver:" + System.Configuration.ConfigurationManager.AppSettings["Server"]);
-                //    connectionProperties.SetProperty("USER", System.Configuration.ConfigurationManager.AppSettings["UserName"]);
-                //    connectionProperties.SetProperty("PASSWORD", System.Configuration.ConfigurationManager.AppSettings["Password"]);
-                //    connectionProperties.SetProperty("VERSION", System.Configuration.ConfigurationManager.AppSettings["Version"]);
-
-                //    Type factoryType = Type.GetTypeFromProgID("esriDataSourcesGDB.SdeWorkspaceFactory");
-                //    IWorkspaceFactory wfDatabase = (IWorkspaceFactory)Activator.CreateInstance(factoryType);
-                //    IWorkspace workspace = wfDatabase.Open(connectionProperties, 0);
-
-                //    IFeatureWorkspace fwDatabase = (IFeatureWorkspace)workspace;
-
-                //    ITable sysTable = fwDatabase.OpenTable("sys.columns");
-                    //break;
                 default:
 
                     MessageBox.Show(Variables.localisationManager.getValue(Localization.LocalizationItem.Message_Data_Type) + " ('" + serviceType.type + "')","Isogeo");                                                
@@ -346,7 +304,7 @@ namespace ArcMapAddinIsogeo.Utils
             IDataLayer dataLayer = (IDataLayer)wmsMapLayer;
             try
             {
-                /*TOALEMENT USELESS*/
+               
                 if (dataLayer.get_DataSourceSupported((IName)connName))
                 {
                     IName tmp = dataLayer.DataSourceName;
@@ -433,8 +391,6 @@ namespace ArcMapAddinIsogeo.Utils
             }
             catch (Exception e)
             {
-               // MessageBox.Show("Une erreur est survenue lors du téléchargement du WMS.\n Détails : " + e.Message + "\n" + e.StackTrace, "Erreur");
-                //MessageBox.Show("Impossible de déterminer ou de trouver le Layer demandé", "Isogeo");
                 MessageBox.Show(Variables.localisationManager.getValue(Localization.LocalizationItem.Message_Data_layer_not_found), "Isogeo");                                                
             }
             return null;
@@ -520,23 +476,14 @@ namespace ArcMapAddinIsogeo.Utils
                     Variables.wfsIdFInd = false;
                     for (int i = 0; i < grpLayer.Count; i++)
                     {
-
-                        //Debug.Print("Setting visibility for " + grpLayer.get_Layer(i).Name);
                         SetVisibility(grpLayer.get_Layer(i), visibleIndices, name,-1);
-                        //outLayerIndice = geyIlayerById(grpLayer.get_Layer(i), visibleIndices);
-                        //outLayerIndice.Visible = true;
-                        //if (outLayerIndice != null) break;
-                        
                     }
                     if (Variables.wfsIdFInd == false)
                     {
-                        
                         if (visibleIndices < grpLayer.Count && visibleIndices >-1)
                         {
                             SetVisibility(grpLayer.get_Layer(visibleIndices), visibleIndices, name, visibleIndices);
                         }
-                            
-                        
                     }
                     outLayerIndice = outLayer;
                 }
@@ -545,10 +492,7 @@ namespace ArcMapAddinIsogeo.Utils
                     outLayerIndice = outLayer;
                     
                 }
-                //Debug.Print("setting {0} transparency to {1}", name, transparency);
-                //((ILayerEffects)outLayer).Transparency = transparency;
                 outLayerIndice.Name = name;
-                //
             }
             else
             {
@@ -568,7 +512,7 @@ namespace ArcMapAddinIsogeo.Utils
                 {
                     return soName;
                 }
-                /*SUR de rien */
+                
                 if ((soName.Type == "FeatureServer"))
                 {
                     String soNameUrl = soName.URL.ToUpper();
@@ -627,8 +571,6 @@ namespace ArcMapAddinIsogeo.Utils
             // recurse and set visibility
             IMapServerSublayer subLayer = lyr as IMapServerSublayer;
             //ILayerDescription ild = lyr as ILayerDescription;
-            
-            
 
             if (subLayer == null)
             {
@@ -653,10 +595,6 @@ namespace ArcMapAddinIsogeo.Utils
                     }
                 }
                 IFeatureLayerDefinition dd = lyr as IFeatureLayerDefinition;
-                
-                
-;
-                //String dd = lyr.GetType();
                 return;
             }
              
@@ -686,9 +624,6 @@ namespace ArcMapAddinIsogeo.Utils
                 
             }
             
-            
-            
-                
             IMapServerGroupLayer gLayer = lyr as IMapServerGroupLayer;
             if (gLayer != null)
             {
@@ -726,15 +661,6 @@ namespace ArcMapAddinIsogeo.Utils
 
         private static string GetServiceName(string url)
         {
-            /*
-            int idx = url.ToString().ToUpper().IndexOf(@"/SERVICES/") + 10;
-            string svcName = url.ToString().Substring(idx).Trim();
-            if (svcName.ToUpper().EndsWith(@"/MAPSERVER"))
-            {
-                svcName = svcName.Substring(0, svcName.ToUpper().LastIndexOf(@"/MAPSERVER"));
-            }
-            return svcName;
-             * */
             int index = -1;
 
             if (url.Contains("MapServer"))
@@ -750,7 +676,6 @@ namespace ArcMapAddinIsogeo.Utils
                 return ret;
 
             }
-
             else if (url.Contains("FeatureServer"))
             {
                 index = url.LastIndexOf("FeatureServer") + 13;
@@ -802,9 +727,6 @@ namespace ArcMapAddinIsogeo.Utils
                 //get the layer from the enum, store it in a MapServerLayer variable
 
                 iLayer = enumLyrs.Next();
-
-
-
 
             }
             catch

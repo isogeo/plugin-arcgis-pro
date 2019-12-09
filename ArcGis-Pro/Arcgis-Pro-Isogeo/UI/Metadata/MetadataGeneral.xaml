@@ -14,7 +14,7 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
-        <Label Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" Content="Titre" x:Name="LblTitle" FontSize="16" FontWeight="Bold"/>
+        <Label x:Name="LblTitle" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" Content="Titre" FontSize="16" FontWeight="Bold"/>
         <Grid Grid.Row="1" Grid.Column="0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>

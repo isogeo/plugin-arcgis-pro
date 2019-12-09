@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Arcgis_Pro_Isogeo;
+using UI = Arcgis_Pro_Isogeo.UI;
 
 //using System.Windows.Forms;
 //using ESRI.ArcGIS.Carto;
@@ -29,7 +30,7 @@ namespace ArcMapAddinIsogeo
         
         
 
-        //public static Ui.Search.AdvancedSearch.AdvancedSreachItem advancedSreachItem_geographicFilter; 
+        public static UI.Search.AdvancedSearch.AdvancedSearchItem advancedSearchItem_geographicFilter; 
 
         public static API.RestFunctions restFunctions;
         public static API.Token token;
@@ -38,7 +39,7 @@ namespace ArcMapAddinIsogeo
         public static API.SearchLists searchLists;
         public static Boolean ListLoading = false;
         public static Boolean TranslateInProgress = false;
-        //public static ComboBox combo_lang;
+        public static ComboBox CmbLang;
         public static int currentPage=1;
 
         public static Boolean haveResult = false;

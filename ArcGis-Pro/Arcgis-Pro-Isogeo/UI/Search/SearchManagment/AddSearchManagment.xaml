@@ -9,11 +9,11 @@
     <StackPanel>
         <StackPanel Orientation="Horizontal">
                 <Label x:Name="LblQuickSearch" Content="Nom de la recherche rapide : "/>
-                <TextBox x:Name="TxtQuickSearch" Height="20" Width="117" />
+                <TextBox x:Name="TxtQuickSearch" Height="20" Width="117" KeyDown="TxtQuickSearch_OnKeyDown"  />
         </StackPanel>
         <StackPanel Orientation="Horizontal">
-            <Button x:Name="BtnSave" HorizontalAlignment="Right" Height="23" Width="75" Margin="10, 10, 10, 10" Content="Save" />
-            <Button x:Name="Cancel" HorizontalAlignment="Right" Height="23" Width="75" Content="Cancel"/>
+            <Button x:Name="BtnSave" HorizontalAlignment="Right" Height="23" Width="75" Margin="10, 10, 10, 10" Content="Save" Click="BtnSave_Click" />
+            <Button x:Name="Cancel" HorizontalAlignment="Right" Height="23" Width="75" Content="Cancel" Click="Cancel_Click"/>
         </StackPanel>
     </StackPanel>
 </Window>

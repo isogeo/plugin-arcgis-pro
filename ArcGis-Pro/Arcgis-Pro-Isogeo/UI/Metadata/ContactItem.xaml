@@ -7,7 +7,7 @@
              mc:Ignorable="d" d:DesignWidth="317" Height="135">
     <StackPanel VerticalAlignment="Top">
         <Label x:Name="LblName" Content="lblName"/>
-        <Label x:Name="LblEmail" Content="lblEmail"/>
+        <Label x:Name="LblEmail" Content="lblEmail" MouseDoubleClick="LblEmail_OnMouseDoubleClick" />
         <Label x:Name="LblPhone" Content="lblPhone"/>
         <Label x:Name="LblAddress" Content="lblAddress"/>
         <Label x:Name="LblCity" Content="lblCity"/>

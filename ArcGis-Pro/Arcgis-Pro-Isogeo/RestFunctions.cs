@@ -1,10 +1,7 @@
 ﻿using System;
-using System.IO;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Net;
-using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using RestSharp;
@@ -94,7 +91,7 @@ namespace ArcMapAddinIsogeo.API
                 if (Variables.isFirstLoad == false)
                 {
                     Variables.isFirstLoad = false;
-                    MessageBox.Show(Variables.dockableWindowIsogeo, Variables.localisationManager.getValue(Localization.LocalizationItem.Message_Query_authentification_ko_invalid) + "\n" + Variables.localisationManager.getValue(Localization.LocalizationItem.Message_contact_support), "Isogeo");
+                    // TODO MessageBox.Show(Variables.dockableWindowIsogeo, Variables.localisationManager.getValue(Localization.LocalizationItem.Message_Query_authentification_ko_invalid) + "\n" + Variables.localisationManager.getValue(Localization.LocalizationItem.Message_contact_support), "Isogeo");
                 }
                 Variables.isFirstLoad = false;
                 return;
@@ -102,24 +99,24 @@ namespace ArcMapAddinIsogeo.API
             switch (Variables.token.StatusResult)
             {
                 case "NotFound":
-                    MessageBox.Show(Variables.dockableWindowIsogeo, Variables.localisationManager.getValue(Localization.LocalizationItem.Message_Query_authentification_ko_internet) + "\n" + Variables.localisationManager.getValue(Localization.LocalizationItem.Message_contact_support), "Isogeo");
+                    // TODO MessageBox.Show(Variables.dockableWindowIsogeo, Variables.localisationManager.getValue(Localization.LocalizationItem.Message_Query_authentification_ko_internet) + "\n" + Variables.localisationManager.getValue(Localization.LocalizationItem.Message_contact_support), "Isogeo");
                     break;
                 case "OK":
 
                     break;
                 case "BadRequest":
-                    MessageBox.Show(Variables.dockableWindowIsogeo, Variables.localisationManager.getValue(Localization.LocalizationItem.Message_Query_authentification_ko_invalid) + "\n" + Variables.localisationManager.getValue(Localization.LocalizationItem.Message_contact_support), "Isogeo");
+                    // TODO MessageBox.Show(Variables.dockableWindowIsogeo, Variables.localisationManager.getValue(Localization.LocalizationItem.Message_Query_authentification_ko_invalid) + "\n" + Variables.localisationManager.getValue(Localization.LocalizationItem.Message_contact_support), "Isogeo");
                     break;
                 case "0":
                     if (Variables.isFirstLoad == false)
                     {
                         Variables.isFirstLoad = false;
-                        MessageBox.Show(Variables.dockableWindowIsogeo, Variables.localisationManager.getValue(Localization.LocalizationItem.Message_Query_authentification_ko_proxy) + "\n" + Variables.localisationManager.getValue(Localization.LocalizationItem.Message_contact_support), "Isogeo");
+                        // TODO MessageBox.Show(Variables.dockableWindowIsogeo, Variables.localisationManager.getValue(Localization.LocalizationItem.Message_Query_authentification_ko_proxy) + "\n" + Variables.localisationManager.getValue(Localization.LocalizationItem.Message_contact_support), "Isogeo");
                     }
                     
                     break;
                 default:
-                    MessageBox.Show(Variables.dockableWindowIsogeo, Variables.localisationManager.getValue(Localization.LocalizationItem.Message_Query_authentification_ko_internet) + "\n" + Variables.localisationManager.getValue(Localization.LocalizationItem.Message_contact_support), "Isogeo");
+                    // TODO MessageBox.Show(Variables.dockableWindowIsogeo, Variables.localisationManager.getValue(Localization.LocalizationItem.Message_Query_authentification_ko_internet) + "\n" + Variables.localisationManager.getValue(Localization.LocalizationItem.Message_contact_support), "Isogeo");
                     break;
 
             }
@@ -223,7 +220,7 @@ namespace ArcMapAddinIsogeo.API
                 int nbpage = 0;
                 if (isResult == true)
                 {
-                    nbResult = Convert.ToInt32(Math.Floor(Convert.ToDecimal((Variables.dockableWindowIsogeo.Results.lstResults.Height - 10) / 35)));
+                    //TODO nbResult = Convert.ToInt32(Math.Floor(Convert.ToDecimal((Variables.dockableWindowIsogeo.Results.lstResults.Height - 10) / 35)));
                     nbpage = Convert.ToInt32(Math.Ceiling(Variables.search.total / nbResult));
                     if (Variables.currentPage > nbpage) Variables.currentPage = nbpage;
                     offset = (Variables.currentPage - 1) * nbResult;
@@ -232,7 +229,7 @@ namespace ArcMapAddinIsogeo.API
                 }
                 else
                 {
-                    Variables.dockableWindowIsogeo.Result.clearPages();
+                    //TODO Variables.dockableWindowIsogeo.Results.clearPages();
                 }
 
 
@@ -292,21 +289,21 @@ namespace ArcMapAddinIsogeo.API
                 //temp test                
                 request.AddParameter("q", query.Replace("action:view", ""));
 
-                if (Variables.advancedSreachItemGeographicFilter.cmb_search.SelectedIndex == 1)
+                if (Variables.advancedSearchItem_geographicFilter.CmbAdvancedSearchFilter.SelectedIndex == 1)
                 {
                     //request.AddParameter("coord", Utils.MapFunctions.getMapExtent());
 
                     //request.AddParameter("box", "-4.970, 30.69418, 8.258, 51.237");
-                    request.AddParameter("box", Utils.MapFunctions.getMapExtent());
+                    //TODO request.AddParameter("box", Utils.MapFunctions.getMapExtent());
                     
                     //request.AddParameter("extent", Utils.MapFunctions.getMapExtent());
                     //request.AddParameter("epsg", "4326");
                     request.AddParameter("rel", Variables.configurationManager.config.geographicalOperator);
                 }
                 
-                if (Variables.advancedSreachItemGeographicFilter.cmb_search.SelectedIndex > 1)
+                if (Variables.advancedSearchItem_geographicFilter.CmbAdvancedSearchFilter.SelectedIndex > 1)
                 {
-                    request.AddParameter("box", Utils.MapFunctions.getLayerExtent(Variables.layersVisible[Variables.advancedSreachItemGeographicFilter.cmb_search.SelectedIndex - 2]));
+                    // TODO request.AddParameter("box", Utils.MapFunctions.getLayerExtent(Variables.layersVisible[Variables.advancedSearchItem_geographicFilter.CmbAdvancedSearchFilter.SelectedIndex - 2]));
                     request.AddParameter("rel", Variables.configurationManager.config.geographicalOperator);
                 }
                 //if (layer.Visible == true)
@@ -328,11 +325,11 @@ namespace ArcMapAddinIsogeo.API
 
                 setSearchList(query);
 
-                Variables.dockableWindowIsogeo.ResultsToolBar.setNbResults();
+               // TODO Variables.dockableWindowIsogeo.ResultsToolBar.setNbResults();
                 if (isResult==true)
                 {
-                    Variables.dockableWindowIsogeo.Results.setData();
-                    Variables.dockableWindowIsogeo.Results.setCombo(nbpage);
+                    // TODO Variables.dockableWindowIsogeo.Results.setData();
+                    // TODO Variables.dockableWindowIsogeo.Results.setCombo(nbpage);
 
                 }
 
@@ -476,7 +473,7 @@ namespace ArcMapAddinIsogeo.API
 
             if (query != "")
             { 
-                Variables.dockableWindowIsogeo.PrincipalSearch.searchItems1.txt_search.Text = textInput;
+                Variables.dockableWindowIsogeo.PrincipalSearch.SearchItems.LblTxtSearch.Text = textInput;
             }
             
             Variables.ListLoading = false;
@@ -487,7 +484,7 @@ namespace ArcMapAddinIsogeo.API
         {
             String filter="";
 
-            foreach (ComboBox cmb in Variables.listComboFilter)
+            foreach (var cmb in Variables.listComboFilter)
             {
                 if (cmb.SelectedValue != null) 
                 {
@@ -505,7 +502,7 @@ namespace ArcMapAddinIsogeo.API
                 filter += " action:view";
             }
             
-            filter += " "  + Variables.dockableWindowIsogeo.PrincipalSearch.searchItems1.txt_search.Text;
+            filter += " "  + Variables.dockableWindowIsogeo.PrincipalSearch.SearchItems.LblTxtSearch.Text;
          
    
             return filter;
@@ -534,11 +531,9 @@ namespace ArcMapAddinIsogeo.API
 
         }
 
-        public void setListCombo(ComboBox cmb, String listName)
+        public void setListCombo(System.Windows.Controls.ComboBox cmb, String listName)
         {
-            cmb.SetBinding(ItemsControl.ItemsSourceProperty, new Binding {Source = lst.lstItem});
-
-            /*foreach (API.SearchList lst in Variables.searchLists.list)
+            foreach (API.SearchList lst in Variables.searchLists.list)
             {
                 if (lst.filter == listName)
                 {
@@ -555,9 +550,9 @@ namespace ArcMapAddinIsogeo.API
                         {
                             valcmbValue = lst.query;
                         }
-                        cmb. .DataSource = new BindingSource(lst.lstItem, null);
-                        cmb.ValueMember = "code";
-                        cmb.DisplayMember = "value";
+                        cmb.SetBinding(ItemsControl.ItemsSourceProperty, new Binding { Source = lst.lstItem });
+                        cmb.DisplayMemberPath = "code";
+                        cmb.SelectedValuePath = "value";
 
                         if (valcmbValue != null)
                         {
@@ -568,14 +563,14 @@ namespace ArcMapAddinIsogeo.API
                     catch (Exception ex)
                     {
                         Utils.Log.DockableWindowLogger.Debug(string.Concat(new object[]
-				        {
-					        "Erreur ",
-					        ex.Message
-				        }));
+                        {
+                            "Erreur ",
+                            ex.Message
+                        }));
                     }
 
                 }
-            }*/
+            }
         }
     }
 }

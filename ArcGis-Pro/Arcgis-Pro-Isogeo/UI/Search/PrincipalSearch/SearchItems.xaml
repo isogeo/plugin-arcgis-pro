@@ -16,7 +16,7 @@
             <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
         <Label x:Name="LblSearchTerms" Grid.Row="0" Grid.Column="0" Content="Search Terms :"/>
-        <TextBox x:Name="LblTxtSearch" Grid.Row="0" Grid.Column="1" MouseEnter="TxtSearch_OnMouseEnter"/>
+        <TextBox x:Name="TxtSearch" Grid.Row="0" Grid.Column="1" KeyDown="TxtSearch_OnKeyDown"/>
         <Button x:Name="BtnSearch" Grid.Row="0" Grid.Column="2" Content="Search" Click="Search_Click"/>
     </Grid>
 </UserControl>

@@ -6,12 +6,13 @@
              xmlns:local="clr-namespace:Arcgis_Pro_Isogeo.UI.Metadata"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <DataGrid CanUserAddRows="False"  
+    <DataGrid x:Name="DgLastModifications" IsReadOnly="True" CanUserAddRows="False"  
               AutoGenerateColumns="False"  
-              HorizontalAlignment="Stretch" Margin="13,13,13,13" VerticalAlignment="Stretch">
+              HorizontalAlignment="Stretch" Margin="13,13,13,13" VerticalAlignment="Stretch"
+              ItemsSource="{Binding EventBinding}">
         <DataGrid.Columns>
-            <DataGridTextColumn Width="1*" Header="Date" x:Name="Date"/>
-            <DataGridTextColumn Width="1*" Header="Description" x:Name="Description"/>
+            <DataGridTextColumn Binding="{Binding Path=date}" Width="1*" Header="Date" x:Name="Date"/>
+            <DataGridTextColumn Binding="{Binding Path=description}" Width="1*" Header="Description" x:Name="Description"/>
         </DataGrid.Columns>
     </DataGrid>
 </UserControl>

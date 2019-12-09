@@ -14,7 +14,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
-        <local:SearchItems Margin="0,0,5,0" Grid.Row="0" Grid.Column="0"/>
-        <local:Keywords Margin="5,0,0,0"  Grid.Row="0" Grid.Column="1" />
+        <local:SearchItems x:Name="SearchItems" Margin="0,0,5,0" Grid.Row="0" Grid.Column="0"/>
+        <local:Keywords x:Name="Keywords" Margin="5,0,0,0"  Grid.Row="0" Grid.Column="1" />
     </Grid>
 </UserControl>

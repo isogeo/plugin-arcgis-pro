@@ -17,7 +17,7 @@
             <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
         <GroupBox x:Name="GrpDataHistory" Grid.Row="0" Grid.Column="0" Header="Data history" HorizontalAlignment="Stretch">
-            <local:HistoryDataItem />
+            <local:HistoryDataItem x:Name="HistoryDataItem" />
         </GroupBox>
         <GroupBox x:Name="GrpCollectContext" Grid.Row="1" Grid.Column="0" Header="Contexte de collecte" HorizontalAlignment="Stretch">
             <Label x:Name="LblContext" Content="LblContext" />
@@ -26,7 +26,7 @@
             <Label Content="LblMethod" x:Name="LblMethod" />
         </GroupBox>
         <GroupBox x:Name="GrpLastModification" Grid.Row="3" Grid.Column="0" Header="Dernières modifications sur la donnée" HorizontalAlignment="Stretch">
-            <local:LastModificationMetaDataItem />
+            <local:LastModificationMetaDataItem x:Name="LastModificationMetaDataItem" />
         </GroupBox>
     </Grid>
 </UserControl>

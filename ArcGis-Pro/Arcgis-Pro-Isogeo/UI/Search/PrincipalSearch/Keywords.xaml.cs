@@ -20,7 +20,8 @@ namespace Arcgis_Pro_Isogeo.UI.Search.PrincipalSearch
 
         private void translate()
         {
-            LblKeywords.Content = Variables.localisationManager.getValue(Localization.LocalizationItem.Keywords) + " :";
+            LblKeywords.Content = Variables.localisationManager.getValue(
+                                      ArcMapAddinIsogeo.Localization.LocalizationItem.Keywords) + " :";
         }
 
         private void setList()

@@ -8,7 +8,7 @@
              d:DesignHeight="235" d:DesignWidth="649">
     <Grid>
         <GroupBox x:Name="GrpAdvancedSearch" Header="Advanced search" HorizontalAlignment="Stretch" Margin="0,0,0,0" VerticalAlignment="Top">
-            <Expander>
+            <Expander x:Name="AdvancedSearchExpander">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="1*"/>
@@ -21,13 +21,13 @@
                         <RowDefinition Height="1*"/>
                     </Grid.RowDefinitions>
                     <local:AdvancedSearchItem x:Name="GeographyFilter" Grid.Row="0" Grid.Column="0" />
-                    <local:AdvancedSearchItem x:Name="Format" Grid.Row="1" Grid.Column="0" />
-                    <local:AdvancedSearchItem x:Name="Inspire" Grid.Row="2" Grid.Column="0" />
-                    <local:AdvancedSearchItem x:Name="Contact" Grid.Row="3" Grid.Column="0" />
-                    <local:AdvancedSearchItem x:Name="ResourceType" Grid.Row="0" Grid.Column="1" />
-                    <local:AdvancedSearchItem x:Name="OwnerMetadata" Grid.Row="1" Grid.Column="1" />
-                    <local:AdvancedSearchItem x:Name="CoordinateSystem" Grid.Row="2" Grid.Column="1" />
-                    <local:AdvancedSearchItem x:Name="License" Grid.Row="3" Grid.Column="1" />
+                    <local:AdvancedSearchItem x:Name="FormatFilter" Grid.Row="1" Grid.Column="0" />
+                    <local:AdvancedSearchItem x:Name="InspireFilter" Grid.Row="2" Grid.Column="0" />
+                    <local:AdvancedSearchItem x:Name="ContactFilter" Grid.Row="3" Grid.Column="0" />
+                    <local:AdvancedSearchItem x:Name="ResourceTypeFilter" Grid.Row="0" Grid.Column="1" />
+                    <local:AdvancedSearchItem x:Name="OwnerMetadataFilter" Grid.Row="1" Grid.Column="1" />
+                    <local:AdvancedSearchItem x:Name="CoordinateSystemFilter" Grid.Row="2" Grid.Column="1" />
+                    <local:AdvancedSearchItem x:Name="LicenseFilter" Grid.Row="3" Grid.Column="1" />
                 </Grid>
             </Expander>
         </GroupBox>
