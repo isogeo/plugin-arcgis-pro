@@ -35,7 +35,6 @@ namespace ArcMapAddinIsogeo.API
             setConnexion();
             
 
-            //Variables.search = new API.Search();
             if (Variables.token.access_token != null)
             {
                 sendRequestIsogeo(query,page,isResult);
@@ -188,7 +187,6 @@ namespace ArcMapAddinIsogeo.API
                 request.AddParameter("_include", "limitations");
                 request.AddParameter("_include", "keywords");
                 request.AddParameter("_include", "specifications");
-                //IRestResponse<API.Search> reponse = client.Execute<API.Search>(request);
 
                 IRestResponse response = client.Execute(request);
                 Result result = JsonConvert.DeserializeObject<Result>(response.Content);
@@ -220,26 +218,19 @@ namespace ArcMapAddinIsogeo.API
                 int nbpage = 0;
                 if (isResult == true)
                 {
-                    //TODO nbResult = Convert.ToInt32(Math.Floor(Convert.ToDecimal((Variables.dockableWindowIsogeo.Results.lstResults.Height - 10) / 35)));
+                    //TODO nbResult, need to redo it
+                    nbResult = 1; // Convert.ToInt32(Math.Floor(Convert.ToDecimal((Variables.dockableWindowIsogeo.Results.LstResults.Height - 10) / 35)));
                     nbpage = Convert.ToInt32(Math.Ceiling(Variables.search.total / nbResult));
                     if (Variables.currentPage > nbpage) Variables.currentPage = nbpage;
                     offset = (Variables.currentPage - 1) * nbResult;
-
-
                 }
                 else
                 {
-                    //TODO Variables.dockableWindowIsogeo.Results.clearPages();
+                    Variables.dockableWindowIsogeo.Results.clearPages();
                 }
 
 
                 Variables.search = new Search();
-                //Variables.currentPage
-                //Variables.search
-
-
-
-
 
                 String url = "https://v1.api.isogeo.com/resources/search"; //?&_limit=0
                 var client = new RestClient(url);
@@ -256,20 +247,12 @@ namespace ArcMapAddinIsogeo.API
                 request.AddParameter("_include", "layers");
                 request.AddParameter("_include", "serviceLayers");
 
-                //request.AddParameter("_lang", Utils.Util.getLocale());
+                request.AddParameter("_lang", Utils.Util.getLocale());
                 request.AddParameter("_limit", nbResult);
 
                 request.AddParameter("ob", Variables.dockableWindowIsogeo.ResultsToolBar.CmbSortingMethod.SelectedValue);
                 request.AddParameter("od", Variables.dockableWindowIsogeo.ResultsToolBar.CmbSortingDirection.SelectedValue);
 
-                //request.AddParameter("_include", "conditions");
-                //request.AddParameter("_include", "contacts");
-                //request.AddParameter("_include", "coordinate-system");
-                //request.AddParameter("_include", "events");
-                //request.AddParameter("_include", "feature-attributes");
-                //request.AddParameter("_include", "limitations");
-                //request.AddParameter("_include", "keywords");
-                //request.AddParameter("_include", "specifications");
 
                 if (isResult == true)
                 {
@@ -294,7 +277,7 @@ namespace ArcMapAddinIsogeo.API
                     //request.AddParameter("coord", Utils.MapFunctions.getMapExtent());
 
                     //request.AddParameter("box", "-4.970, 30.69418, 8.258, 51.237");
-                    //TODO request.AddParameter("box", Utils.MapFunctions.getMapExtent());
+                    // TODO request.AddParameter("box", Utils.MapFunctions.getMapExtent());
                     
                     //request.AddParameter("extent", Utils.MapFunctions.getMapExtent());
                     //request.AddParameter("epsg", "4326");
@@ -306,12 +289,7 @@ namespace ArcMapAddinIsogeo.API
                     // TODO request.AddParameter("box", Utils.MapFunctions.getLayerExtent(Variables.layersVisible[Variables.advancedSearchItem_geographicFilter.CmbAdvancedSearchFilter.SelectedIndex - 2]));
                     request.AddParameter("rel", Variables.configurationManager.config.geographicalOperator);
                 }
-                //if (layer.Visible == true)
-                //{
-                //    ESRI.ArcGIS.Geometry.IEnvelope env = layer.AreaOfInterest.Envelope;
-                //}
-                //request.AddParameter("q", "format:shp type:vector-dataset"); 
-                //client.Proxy=new WebProxy(ff, false);
+
                 request.AddHeader("Authorization", "Bearer " + Variables.token.access_token);
 
                 //IRestResponse<API.Search> reponse = client.Execute<API.Search>(request);
@@ -325,11 +303,11 @@ namespace ArcMapAddinIsogeo.API
 
                 setSearchList(query);
 
-               // TODO Variables.dockableWindowIsogeo.ResultsToolBar.setNbResults();
+               Variables.dockableWindowIsogeo.ResultsToolBar.setNbResults();
                 if (isResult==true)
-                {
-                    // TODO Variables.dockableWindowIsogeo.Results.setData();
-                    // TODO Variables.dockableWindowIsogeo.Results.setCombo(nbpage);
+                { 
+                    Variables.dockableWindowIsogeo.Results.setData(); 
+                    Variables.dockableWindowIsogeo.Results.setCombo(nbpage);
 
                 }
 
@@ -363,9 +341,9 @@ namespace ArcMapAddinIsogeo.API
         public void setSearchList(String query)
         {
             String textInput = "";
-            Variables.searchLists=new API.SearchLists();
+            Variables.searchLists = new API.SearchLists();
 
-            Variables.searchLists.list.Add(new SearchList("type",true));
+            Variables.searchLists.list.Add(new SearchList("type", true));
             Variables.searchLists.list.Add(new SearchList("keyword:inspire-theme", true));
             Variables.searchLists.list.Add(new SearchList("keyword:isogeo", true));
             Variables.searchLists.list.Add(new SearchList("format", true));
@@ -374,16 +352,6 @@ namespace ArcMapAddinIsogeo.API
             Variables.searchLists.list.Add(new SearchList("action", true));
             Variables.searchLists.list.Add(new SearchList("contact", true));
             Variables.searchLists.list.Add(new SearchList("license", true));
-
-            
-            foreach (SearchList item in Variables.searchLists.list)
-            {
-                item.lstItem= new List<Objects.comboItem>();
-                item.lstItem.Add(new Objects.comboItem("","-"));
-            }
-
-            
-            
 
             if (Variables.search.tags == null) return;
             foreach (var item in Variables.search.tags)
@@ -431,37 +399,14 @@ namespace ArcMapAddinIsogeo.API
                         if (textInput != "") textInput += " ";
                         textInput += queryItem;
                     }
-
-                    string[] queryItemsKeyValue = queryItem.Split(':');
-                    if (queryItemsKeyValue.Length == 2 || queryItemsKeyValue.Length == 3)
-                    {
-                        String keyQuery = queryItemsKeyValue[0];
-
-                        foreach (SearchList lst in Variables.searchLists.list)
-                        {
-                            if (keyQuery.IndexOf(lst.filter) == 0)
-                            {
-                                lst.query = queryItem;
-                                break;
-                            }
-                        }
-                    }
-                    else
-                    {
-                        if (textInput != "") textInput += " ";
-                        textInput += queryItem;
-                    }
                 }
 
             }
 
-
-
-
             foreach (SearchList lst in Variables.searchLists.list)
             {
                 lst.lstItem = lst.lstItem.OrderBy(x => x.value).ToList();
-                lst.lstItem.Insert(0,new Objects.comboItem("-","-"));
+                lst.lstItem.Insert(0, new Objects.comboItem("-", "-"));
 
             }
 
@@ -472,10 +417,10 @@ namespace ArcMapAddinIsogeo.API
             }
 
             if (query != "")
-            { 
-                Variables.dockableWindowIsogeo.PrincipalSearch.SearchItems.LblTxtSearch.Text = textInput;
+            {
+                Variables.dockableWindowIsogeo.PrincipalSearch.SearchItems.TxtSearch.Text = textInput;
             }
-            
+
             Variables.ListLoading = false;
         }
 
@@ -502,7 +447,7 @@ namespace ArcMapAddinIsogeo.API
                 filter += " action:view";
             }
             
-            filter += " "  + Variables.dockableWindowIsogeo.PrincipalSearch.SearchItems.LblTxtSearch.Text;
+            filter += " "  + Variables.dockableWindowIsogeo.PrincipalSearch.SearchItems.TxtSearch.Text;
          
    
             return filter;
@@ -568,7 +513,6 @@ namespace ArcMapAddinIsogeo.API
                             ex.Message
                         }));
                     }
-
                 }
             }
         }

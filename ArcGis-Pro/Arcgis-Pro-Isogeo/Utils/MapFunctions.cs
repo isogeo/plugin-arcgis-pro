@@ -10,13 +10,15 @@ using System.Linq;
 using System.Windows.Forms;
 //using ESRI.ArcGIS.Geodatabase;
 using System.IO;
+using ArcGIS.Core.Geometry;
 using ArcGIS.Desktop.Mapping;
 
 namespace ArcMapAddinIsogeo.Utils
 {
+    // TODO
     class MapFunctions
     {
-       
+       /*
         /// <summary>
         /// Méthode qui retourne le système de coordonnée du document (pas sur sur que ce soit ca au vu du code crée apres compilation)
         /// </summary>
@@ -26,6 +28,8 @@ namespace ArcMapAddinIsogeo.Utils
             try
             {
                 var a = ArcGIS.Core.Geometry.SpatialReference();
+                ArcGIS.Desktop.Core.G
+                ArcGIS.Core.Geometry.SpatialReference.
                 String srs_map = 
                 String srs_map = "EPSG:" + ArcMap.Document.ActiveView.FocusMap.SpatialReference.FactoryCode;
                 return srs_map;
@@ -738,6 +742,6 @@ namespace ArcMapAddinIsogeo.Utils
                 System.Runtime.InteropServices.Marshal.FinalReleaseComObject(fsLayerFactory);
             }
             return iLayer;
-        }
+        }*/
     }
 }

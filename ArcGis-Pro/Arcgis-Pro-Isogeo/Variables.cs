@@ -46,6 +46,7 @@ namespace ArcMapAddinIsogeo
 
         public static Boolean wfsIdFInd = false;
 
+        // TODO Implement it
         //public static List<ILayer> layersVisible = new List<ILayer>();
 
         public static API.Result currentResult;

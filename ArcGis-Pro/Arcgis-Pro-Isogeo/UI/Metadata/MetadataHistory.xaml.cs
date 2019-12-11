@@ -35,8 +35,8 @@ namespace Arcgis_Pro_Isogeo.UI.Metadata
 
             //HISTORY ---------------------------------------------------------
             //Data creation and last update dates
-            HistoryDataItem.LblDataCreation.Content = formatDate(Variables.currentResult._created);
-            HistoryDataItem.LblDataUpdate.Content = formatDate(Variables.currentResult._modified);
+            HistoryDataItem.LblDataCreationValue.Content = formatDate(Variables.currentResult._created);
+            HistoryDataItem.LblDataUpdateValue.Content = formatDate(Variables.currentResult._modified);
             //custom_tools.handle_date
             //Update frequency information
             if (Variables.currentResult.updateFrequency != null)

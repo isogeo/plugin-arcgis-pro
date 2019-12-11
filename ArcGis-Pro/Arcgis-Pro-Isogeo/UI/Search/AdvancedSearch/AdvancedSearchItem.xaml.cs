@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Controls;
+using System.Windows.Media.Imaging;
 using ArcMapAddinIsogeo;
 using Binding = System.Windows.Data.Binding;
 using  Objects = ArcMapAddinIsogeo.Objects;
@@ -22,10 +23,11 @@ namespace Arcgis_Pro_Isogeo.UI.Search.AdvancedSearch
             InitializeComponent();
         }
 
-        public void Init(String searchName, Bitmap imageSearch, String listName)
+        public void Init(String searchName, String imageSearchPath, String listName)
         {
             LblFilterName.Content = searchName;
-            //ImgAdvancedSearch.Source = new BitmapImage(imageSearch.));
+            // TODO set picture
+            ImgAdvancedSearch.Source = new BitmapImage(new Uri(imageSearchPath, UriKind.Absolute)); //imageSearchPath;
             translateName = searchName;
             this.listName = listName;
             Variables.functionsTranslate.Add(translate);
@@ -71,8 +73,8 @@ namespace Arcgis_Pro_Isogeo.UI.Search.AdvancedSearch
                 Variables.localisationManager.getValue(ArcMapAddinIsogeo.Localization.LocalizationItem.Map_canvas)));
 
             CmbAdvancedSearchFilter.SetBinding(ItemsControl.ItemsSourceProperty, new Binding("SelectedItem") {  Source = comboItems });
-            // CmbAdvancedSearchFilter.ValueMember = "code";
-            // CmbAdvancedSearchFilter.DisplayMember = "value";
+            CmbAdvancedSearchFilter.SelectedValuePath = "code";
+            CmbAdvancedSearchFilter.DisplayMemberPath = "value";
             if (valcmbValue != null)
             {
                 try
@@ -89,7 +91,7 @@ namespace Arcgis_Pro_Isogeo.UI.Search.AdvancedSearch
             }
         }
 
-        private void CmbAdvancedSearchFilter_SelectedIndexChanged(object sender, EventArgs e)
+        private void CmbAdvancedSearchFilter_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (Variables.ListLoading == true) return;
             if (Variables.restFunctions != null) Variables.restFunctions.reloadinfosAPI("", 0, false);

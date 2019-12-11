@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:Arcgis_Pro_Isogeo.UI.Search.Results"
              mc:Ignorable="d" 
              d:DesignHeight="35" d:DesignWidth="531">
-    <Grid>
+    <Grid MouseLeftButtonDown="UIElement_OnMouseLeftButtonDown">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="1*"/>
@@ -16,17 +16,17 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
-        <Image Margin="3, 3, 3, 3" Grid.Column="0" Grid.Row="0" x:Name="ImgType"/>
-        <TextBox IsReadOnly="True" Grid.Column="1" Grid.Row="0" x:Name="TxtTitle"/>
+        <Image Margin="3, 3, 3, 3" Grid.Column="0" Grid.Row="0" x:Name="ImgType" MouseLeftButtonDown="ImgType_OnMouseLeftButtonDown"/>
+        <TextBox IsReadOnly="True" Grid.Column="1" Grid.Row="0" x:Name="TxtTitle" MouseDoubleClick="TxtTitle_OnMouseDoubleClick" />
         <ComboBox Grid.Column="2" Grid.Row="0" x:Name="CmbLayer"/>
         <Label Visibility="Hidden" Grid.Column="2" Grid.Row="0" x:Name="LblLayer" />
-        <Image Visibility="Hidden" Grid.Column="2" Grid.Row="0" x:Name="ImgLayer"/>
+        <Image Visibility="Hidden" Grid.Column="2" Grid.Row="0" x:Name="ImgLayer" />
         <Menu Visibility="Hidden" Grid.Column="2" Grid.Row="0" x:Name="Menu">
-            <MenuItem x:Name="MniLoadData" Header="Load Data" />
-            <MenuItem x:Name="MniShowMetadata" Header="Show metadata" />
-            <MenuItem x:Name="MniOpenCatalog" Header="Open Catalog" />
-            <MenuItem x:Name="MniDownload" Header="Download" />
+            <MenuItem x:Name="MniLoadData" Header="Load Data" Click="MniLoadData_OnClick" />
+            <MenuItem x:Name="MniShowMetadata" Header="Show metadata" Click="MniShowMetadata_OnClick" />
+            <MenuItem x:Name="MniOpenCatalog" Header="Open Catalog" Click="MniOpenCatalog_OnClick" />
+
         </Menu>
-        <Button Padding="10, 10, 10, 10" Grid.Column="3" Grid.Row="0" x:Name="BtnMenu" Content="+" />
+        <Button Padding="10, 10, 10, 10" Grid.Column="3" Grid.Row="0" x:Name="BtnMenu" Content="+" Click="BtnMenu_OnClick"/>
     </Grid>
 </UserControl>

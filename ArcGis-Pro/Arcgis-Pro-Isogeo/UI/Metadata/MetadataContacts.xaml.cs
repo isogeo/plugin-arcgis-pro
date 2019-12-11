@@ -31,8 +31,10 @@ namespace Arcgis_Pro_Isogeo.UI.Metadata
 
         public void setValues()
         {
-            GrpContactPoint.Header = Variables.localisationManager.getValue(ArcMapAddinIsogeo.Localization.LocalizationItem.Metadata_Contacts_points_contacts);
-            GrpOthersContact.Header = Variables.localisationManager.getValue(ArcMapAddinIsogeo.Localization.LocalizationItem.Metadata_Contacts_others_contacts);
+            GrpContactPoint.Header = Variables.localisationManager.getValue(ArcMapAddinIsogeo.Localization
+                .LocalizationItem.Metadata_Contacts_points_contacts);
+            GrpOthersContact.Header = Variables.localisationManager.getValue(ArcMapAddinIsogeo.Localization
+                .LocalizationItem.Metadata_Contacts_others_contacts);
 
             // TODO : error here, can have multiple users, not only one, so have to make a "add" fonction, not "init"
             for (int i = Variables.currentResult.contacts.Count - 1; i >= 0; i--)
@@ -58,4 +60,5 @@ namespace Arcgis_Pro_Isogeo.UI.Metadata
 
             }
         }
+    }
 }

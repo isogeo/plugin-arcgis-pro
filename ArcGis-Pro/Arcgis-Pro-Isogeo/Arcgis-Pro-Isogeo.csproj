@@ -414,91 +414,91 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
-    <None Include="Resources\arrowCollapse.png" />
+    <Resource Include="Resources\arrowCollapse.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\arrowExtent.png" />
+    <Resource Include="Resources\arrowExtent.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\asterisk.png" />
+    <Resource Include="Resources\asterisk.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\bolt.png" />
+    <Resource Include="Resources\bolt.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\check.png" />
+    <Resource Include="Resources\check.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\cube.png" />
+    <Resource Include="Resources\cube.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\delete.png" />
+    <Resource Include="Resources\delete.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\email15.png" />
+    <Resource Include="Resources\email15.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\eye.png" />
+    <Resource Include="Resources\eye.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\flash.png" />
+    <Resource Include="Resources\flash.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\gavel.png" />
+    <Resource Include="Resources\gavel.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\gear16.png" />
+    <Resource Include="Resources\gear16.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\globe.png" />
+    <Resource Include="Resources\globe.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\info.png" />
+    <Resource Include="Resources\info.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\key.png" />
+    <Resource Include="Resources\key.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\leaf.png" />
+    <Resource Include="Resources\leaf.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\map.png" />
+    <Resource Include="Resources\map.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\phone_orange.png" />
+    <Resource Include="Resources\phone_orange.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\previousSearch.png" />
+    <Resource Include="Resources\previousSearch.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\rename.png" />
+    <Resource Include="Resources\rename.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\save2.png" />
+    <Resource Include="Resources\save2.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\saveas.png" />
+    <Resource Include="Resources\saveas.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\search16.png" />
+    <Resource Include="Resources\search16.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\undo.png" />
+    <Resource Include="Resources\undo.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\undo14.png" />
+    <Resource Include="Resources\undo14.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\undo16.png" />
+    <Resource Include="Resources\undo16.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\undo161.png" />
+    <Resource Include="Resources\undo161.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\undo162.png" />
+    <Resource Include="Resources\undo162.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\users.png" />
+    <Resource Include="Resources\users.png" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ArcGis-Pro-WPF-Library\ArcGis-Pro-WPF-Library.csproj">
@@ -507,10 +507,14 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Localization\en.xml" />
+    <Content Include="Localization\en.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Localization\fr.xml" />
+    <Content Include="Localization\fr.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.resx">

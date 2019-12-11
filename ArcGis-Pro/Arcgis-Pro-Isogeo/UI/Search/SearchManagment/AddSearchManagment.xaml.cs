@@ -29,6 +29,10 @@ namespace Arcgis_Pro_Isogeo.UI.Search.SearchManagment
         public AddSearchManagment()
         {
             InitializeComponent();
+        }
+
+        public void Init(Boolean isRename, String oldName)
+        {
             this.isRename = isRename;
             this.oldName = oldName;
         }

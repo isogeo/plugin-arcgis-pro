@@ -15,6 +15,12 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <ListBox x:Name="LstResults" Grid.Row="0" Grid.Column="0"/>
-        <Label Grid.Row="1" Grid.Column="0" Content="Pagination here" HorizontalAlignment="Center"/>
+        <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center" >
+            <Button x:Name="BtnPrevious" Margin="3,3,3,3" Content='&#60;' Click="BtnPrevious_Click"/>
+            <Label Content="Page" />
+            <ComboBox x:Name="CmbNoPage" Margin="3,3,3,3" SelectionChanged="CmbNoPage_SelectionChanged"></ComboBox>
+            <Label x:Name="LblNbPage" Content="/?"></Label>
+            <Button x:Name="BtnNext" Margin="3,3,3,3" Content=">" Click="BtnNext_Click"/>
+        </StackPanel>
     </Grid>
 </UserControl>

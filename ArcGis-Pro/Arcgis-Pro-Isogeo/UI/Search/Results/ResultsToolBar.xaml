@@ -16,9 +16,19 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
-        <Button x:Name="BtnResults" Grid.Row="0" Grid.Column="0" Content="Results" Margin="3,3,3,3"/>
-        <Button x:Name="BtnRefresh" Grid.Row="0" Grid.Column="1" Content="Rrefresh" Margin="3,3,3,3"/>
-        <ComboBox x:Name="CmbSortingMethod" Grid.Row="0" Grid.Column="2" Margin="3,3,3,3"/>
-        <ComboBox x:Name="CmbSortingDirection" Grid.Row="0" Grid.Column="3" Margin="3,3,3,3"/>
+        <Button x:Name="BtnResults" Grid.Row="0" Grid.Column="0" Content="Results" Margin="3,3,3,3" Click="BtnResults_Click"/>
+        <Button x:Name="BtnLastSearch" Grid.Row="0" Grid.Column="1" Content="LastSearch" Margin="3,3,3,3" Click="BtnLastSearch_Click"/>
+        <ComboBox x:Name="CmbSortingMethod" Grid.Row="0" Grid.Column="2" Margin="3,3,3,3" SelectionChanged="CmbSortingMethod_SelectionChanged">
+            <ComboBoxItem x:Name="CmbiRelevance"></ComboBoxItem>
+            <ComboBoxItem x:Name="CmbiTitle"></ComboBoxItem>
+            <ComboBoxItem x:Name="CmbiModified"></ComboBoxItem>
+            <ComboBoxItem x:Name="CmbiCreated"></ComboBoxItem>
+            <ComboBoxItem x:Name="Cmbi_Modified"></ComboBoxItem>
+            <ComboBoxItem x:Name="Cmbi_Created"></ComboBoxItem>
+        </ComboBox>
+        <ComboBox x:Name="CmbSortingDirection" Grid.Row="0" Grid.Column="3" Margin="3,3,3,3" SelectionChanged="CmbSortingDirection_SelectionChanged">
+            <ComboBoxItem x:Name="CmbiAsc"></ComboBoxItem>
+            <ComboBoxItem x:Name="CmbiDesc"></ComboBoxItem>
+        </ComboBox>
     </Grid>
 </UserControl>

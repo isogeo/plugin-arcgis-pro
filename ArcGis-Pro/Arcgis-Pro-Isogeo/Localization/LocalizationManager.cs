@@ -31,7 +31,7 @@ namespace ArcMapAddinIsogeo.Localization
             }
             else
             {
-                configPath = dllPAth.Substring(0, dllPAth.LastIndexOf("\\")) + "\\Localization\\" + "en" + ".xml";
+                configPath = dllPAth.Substring(0, dllPAth.LastIndexOf("\\")) + "\\Localization\\" + "en" + ".xml"; // Path.Combine(Environment.CurrentDirectory, @"Localization/en.xml");
                 doc = XDocument.Load(configPath);
             }
         }

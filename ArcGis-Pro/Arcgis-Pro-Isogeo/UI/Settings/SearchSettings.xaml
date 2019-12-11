@@ -19,6 +19,7 @@
                     <RowDefinition Height="1*"/>
                     <RowDefinition Height="1*"/>
                     <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
                 </Grid.RowDefinitions>
                 <Label x:Name="LblLanguage" HorizontalAlignment="Right" Content="Langue : " Grid.Row="0" Grid.Column="0" />
                 <Label x:Name="LblOwnerProperty" HorizontalAlignment="Right" Content="Propriétaire de la métadonnée (défaut) : " Grid.Row="1" Grid.Column="0" />
@@ -50,6 +51,17 @@
                     </Grid.RowDefinitions>
                     <TextBox x:Name="TxtSdeConnectionFile" IsReadOnly="True" Margin="3, 3, 3, 3" Grid.Row="0" Grid.Column="0" />
                     <Button x:Name="BtnSdeConnectionFile" Content=" ... " Margin="3, 3, 3, 3" Grid.Row="0" Grid.Column="1" />
+                </Grid>
+                <Grid Grid.Row="5" Grid.Column="1" HorizontalAlignment="Right">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="1*"/>
+                    </Grid.RowDefinitions>
+                    <Button Grid.Column="0" Grid.Row="0" Margin="3,3,3,3" x:Name="BtnSave" Content="Save"/>
+                    <Button Grid.Column="1" Grid.Row="0" Margin="3,3,3,3" x:Name="BtnCancel" Content="Cancel"/>
                 </Grid>
             </Grid>
         </GroupBox>

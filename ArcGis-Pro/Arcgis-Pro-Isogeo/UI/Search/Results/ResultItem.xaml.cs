@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Media.Imaging;
 using ArcMapAddinIsogeo;
 using API = ArcMapAddinIsogeo.API;
@@ -46,9 +47,6 @@ namespace Arcgis_Pro_Isogeo.UI.Search.Results
             MniLoadData.Header = Variables.localisationManager.getValue(ArcMapAddinIsogeo.Localization.LocalizationItem.menuLoad);
             MniShowMetadata.Header = Variables.localisationManager.getValue(ArcMapAddinIsogeo.Localization.LocalizationItem.menuMetadata);
             MniOpenCatalog.Header = Variables.localisationManager.getValue(ArcMapAddinIsogeo.Localization.LocalizationItem.menuOpenCatalog);
-            MniDownload.Header = Variables.localisationManager.getValue(ArcMapAddinIsogeo.Localization.LocalizationItem.menuDownload);
-
-
         }
 
         // TODO: temporary
@@ -115,28 +113,28 @@ namespace Arcgis_Pro_Isogeo.UI.Search.Results
                     switch (data_list[0].type)
                     {
                         case "WMS":
-                            ImgLayer.Image = imageList2.Images[0];
+                            ImgLayer.Source = ReturnPicture();  // imageList2.Images[0];
                             break;
                         case "WFS":
-                            img_layer.Image = imageList2.Images[1];
+                            ImgLayer.Source = ReturnPicture(); // imageList2.Images[1];
                             break;
                         case "WMTS":
-                            img_layer.Image = imageList2.Images[1];
+                            ImgLayer.Source = ReturnPicture();// imageList2.Images[1];
                             break;
                         case "PostGIS table":
-                            img_layer.Image = imageList2.Images[2];
+                            ImgLayer.Source = ReturnPicture();// imageList2.Images[2];
                             break;
                         case "Data file":
-                            img_layer.Image = imageList2.Images[3];
+                            ImgLayer.Source = ReturnPicture(); // imageList2.Images[3];
                             break;
                     }
                     break;
                 default:
                     //If there is only one way for the data to be added, insert a label.
                     //Else, add a combobox, storing all possibilities.                    
-                    LblLayer.Visible = false;
+                    LblLayer.IsEnabled = false;
                     //img_layer.Visible=false;
-                    CmbLayer.Visible = true;
+                    CmbLayer.IsEnabled = true;
 
                     foreach (ArcMapAddinIsogeo.DataType.ServiceType data in data_list)
                     {
@@ -224,69 +222,38 @@ namespace Arcgis_Pro_Isogeo.UI.Search.Results
             return layer_title;
         }
 
-        private String getNameFromUrl(String title, String url)
+        private void openMetadata()
         {
-            try
-            {
-                String[] list_parameters = url.Split('?')[1].Split('&');
-                foreach (String param in list_parameters)
-                {
-                    switch (param.Split('=')[0])
-                    {
-                        case "typename":
-                        case "layers":
-                        case "layer":
-                            return param.Split('=')[1];
-                            break;
-                        case "getcapabilities":
-                            return title;
-                            break;
-                    }
-                }
-            }
-            catch
-            {
-            }
-            return title;
+            Variables.currentResult = null;
+            Variables.restFunctions.getDetails(result._id);
+            MniShowMetadata_OnClick(null, null);
         }
 
-        private void DockWindow_Resize(object sender, System.EventArgs e)
+        private void TxtTitle_OnMouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            this.Width = Variables.dockableWindowIsogeo.Width - 20;
+            openMetadata();
         }
 
-        private void btn_menu_Click(object sender, EventArgs e)
+        private void ImgType_OnMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            openMetadata();
+        }
+
+        // TODO : this function is a test
+        private void UIElement_OnMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            openMetadata();
+        }
+
+        private void BtnMenu_OnClick(object sender, RoutedEventArgs e)
         {
             Variables.currentResult = null;
             Variables.restFunctions.getDetails(result._id);
 
-            menu_load_Click(null, null);
-
+            MniLoadData_OnClick(null, null);
         }
 
-        private void menu_metadata_Click(object sender, EventArgs e)
-        {
-            Metadata.Metadata frmMetadata = new Metadata.Metadata();
-            frmMetadata.ShowDialog();
-
-        }
-
-        private void menu_load_Click(object sender, EventArgs e)
-        {
-            ArcMapAddinIsogeo.DataType.ServiceType currentService;
-            if (data_list.Count == 1)
-            {
-                currentService = data_list[0];
-            }
-            else
-            {
-                currentService = data_list[CmbLayer.SelectedIndex];
-            }
-
-            ArcMapAddinIsogeo.Utils.MapFunctions.AddLayer(currentService);
-        }
-
-        private void menu_opencatalog_Click(object sender, EventArgs e)
+        private void MniOpenCatalog_OnClick(object sender, RoutedEventArgs e)
         {
             ArcMapAddinIsogeo.DataType.ServiceType currentService;
             if (data_list.Count == 1)
@@ -306,29 +273,25 @@ namespace Arcgis_Pro_Isogeo.UI.Search.Results
             System.Diagnostics.Process.Start(url);
         }
 
-
-        private void panel_title_Click(object sender, EventArgs e)
+        private void MniShowMetadata_OnClick(object sender, RoutedEventArgs e)
         {
-            openMetadata();
-
+            Metadata.Metadata frmMetadata = new Metadata.Metadata();
+            frmMetadata.ShowDialog();
         }
 
-        private void txt_title_Click(object sender, EventArgs e)
+        private void MniLoadData_OnClick(object sender, RoutedEventArgs e)
         {
-            openMetadata();
-        }
+            ArcMapAddinIsogeo.DataType.ServiceType currentService;
+            if (data_list.Count == 1)
+            {
+                currentService = data_list[0];
+            }
+            else
+            {
+                currentService = data_list[CmbLayer.SelectedIndex];
+            }
 
-        private void img_type_Click(object sender, EventArgs e)
-        {
-            openMetadata();
-        }
-
-        private void openMetadata()
-        {
-            Variables.currentResult = null;
-            Variables.restFunctions.getDetails(result._id);
-            menu_metadata_Click(null, null);
-
+            // TODO ArcMapAddinIsogeo.Utils.MapFunctions.AddLayer(currentService);
         }
     }
 }

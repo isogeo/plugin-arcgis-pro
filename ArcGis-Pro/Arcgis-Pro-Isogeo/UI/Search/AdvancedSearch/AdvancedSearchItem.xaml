@@ -12,7 +12,6 @@
             <Image Height="12" Width="12" x:Name="ImgAdvancedSearch"/>
             <Label x:Name="LblFilterName" Content="Geographic filter"/>
         </StackPanel>
-        <ComboBox x:Name="CmbAdvancedSearchFilter"/>
-        <Metadata:HistoryDataItem Height="100"/>
+        <ComboBox x:Name="CmbAdvancedSearchFilter" SelectionChanged="CmbAdvancedSearchFilter_SelectionChanged"/>
     </StackPanel>
 </UserControl>

@@ -9,6 +9,7 @@
 //------------------------------------------------------------------------------
 
 namespace Arcgis_Pro_Isogeo.Properties {
+    using System;
     
     
     /// <summary>
@@ -18,10 +19,10 @@ namespace Arcgis_Pro_Isogeo.Properties {
     // à l'aide d'un outil, tel que ResGen ou Visual Studio.
     // Pour ajouter ou supprimer un membre, modifiez votre fichier .ResX, puis réexécutez ResGen
     // avec l'option /str ou régénérez votre projet VS.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class Resources {
+    internal class Resources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
@@ -37,8 +38,8 @@ namespace Arcgis_Pro_Isogeo.Properties {
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
-                if ((resourceMan == null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("ArcGis_Pro_WPF_Library.Properties.Resources", typeof(Resources).Assembly);
+                if (object.ReferenceEquals(resourceMan, null)) {
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Arcgis_Pro_Isogeo.Properties.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -58,350 +59,292 @@ namespace Arcgis_Pro_Isogeo.Properties {
                 resourceCulture = value;
             }
         }
-
+        
         /// <summary>
         ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap arrowCollapse
-        {
-            get
-            {
+        internal static System.Drawing.Bitmap arrowCollapse {
+            get {
                 object obj = ResourceManager.GetObject("arrowCollapse", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
-
+        
         /// <summary>
         ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap arrowExtent
-        {
-            get
-            {
+        internal static System.Drawing.Bitmap arrowExtent {
+            get {
                 object obj = ResourceManager.GetObject("arrowExtent", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
-
+        
         /// <summary>
         ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap asterisk
-        {
-            get
-            {
+        internal static System.Drawing.Bitmap asterisk {
+            get {
                 object obj = ResourceManager.GetObject("asterisk", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
-
+        
         /// <summary>
         ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap bolt
-        {
-            get
-            {
+        internal static System.Drawing.Bitmap bolt {
+            get {
                 object obj = ResourceManager.GetObject("bolt", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
-
+        
         /// <summary>
         ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap check
-        {
-            get
-            {
+        internal static System.Drawing.Bitmap check {
+            get {
                 object obj = ResourceManager.GetObject("check", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
-
+        
         /// <summary>
         ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap cube
-        {
-            get
-            {
+        internal static System.Drawing.Bitmap cube {
+            get {
                 object obj = ResourceManager.GetObject("cube", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
-
+        
         /// <summary>
         ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap delete
-        {
-            get
-            {
+        internal static System.Drawing.Bitmap delete {
+            get {
                 object obj = ResourceManager.GetObject("delete", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
-
+        
         /// <summary>
         ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap email15
-        {
-            get
-            {
+        internal static System.Drawing.Bitmap email15 {
+            get {
                 object obj = ResourceManager.GetObject("email15", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
-
+        
         /// <summary>
         ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap eye
-        {
-            get
-            {
+        internal static System.Drawing.Bitmap eye {
+            get {
                 object obj = ResourceManager.GetObject("eye", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
-
+        
         /// <summary>
         ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap flash
-        {
-            get
-            {
+        internal static System.Drawing.Bitmap flash {
+            get {
                 object obj = ResourceManager.GetObject("flash", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
-
+        
         /// <summary>
         ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap gavel
-        {
-            get
-            {
+        internal static System.Drawing.Bitmap gavel {
+            get {
                 object obj = ResourceManager.GetObject("gavel", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
-
+        
         /// <summary>
         ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap gear16
-        {
-            get
-            {
+        internal static System.Drawing.Bitmap gear16 {
+            get {
                 object obj = ResourceManager.GetObject("gear16", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
-
+        
         /// <summary>
         ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap globe
-        {
-            get
-            {
+        internal static System.Drawing.Bitmap globe {
+            get {
                 object obj = ResourceManager.GetObject("globe", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
-
+        
         /// <summary>
         ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap info
-        {
-            get
-            {
+        internal static System.Drawing.Bitmap info {
+            get {
                 object obj = ResourceManager.GetObject("info", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
-
+        
         /// <summary>
         ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap key
-        {
-            get
-            {
+        internal static System.Drawing.Bitmap key {
+            get {
                 object obj = ResourceManager.GetObject("key", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
-
+        
         /// <summary>
         ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap leaf
-        {
-            get
-            {
+        internal static System.Drawing.Bitmap leaf {
+            get {
                 object obj = ResourceManager.GetObject("leaf", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
-
+        
         /// <summary>
         ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap map
-        {
-            get
-            {
+        internal static System.Drawing.Bitmap map {
+            get {
                 object obj = ResourceManager.GetObject("map", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
-
+        
         /// <summary>
         ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap phone_orange
-        {
-            get
-            {
+        internal static System.Drawing.Bitmap phone_orange {
+            get {
                 object obj = ResourceManager.GetObject("phone_orange", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
-
+        
         /// <summary>
         ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap previousSearch
-        {
-            get
-            {
+        internal static System.Drawing.Bitmap previousSearch {
+            get {
                 object obj = ResourceManager.GetObject("previousSearch", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
-
+        
         /// <summary>
         ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap rename
-        {
-            get
-            {
+        internal static System.Drawing.Bitmap rename {
+            get {
                 object obj = ResourceManager.GetObject("rename", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
-
+        
         /// <summary>
         ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap save2
-        {
-            get
-            {
+        internal static System.Drawing.Bitmap save2 {
+            get {
                 object obj = ResourceManager.GetObject("save2", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
-
+        
         /// <summary>
         ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap saveas
-        {
-            get
-            {
+        internal static System.Drawing.Bitmap saveas {
+            get {
                 object obj = ResourceManager.GetObject("saveas", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
-
+        
         /// <summary>
         ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap search16
-        {
-            get
-            {
+        internal static System.Drawing.Bitmap search16 {
+            get {
                 object obj = ResourceManager.GetObject("search16", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
-
+        
         /// <summary>
         ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap undo
-        {
-            get
-            {
+        internal static System.Drawing.Bitmap undo {
+            get {
                 object obj = ResourceManager.GetObject("undo", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
-
+        
         /// <summary>
         ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap undo14
-        {
-            get
-            {
+        internal static System.Drawing.Bitmap undo14 {
+            get {
                 object obj = ResourceManager.GetObject("undo14", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
-
+        
         /// <summary>
         ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap undo16
-        {
-            get
-            {
+        internal static System.Drawing.Bitmap undo16 {
+            get {
                 object obj = ResourceManager.GetObject("undo16", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
-
+        
         /// <summary>
         ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap undo161
-        {
-            get
-            {
+        internal static System.Drawing.Bitmap undo161 {
+            get {
                 object obj = ResourceManager.GetObject("undo161", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
-
+        
         /// <summary>
         ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap undo162
-        {
-            get
-            {
+        internal static System.Drawing.Bitmap undo162 {
+            get {
                 object obj = ResourceManager.GetObject("undo162", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
-
+        
         /// <summary>
         ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
         /// </summary>
-        public static System.Drawing.Bitmap users
-        {
-            get
-            {
+        internal static System.Drawing.Bitmap users {
+            get {
                 object obj = ResourceManager.GetObject("users", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
