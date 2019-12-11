@@ -496,8 +496,8 @@ namespace ArcMapAddinIsogeo.API
                             valcmbValue = lst.query;
                         }
                         cmb.SetBinding(ItemsControl.ItemsSourceProperty, new Binding { Source = lst.lstItem });
-                        cmb.DisplayMemberPath = "code";
-                        cmb.SelectedValuePath = "value";
+                        cmb.DisplayMemberPath = "value";
+                        cmb.SelectedValuePath = "code";
 
                         if (valcmbValue != null)
                         {

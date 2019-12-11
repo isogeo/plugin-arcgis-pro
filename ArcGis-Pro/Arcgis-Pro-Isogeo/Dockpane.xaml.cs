@@ -90,7 +90,6 @@ namespace Arcgis_Pro_Isogeo
             {
                 addGroupLayerVisibility(layer);
             }*/
-            //Variables.advancedSreachItem_geographicFilter.setGeographicOperator();
         }
 
         //TODO
@@ -124,7 +123,6 @@ namespace Arcgis_Pro_Isogeo
             Variables.restFunctions.reloadinfosAPI(Variables.configurationManager.config.query, 0, false);
             if (Variables.configurationManager.config.owner == null) Variables.configurationManager.config.owner = "";
             SearchSettings.CmbOwnerProperty.SelectedValue = Variables.configurationManager.config.owner;
-
         }
 
         private void translate()

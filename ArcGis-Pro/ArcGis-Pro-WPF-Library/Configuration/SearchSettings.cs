@@ -5,6 +5,7 @@ using System.Text;
 
 namespace ArcMapAddinIsogeo.Configuration
 {
+    // TODO useless
     class SearchSettings
     {
     }

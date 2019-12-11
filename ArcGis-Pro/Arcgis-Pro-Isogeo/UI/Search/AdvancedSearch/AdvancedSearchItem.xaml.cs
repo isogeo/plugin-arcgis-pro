@@ -26,8 +26,7 @@ namespace Arcgis_Pro_Isogeo.UI.Search.AdvancedSearch
         public void Init(String searchName, String imageSearchPath, String listName)
         {
             LblFilterName.Content = searchName;
-            // TODO set picture
-            ImgAdvancedSearch.Source = new BitmapImage(new Uri(imageSearchPath, UriKind.Absolute)); //imageSearchPath;
+            ImgAdvancedSearch.Source = new BitmapImage(new Uri(imageSearchPath, UriKind.Absolute));
             translateName = searchName;
             this.listName = listName;
             Variables.functionsTranslate.Add(translate);
@@ -70,11 +69,13 @@ namespace Arcgis_Pro_Isogeo.UI.Search.AdvancedSearch
             List<Objects.comboItem> comboItems = new List<Objects.comboItem>();
             comboItems.Add(new Objects.comboItem("-", "-"));
             comboItems.Add(new Objects.comboItem("mapcanvas",
-                Variables.localisationManager.getValue(ArcMapAddinIsogeo.Localization.LocalizationItem.Map_canvas)));
+                Variables.localisationManager.getValue(
+                    ArcMapAddinIsogeo.Localization.LocalizationItem.Map_canvas)));
 
-            CmbAdvancedSearchFilter.SetBinding(ItemsControl.ItemsSourceProperty, new Binding("SelectedItem") {  Source = comboItems });
-            CmbAdvancedSearchFilter.SelectedValuePath = "code";
+            CmbAdvancedSearchFilter.SetBinding(ItemsControl.ItemsSourceProperty, 
+                new Binding("SelectedItem") {  Source = comboItems });
             CmbAdvancedSearchFilter.DisplayMemberPath = "value";
+            CmbAdvancedSearchFilter.SelectedValuePath = "code";
             if (valcmbValue != null)
             {
                 try

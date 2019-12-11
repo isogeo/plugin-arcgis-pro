@@ -13,6 +13,8 @@ namespace Arcgis_Pro_Isogeo.UI.Authentification
         public Authentification()
         {
             InitializeComponent();
+            getAuthentification();
+            translate();
         }
 
         private void getAuthentification()
@@ -42,7 +44,7 @@ namespace Arcgis_Pro_Isogeo.UI.Authentification
 
         private void BtnCheck_Click(object sender, RoutedEventArgs e)
         {
-
+            checkAuthentification(true);
         }
 
         private void translate()

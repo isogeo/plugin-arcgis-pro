@@ -14,8 +14,8 @@
         <Button x:Name="BtnCheck" Content="Check" HorizontalAlignment="Left" Margin="300.458,38,0,0" VerticalAlignment="Top" Width="75" Grid.Column="1" Click="BtnCheck_Click"/>
         <Label x:Name="LblApplicationId" Content="Application ID :" HorizontalAlignment="Left" Margin="45,10,0,0" VerticalAlignment="Top"/>
         <Label x:Name="LblApplicationSecret" Content="Application SECRET :" HorizontalAlignment="Left" Margin="45,47,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="TxtId" HorizontalAlignment="Left" Height="23" Margin="223,14,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="313" Grid.ColumnSpan="2"/>
-        <TextBox x:Name="TxtSecret" HorizontalAlignment="Left" Height="23" Margin="223,51,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="313" Grid.ColumnSpan="2"/>
+        <TextBox x:Name="TxtId" HorizontalAlignment="Left" Height="23" Margin="223,14,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="313" Grid.ColumnSpan="2"/>
+        <TextBox x:Name="TxtSecret" HorizontalAlignment="Left" Height="23" Margin="223,51,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="313" Grid.ColumnSpan="2"/>
         <Button x:Name="BtnSave" Content="Save" HorizontalAlignment="Left" Margin="240,90,0,0" VerticalAlignment="Top" Width="75" Grid.ColumnSpan="2" Click="BtnSave_Click"/>
         <Button x:Name="BtnCancel" Content="Cancel" HorizontalAlignment="Left" Margin="66.458,90,0,0" VerticalAlignment="Top" Width="75" Grid.Column="1" Click="BtnCancel_Click"/>
     </Grid>
