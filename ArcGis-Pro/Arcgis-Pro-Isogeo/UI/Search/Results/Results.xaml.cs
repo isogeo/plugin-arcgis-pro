@@ -22,16 +22,19 @@ namespace Arcgis_Pro_Isogeo.UI.Search.Results
 
         public void setData()
         {
-            LstResults.Items.Clear();
+            //if (LstResults.Items.Count > 0) 
+            //    LstResults.Items.Clear();
             LstResults.IsEnabled = false;
-            var resultsList = new List<API.Result>();
+            var resultsList = new List<ResultItem>();
             for (int i = Variables.search.results.Count - 1; i >= 0; i--)
             {
                 API.Result result = Variables.search.results[i];
-                resultsList.Add(result);
+                ResultItem resultItem = new ResultItem();
+                resultItem.Init(result);
+                // resultsList.Add(resultItem);
+                resultsList.Insert(0, resultItem);
                 //ResultItemSeparator resultItemSeparator = new ResultItemSeparator();
             }
-            // TODO pretty sure it will not work, but go with that for the moment
             LstResults.SetBinding(ItemsControl.ItemsSourceProperty, new Binding { Source = resultsList });
             LstResults.IsEnabled = true;
         }
@@ -40,8 +43,6 @@ namespace Arcgis_Pro_Isogeo.UI.Search.Results
         {
             isCmbLoad = true;
             CmbNoPage.Items.Clear();
-            // TODO don't have panel anymore
-            // panel_page.Enabled = true;
             for (int i = 0; i < nbPage; i++)
             {
                 CmbNoPage.Items.Add(i + 1);
@@ -53,8 +54,10 @@ namespace Arcgis_Pro_Isogeo.UI.Search.Results
 
         public void clearPages()
         {
-            LstResults.Items.Clear();
-            // panel_page.Enabled = false;
+            var resultsList = new List<ResultItem>();
+            LstResults.SetBinding(ItemsControl.ItemsSourceProperty, new Binding { Source = resultsList });
+            LstResults.IsEnabled = true;
+            //LstResults.Items.Clear();
             CmbNoPage.Items.Clear();
             LblNbPage.Content = "";
         }

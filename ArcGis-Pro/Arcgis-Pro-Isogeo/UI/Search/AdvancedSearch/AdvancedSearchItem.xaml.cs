@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
 using ArcMapAddinIsogeo;
 using Binding = System.Windows.Data.Binding;
-using  Objects = ArcMapAddinIsogeo.Objects;
+using Objects = ArcMapAddinIsogeo.Objects;
 using UserControl = System.Windows.Controls.UserControl;
 
 namespace Arcgis_Pro_Isogeo.UI.Search.AdvancedSearch

@@ -49,25 +49,27 @@ namespace Arcgis_Pro_Isogeo.UI.Search.Results
             MniOpenCatalog.Header = Variables.localisationManager.getValue(ArcMapAddinIsogeo.Localization.LocalizationItem.menuOpenCatalog);
         }
 
-        // TODO: temporary
-        private BitmapImage ReturnPicture()
+        private BitmapImage ReturnPicture(String imagePath)
         {
-            Uri src = new Uri(@"/ApplicationName;component/Resources/bolt.png", UriKind.Relative);
-            BitmapImage img = new BitmapImage(src);
-            return img;
+            return new BitmapImage(new Uri(imagePath, UriKind.Absolute));
         }
 
         private void setComponent()
         {
-            ImgType.Source = ReturnPicture(); //imageList1.Images[5];
+            ImgType.Source =
+                ReturnPicture("pack://application:,,,/" + Variables._assemblyName + ";component/Resources/gavel.png"); //imageList1.Images[5];
             if (result.geometry != null)
             {
                 if (result.geometry != null)
                 {
-                    if (polygon_list.Contains(result.geometry) == true) ImgType.Source = ReturnPicture(); // imageList1.Images[0];
-                    if (point_list.Contains(result.geometry) == true) ImgType.Source = ReturnPicture(); // imageList1.Images[1];
-                    if (line_list.Contains(result.geometry) == true) ImgType.Source = ReturnPicture(); // imageList1.Images[2];
-                    if (multi_list.Contains(result.geometry) == true) ImgType.Source = ReturnPicture(); // imageList1.Images[3];
+                    if (polygon_list.Contains(result.geometry) == true) ImgType.Source = 
+                        ReturnPicture("pack://application:,,,/" + Variables._assemblyName + ";component/Resources/gavel.png"); ; // imageList1.Images[0];
+                    if (point_list.Contains(result.geometry) == true) ImgType.Source = 
+                        ReturnPicture("pack://application:,,,/" + Variables._assemblyName + ";component/Resources/gavel.png"); // imageList1.Images[1];
+                    if (line_list.Contains(result.geometry) == true) ImgType.Source = 
+                        ReturnPicture("pack://application:,,,/" + Variables._assemblyName + ";component/Resources/gavel.png"); // imageList1.Images[2];
+                    if (multi_list.Contains(result.geometry) == true) ImgType.Source = 
+                        ReturnPicture("pack://application:,,,/" + Variables._assemblyName + ";component/Resources/gavel.png"); // imageList1.Images[3];
                     //if (result.geometry=="TIN") img_type.Image = imageList1.Images[4];
                 }
                 else
@@ -80,7 +82,8 @@ namespace Arcgis_Pro_Isogeo.UI.Search.Results
             {
                 if (result.type == "rasterDataset")
                 {
-                    ImgType.Source = ReturnPicture(); // imageList1.Images[4];
+                    ImgType.Source = 
+                        ReturnPicture("pack://application:,,,/" + Variables._assemblyName + ";component/Resources/gavel.png"); // imageList1.Images[4];
                 }
             }
             TxtTitle.Text = result.title;
@@ -113,19 +116,24 @@ namespace Arcgis_Pro_Isogeo.UI.Search.Results
                     switch (data_list[0].type)
                     {
                         case "WMS":
-                            ImgLayer.Source = ReturnPicture();  // imageList2.Images[0];
+                            ImgLayer.Source = 
+                                ReturnPicture("pack://application:,,,/" + Variables._assemblyName + ";component/Resources/gavel.png");  // imageList2.Images[0];
                             break;
                         case "WFS":
-                            ImgLayer.Source = ReturnPicture(); // imageList2.Images[1];
+                            ImgLayer.Source =
+                                ReturnPicture("pack://application:,,,/" + Variables._assemblyName + ";component/Resources/gavel.png");// imageList2.Images[1];
                             break;
                         case "WMTS":
-                            ImgLayer.Source = ReturnPicture();// imageList2.Images[1];
+                            ImgLayer.Source = 
+                                ReturnPicture("pack://application:,,,/" + Variables._assemblyName + ";component/Resources/gavel.png");// imageList2.Images[1];
                             break;
                         case "PostGIS table":
-                            ImgLayer.Source = ReturnPicture();// imageList2.Images[2];
+                            ImgLayer.Source = 
+                                ReturnPicture("pack://application:,,,/" + Variables._assemblyName + ";component/Resources/gavel.png"); ;// imageList2.Images[2];
                             break;
                         case "Data file":
-                            ImgLayer.Source = ReturnPicture(); // imageList2.Images[3];
+                            ImgLayer.Source = 
+                                ReturnPicture("pack://application:,,,/" + Variables._assemblyName + ";component/Resources/gavel.png"); // imageList2.Images[3];
                             break;
                     }
                     break;

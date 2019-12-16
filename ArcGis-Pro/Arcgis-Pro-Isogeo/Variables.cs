@@ -13,6 +13,7 @@ namespace ArcMapAddinIsogeo
 {
     public static class Variables
     {
+        public static String _assemblyName = "Arcgis-Pro-Isogeo";
 
         public static String emailSupport = "support+arcmap@isogeo.fr";
         public static String emailBodySupport = "support+arcmap@isogeo.fr";

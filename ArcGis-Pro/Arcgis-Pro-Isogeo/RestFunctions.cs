@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Windows.Controls;
 using System.Windows.Data;
+using ArcGIS.Desktop.Framework.Dialogs;
 using RestSharp;
 using Newtonsoft.Json;
 using UI = Arcgis_Pro_Isogeo.UI;
@@ -90,7 +91,7 @@ namespace ArcMapAddinIsogeo.API
                 if (Variables.isFirstLoad == false)
                 {
                     Variables.isFirstLoad = false;
-                    // TODO MessageBox.Show(Variables.dockableWindowIsogeo, Variables.localisationManager.getValue(Localization.LocalizationItem.Message_Query_authentification_ko_invalid) + "\n" + Variables.localisationManager.getValue(Localization.LocalizationItem.Message_contact_support), "Isogeo");
+                    MessageBox.Show(Variables.localisationManager.getValue(Localization.LocalizationItem.Message_Query_authentification_ko_invalid) + "\n" + Variables.localisationManager.getValue(Localization.LocalizationItem.Message_contact_support), "Isogeo");
                 }
                 Variables.isFirstLoad = false;
                 return;
@@ -98,24 +99,24 @@ namespace ArcMapAddinIsogeo.API
             switch (Variables.token.StatusResult)
             {
                 case "NotFound":
-                    // TODO MessageBox.Show(Variables.dockableWindowIsogeo, Variables.localisationManager.getValue(Localization.LocalizationItem.Message_Query_authentification_ko_internet) + "\n" + Variables.localisationManager.getValue(Localization.LocalizationItem.Message_contact_support), "Isogeo");
+                    MessageBox.Show(Variables.localisationManager.getValue(Localization.LocalizationItem.Message_Query_authentification_ko_internet) + "\n" + Variables.localisationManager.getValue(Localization.LocalizationItem.Message_contact_support), "Isogeo");
                     break;
                 case "OK":
 
                     break;
                 case "BadRequest":
-                    // TODO MessageBox.Show(Variables.dockableWindowIsogeo, Variables.localisationManager.getValue(Localization.LocalizationItem.Message_Query_authentification_ko_invalid) + "\n" + Variables.localisationManager.getValue(Localization.LocalizationItem.Message_contact_support), "Isogeo");
+                    MessageBox.Show(Variables.localisationManager.getValue(Localization.LocalizationItem.Message_Query_authentification_ko_invalid) + "\n" + Variables.localisationManager.getValue(Localization.LocalizationItem.Message_contact_support), "Isogeo");
                     break;
                 case "0":
                     if (Variables.isFirstLoad == false)
                     {
                         Variables.isFirstLoad = false;
-                        // TODO MessageBox.Show(Variables.dockableWindowIsogeo, Variables.localisationManager.getValue(Localization.LocalizationItem.Message_Query_authentification_ko_proxy) + "\n" + Variables.localisationManager.getValue(Localization.LocalizationItem.Message_contact_support), "Isogeo");
+                        MessageBox.Show(Variables.localisationManager.getValue(Localization.LocalizationItem.Message_Query_authentification_ko_proxy) + "\n" + Variables.localisationManager.getValue(Localization.LocalizationItem.Message_contact_support), "Isogeo");
                     }
                     
                     break;
                 default:
-                    // TODO MessageBox.Show(Variables.dockableWindowIsogeo, Variables.localisationManager.getValue(Localization.LocalizationItem.Message_Query_authentification_ko_internet) + "\n" + Variables.localisationManager.getValue(Localization.LocalizationItem.Message_contact_support), "Isogeo");
+                    MessageBox.Show(Variables.localisationManager.getValue(Localization.LocalizationItem.Message_Query_authentification_ko_internet) + "\n" + Variables.localisationManager.getValue(Localization.LocalizationItem.Message_contact_support), "Isogeo");
                     break;
 
             }
@@ -131,7 +132,7 @@ namespace ArcMapAddinIsogeo.API
                 String encodedParam = System.Convert.ToBase64String(System.Text.Encoding.UTF8.GetBytes(clientId + ":" + clientSecret));
                 String url = "https://id.api.isogeo.com/oauth/token";
                 var client = new RestClient(url);
-                //setProxy(client);
+                setProxy(client);
                 var request2 = new RestRequest(Method.POST);
                 request2.AddHeader("cache-control", "no-cache");
                 request2.AddHeader("content-type", "application/x-www-form-urlencoded");
@@ -219,9 +220,10 @@ namespace ArcMapAddinIsogeo.API
                 if (isResult == true)
                 {
                     //TODO nbResult, need to redo it
-                    nbResult = 1; // Convert.ToInt32(Math.Floor(Convert.ToDecimal((Variables.dockableWindowIsogeo.Results.LstResults.Height - 10) / 35)));
+                    nbResult = 10;  //Convert.ToInt32(Math.Floor(Convert.ToDecimal((Variables.dockableWindowIsogeo.Results.LstResults.ActualHeight - 10) / 35)));
                     nbpage = Convert.ToInt32(Math.Ceiling(Variables.search.total / nbResult));
                     if (Variables.currentPage > nbpage) Variables.currentPage = nbpage;
+                    //TODO This is wrong because the height of the window can change, so instead, have to keep memory of offset 
                     offset = (Variables.currentPage - 1) * nbResult;
                 }
                 else
@@ -232,7 +234,7 @@ namespace ArcMapAddinIsogeo.API
 
                 Variables.search = new Search();
 
-                String url = "https://v1.api.isogeo.com/resources/search"; //?&_limit=0
+                String url = "https://v1.api.isogeo.com/resources/search";
                 var client = new RestClient(url);
                 setProxy(client);
                 var request = new RestRequest(Method.GET);
@@ -243,7 +245,6 @@ namespace ArcMapAddinIsogeo.API
                 {
                 }
 
-                //request.AddParameter("_include", "links");
                 request.AddParameter("_include", "layers");
                 request.AddParameter("_include", "serviceLayers");
 
@@ -274,13 +275,8 @@ namespace ArcMapAddinIsogeo.API
 
                 if (Variables.advancedSearchItem_geographicFilter.CmbAdvancedSearchFilter.SelectedIndex == 1)
                 {
-                    //request.AddParameter("coord", Utils.MapFunctions.getMapExtent());
-
-                    //request.AddParameter("box", "-4.970, 30.69418, 8.258, 51.237");
                     // TODO request.AddParameter("box", Utils.MapFunctions.getMapExtent());
                     
-                    //request.AddParameter("extent", Utils.MapFunctions.getMapExtent());
-                    //request.AddParameter("epsg", "4326");
                     request.AddParameter("rel", Variables.configurationManager.config.geographicalOperator);
                 }
                 
@@ -291,8 +287,6 @@ namespace ArcMapAddinIsogeo.API
                 }
 
                 request.AddHeader("Authorization", "Bearer " + Variables.token.access_token);
-
-                //IRestResponse<API.Search> reponse = client.Execute<API.Search>(request);
 
                 IRestResponse response = client.Execute(request);
                 response.Content.Replace("\"coordinate-system\": {", "\"coordinate_system\": {");
@@ -306,9 +300,8 @@ namespace ArcMapAddinIsogeo.API
                Variables.dockableWindowIsogeo.ResultsToolBar.setNbResults();
                 if (isResult==true)
                 { 
-                    Variables.dockableWindowIsogeo.Results.setData(); 
+                    Variables.dockableWindowIsogeo.Results.setData();
                     Variables.dockableWindowIsogeo.Results.setCombo(nbpage);
-
                 }
 
             }
@@ -362,7 +355,7 @@ namespace ArcMapAddinIsogeo.API
                 {
                     if (key.IndexOf(lst.filter) == 0)
                     {
-                        lst.lstItem.Add(new Objects.comboItem(key, val));//.Substring(lst.filter.Length+1)                        
+                        lst.lstItem.Add(new Objects.comboItem(key, val));
                         break;
                     }
                 }
