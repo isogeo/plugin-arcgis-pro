@@ -164,7 +164,7 @@ namespace Arcgis_Pro_Isogeo
 
         private void DockableWindowIsogeo_SizeChanged(object sender, EventArgs e)
         {
-            //Variables.restFunctions.reloadinfosAPI("", 1, true);
+            //Variables.restFunctions.reloadinfosAPI("", 0, true);
             //reultsPanel1.clear();
             //base.OnSizeChanged(e);
             _timer.Start();
@@ -172,7 +172,7 @@ namespace Arcgis_Pro_Isogeo
 
         private void DockableWindowIsogeo_Resize(object sender, EventArgs e)
         {
-            //Variables.restFunctions.reloadinfosAPI("", 1, true);
+            //Variables.restFunctions.reloadinfosAPI("", 0, true);
         }
 
         private void DockableWindowIsogeo_MouseUp(object sender, MouseEventArgs e)
@@ -185,7 +185,7 @@ namespace Arcgis_Pro_Isogeo
             _timer.Stop();
 
             // Your code
-            if (resultPanelHeight != Results.LstResults.Height && Variables.haveResult == true) Variables.restFunctions.reloadinfosAPI("", 1, true);
+            if (resultPanelHeight != Results.LstResults.Height && Variables.haveResult == true) Variables.restFunctions.reloadinfosAPI("", 0, true);
 
         }
 

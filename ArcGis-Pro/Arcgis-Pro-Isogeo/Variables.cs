@@ -28,8 +28,8 @@ namespace ArcMapAddinIsogeo
         public static List<ComboBox> listComboFilter = new List<ComboBox>();
 
         public static Boolean isFirstLoad = true;
-        
-        
+
+
 
         public static UI.Search.AdvancedSearch.AdvancedSearchItem advancedSearchItem_geographicFilter; 
 
@@ -41,7 +41,6 @@ namespace ArcMapAddinIsogeo
         public static Boolean ListLoading = false;
         public static Boolean TranslateInProgress = false;
         public static ComboBox CmbLang;
-        public static int currentPage=1;
 
         public static Boolean haveResult = false;
 
@@ -51,8 +50,9 @@ namespace ArcMapAddinIsogeo
         //public static List<ILayer> layersVisible = new List<ILayer>();
 
         public static API.Result currentResult;
-        
-        
+
+        public static int nbResult = 10;
+
     }
     
 }

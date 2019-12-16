@@ -19,7 +19,7 @@ namespace ArcMapAddinIsogeo.API
             
         }
 
-        public void reloadinfosAPI(String query, int page, Boolean isResult)
+        public void reloadinfosAPI(String query, int offset, Boolean isResult)
         {
             Variables.haveResult = isResult;
             saveLastSearch();
@@ -38,7 +38,7 @@ namespace ArcMapAddinIsogeo.API
 
             if (Variables.token.access_token != null)
             {
-                sendRequestIsogeo(query,page,isResult);
+                sendRequestIsogeo(query,offset,isResult);
                 Variables.dockableWindowIsogeo.IsEnabled = true;
             }
             else
@@ -208,29 +208,20 @@ namespace ArcMapAddinIsogeo.API
             
         }
 
-        public void sendRequestIsogeo(String query,int page,Boolean isResult)
+        public void sendRequestIsogeo(String query,int offset,Boolean isResult)
         {
             //nbresult = 99;
 
             try
             {
-                int nbResult = 0;
-                int offset = 0;
-                int nbpage = 0;
-                if (isResult == true)
+                /*if (isResult)
                 {
-                    //TODO nbResult, need to redo it
-                    nbResult = 10;  //Convert.ToInt32(Math.Floor(Convert.ToDecimal((Variables.dockableWindowIsogeo.Results.LstResults.ActualHeight - 10) / 35)));
-                    nbpage = Convert.ToInt32(Math.Ceiling(Variables.search.total / nbResult));
-                    if (Variables.currentPage > nbpage) Variables.currentPage = nbpage;
-                    //TODO This is wrong because the height of the window can change, so instead, have to keep memory of offset 
-                    offset = (Variables.currentPage - 1) * nbResult;
-                }
-                else
+                    Variables.dockableWindowIsogeo.Results.setCombo(offset);
+                }*/
+                /*else
                 {
                     Variables.dockableWindowIsogeo.Results.clearPages();
-                }
-
+                }*/
 
                 Variables.search = new Search();
 
@@ -249,7 +240,7 @@ namespace ArcMapAddinIsogeo.API
                 request.AddParameter("_include", "serviceLayers");
 
                 request.AddParameter("_lang", Utils.Util.getLocale());
-                request.AddParameter("_limit", nbResult);
+                request.AddParameter("_limit", Variables.nbResult);
 
                 request.AddParameter("ob", Variables.dockableWindowIsogeo.ResultsToolBar.CmbSortingMethod.SelectedValue);
                 request.AddParameter("od", Variables.dockableWindowIsogeo.ResultsToolBar.CmbSortingDirection.SelectedValue);
@@ -270,7 +261,7 @@ namespace ArcMapAddinIsogeo.API
                     query += " action:view";
                 }
 
-                //temp test                
+                //temp test
                 request.AddParameter("q", query.Replace("action:view", ""));
 
                 if (Variables.advancedSearchItem_geographicFilter.CmbAdvancedSearchFilter.SelectedIndex == 1)
@@ -300,8 +291,7 @@ namespace ArcMapAddinIsogeo.API
                Variables.dockableWindowIsogeo.ResultsToolBar.setNbResults();
                 if (isResult==true)
                 { 
-                    Variables.dockableWindowIsogeo.Results.setData();
-                    Variables.dockableWindowIsogeo.Results.setCombo(nbpage);
+                    Variables.dockableWindowIsogeo.Results.Refresh(offset);
                 }
 
             }

@@ -121,7 +121,7 @@ namespace Arcgis_Pro_Isogeo.UI.Search.Results
         {
             if (isUpdateCombo == false)
             {
-                Variables.restFunctions.reloadinfosAPI("", 1, true);
+                Variables.restFunctions.reloadinfosAPI("", 0, true);
             }
         }
 
@@ -129,13 +129,13 @@ namespace Arcgis_Pro_Isogeo.UI.Search.Results
         {
             if (isUpdateCombo == false)
             {
-                Variables.restFunctions.reloadinfosAPI("", 1, true);
+                Variables.restFunctions.reloadinfosAPI("", 0, true);
             }
         }
 
         private void BtnResults_Click(object sender, RoutedEventArgs e)
         {
-            Variables.restFunctions.reloadinfosAPI("", 1, true);
+            Variables.restFunctions.reloadinfosAPI("", 0, true);
         }
 
         private void BtnLastSearch_Click(object sender, RoutedEventArgs e)
