@@ -128,7 +128,7 @@ namespace Arcgis_Pro_Isogeo
         private void translate()
         {
             TabiSearch.Header = Variables.localisationManager.getValue(ArcMapAddinIsogeo.Localization.LocalizationItem.Search);
-            TabiSearch.Header = Variables.localisationManager.getValue(ArcMapAddinIsogeo.Localization.LocalizationItem.Settings);
+            TabiSettings.Header = Variables.localisationManager.getValue(ArcMapAddinIsogeo.Localization.LocalizationItem.Settings);
         }
 
         private void getConfiguration()

@@ -53,7 +53,7 @@ namespace Arcgis_Pro_Isogeo.UI.Metadata
                 else
                 {
                     // TODO error here
-                    this.ContactItemPoint.Init(contact);
+                    this.OtherContactItem.Init(contact);
                     //panel_others_contact.Controls.Add(resultItemSeparator);
                     //panel_others_contact.Controls.Add(contactItem);
                 }

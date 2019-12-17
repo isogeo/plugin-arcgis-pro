@@ -7,6 +7,6 @@
         mc:Ignorable="d"
         Title="Isogeo Metadata" Height="626" Width="1255">
     <StackPanel>
-        <local:TabsMetadata />
+        <local:TabsMetadata x:Name="TabsMetadata" />
     </StackPanel>
 </Window>

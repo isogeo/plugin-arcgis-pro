@@ -17,10 +17,10 @@
         </Grid.RowDefinitions>
         <Image Margin="3, 3, 3, 3" Grid.Column="0" Grid.Row="0" x:Name="ImgType" MouseLeftButtonDown="ImgType_OnMouseLeftButtonDown"/>
         <TextBox IsReadOnly="True" Grid.Column="1" Grid.Row="0" x:Name="TxtTitle" MouseDoubleClick="TxtTitle_OnMouseDoubleClick" />
-        <ComboBox Grid.Column="2" Grid.Row="0" x:Name="CmbLayer"/>
-        <Label IsEnabled="False" Grid.Column="2" Grid.Row="0" x:Name="LblLayer" />
-        <Image IsEnabled="False" Grid.Column="2" Grid.Row="0" x:Name="ImgLayer" />
-        <Menu IsEnabled="False" Grid.Column="2" Grid.Row="0" x:Name="Menu">
+        <ComboBox Visibility="Hidden" Grid.Column="2" Grid.Row="0" x:Name="CmbLayer"/>
+        <Label Visibility="Visible"  Grid.Column="2" Grid.Row="0" x:Name="LblLayer" />
+        <Image Visibility="Hidden" Grid.Column="2" Grid.Row="0" x:Name="ImgLayer" />
+        <Menu Visibility="Hidden" Grid.Column="2" Grid.Row="0" x:Name="Menu">
             <MenuItem x:Name="MniLoadData" Header="Load Data" Click="MniLoadData_OnClick" />
             <MenuItem x:Name="MniShowMetadata" Header="Show metadata" Click="MniShowMetadata_OnClick" />
             <MenuItem x:Name="MniOpenCatalog" Header="Open Catalog" Click="MniOpenCatalog_OnClick" />

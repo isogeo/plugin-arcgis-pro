@@ -59,15 +59,14 @@ namespace Arcgis_Pro_Isogeo.UI.Metadata
             }
 
             //Set the data format
-            TechnicalInformationItem.LblFormat.Content = "";
+            TechnicalInformationItem.LblFormatValue.Content = "";
             if (Variables.currentResult.tagsLists != null)
             {
                 if (Variables.currentResult.tagsLists.formats.Count > 0)
                 {
-                    TechnicalInformationItem.LblFormat.Content = Variables.currentResult.tagsLists.formats[0];
+                    TechnicalInformationItem.LblFormatValue.Content = Variables.currentResult.tagsLists.formats[0];
                 }
             }
-
 
             //feature info
             TechnicalInformationItem.LblFeatCountValue.Content = "";

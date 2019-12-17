@@ -22,6 +22,12 @@ namespace Arcgis_Pro_Isogeo.UI.Metadata
         public Metadata()
         {
             InitializeComponent();
+            this.TabsMetadata.MetadataLicences.setValues();
+            this.TabsMetadata.MetadataAdvanced.setValues();
+            this.TabsMetadata.MetadataGeneral.setValues();
+            this.TabsMetadata.MetadataHistory.setValues();
+            this.TabsMetadata.MetadataGeography.setValues();
+            this.TabsMetadata.MetadataContacts.setValues();
         }
     }
 }

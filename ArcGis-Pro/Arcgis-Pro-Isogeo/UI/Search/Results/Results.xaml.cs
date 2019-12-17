@@ -59,14 +59,6 @@ namespace Arcgis_Pro_Isogeo.UI.Search.Results
                 nbPage = Convert.ToInt32(Math.Ceiling(Variables.search.total / Variables.nbResult));
             else
                 nbPage = 1;
-            // TODO current page
-            /*if (offset == 0)
-                CurrentPage = 1;
-            else
-            {
-                CurrentPage = Convert.ToInt32(Math.Ceiling(Convert.ToDouble(offset) / Variables.nbResult));
-            }*/
-
             isCmbLoad = true;
             _listNumberPage.Clear();
             for (int i = 0; i < nbPage; i++)
@@ -78,17 +70,6 @@ namespace Arcgis_Pro_Isogeo.UI.Search.Results
             LblNbPage.Content = "/" + nbPage;
             isCmbLoad = false;
             CheckButtonEnabled();
-        }
-
-        public void clearPages()
-        {
-            var resultsList = new List<ResultItem>();
-            LstResults.SetBinding(ItemsControl.ItemsSourceProperty, new Binding { Source = resultsList });
-            LstResults.IsEnabled = true;
-            //LstResults.Items.Clear();
-            //CmbNoPage.Items.Clear();
-            setCombo(0);
-            LblNbPage.Content = "";
         }
 
         private void BtnPrevious_Click(object sender, System.Windows.RoutedEventArgs e)

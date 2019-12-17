@@ -9,22 +9,22 @@
     <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
         <TabControl TabStripPlacement="Left" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
             <TabItem x:Name="TabiGeneral" Header="Géneral">
-                <local:MetadataGeneral />
+                <local:MetadataGeneral x:Name="MetadataGeneral" />
             </TabItem>
             <TabItem x:Name="TabiContacts" Header="Contacts">
-                <local:MetadataContacts />
+                <local:MetadataContacts x:Name="MetadataContacts" />
             </TabItem>
             <TabItem x:Name="TabiHistory" Header="Historique">
-                <local:MetadataHistory />
+                <local:MetadataHistory x:Name="MetadataHistory" />
             </TabItem>
             <TabItem x:Name="TabiGeography" Header="Géographie">
-                <local:MetadataGeography />
+                <local:MetadataGeography  x:Name="MetadataGeography"/>
             </TabItem>
             <TabItem x:Name="TabiLicence" Header="Licence">
-                <local:MetadataLicences />
+                <local:MetadataLicences x:Name="MetadataLicences" />
             </TabItem>
             <TabItem x:Name="TabiAdvanced" Header="Avancés">
-                <local:MetadataAdvanced />
+                <local:MetadataAdvanced x:Name="MetadataAdvanced" />
             </TabItem>
         </TabControl>
     </Grid>

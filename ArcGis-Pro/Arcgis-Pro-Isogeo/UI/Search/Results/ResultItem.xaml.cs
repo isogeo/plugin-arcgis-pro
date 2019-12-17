@@ -95,8 +95,7 @@ namespace Arcgis_Pro_Isogeo.UI.Search.Results
         private void setCombo()
         {
             LblLayer.Visibility = Visibility.Visible;
-            //img_layer.Visible=true;
-            CmbLayer.IsEnabled = false;
+            CmbLayer.Visibility = Visibility.Visible;
             MniLoadData.IsEnabled = true;
             MniShowMetadata.IsEnabled = true;
             MniOpenCatalog.IsEnabled = true;
@@ -140,9 +139,10 @@ namespace Arcgis_Pro_Isogeo.UI.Search.Results
                 default:
                     //If there is only one way for the data to be added, insert a label.
                     //Else, add a combobox, storing all possibilities.                    
-                    LblLayer.IsEnabled = false;
+                    LblLayer.Visibility = Visibility.Hidden;
+
                     //img_layer.Visible=false;
-                    CmbLayer.IsEnabled = true;
+                    CmbLayer.Visibility = Visibility.Visible;
 
                     foreach (ArcMapAddinIsogeo.DataType.ServiceType data in data_list)
                     {
