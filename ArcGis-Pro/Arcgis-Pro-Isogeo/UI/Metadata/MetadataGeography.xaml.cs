@@ -12,8 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using ArcMapAddinIsogeo;
-using API = ArcMapAddinIsogeo.API;
+using IsogeoLibrary;
+using API = IsogeoLibrary.API;
 
 namespace Arcgis_Pro_Isogeo.UI.Metadata
 {
@@ -30,22 +30,22 @@ namespace Arcgis_Pro_Isogeo.UI.Metadata
         public void setValues()
         {
             GrpTechnicalInformation.Header =
-                Variables.localisationManager.getValue(ArcMapAddinIsogeo.Localization.LocalizationItem.Metadata_Geography_info);
+                Variables.localisationManager.getValue(IsogeoLibrary.Localization.LocalizationItem.Metadata_Geography_info);
             GrpSpecification.Header =
-                Variables.localisationManager.getValue(ArcMapAddinIsogeo.Localization.LocalizationItem.Metadata_Geography_specification);
+                Variables.localisationManager.getValue(IsogeoLibrary.Localization.LocalizationItem.Metadata_Geography_specification);
             GrpTypology.Content =
-                Variables.localisationManager.getValue(ArcMapAddinIsogeo.Localization.LocalizationItem.Metadata_Geography_typology);
+                Variables.localisationManager.getValue(IsogeoLibrary.Localization.LocalizationItem.Metadata_Geography_typology);
             TechnicalInformationItem.LblFormat.Content =
-                Variables.localisationManager.getValue(ArcMapAddinIsogeo.Localization.LocalizationItem.Metadata_Geography_format);
+                Variables.localisationManager.getValue(IsogeoLibrary.Localization.LocalizationItem.Metadata_Geography_format);
             TechnicalInformationItem.LblFeatCount.Content =
-                Variables.localisationManager.getValue(ArcMapAddinIsogeo.Localization.LocalizationItem.Metadata_Geography_nbobjects);
+                Variables.localisationManager.getValue(IsogeoLibrary.Localization.LocalizationItem.Metadata_Geography_nbobjects);
             TechnicalInformationItem.LblGeometryType.Content =
-                Variables.localisationManager.getValue(ArcMapAddinIsogeo.Localization.LocalizationItem.Metadata_Geography_geometrytype);
-            TechnicalInformationItem.LblSrs.Content = Variables.localisationManager.getValue(ArcMapAddinIsogeo.Localization.LocalizationItem.Metadata_Geography_srs);
+                Variables.localisationManager.getValue(IsogeoLibrary.Localization.LocalizationItem.Metadata_Geography_geometrytype);
+            TechnicalInformationItem.LblSrs.Content = Variables.localisationManager.getValue(IsogeoLibrary.Localization.LocalizationItem.Metadata_Geography_srs);
             TechnicalInformationItem.LblScale.Content =
-                Variables.localisationManager.getValue(ArcMapAddinIsogeo.Localization.LocalizationItem.Metadata_Geography_scale);
+                Variables.localisationManager.getValue(IsogeoLibrary.Localization.LocalizationItem.Metadata_Geography_scale);
             TechnicalInformationItem.LblResolution.Content =
-                Variables.localisationManager.getValue(ArcMapAddinIsogeo.Localization.LocalizationItem.Metadata_Geography_resolution);
+                Variables.localisationManager.getValue(IsogeoLibrary.Localization.LocalizationItem.Metadata_Geography_resolution);
 
 
             LblTypology.Content = "";

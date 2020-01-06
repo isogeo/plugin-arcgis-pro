@@ -7,7 +7,7 @@ using System.Text;
 using System.Xml;
 using System.Xml.Linq;
 
-namespace ArcMapAddinIsogeo.Localization
+namespace IsogeoLibrary.Localization
 {
     public class LocalizationManager
     {

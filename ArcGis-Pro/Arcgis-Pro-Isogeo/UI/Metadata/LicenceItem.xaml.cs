@@ -12,7 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using  API = ArcMapAddinIsogeo.API;
+using  API = IsogeoLibrary.API;
 
 namespace Arcgis_Pro_Isogeo.UI.Metadata
 {

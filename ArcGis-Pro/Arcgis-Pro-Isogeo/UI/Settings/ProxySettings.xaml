@@ -32,11 +32,11 @@
                         <Label x:Name="LblPassword" Content="Password : " Grid.Row="2" Grid.Column="0" />
                         <TextBox x:Name="TxtProxyUrl" Margin="3, 3, 3, 3" Grid.Row="0" Grid.Column="1" />
                         <TextBox x:Name="TxtUser" Margin="3, 3, 3, 3" Grid.Row="1" Grid.Column="1" />
-                        <PasswordBox x:Name="PwdPwd" Margin="3, 3, 3, 3" Grid.Row="2" Grid.Column="1" />
+                        <PasswordBox x:Name="TxtPassword" Margin="3, 3, 3, 3" Grid.Row="2" Grid.Column="1" />
                     </Grid>
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Column="0" Grid.Row="1">
-                        <Button x:Name="BtnSave" Margin="3, 3, 3, 3" Padding="20, 3, 20, 3" Content="Save"/>
-                        <Button x:Name="BtnCancel" Margin="3, 3, 3, 3" Padding="20, 3, 20, 3" Content="Cancel"/>
+                        <Button x:Name="BtnSave" Margin="3, 3, 3, 3" Padding="20, 3, 20, 3" Content="Save" Click="BtnSave_Click"/>
+                        <Button x:Name="BtnCancel" Margin="3, 3, 3, 3" Padding="20, 3, 20, 3" Content="Cancel" Click="BtnCancel_Click"/>
                     </StackPanel>
                 </Grid>
             </Expander>

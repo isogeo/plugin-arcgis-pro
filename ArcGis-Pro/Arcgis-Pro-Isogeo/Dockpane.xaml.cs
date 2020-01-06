@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Forms;
-using ArcMapAddinIsogeo;
+using IsogeoLibrary;
 using MouseEventArgs = System.Windows.Input.MouseEventArgs;
 using UserControl = System.Windows.Controls.UserControl;
-using API = ArcMapAddinIsogeo.API;
+using API = IsogeoLibrary.API;
 
 
 namespace Arcgis_Pro_Isogeo
@@ -127,14 +127,14 @@ namespace Arcgis_Pro_Isogeo
 
         private void translate()
         {
-            TabiSearch.Header = Variables.localisationManager.getValue(ArcMapAddinIsogeo.Localization.LocalizationItem.Search);
-            TabiSettings.Header = Variables.localisationManager.getValue(ArcMapAddinIsogeo.Localization.LocalizationItem.Settings);
+            TabiSearch.Header = Variables.localisationManager.getValue(IsogeoLibrary.Localization.LocalizationItem.Search);
+            TabiSettings.Header = Variables.localisationManager.getValue(IsogeoLibrary.Localization.LocalizationItem.Settings);
         }
 
         private void getConfiguration()
         {
-            Variables.configurationManager = new ArcMapAddinIsogeo.Configuration.ConfigurationManager();
-            Variables.localisationManager = new ArcMapAddinIsogeo.Localization.LocalizationManager();
+            Variables.configurationManager = new IsogeoLibrary.Configuration.ConfigurationManager();
+            Variables.localisationManager = new IsogeoLibrary.Localization.LocalizationManager();
             if (Variables.configurationManager.config.query == null) Variables.configurationManager.config.query = "action:view";
             if (Variables.configurationManager.config.query == "" || Variables.configurationManager.config.query == " ") Variables.configurationManager.config.query = "action:view";
             Variables.localisationManager.translatesAll();
@@ -149,7 +149,7 @@ namespace Arcgis_Pro_Isogeo
             // AdvancedSearch.setHeight();
             getConfiguration();
             Variables.functionsTranslate.Add(translate);
-            Variables.localisationManager = new ArcMapAddinIsogeo.Localization.LocalizationManager();
+            Variables.localisationManager = new IsogeoLibrary.Localization.LocalizationManager();
             Variables.localisationManager.translatesAll();
 
         }
@@ -188,6 +188,5 @@ namespace Arcgis_Pro_Isogeo
             if (resultPanelHeight != Results.LstResults.Height && Variables.haveResult == true) Variables.restFunctions.reloadinfosAPI("", 0, true);
 
         }
-
     }
 }

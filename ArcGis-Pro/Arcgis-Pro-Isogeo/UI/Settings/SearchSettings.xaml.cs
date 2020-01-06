@@ -12,11 +12,11 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using ArcMapAddinIsogeo;
+using IsogeoLibrary;
 using MessageBox = System.Windows.MessageBox;
 using UserControl = System.Windows.Controls.UserControl;
-using Localization = ArcMapAddinIsogeo.Localization;
-using Objects = ArcMapAddinIsogeo.Objects;
+using Localization = IsogeoLibrary.Localization;
+using Objects = IsogeoLibrary.Objects;
 
 namespace Arcgis_Pro_Isogeo.UI.Settings
 {
@@ -69,7 +69,7 @@ namespace Arcgis_Pro_Isogeo.UI.Settings
     {
         int valcmbIndex = CmbLanguage.SelectedIndex;
         if (valcmbIndex == -1) valcmbIndex = 0;
-        List<Objects.comboItem> comboItems = new List<ArcMapAddinIsogeo.Objects.comboItem>();
+        List<Objects.comboItem> comboItems = new List<IsogeoLibrary.Objects.comboItem>();
         comboItems.Add(new Objects.comboItem("default", Variables.localisationManager.getValue(Localization.LocalizationItem.Lang_default)));
         comboItems.Add(new Objects.comboItem("en", Variables.localisationManager.getValue(Localization.LocalizationItem.en_EN)));
         comboItems.Add(new Objects.comboItem("fr", Variables.localisationManager.getValue(Localization.LocalizationItem.fr_FR)));
@@ -166,7 +166,6 @@ namespace Arcgis_Pro_Isogeo.UI.Settings
         Variables.configurationManager.config.fileSDE = TxtSdeConnectionFile.Text;
 
 
-
         Variables.configurationManager.save();
 
         // TODO MessageBox.Show(Variables.dockableWindowIsogeo, Variables.localisationManager.getValue(Localization.LocalizationItem.Message_Settings_save));
@@ -181,7 +180,7 @@ namespace Arcgis_Pro_Isogeo.UI.Settings
         }
         catch (Exception ex)
         {
-            ArcMapAddinIsogeo.Utils.Log.DockableWindowLogger.Debug(string.Concat(new object[]
+            IsogeoLibrary.Utils.Log.DockableWindowLogger.Debug(string.Concat(new object[]
             {
                     "Erreur ",
                     ex.Message

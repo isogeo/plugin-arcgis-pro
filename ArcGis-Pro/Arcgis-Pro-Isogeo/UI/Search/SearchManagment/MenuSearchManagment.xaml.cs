@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows.Controls;
-using ArcMapAddinIsogeo;
+using IsogeoLibrary;
 
 namespace Arcgis_Pro_Isogeo.UI.Search.SearchManagment
 {
@@ -22,9 +22,9 @@ namespace Arcgis_Pro_Isogeo.UI.Search.SearchManagment
 
         private void translate()
         {
-            this.MniSearchManagement.Header = Variables.localisationManager.getValue(ArcMapAddinIsogeo.Localization.LocalizationItem.Search_management);
-            this.MniNewSearch.Header = Variables.localisationManager.getValue(ArcMapAddinIsogeo.Localization.LocalizationItem.New_search);
-            this.MniPrecedentSearch.Header = Variables.localisationManager.getValue(ArcMapAddinIsogeo.Localization.LocalizationItem.Previous_search);
+            this.MniSearchManagement.Header = Variables.localisationManager.getValue(IsogeoLibrary.Localization.LocalizationItem.Search_management);
+            this.MniNewSearch.Header = Variables.localisationManager.getValue(IsogeoLibrary.Localization.LocalizationItem.New_search);
+            this.MniPrecedentSearch.Header = Variables.localisationManager.getValue(IsogeoLibrary.Localization.LocalizationItem.Previous_search);
             //selectedSavedChange();
 
         }
@@ -32,7 +32,7 @@ namespace Arcgis_Pro_Isogeo.UI.Search.SearchManagment
         public void setValues()
         {
             int i = 0;
-            foreach (ArcMapAddinIsogeo.Configuration.Search search in Variables.configurationManager.config.searchs.searchs)
+            foreach (IsogeoLibrary.Configuration.Search search in Variables.configurationManager.config.searchs.searchs)
             {
                 if (search.name != "CurrentSearchSave")
                 {
@@ -94,7 +94,7 @@ namespace Arcgis_Pro_Isogeo.UI.Search.SearchManagment
 
         private void tsmi_save_Click(object sender, EventArgs e)
         {
-            foreach (ArcMapAddinIsogeo.Configuration.Search search in Variables.configurationManager.config.searchs.searchs)
+            foreach (IsogeoLibrary.Configuration.Search search in Variables.configurationManager.config.searchs.searchs)
             {
                 if (search.name == searchSelectedName)
                 {
@@ -119,7 +119,7 @@ namespace Arcgis_Pro_Isogeo.UI.Search.SearchManagment
         private void tsmi_saved_click(object sender, EventArgs e)
         {
             searchSelectedName = ((MenuItem)sender).Name;
-            foreach (ArcMapAddinIsogeo.Configuration.Search search in Variables.configurationManager.config.searchs.searchs)
+            foreach (IsogeoLibrary.Configuration.Search search in Variables.configurationManager.config.searchs.searchs)
             {
                 if (search.name == searchSelectedName)
                 {
@@ -136,7 +136,7 @@ namespace Arcgis_Pro_Isogeo.UI.Search.SearchManagment
 
         public void tsmi_previous_Click(object sender, EventArgs e)
         {
-            foreach (ArcMapAddinIsogeo.Configuration.Search search in Variables.configurationManager.config.searchs.searchs)
+            foreach (IsogeoLibrary.Configuration.Search search in Variables.configurationManager.config.searchs.searchs)
             {
                 if (search.name == "CurrentSearchSave")
                 {
@@ -165,7 +165,7 @@ namespace Arcgis_Pro_Isogeo.UI.Search.SearchManagment
                 }
             }
 
-            foreach (ArcMapAddinIsogeo.Configuration.Search search in Variables.configurationManager.config.searchs.searchs)
+            foreach (IsogeoLibrary.Configuration.Search search in Variables.configurationManager.config.searchs.searchs)
             {
                 if (search.name == searchSelectedName)
                 {
@@ -192,7 +192,7 @@ namespace Arcgis_Pro_Isogeo.UI.Search.SearchManagment
             //String new_name = frm.txt_name.Text;
 
             //Ajout dans configuration
-            ArcMapAddinIsogeo.Configuration.Search newsearch = new ArcMapAddinIsogeo.Configuration.Search();
+            IsogeoLibrary.Configuration.Search newsearch = new IsogeoLibrary.Configuration.Search();
             //newsearch.name = new_name;
             newsearch.query = Variables.restFunctions.getQueryCombos();
             Variables.configurationManager.config.searchs.searchs.Add(newsearch);
@@ -229,7 +229,7 @@ namespace Arcgis_Pro_Isogeo.UI.Search.SearchManagment
             }
 
             //Suppression dans la configuration
-            foreach (ArcMapAddinIsogeo.Configuration.Search search in Variables.configurationManager.config.searchs.searchs)
+            foreach (IsogeoLibrary.Configuration.Search search in Variables.configurationManager.config.searchs.searchs)
             {
                 if (search.name == searchSelectedName)
                 {

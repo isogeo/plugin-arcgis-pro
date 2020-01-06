@@ -13,7 +13,7 @@ using System.IO;
 using ArcGIS.Core.Geometry;
 using ArcGIS.Desktop.Mapping;
 
-namespace ArcMapAddinIsogeo.Utils
+namespace IsogeoLibrary.Utils
 {
     // TODO
     class MapFunctions

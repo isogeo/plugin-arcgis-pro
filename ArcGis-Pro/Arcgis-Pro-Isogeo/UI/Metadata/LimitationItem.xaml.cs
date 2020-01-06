@@ -1,5 +1,5 @@
 ﻿using System.Windows.Controls;
-using API = ArcMapAddinIsogeo.API;
+using API = IsogeoLibrary.API;
 
 namespace Arcgis_Pro_Isogeo.UI.Metadata
 {

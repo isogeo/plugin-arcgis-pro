@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace ArcMapAddinIsogeo.DataType
+namespace IsogeoLibrary.DataType
 {
     public class ServiceType
     {

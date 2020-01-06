@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Globalization;
 
-namespace ArcMapAddinIsogeo.Utils
+namespace IsogeoLibrary.Utils
 {
     public static class Util
     {

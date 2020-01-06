@@ -16,7 +16,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
-        <Button x:Name="BtnResults" Grid.Row="0" Grid.Column="0" Content="Results" Margin="3,3,3,3" Click="BtnResults_Click"/>
+        <Button x:Name="BtnResults" Grid.Row="0" Grid.Column="0" Content="ResultsTest" Margin="3,3,3,3" Click="BtnResults_Click"/>
         <Button x:Name="BtnLastSearch" Grid.Row="0" Grid.Column="1" Content="LastSearch" Margin="3,3,3,3" Click="BtnLastSearch_Click"/>
         <ComboBox x:Name="CmbSortingMethod" Grid.Row="0" Grid.Column="2" Margin="3,3,3,3" SelectionChanged="CmbSortingMethod_SelectionChanged">
             <ComboBoxItem x:Name="CmbiRelevance"></ComboBoxItem>

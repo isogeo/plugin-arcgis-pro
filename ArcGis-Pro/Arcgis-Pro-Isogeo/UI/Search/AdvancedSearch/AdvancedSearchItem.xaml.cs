@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
-using ArcMapAddinIsogeo;
+using IsogeoLibrary;
 using Binding = System.Windows.Data.Binding;
-using Objects = ArcMapAddinIsogeo.Objects;
+using Objects = IsogeoLibrary.Objects;
 using UserControl = System.Windows.Controls.UserControl;
 
 namespace Arcgis_Pro_Isogeo.UI.Search.AdvancedSearch
@@ -69,7 +69,7 @@ namespace Arcgis_Pro_Isogeo.UI.Search.AdvancedSearch
             comboItems.Add(new Objects.comboItem("-", "-"));
             comboItems.Add(new Objects.comboItem("mapcanvas",
                 Variables.localisationManager.getValue(
-                    ArcMapAddinIsogeo.Localization.LocalizationItem.Map_canvas)));
+                    IsogeoLibrary.Localization.LocalizationItem.Map_canvas)));
 
             CmbAdvancedSearchFilter.SetBinding(ItemsControl.ItemsSourceProperty, 
                 new Binding("SelectedItem") {  Source = comboItems });

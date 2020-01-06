@@ -6,7 +6,13 @@
         xmlns:local="clr-namespace:Arcgis_Pro_Isogeo.UI.Metadata"
         mc:Ignorable="d"
         Title="Isogeo Metadata" Height="626" Width="1255">
-    <StackPanel>
-        <local:TabsMetadata x:Name="TabsMetadata" />
-    </StackPanel>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+        <local:TabsMetadata Grid.Row="0" Grid.Column="0" x:Name="TabsMetadata" />
+    </Grid>
 </Window>

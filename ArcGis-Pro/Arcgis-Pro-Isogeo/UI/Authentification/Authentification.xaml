@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Arcgis_Pro_Isogeo.UI.Authentification"
         mc:Ignorable="d"
-        Title="Isogeo authentification settings" Height="146" Width="694">
+        Title="Isogeo authentification settings" Height="146" Width="694" ResizeMode="NoResize">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="20*"/>

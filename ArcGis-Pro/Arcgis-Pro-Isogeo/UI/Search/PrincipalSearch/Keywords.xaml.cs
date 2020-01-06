@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Controls;
-using ArcMapAddinIsogeo;
+using IsogeoLibrary;
 
 namespace Arcgis_Pro_Isogeo.UI.Search.PrincipalSearch
 {
@@ -21,7 +21,7 @@ namespace Arcgis_Pro_Isogeo.UI.Search.PrincipalSearch
         private void translate()
         {
             LblKeywords.Content = Variables.localisationManager.getValue(
-                                      ArcMapAddinIsogeo.Localization.LocalizationItem.Keywords) + " :";
+                                      IsogeoLibrary.Localization.LocalizationItem.Keywords) + " :";
         }
 
         private void setList()

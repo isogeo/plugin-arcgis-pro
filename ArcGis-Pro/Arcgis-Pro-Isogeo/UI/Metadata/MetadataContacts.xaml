@@ -6,12 +6,23 @@
              xmlns:local="clr-namespace:Arcgis_Pro_Isogeo.UI.Metadata"
              mc:Ignorable="d" 
              d:DesignHeight="602" d:DesignWidth="587">
-    <StackPanel>
-        <GroupBox x:Name="GrpContactPoint" Header="Point of contact" HorizontalAlignment="Stretch" Padding="6,6,6,6" Margin="3,3,3,3" VerticalAlignment="Top">
-            <UI:ContactItem x:Name="ContactItemPoint" />
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+        <GroupBox Grid.Row="0" Grid.Column="0" x:Name="GrpContactPoint" Header="Point of contact" HorizontalAlignment="Stretch" Padding="6,6,6,6" Margin="3,3,3,3" VerticalAlignment="Top">
+            <ScrollViewer VerticalScrollBarVisibility="Auto">
+                <ListView x:Name="LvwContactItems" HorizontalAlignment="Left" Margin="3,3,3,3"/>
+            </ScrollViewer>
         </GroupBox>
-        <GroupBox x:Name="GrpOthersContact" Header="Others contact" HorizontalAlignment="Stretch" Padding="6,6,6,6" Margin="3,3,3,3" VerticalAlignment="Top">
-            <UI:ContactItem x:Name="OtherContactItem" />
+        <GroupBox Grid.Row="1" Grid.Column="0" x:Name="GrpOthersContact" Header="Others contact" HorizontalAlignment="Stretch" Padding="6,6,6,6" Margin="3,3,3,3" VerticalAlignment="Top">
+            <ScrollViewer VerticalScrollBarVisibility="Auto">
+                <ListView x:Name="LvwOtherContactItems" HorizontalAlignment="Left" Margin="3,3,3,3"/>
+            </ScrollViewer>
         </GroupBox>
-    </StackPanel>
+    </Grid>
 </UserControl>

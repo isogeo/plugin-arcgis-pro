@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Windows.Controls;
 using System.Windows.Data;
-using ArcMapAddinIsogeo;
+using IsogeoLibrary;
 using UserControl = System.Windows.Controls.UserControl;
-using API = ArcMapAddinIsogeo.API;
+using API = IsogeoLibrary.API;
 
 namespace Arcgis_Pro_Isogeo.UI.Search.Results
 {

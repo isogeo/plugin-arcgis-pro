@@ -1,7 +1,7 @@
 ﻿using log4net;
 using System;
 
-namespace ArcMapAddinIsogeo.Utils
+namespace IsogeoLibrary.Utils
 {
     internal class Log
     {

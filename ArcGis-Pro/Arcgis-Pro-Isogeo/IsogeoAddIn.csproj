@@ -13,6 +13,8 @@
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -501,9 +503,9 @@
     <Resource Include="Resources\users.png" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ArcGis-Pro-WPF-Library\ArcGis-Pro-WPF-Library.csproj">
+    <ProjectReference Include="..\ArcGis-Pro-WPF-Library\IsogeoLibrary.csproj">
       <Project>{015c74ff-38b3-4fd5-a53f-fc0726ce270f}</Project>
-      <Name>ArcGis-Pro-WPF-Library</Name>
+      <Name>IsogeoLibrary</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

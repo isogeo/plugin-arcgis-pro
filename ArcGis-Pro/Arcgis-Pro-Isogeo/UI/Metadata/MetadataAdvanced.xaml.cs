@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Forms;
-using ArcMapAddinIsogeo;
+using IsogeoLibrary;
 using UserControl = System.Windows.Controls.UserControl;
 
 namespace Arcgis_Pro_Isogeo.UI.Metadata
@@ -18,11 +18,11 @@ namespace Arcgis_Pro_Isogeo.UI.Metadata
 
         public void setValues()
         {
-            GrpMetadataProperty.Header = Variables.localisationManager.getValue(ArcMapAddinIsogeo.Localization.LocalizationItem.Metadata_Advanced_owner);
-            GrpMetadataDetails.Header = Variables.localisationManager.getValue(ArcMapAddinIsogeo.Localization.LocalizationItem.Metadata_Advanced_details);
-            MetadataDetails.LblLanguage.Content = Variables.localisationManager.getValue(ArcMapAddinIsogeo.Localization.LocalizationItem.Metadata_Advanced_lang);
-            MetadataDetails.LblCreatedAt.Content = Variables.localisationManager.getValue(ArcMapAddinIsogeo.Localization.LocalizationItem.Metadata_Advanced_create);
-            MetadataDetails.LblLastModification.Content = Variables.localisationManager.getValue(ArcMapAddinIsogeo.Localization.LocalizationItem.Metadata_Advanced_last_update);
+            GrpMetadataProperty.Header = Variables.localisationManager.getValue(IsogeoLibrary.Localization.LocalizationItem.Metadata_Advanced_owner);
+            GrpMetadataDetails.Header = Variables.localisationManager.getValue(IsogeoLibrary.Localization.LocalizationItem.Metadata_Advanced_details);
+            MetadataDetails.LblLanguage.Content = Variables.localisationManager.getValue(IsogeoLibrary.Localization.LocalizationItem.Metadata_Advanced_lang);
+            MetadataDetails.LblCreatedAt.Content = Variables.localisationManager.getValue(IsogeoLibrary.Localization.LocalizationItem.Metadata_Advanced_create);
+            MetadataDetails.LblLastModification.Content = Variables.localisationManager.getValue(IsogeoLibrary.Localization.LocalizationItem.Metadata_Advanced_last_update);
 
             // -- ADVANCED  TAB ---------------------------------------------------
             //Workgroup owner

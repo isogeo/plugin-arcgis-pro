@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace ArcMapAddinIsogeo.Objects
+namespace IsogeoLibrary.Objects
 {
     public class Tags
     {

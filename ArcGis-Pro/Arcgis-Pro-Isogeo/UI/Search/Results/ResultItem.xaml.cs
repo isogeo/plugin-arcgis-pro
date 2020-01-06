@@ -4,8 +4,8 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
-using ArcMapAddinIsogeo;
-using API = ArcMapAddinIsogeo.API;
+using IsogeoLibrary;
+using API = IsogeoLibrary.API;
 
 namespace Arcgis_Pro_Isogeo.UI.Search.Results
 {
@@ -25,7 +25,7 @@ namespace Arcgis_Pro_Isogeo.UI.Search.Results
         private List<String> vectorformat_list = new List<String>(new String[] { "shp", "dxf", "dgn", "filegdb", "tab", "arcsde" });
         private List<String> rasterformat_list = new List<String>(new String[] { "esriasciigrid", "geotiff", "intergraphgdb", "jpeg", "png", "xyz", "ecw" });
 
-        private List<ArcMapAddinIsogeo.DataType.ServiceType> data_list = new List<ArcMapAddinIsogeo.DataType.ServiceType>();
+        private List<IsogeoLibrary.DataType.ServiceType> data_list = new List<IsogeoLibrary.DataType.ServiceType>();
 
         public ResultItem()
         {
@@ -44,9 +44,9 @@ namespace Arcgis_Pro_Isogeo.UI.Search.Results
 
         private void translate()
         {
-            MniLoadData.Header = Variables.localisationManager.getValue(ArcMapAddinIsogeo.Localization.LocalizationItem.menuLoad);
-            MniShowMetadata.Header = Variables.localisationManager.getValue(ArcMapAddinIsogeo.Localization.LocalizationItem.menuMetadata);
-            MniOpenCatalog.Header = Variables.localisationManager.getValue(ArcMapAddinIsogeo.Localization.LocalizationItem.menuOpenCatalog);
+            MniLoadData.Header = Variables.localisationManager.getValue(IsogeoLibrary.Localization.LocalizationItem.menuLoad);
+            MniShowMetadata.Header = Variables.localisationManager.getValue(IsogeoLibrary.Localization.LocalizationItem.menuMetadata);
+            MniOpenCatalog.Header = Variables.localisationManager.getValue(IsogeoLibrary.Localization.LocalizationItem.menuOpenCatalog);
         }
 
         private BitmapImage ReturnPicture(String imagePath)
@@ -144,7 +144,7 @@ namespace Arcgis_Pro_Isogeo.UI.Search.Results
                     //img_layer.Visible=false;
                     CmbLayer.Visibility = Visibility.Visible;
 
-                    foreach (ArcMapAddinIsogeo.DataType.ServiceType data in data_list)
+                    foreach (IsogeoLibrary.DataType.ServiceType data in data_list)
                     {
                         CmbLayer.Items.Add(data.type + " - " + data.title);
                     }
@@ -159,12 +159,12 @@ namespace Arcgis_Pro_Isogeo.UI.Search.Results
 
             if (vectorformat_list.Contains(result.format) == true)
             {
-                data_list.Add(new ArcMapAddinIsogeo.DataType.ServiceType(result.format, result.title, result.path, result.name, result._creator._id, result._id));
+                data_list.Add(new IsogeoLibrary.DataType.ServiceType(result.format, result.title, result.path, result.name, result._creator._id, result._id));
             }
 
             if (rasterformat_list.Contains(result.format) == true)
             {
-                data_list.Add(new ArcMapAddinIsogeo.DataType.ServiceType("raster", result.title, result.path, result.name, result._creator._id, result._id));
+                data_list.Add(new IsogeoLibrary.DataType.ServiceType("raster", result.title, result.path, result.name, result._creator._id, result._id));
             }
 
             if (result.format == "postgis")
@@ -181,7 +181,7 @@ namespace Arcgis_Pro_Isogeo.UI.Search.Results
             {
                 foreach (var serviceLayer in result.serviceLayers)
                 {
-                    data_list.Add(new ArcMapAddinIsogeo.DataType.ServiceType(serviceLayer.service.format.ToUpper(), serviceLayer.titles[0].value, serviceLayer.service.path, getId(serviceLayer.id), result._creator._id, result._id));
+                    data_list.Add(new IsogeoLibrary.DataType.ServiceType(serviceLayer.service.format.ToUpper(), serviceLayer.titles[0].value, serviceLayer.service.path, getId(serviceLayer.id), result._creator._id, result._id));
                 }
 
             }
@@ -194,7 +194,7 @@ namespace Arcgis_Pro_Isogeo.UI.Search.Results
                 {
                     foreach (var layer in result.layers)
                     {
-                        data_list.Add(new ArcMapAddinIsogeo.DataType.ServiceType(result.format.ToUpper(), getTitle(result.format.ToUpper(), layer.id, layer.titles), result.path, getId(layer.id), result._creator._id, result._id));
+                        data_list.Add(new IsogeoLibrary.DataType.ServiceType(result.format.ToUpper(), getTitle(result.format.ToUpper(), layer.id, layer.titles), result.path, getId(layer.id), result._creator._id, result._id));
                     }
                 }
             }
@@ -263,7 +263,7 @@ namespace Arcgis_Pro_Isogeo.UI.Search.Results
 
         private void MniOpenCatalog_OnClick(object sender, RoutedEventArgs e)
         {
-            ArcMapAddinIsogeo.DataType.ServiceType currentService;
+            IsogeoLibrary.DataType.ServiceType currentService;
             if (data_list.Count == 1)
             {
                 currentService = data_list[0];
@@ -289,7 +289,7 @@ namespace Arcgis_Pro_Isogeo.UI.Search.Results
 
         private void MniLoadData_OnClick(object sender, RoutedEventArgs e)
         {
-            ArcMapAddinIsogeo.DataType.ServiceType currentService;
+            IsogeoLibrary.DataType.ServiceType currentService;
             if (data_list.Count == 1)
             {
                 currentService = data_list[0];

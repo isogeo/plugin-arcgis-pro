@@ -9,7 +9,7 @@ using RestSharp;
 using Newtonsoft.Json;
 using UI = Arcgis_Pro_Isogeo.UI;
 
-namespace ArcMapAddinIsogeo.API
+namespace IsogeoLibrary.API
 {
     public class RestFunctions
     {
@@ -438,8 +438,8 @@ namespace ArcMapAddinIsogeo.API
 
         private void saveLastSearch()
         {
-            ArcMapAddinIsogeo.Configuration.Search currentSearch=null;
-            foreach (ArcMapAddinIsogeo.Configuration.Search search in Variables.configurationManager.config.searchs.searchs)
+            Configuration.Search currentSearch=null;
+            foreach (Configuration.Search search in Variables.configurationManager.config.searchs.searchs)
             {
                 if (search.name == "CurrentSearchSave")
                 {
@@ -448,7 +448,7 @@ namespace ArcMapAddinIsogeo.API
                 }
             }
             if (currentSearch==null) { 
-                currentSearch=new ArcMapAddinIsogeo.Configuration.Search(); 
+                currentSearch=new Configuration.Search(); 
                 currentSearch.name="CurrentSearchSave"; 
                 Variables.configurationManager.config.searchs.searchs.Add(currentSearch);
             }

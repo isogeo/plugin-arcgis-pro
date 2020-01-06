@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Windows.Data;
 using System.Windows.Controls;
-using ArcMapAddinIsogeo;
+using IsogeoLibrary;
 using UserControl = System.Windows.Controls.UserControl;
-using API = ArcMapAddinIsogeo.API;
+using API = IsogeoLibrary.API;
 
 namespace Arcgis_Pro_Isogeo.UI.Metadata
 {
@@ -20,17 +20,17 @@ namespace Arcgis_Pro_Isogeo.UI.Metadata
 
         public void setValues()
         {
-            GrpDataHistory.Header = Variables.localisationManager.getValue(ArcMapAddinIsogeo.Localization.LocalizationItem.Metadata_History_history);
-            GrpCollectContext.Header = Variables.localisationManager.getValue(ArcMapAddinIsogeo.Localization.LocalizationItem.Metadata_History_context);
-            GrpCollectMethod.Header = Variables.localisationManager.getValue(ArcMapAddinIsogeo.Localization.LocalizationItem.Metadata_History_method);
-            GrpLastModification.Header = Variables.localisationManager.getValue(ArcMapAddinIsogeo.Localization.LocalizationItem.Metadata_History_lastupdatedata);
+            GrpDataHistory.Header = Variables.localisationManager.getValue(IsogeoLibrary.Localization.LocalizationItem.Metadata_History_history);
+            GrpCollectContext.Header = Variables.localisationManager.getValue(IsogeoLibrary.Localization.LocalizationItem.Metadata_History_context);
+            GrpCollectMethod.Header = Variables.localisationManager.getValue(IsogeoLibrary.Localization.LocalizationItem.Metadata_History_method);
+            GrpLastModification.Header = Variables.localisationManager.getValue(IsogeoLibrary.Localization.LocalizationItem.Metadata_History_lastupdatedata);
 
-            HistoryDataItem.LblDataCreation.Content = Variables.localisationManager.getValue(ArcMapAddinIsogeo.Localization.LocalizationItem.Metadata_History_datecreate);
-            HistoryDataItem.LblDataUpdate.Content = Variables.localisationManager.getValue(ArcMapAddinIsogeo.Localization.LocalizationItem.Metadata_History_lastupdate);
-            HistoryDataItem.LblFrequency.Content = Variables.localisationManager.getValue(ArcMapAddinIsogeo.Localization.LocalizationItem.Metadata_History_updateevery);
-            HistoryDataItem.LblValidStart.Content = Variables.localisationManager.getValue(ArcMapAddinIsogeo.Localization.LocalizationItem.Metadata_History_startvalid);
-            HistoryDataItem.LblValidEnd.Content = Variables.localisationManager.getValue(ArcMapAddinIsogeo.Localization.LocalizationItem.Metadata_History_endvalid);
-            HistoryDataItem.LblValidComment.Content = Variables.localisationManager.getValue(ArcMapAddinIsogeo.Localization.LocalizationItem.Metadata_History_comment);
+            HistoryDataItem.LblDataCreation.Content = Variables.localisationManager.getValue(IsogeoLibrary.Localization.LocalizationItem.Metadata_History_datecreate);
+            HistoryDataItem.LblDataUpdate.Content = Variables.localisationManager.getValue(IsogeoLibrary.Localization.LocalizationItem.Metadata_History_lastupdate);
+            HistoryDataItem.LblFrequency.Content = Variables.localisationManager.getValue(IsogeoLibrary.Localization.LocalizationItem.Metadata_History_updateevery);
+            HistoryDataItem.LblValidStart.Content = Variables.localisationManager.getValue(IsogeoLibrary.Localization.LocalizationItem.Metadata_History_startvalid);
+            HistoryDataItem.LblValidEnd.Content = Variables.localisationManager.getValue(IsogeoLibrary.Localization.LocalizationItem.Metadata_History_endvalid);
+            HistoryDataItem.LblValidComment.Content = Variables.localisationManager.getValue(IsogeoLibrary.Localization.LocalizationItem.Metadata_History_comment);
 
 
             //HISTORY ---------------------------------------------------------

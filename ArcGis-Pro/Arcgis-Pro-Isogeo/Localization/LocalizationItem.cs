@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace ArcMapAddinIsogeo.Localization
+namespace IsogeoLibrary.Localization
 {
     static class LocalizationItem
     {

@@ -12,7 +12,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using ArcMapAddinIsogeo;
+using IsogeoLibrary;
 
 namespace Arcgis_Pro_Isogeo.UI.Search.SearchManagment
 {
@@ -47,17 +47,17 @@ namespace Arcgis_Pro_Isogeo.UI.Search.SearchManagment
         {
             if (TxtQuickSearch.Text == "")
             {
-                MessageBox.Show(this, Variables.localisationManager.getValue(ArcMapAddinIsogeo.Localization.LocalizationItem.Quicksearch_name_mandatory), this.Title);
+                MessageBox.Show(this, Variables.localisationManager.getValue(IsogeoLibrary.Localization.LocalizationItem.Quicksearch_name_mandatory), this.Title);
                 return;
             }
 
 
-            foreach (ArcMapAddinIsogeo.Configuration.Search search in Variables.configurationManager.config.searchs.searchs)
+            foreach (IsogeoLibrary.Configuration.Search search in Variables.configurationManager.config.searchs.searchs)
             {
                 if (search.name == TxtQuickSearch.Text && search.name != oldName)
                 {
                     MessageBox.Show(this,
-                        Variables.localisationManager.getValue(ArcMapAddinIsogeo.Localization.LocalizationItem.Quicksearch_already_exist), this.Title);
+                        Variables.localisationManager.getValue(IsogeoLibrary.Localization.LocalizationItem.Quicksearch_already_exist), this.Title);
                     return;
                 }
             }

@@ -1,6 +1,7 @@
-﻿using System.Windows;
+﻿using System.Collections.Generic;
+using System.Windows;
 using System.Windows.Forms;
-using ArcMapAddinIsogeo;
+using IsogeoLibrary;
 using UserControl = System.Windows.Controls.UserControl;
 using UI = Arcgis_Pro_Isogeo.UI;
 
@@ -11,15 +12,27 @@ namespace Arcgis_Pro_Isogeo.UI.Metadata
     /// </summary>
     public partial class MetadataLicences : UserControl
     {
+        private List<LicenceItem> _licenceItemsList;
+        private List<LimitationItem> _limitationItemsList;
+
         public MetadataLicences()
         {
             InitializeComponent();
+            Init();
+        }
+
+        private void Init()
+        {
+            _licenceItemsList = new List<LicenceItem>();
+            _limitationItemsList = new List<LimitationItem>();
+            LvwLicenceItems.ItemsSource = _licenceItemsList;
+            LvwLimitationItems.ItemsSource = _limitationItemsList;
         }
 
         public void setValues()
         {
-            GrpLicences.Header = Variables.localisationManager.getValue(ArcMapAddinIsogeo.Localization.LocalizationItem.Metadata_Licences_licence);
-            GrpLimitations.Header = Variables.localisationManager.getValue(ArcMapAddinIsogeo.Localization.LocalizationItem.Metadata_Licences_limitation);
+            GrpLicences.Header = Variables.localisationManager.getValue(IsogeoLibrary.Localization.LocalizationItem.Metadata_Licences_licence);
+            GrpLimitations.Header = Variables.localisationManager.getValue(IsogeoLibrary.Localization.LocalizationItem.Metadata_Licences_limitation);
             //-- CGUs ------------------------------------------------------------
             //Licences
 
@@ -28,14 +41,10 @@ namespace Arcgis_Pro_Isogeo.UI.Metadata
                 for (int i = Variables.currentResult.conditions.Count - 1; i >= 0; i--)
                 {
 
-                    // TODO ADD gestion multiple licences
-                    //LicenceItem licenceItem = new LicenceItem(Variables.currentResult.conditions[i]);
-                    //licenceItem.Dock = DockStyle.Top;
-                    //UI.Search.Results.ResultItemSeparator resultItemSeparator = new UI.Search.Results.ResultItemSeparator();
-                    //resultItemSeparator.Dock = DockStyle.Top;
-                    this.LicenceItem.Init(Variables.currentResult.conditions[i]);
+                    LicenceItem licenceItem = new LicenceItem();
+                    licenceItem.Init(Variables.currentResult.conditions[i]);
+                    _licenceItemsList.Add(licenceItem);
                     // panel_licences.Controls.Add(resultItemSeparator);
-                    // panel_licences.Controls.Add(licenceItem);
                 }
             }
 
@@ -46,14 +55,10 @@ namespace Arcgis_Pro_Isogeo.UI.Metadata
             {
                 for (int i = Variables.currentResult.limitations.Count - 1; i >= 0; i--)
                 {
-                    // TODO add gestion multiple limitations
-                    this.LimitationItem.Init(Variables.currentResult.limitations[i]);
-                    //LimitationItem limitationItem = new LimitationItem(Variables.currentResult.limitations[i]);
-                    // limitationItem.Dock = DockStyle.Top;
-                    //UI.Search.Results.ResultItemSeparator resultItemSeparator = new UI.Search.Results.ResultItemSeparator();
-                    // resultItemSeparator.Dock = DockStyle.Top;
+                    LimitationItem limitationItem = new LimitationItem();
+                    limitationItem.Init(Variables.currentResult.limitations[i]);
+                    _limitationItemsList.Add(limitationItem);
                     // panel_limitations.Controls.Add(resultItemSeparator);
-                    // panel_limitations.Controls.Add(limitationItem);
                 }
             }
 

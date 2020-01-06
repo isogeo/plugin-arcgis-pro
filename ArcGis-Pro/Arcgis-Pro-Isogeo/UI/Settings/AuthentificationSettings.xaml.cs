@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using IsogeoLibrary;
 
 namespace Arcgis_Pro_Isogeo.UI.Settings
 {
@@ -23,6 +24,19 @@ namespace Arcgis_Pro_Isogeo.UI.Settings
         public AuthentificationSettings()
         {
             InitializeComponent();
+            Variables.functionsTranslate.Add(translate);
+        }
+
+        private void translate()
+        {
+            GrpAuthenticationSettings.Content = Variables.localisationManager.getValue(IsogeoLibrary.Localization.LocalizationItem.Authentification_settings); 
+            LblAuthenticationParameters.Content = Variables.localisationManager.getValue(IsogeoLibrary.Localization.LocalizationItem.Set_pluggin_authentification) + " :";
+        }
+
+        private void BtnAuthentication_Click(object sender, RoutedEventArgs e)
+        {
+            UI.Authentification.Authentification frmAuthentification = new UI.Authentification.Authentification();
+            frmAuthentification.ShowDialog();
         }
     }
 }

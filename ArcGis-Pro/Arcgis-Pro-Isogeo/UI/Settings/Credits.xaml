@@ -5,8 +5,47 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Arcgis_Pro_Isogeo.UI.Settings"
         mc:Ignorable="d"
-        Title="Credits" Height="523" Width="366">
-    <StackPanel>
-        <GroupBox x:Name="GrpCredits" Width="337" Height="268" Content="Contenu"></GroupBox>
-    </StackPanel>
+        Title="Credits" Height="523" Width="366"
+        ResizeMode="NoResize">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+        <GroupBox Grid.Column="0" Grid.Row="0" x:Name="GrpContent" Header="Content">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="1*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+                <Label Grid.Column="0" Grid.Row="0" x:Name="LblContent"/>
+                <Image Grid.Column="0" Grid.Row="1" x:Name="ImgContent"/>
+            </Grid>
+        </GroupBox>
+        <GroupBox Grid.Column="0" Grid.Row="1" x:Name="GrpConception" Header="Conception">
+            <Image x:Name="ImgConception"/>
+        </GroupBox>
+        <GroupBox Grid.Column="0" Grid.Row="2" x:Name="GrpDevelopment" Header="Development">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+                <Label Grid.Column="0" Grid.Row="0" x:Name="LblDevelopedBy"></Label>
+                <ListBox Grid.Column="1" Grid.Row="0" x:Name="LstDevelopedBy"></ListBox>
+            </Grid>
+        </GroupBox>
+        <Label Grid.Column="0" Grid.Row="3" x:Name="LblIsogeo"></Label>
+    </Grid>
 </Window>

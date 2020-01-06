@@ -12,7 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using ArcMapAddinIsogeo;
+using IsogeoLibrary;
 
 namespace Arcgis_Pro_Isogeo.UI.Metadata
 {
@@ -35,11 +35,11 @@ namespace Arcgis_Pro_Isogeo.UI.Metadata
             LblConformityValue.Content = "";
             LblDescriptionValue.Content = "";
 
-            LblOwner.Content = Variables.localisationManager.getValue(ArcMapAddinIsogeo.Localization.LocalizationItem.Metadata_General_owner);
-            LblKeywords.Content = Variables.localisationManager.getValue(ArcMapAddinIsogeo.Localization.LocalizationItem.Metadata_General_keywords);
-            LblThemes.Content = Variables.localisationManager.getValue(ArcMapAddinIsogeo.Localization.LocalizationItem.Metadata_General_themes);
-            LblConformity.Content = Variables.localisationManager.getValue(ArcMapAddinIsogeo.Localization.LocalizationItem.Metadata_General_conformity);
-            LblDescription.Content = Variables.localisationManager.getValue(ArcMapAddinIsogeo.Localization.LocalizationItem.Metadata_General_description);
+            LblOwner.Content = Variables.localisationManager.getValue(IsogeoLibrary.Localization.LocalizationItem.Metadata_General_owner);
+            LblKeywords.Content = Variables.localisationManager.getValue(IsogeoLibrary.Localization.LocalizationItem.Metadata_General_keywords);
+            LblThemes.Content = Variables.localisationManager.getValue(IsogeoLibrary.Localization.LocalizationItem.Metadata_General_themes);
+            LblConformity.Content = Variables.localisationManager.getValue(IsogeoLibrary.Localization.LocalizationItem.Metadata_General_conformity);
+            LblDescription.Content = Variables.localisationManager.getValue(IsogeoLibrary.Localization.LocalizationItem.Metadata_General_description);
 
 
 

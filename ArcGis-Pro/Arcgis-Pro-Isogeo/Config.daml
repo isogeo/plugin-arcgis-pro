@@ -28,7 +28,7 @@
       </groups>
       <controls>
         <!-- add your controls here -->
-        <button id="Arcgis_Pro_Isogeo_Dockpane_ShowButton" caption="Plugin" className="Dockpane_ShowButton" loadOnClick="true" smallImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/GenericButtonPurple16.png" largeImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/GenericButtonPurple32.png">
+        <button id="Arcgis_Pro_Isogeo_Dockpane_ShowButton" caption="Plugin" className="Dockpane_ShowButton" loadOnClick="true" smallImage="pack://application:,,,/Arcgis-Pro-Isogeo;component/Images/icon16.png" largeImage="pack://application:,,,/Arcgis-Pro-Isogeo;component/Images/btnIsogeo.png">
           <tooltip heading="Isogeo">Isogeo<disabledText /></tooltip>
         </button>
       </controls>

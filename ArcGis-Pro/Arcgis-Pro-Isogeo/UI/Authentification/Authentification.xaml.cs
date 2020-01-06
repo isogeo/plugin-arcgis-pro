@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows;
-using ArcMapAddinIsogeo;
-using API = ArcMapAddinIsogeo.API;
+using IsogeoLibrary;
+using API = IsogeoLibrary.API;
 
 namespace Arcgis_Pro_Isogeo.UI.Authentification
 {
@@ -25,20 +25,14 @@ namespace Arcgis_Pro_Isogeo.UI.Authentification
                 String secretValue = Variables.configurationManager.config.userAuthentification.secret;
                 if (secretValue != "")
                 {
-                    try
-                    { 
-                        TxtSecret.Text = RijndaelManagedEncryption.DecryptRijndael(secretValue, Variables.encryptCode);
-                    }
-                    catch
-                    {
-                    }
-
+                    TxtSecret.Text = RijndaelManagedEncryption.DecryptRijndael(secretValue, Variables.encryptCode);
                 }
 
             }
             catch (Exception ex)
             {
                 String erreur = ex.ToString();
+                // TODO : log
             }
         }
 
@@ -50,12 +44,12 @@ namespace Arcgis_Pro_Isogeo.UI.Authentification
         private void translate()
         {
 
-            this.Title = Variables.localisationManager.getValue(ArcMapAddinIsogeo.Localization.LocalizationItem.Authentification_Title);
-            LblApplicationId.Content = Variables.localisationManager.getValue(ArcMapAddinIsogeo.Localization.LocalizationItem.Application_ID) + " :";
-            LblApplicationSecret.Content = Variables.localisationManager.getValue(ArcMapAddinIsogeo.Localization.LocalizationItem.Application_SECRET) + " :";
-            BtnCheck.Content = Variables.localisationManager.getValue(ArcMapAddinIsogeo.Localization.LocalizationItem.Check);
-            BtnSave.Content = Variables.localisationManager.getValue(ArcMapAddinIsogeo.Localization.LocalizationItem.Save);
-            BtnCancel.Content = Variables.localisationManager.getValue(ArcMapAddinIsogeo.Localization.LocalizationItem.Cancel);
+            this.Title = Variables.localisationManager.getValue(IsogeoLibrary.Localization.LocalizationItem.Authentification_Title);
+            LblApplicationId.Content = Variables.localisationManager.getValue(IsogeoLibrary.Localization.LocalizationItem.Application_ID) + " :";
+            LblApplicationSecret.Content = Variables.localisationManager.getValue(IsogeoLibrary.Localization.LocalizationItem.Application_SECRET) + " :";
+            BtnCheck.Content = Variables.localisationManager.getValue(IsogeoLibrary.Localization.LocalizationItem.Check);
+            BtnSave.Content = Variables.localisationManager.getValue(IsogeoLibrary.Localization.LocalizationItem.Save);
+            BtnCancel.Content = Variables.localisationManager.getValue(IsogeoLibrary.Localization.LocalizationItem.Cancel);
 
         }
 
@@ -63,12 +57,12 @@ namespace Arcgis_Pro_Isogeo.UI.Authentification
         {
             if (TxtId.Text == "")
             {
-                MessageBox.Show(this, Variables.localisationManager.getValue(ArcMapAddinIsogeo.Localization.LocalizationItem.Message_Query_authentification_id_mandatory), "Isogeo");
+                MessageBox.Show(this, Variables.localisationManager.getValue(IsogeoLibrary.Localization.LocalizationItem.Message_Query_authentification_id_mandatory), "Isogeo");
                 return false;
             }
             if (TxtSecret.Text.Length != 64)
             {
-                MessageBox.Show(this, Variables.localisationManager.getValue(ArcMapAddinIsogeo.Localization.LocalizationItem.Message_Query_authentification_secret_mandatory), "Isogeo");
+                MessageBox.Show(this, Variables.localisationManager.getValue(IsogeoLibrary.Localization.LocalizationItem.Message_Query_authentification_secret_mandatory), "Isogeo");
                 return false;
             }
 
@@ -76,20 +70,20 @@ namespace Arcgis_Pro_Isogeo.UI.Authentification
             switch (token.StatusResult)
             {
                 case "NotFound":
-                    MessageBox.Show(this, Variables.localisationManager.getValue(ArcMapAddinIsogeo.Localization.LocalizationItem.Message_Query_authentification_ko_internet) + "\n" + Variables.localisationManager.getValue(ArcMapAddinIsogeo.Localization.LocalizationItem.Message_contact_support), "Isogeo");
+                    MessageBox.Show(this, Variables.localisationManager.getValue(IsogeoLibrary.Localization.LocalizationItem.Message_Query_authentification_ko_internet) + "\n" + Variables.localisationManager.getValue(IsogeoLibrary.Localization.LocalizationItem.Message_contact_support), "Isogeo");
                     break;
                 case "OK":
 
                     break;
                 case "BadRequest":
-                    MessageBox.Show(this, Variables.localisationManager.getValue(ArcMapAddinIsogeo.Localization.LocalizationItem.Message_Query_authentification_ko_invalid) + "\n" + Variables.localisationManager.getValue(ArcMapAddinIsogeo.Localization.LocalizationItem.Message_contact_support), "Isogeo");
+                    MessageBox.Show(this, Variables.localisationManager.getValue(IsogeoLibrary.Localization.LocalizationItem.Message_Query_authentification_ko_invalid) + "\n" + Variables.localisationManager.getValue(IsogeoLibrary.Localization.LocalizationItem.Message_contact_support), "Isogeo");
                     break;
                 case "0":
-                    MessageBox.Show(this, Variables.localisationManager.getValue(ArcMapAddinIsogeo.Localization.LocalizationItem.Message_Query_authentification_ko_proxy) + "\n" + Variables.localisationManager.getValue(ArcMapAddinIsogeo.Localization.LocalizationItem.Message_contact_support), "Isogeo");
+                    MessageBox.Show(this, Variables.localisationManager.getValue(IsogeoLibrary.Localization.LocalizationItem.Message_Query_authentification_ko_proxy) + "\n" + Variables.localisationManager.getValue(IsogeoLibrary.Localization.LocalizationItem.Message_contact_support), "Isogeo");
                     break;
 
                 default:
-                    MessageBox.Show(this, Variables.localisationManager.getValue(ArcMapAddinIsogeo.Localization.LocalizationItem.Message_Query_authentification_ko_internet) + "\n" + Variables.localisationManager.getValue(ArcMapAddinIsogeo.Localization.LocalizationItem.Message_contact_support), "Isogeo");
+                    MessageBox.Show(this, Variables.localisationManager.getValue(IsogeoLibrary.Localization.LocalizationItem.Message_Query_authentification_ko_internet) + "\n" + Variables.localisationManager.getValue(IsogeoLibrary.Localization.LocalizationItem.Message_contact_support), "Isogeo");
                     break;
 
             }
@@ -97,7 +91,7 @@ namespace Arcgis_Pro_Isogeo.UI.Authentification
             {
                 if (isCheck)
                 {
-                    MessageBox.Show(this, Variables.localisationManager.getValue(ArcMapAddinIsogeo.Localization.LocalizationItem.Message_Query_authentification_ok), "Isogeo");
+                    MessageBox.Show(this, Variables.localisationManager.getValue(IsogeoLibrary.Localization.LocalizationItem.Message_Query_authentification_ok), "Isogeo");
                 }
                 return true;
             }

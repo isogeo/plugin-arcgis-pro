@@ -9,7 +9,7 @@ using UI = Arcgis_Pro_Isogeo.UI;
 //using System.Windows.Forms;
 //using ESRI.ArcGIS.Carto;
 
-namespace ArcMapAddinIsogeo
+namespace IsogeoLibrary
 {
     public static class Variables
     {

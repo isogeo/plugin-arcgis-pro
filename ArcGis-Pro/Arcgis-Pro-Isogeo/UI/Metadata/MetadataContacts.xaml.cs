@@ -12,9 +12,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using ArcMapAddinIsogeo;
+using IsogeoLibrary;
 using UserControl = System.Windows.Controls.UserControl;
-using API = ArcMapAddinIsogeo.API;
+using API = IsogeoLibrary.API;
 using UI = Arcgis_Pro_Isogeo.UI;
 
 namespace Arcgis_Pro_Isogeo.UI.Metadata
@@ -24,38 +24,44 @@ namespace Arcgis_Pro_Isogeo.UI.Metadata
     /// </summary>
     public partial class MetadataContacts : UserControl
     {
+        private List<ContactItem> _contactItemsList;
+        private List<ContactItem> _otherContactItemsList;
+
         public MetadataContacts()
         {
             InitializeComponent();
+            Init();
+        }
+
+        private void Init()
+        {
+            _contactItemsList = new List<ContactItem>();
+            _otherContactItemsList = new List<ContactItem>();
+            LvwContactItems.ItemsSource = _contactItemsList;
+            LvwOtherContactItems.ItemsSource = _otherContactItemsList;
         }
 
         public void setValues()
         {
-            GrpContactPoint.Header = Variables.localisationManager.getValue(ArcMapAddinIsogeo.Localization
+            GrpContactPoint.Header = Variables.localisationManager.getValue(IsogeoLibrary.Localization
                 .LocalizationItem.Metadata_Contacts_points_contacts);
-            GrpOthersContact.Header = Variables.localisationManager.getValue(ArcMapAddinIsogeo.Localization
+            GrpOthersContact.Header = Variables.localisationManager.getValue(IsogeoLibrary.Localization
                 .LocalizationItem.Metadata_Contacts_others_contacts);
 
-            // TODO : error here, can have multiple users, not only one, so have to make a "add" fonction, not "init"
             for (int i = Variables.currentResult.contacts.Count - 1; i >= 0; i--)
             {
                 API.Contact contact = Variables.currentResult.contacts[i].contact;
-                //ContactItem contactItem = new ContactItem(contact);
-                //contactItem.Dock = DockStyle.Top;
-                //UI.Search.Results.ResultItemSeparator resultItemSeparator = new UI.Search.Results.ResultItemSeparator();
-                //resultItemSeparator.Dock = DockStyle.Top;
+                ContactItem contactItem = new ContactItem();
+                contactItem.Init(contact);
                 if (Variables.currentResult.contacts[i].role == "pointOfContact")
                 {
-                    // TODO error here
-                    this.ContactItemPoint.Init(contact);
+                    _contactItemsList.Add(contactItem);
                     // panel_contact.Controls.Add(resultItemSeparator);
                 }
                 else
                 {
-                    // TODO error here
-                    this.OtherContactItem.Init(contact);
+                    _otherContactItemsList.Add(contactItem);
                     //panel_others_contact.Controls.Add(resultItemSeparator);
-                    //panel_others_contact.Controls.Add(contactItem);
                 }
 
             }

@@ -1,4 +1,4 @@
-﻿namespace ArcGis_Pro_WPF_Library.Properties {
+﻿namespace IsogeoLibrary.Properties {
     
     
     // Cette classe vous permet de gérer des événements spécifiques dans la classe de paramètres :

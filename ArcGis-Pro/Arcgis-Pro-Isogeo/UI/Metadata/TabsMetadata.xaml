@@ -9,22 +9,70 @@
     <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
         <TabControl TabStripPlacement="Left" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
             <TabItem x:Name="TabiGeneral" Header="Géneral">
-                <local:MetadataGeneral x:Name="MetadataGeneral" />
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="1*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+                    <local:MetadataGeneral Grid.Row="0" Grid.Column="0" x:Name="MetadataGeneral" />
+                </Grid>
             </TabItem>
             <TabItem x:Name="TabiContacts" Header="Contacts">
-                <local:MetadataContacts x:Name="MetadataContacts" />
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="1*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+                    <local:MetadataContacts Grid.Row="0" Grid.Column="0" x:Name="MetadataContacts" />
+                </Grid>
             </TabItem>
             <TabItem x:Name="TabiHistory" Header="Historique">
-                <local:MetadataHistory x:Name="MetadataHistory" />
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="1*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+                    <local:MetadataHistory Grid.Row="0" Grid.Column="0" x:Name="MetadataHistory" />
+                </Grid>
             </TabItem>
             <TabItem x:Name="TabiGeography" Header="Géographie">
-                <local:MetadataGeography  x:Name="MetadataGeography"/>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="1*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+                    <local:MetadataGeography Grid.Row="0" Grid.Column="0" x:Name="MetadataGeography"/>
+                </Grid>
             </TabItem>
             <TabItem x:Name="TabiLicence" Header="Licence">
-                <local:MetadataLicences x:Name="MetadataLicences" />
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="1*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+                    <local:MetadataLicences Grid.Row="0" Grid.Column="0" x:Name="MetadataLicences" />
+                </Grid>
             </TabItem>
             <TabItem x:Name="TabiAdvanced" Header="Avancés">
-                <local:MetadataAdvanced x:Name="MetadataAdvanced" />
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="1*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+                    <local:MetadataAdvanced Grid.Row="0" Grid.Column="0" x:Name="MetadataAdvanced" />
+                </Grid>
             </TabItem>
         </TabControl>
     </Grid>

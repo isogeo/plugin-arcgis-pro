@@ -13,7 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using ArcMapAddinIsogeo;
+using IsogeoLibrary;
 using ToolTip = System.Windows.Controls.ToolTip;
 using UserControl = System.Windows.Controls.UserControl;
 
@@ -35,15 +35,15 @@ namespace Arcgis_Pro_Isogeo.UI.Search.Results
         private void translate()
         {
             ToolTip toolTipSortingMethod = new ToolTip();
-            toolTipSortingMethod.Content = Variables.localisationManager.getValue(ArcMapAddinIsogeo.Localization.LocalizationItem.Sorting_method);
+            toolTipSortingMethod.Content = Variables.localisationManager.getValue(IsogeoLibrary.Localization.LocalizationItem.Sorting_method);
             CmbSortingMethod.ToolTip = toolTipSortingMethod;
 
             ToolTip toolTipSortingDirection = new ToolTip();
-            toolTipSortingDirection.Content = Variables.localisationManager.getValue(ArcMapAddinIsogeo.Localization.LocalizationItem.Sorting_direction);
+            toolTipSortingDirection.Content = Variables.localisationManager.getValue(IsogeoLibrary.Localization.LocalizationItem.Sorting_direction);
             CmbSortingDirection.ToolTip = toolTipSortingDirection;
 
             ToolTip toolTipLastSearh = new ToolTip();
-            toolTipLastSearh.Content = Variables.localisationManager.getValue(ArcMapAddinIsogeo.Localization.LocalizationItem.Reset_search);
+            toolTipLastSearh.Content = Variables.localisationManager.getValue(IsogeoLibrary.Localization.LocalizationItem.Reset_search);
             BtnLastSearch.ToolTip = toolTipLastSearh;
 
             setNbResults();
@@ -67,13 +67,13 @@ namespace Arcgis_Pro_Isogeo.UI.Search.Results
             int valcmbIndex = CmbSortingMethod.SelectedIndex;
             if (valcmbIndex == -1) valcmbIndex = 0;
 
-            CmbiRelevance.Content = Variables.localisationManager.getValue(ArcMapAddinIsogeo.Localization.LocalizationItem.Sorting_method_relevance);
+            CmbiRelevance.Content = Variables.localisationManager.getValue(IsogeoLibrary.Localization.LocalizationItem.Sorting_method_relevance);
 
-            CmbiTitle.Content = Variables.localisationManager.getValue(ArcMapAddinIsogeo.Localization.LocalizationItem.Sorting_method_title);
-            CmbiModified.Content = Variables.localisationManager.getValue(ArcMapAddinIsogeo.Localization.LocalizationItem.Sorting_method_modified);
-            CmbiCreated.Content = Variables.localisationManager.getValue(ArcMapAddinIsogeo.Localization.LocalizationItem.Sorting_method_created);
-            Cmbi_Created.Content = Variables.localisationManager.getValue(ArcMapAddinIsogeo.Localization.LocalizationItem.Sorting_method_metadata_modified);
-            Cmbi_Created.Content = Variables.localisationManager.getValue(ArcMapAddinIsogeo.Localization.LocalizationItem.Sorting_method_metadata_created);
+            CmbiTitle.Content = Variables.localisationManager.getValue(IsogeoLibrary.Localization.LocalizationItem.Sorting_method_title);
+            CmbiModified.Content = Variables.localisationManager.getValue(IsogeoLibrary.Localization.LocalizationItem.Sorting_method_modified);
+            CmbiCreated.Content = Variables.localisationManager.getValue(IsogeoLibrary.Localization.LocalizationItem.Sorting_method_created);
+            Cmbi_Created.Content = Variables.localisationManager.getValue(IsogeoLibrary.Localization.LocalizationItem.Sorting_method_metadata_modified);
+            Cmbi_Created.Content = Variables.localisationManager.getValue(IsogeoLibrary.Localization.LocalizationItem.Sorting_method_metadata_created);
 
             CmbSortingMethod.SelectedIndex = valcmbIndex;
             isUpdateCombo = false;
@@ -85,9 +85,9 @@ namespace Arcgis_Pro_Isogeo.UI.Search.Results
             int valcmbIndex = CmbSortingDirection.SelectedIndex;
             if (valcmbIndex == -1) valcmbIndex = 0;
 
-            CmbiAsc.Content = Variables.localisationManager.getValue(ArcMapAddinIsogeo.Localization.LocalizationItem
+            CmbiAsc.Content = Variables.localisationManager.getValue(IsogeoLibrary.Localization.LocalizationItem
                 .Sorting_method_ascending);
-            CmbiDesc.Content = Variables.localisationManager.getValue(ArcMapAddinIsogeo.Localization.LocalizationItem.Sorting_method_descending);
+            CmbiDesc.Content = Variables.localisationManager.getValue(IsogeoLibrary.Localization.LocalizationItem.Sorting_method_descending);
 
             CmbSortingDirection.SelectedIndex = valcmbIndex;
             isUpdateCombo = false;
@@ -97,7 +97,7 @@ namespace Arcgis_Pro_Isogeo.UI.Search.Results
         {
             if (Variables.search != null)
             {
-                BtnResults.Content = Variables.localisationManager.getValue(ArcMapAddinIsogeo.Localization.LocalizationItem.Results) + " (" + Variables.search.total + ")";
+                BtnResults.Content = Variables.localisationManager.getValue(IsogeoLibrary.Localization.LocalizationItem.Results) + " (" + Variables.search.total + ")";
                 if (Variables.search.total == 0)
                 {
                     BtnResults.IsEnabled = false;
@@ -110,7 +110,7 @@ namespace Arcgis_Pro_Isogeo.UI.Search.Results
             }
             else
             {
-                BtnResults.Content = Variables.localisationManager.getValue(ArcMapAddinIsogeo.Localization.LocalizationItem.Results) + " (0)";
+                BtnResults.Content = Variables.localisationManager.getValue(IsogeoLibrary.Localization.LocalizationItem.Results) + " (0)";
                 BtnResults.IsEnabled = false;
             }
 

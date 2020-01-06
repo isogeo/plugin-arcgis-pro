@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ArcMapAddinIsogeo.Objects
+namespace IsogeoLibrary.Objects
 {
     public class comboItem
     {
