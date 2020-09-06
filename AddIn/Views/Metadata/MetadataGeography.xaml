@@ -1,0 +1,36 @@
+﻿<UserControl x:Class="Isogeo.AddIn.Views.Metadata.MetadataGeography"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:lang="clr-namespace:Isogeo.Language;assembly=Isogeo.Language"
+             xmlns:metadata="clr-namespace:Isogeo.AddIn.Views.Metadata"
+             mc:Ignorable="d" 
+             d:DesignHeight="587" d:DesignWidth="602">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/Isogeo.Resources;component/Styles/TextBox.xaml"></ResourceDictionary>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+        <GroupBox Grid.Row="0" Grid.Column="0" x:Name="GrpTechnicalInformation" Header="{x:Static lang:Resources.Metadata_Geography_info}">
+            <metadata:TechnicalInformationItem x:Name="TechnicalInformationItem" />
+        </GroupBox>
+        <GroupBox MinHeight="100" x:Name="GrpSpecification" Grid.Row="1" Grid.Column="0" Header="{x:Static lang:Resources.Metadata_Geography_specification}">
+            <TextBox ScrollViewer.VerticalScrollBarVisibility="Auto" x:Name="LblSpecification" Text="{Binding Path = Specification, Mode = OneWay}" IsReadOnly="True" TextWrapping="Wrap"/>
+        </GroupBox>
+        <GroupBox MinHeight="100" x:Name="GrpTypology" Grid.Row="2" Grid.Column="0" Header="{x:Static lang:Resources.Metadata_Geography_typology}">
+            <TextBox ScrollViewer.VerticalScrollBarVisibility="Auto" x:Name="LblTypology" Text="{Binding Path = Typology, Mode = OneWay}"  IsReadOnly="True" TextWrapping="Wrap"/>
+        </GroupBox>
+    </Grid>
+</UserControl>

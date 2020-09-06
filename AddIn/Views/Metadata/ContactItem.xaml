@@ -1,0 +1,23 @@
+﻿<UserControl x:Class="Isogeo.AddIn.Views.Metadata.ContactItem"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" d:DesignWidth="317" Height="135">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/Isogeo.Resources;Component/Styles/TextBox.xaml"></ResourceDictionary>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <StackPanel>
+        <TextBox Style="{StaticResource HideBoxTxt}" Text="{Binding Path = ContactOwner.Name, Mode = OneWay}" />
+        <TextBox Style="{StaticResource HideBoxTxt}" Text="{Binding Path = ContactOwner.Email, Mode = OneWay}"/> <!--MouseDoubleClick="LblEmail_OnMouseDoubleClick"/>-->
+        <TextBox Style="{StaticResource HideBoxTxt}" Text="{Binding Path = ContactOwner.Phone, Mode = OneWay}"/>
+        <TextBox Style="{StaticResource HideBoxTxt}" Text="{Binding Path = ContactOwner.AddressLine1, Mode = OneWay}"/>
+        <TextBox Style="{StaticResource HideBoxTxt}" Text="{Binding Path = ContactOwner.City, Mode = OneWay}"/>
+        <TextBox Style="{StaticResource HideBoxTxt}" Text="{Binding Path = ContactOwner.ZipCode, Mode = OneWay}"/>
+        <TextBox Style="{StaticResource HideBoxTxt}" Text="{Binding Path = ContactOwner.Country, Mode = OneWay}"/>
+    </StackPanel>
+</UserControl>

@@ -1,0 +1,24 @@
+﻿<UserControl x:Class="Isogeo.AddIn.Views.TabControls.Settings"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:settings="clr-namespace:Isogeo.AddIn.Views.Settings"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid ScrollViewer.VerticalScrollBarVisibility="Auto">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <settings:SearchSettings DataContext="{Binding SearchSettingsViewModel}" Grid.Row="0" Grid.Column="0" /> 
+        <settings:ProxySettings DataContext="{Binding ProxySettingsViewModel}" Grid.Row="1" Grid.Column="0" />
+        <settings:AuthenticationSettings  Grid.Row="2" Grid.Column="0"/>
+        <settings:ResourcesSettings Grid.Row="3" Grid.Column="0" />
+    </Grid>
+</UserControl>

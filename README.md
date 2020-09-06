@@ -61,7 +61,7 @@ See the documentation:
 * in [English](http://help.isogeo.com/arcmap/fr/index.html)
   
 ## Old versions
-Some old versions can be find inside [this folder](/Old%20Versions)
+Some old versions can be find inside [this folder](https://github.com/VianneyDoleans/ArcGisPro/tree/master/Old%20Versions)
   - You will find Screenshots, installer files and dedicated installation documentation for each version
   - Contains the 0.0.0.1 version (early version created before total rework of Isogeo ArcGis Pro Add-In)
   
@@ -73,4 +73,3 @@ Some old versions can be find inside [this folder](/Old%20Versions)
 - For the development of this Isogeo ArcGis Pro Add-In, Isogeo ArcMap Add-In made by company [GEOFIT](https://geofit.fr/), under GPL3 license, has been used.
   - [Website](https://geofit.fr/)
   - [LinkedIn](https://www.linkedin.com/company/geofit/?originalSubdomain=fr)
-

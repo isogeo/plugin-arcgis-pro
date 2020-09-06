@@ -1,0 +1,34 @@
+﻿<UserControl x:Class="Isogeo.AddIn.Views.Search.Results.Results"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:language="clr-namespace:Isogeo.Language;assembly=Isogeo.Language"
+             mc:Ignorable="d" 
+             d:DesignHeight="237" d:DesignWidth="489">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <ListBox ScrollViewer.CanContentScroll="False" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Grid.Row="0" Grid.Column="0" ItemsSource="{Binding ResultsList}">
+            <ListBox.ItemContainerStyle>
+                <Style TargetType="ListBoxItem">
+                    <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                    <Setter Property="Focusable" Value="false"/>
+                </Style>
+            </ListBox.ItemContainerStyle>
+        </ListBox>
+        <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center" >
+            <Button Style="{DynamicResource Esri_Button}" Margin="3,3,3,3" Content='&#60;' Command="{Binding PreviousCommand}"/>
+            <Label Margin="0,3,0,3" Content="{x:Static language:Resources.Page}"/>
+            <ComboBox DisplayMemberPath="Name"  ItemsSource="{Binding ListNumberPage.Items}" SelectedItem="{Binding CurrentPage}" MinWidth="40" Margin="3,3,3,3"/>
+            <Label Margin="0,3,0,3" Content="{Binding LblNbPage}"/>
+            <Button Style="{DynamicResource Esri_Button}" Margin="3,3,3,3" Content=">" Command="{Binding NextCommand}"/>
+        </StackPanel>
+    </Grid>
+</UserControl>

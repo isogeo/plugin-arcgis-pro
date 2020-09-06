@@ -1,0 +1,89 @@
+﻿<UserControl x:Class="Isogeo.AddIn.Views.Settings.SearchSettings"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:extensions="clr-namespace:ArcGIS.Desktop.Extensions;assembly=ArcGIS.Desktop.Extensions"
+        xmlns:language="clr-namespace:Isogeo.Language;assembly=Isogeo.Language"
+        mc:Ignorable="d">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <extensions:DesignOnlyResourceDictionary Source="pack://application:,,,/ArcGIS.Desktop.Framework;component\Themes\Default.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Grid>
+        <GroupBox Header="{x:Static language:Resources.Search_settings}">
+            <Expander IsExpanded="False">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="1*"/>
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Row="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="1*"/>
+                            <RowDefinition Height="1*"/>
+                            <RowDefinition Height="1*"/>
+                        </Grid.RowDefinitions>
+                        <ComboBox Grid.Row="0" Margin="5,0,5,0" DisplayMemberPath="Name" ItemsSource="{Binding QuickSearchSettings.Items}" SelectedItem="{Binding QuickSearchSettings.SelectedItem}" />
+                    </Grid>
+                    <Grid Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="1*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="1*"/>
+                        </Grid.RowDefinitions>
+                        <Button Style="{DynamicResource Esri_Button}" Grid.Row="0" Grid.Column="0" Height="25" Content="{x:Static language:Resources.Rename}" Command="{Binding RenameCommand}" />
+                        <Button Style="{DynamicResource Esri_Button}" Grid.Row="0" Grid.Column="1" Height="25"  Content="{x:Static language:Resources.Delete}" Command="{Binding DeleteCommand}"/>
+                    </Grid>
+                    <Grid Grid.Row="2" >
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="1*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="1*"/>
+                        </Grid.RowDefinitions>
+                        <Label Margin="6,0,0,0" Grid.Row="0" Grid.Column="0" Content="{x:Static language:Resources.Default_search}" />
+                        <Button Margin="6,0,5,20" Style="{DynamicResource Esri_Button}" MinWidth="50" Grid.Row="0" Grid.Column="1" Content="{x:Static language:Resources.Save}" Command="{Binding SaveCommand}" />
+                    </Grid>
+                    <Grid Grid.Row="3">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="1*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="1*"/>
+                            <RowDefinition Height="1*"/>
+                            <RowDefinition Height="1*"/>
+                            <RowDefinition Height="1*"/>
+                        </Grid.RowDefinitions>
+                        <Label VerticalAlignment="Center" Margin="6,0,0,0" Grid.Row="1" Grid.Column="0" Content="{x:Static language:Resources.Geographical_operator_applied_to_the_filter}" />
+                        <Label VerticalAlignment="Center" Margin="6,0,0,0" Grid.Row="2" Grid.Column="0" Content="{x:Static language:Resources.FileSDE}" />
+                        <ComboBox VerticalAlignment="Center" Margin="6,0,5,0" MinWidth="50" Grid.Row="1" Grid.Column="1" DisplayMemberPath="Name" ItemsSource="{Binding GeoGraphicalSettings.Items}" SelectedItem="{Binding GeoGraphicalSettings.SelectedItem}" />
+                        <Grid VerticalAlignment="Center" Grid.Row="2" Grid.Column="1" Margin="5,0,5,0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBox VerticalAlignment="Center" Text="{Binding SdePathFile}" IsReadOnly="True" Margin="0,0,5,0" />
+                            <Button VerticalAlignment="Center" Command="{Binding LoadSdeFileCommand}" Margin="5,3,0,0" Grid.Column="1" Style="{DynamicResource Esri_Button}" MinWidth="50" BorderThickness="1" Content="..."/>
+                        </Grid>
+                    </Grid>
+                    </Grid>
+            </Expander>
+        </GroupBox>
+    </Grid>
+</UserControl>

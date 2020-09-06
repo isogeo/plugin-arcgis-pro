@@ -1,0 +1,59 @@
+﻿<UserControl x:Class="Isogeo.AddIn.Views.Metadata.HistoryDataItem"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:language="clr-namespace:Isogeo.Language;assembly=Isogeo.Language"
+             mc:Ignorable="d" 
+             d:DesignHeight="100" d:DesignWidth="500">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/Isogeo.Resources;component/Styles/TextBox.xaml"></ResourceDictionary>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+        <Grid  Grid.Row="0" Grid.Column="0" Margin="10, 10, 10, 10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Label x:Name="LblDataCreation" Grid.Row="0" Grid.Column="0" Content="{x:Static language:Resources.Metadata_History_datecreate}" />
+            <Label x:Name="LblDataUpdate" Grid.Row="1" Grid.Column="0" Content="{x:Static language:Resources.Metadata_History_lastupdate}" />
+            <Label x:Name="LblFrequency" Grid.Row="2" Grid.Column="0"  Content="{x:Static language:Resources.Metadata_History_updateevery}" />
+            <TextBox Style="{StaticResource HideBoxTxt}" VerticalAlignment="Center"  x:Name="LblDataCreationValue" Grid.Row="0" Grid.Column="1" Text="{Binding Path = DataCreation, Mode = OneWay}" />
+            <TextBox Style="{StaticResource HideBoxTxt}" VerticalAlignment="Center"  x:Name="LblDataUpdateValue" Grid.Row="1" Grid.Column="1" Text="{Binding Path = DataUpdate, Mode = OneWay}" />
+            <TextBox Style="{StaticResource HideBoxTxt}" VerticalAlignment="Center"  x:Name="LblFrequencyValue" Grid.Row="2" Grid.Column="1"  Text="{Binding Path = UpdateFrequency, Mode = OneWay}" />
+        </Grid>
+        <Grid Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" Margin="10, 10, 10, 10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Label x:Name="LblValidStart" Grid.Row="0" Grid.Column="0" Content="{x:Static language:Resources.Metadata_History_startvalid}" />
+            <Label x:Name="LblValidEnd" Grid.Row="1" Grid.Column="0" Content="{x:Static language:Resources.Metadata_History_endvalid}" />
+            <Label x:Name="LblValidComment" Grid.Row="2" Grid.Column="0" Content="{x:Static language:Resources.Metadata_History_comment}" />
+            <TextBox VerticalAlignment="Center" Style="{StaticResource HideBoxTxt}" x:Name="LblValidStartValue" Grid.Row="0" Grid.Column="1" Text="{Binding Path = ValidStart, Mode = OneWay}"/>
+            <TextBox VerticalAlignment="Center" Style="{StaticResource HideBoxTxt}" x:Name="LblValidEndValue" Grid.Row="1" Grid.Column="1" Text="{Binding Path = ValidEnd, Mode = OneWay}"  />
+            <TextBox VerticalAlignment="Center" Style="{StaticResource HideBoxTxt}" x:Name="LblValidCommentValue" Grid.Row="2" Grid.Column="1" Text="{Binding Path = ValidComment, Mode = OneWay}" />
+        </Grid>
+    </Grid>
+</UserControl>

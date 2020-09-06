@@ -1,0 +1,41 @@
+﻿<UserControl x:Class="Isogeo.AddIn.Views.Metadata.MetadataHistory"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:lang="clr-namespace:Isogeo.Language;assembly=Isogeo.Language"
+             xmlns:extensions="clr-namespace:ArcGIS.Desktop.Extensions;assembly=ArcGIS.Desktop.Extensions"
+             xmlns:metadata="clr-namespace:Isogeo.AddIn.Views.Metadata"
+             mc:Ignorable="d" 
+             d:DesignHeight="587" d:DesignWidth="602">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <extensions:DesignOnlyResourceDictionary Source="pack://application:,,,/ArcGIS.Desktop.Framework;component\Themes\Default.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+        <GroupBox x:Name="GrpDataHistory" Grid.Row="0" Grid.Column="0" Header="{x:Static lang:Resources.Metadata_History_datecreate}">
+            <metadata:HistoryDataItem x:Name="HistoryDataItem" />
+        </GroupBox>
+        <GroupBox x:Name="GrpCollectContext" Grid.Row="1" Grid.Column="0" Header="{x:Static lang:Resources.Metadata_History_context}">
+            <TextBox x:Name="LblContext" Text="{Binding Path = Context, Mode = OneWay}" ScrollViewer.VerticalScrollBarVisibility="Auto" MinHeight="50" TextWrapping="Wrap"/>
+        </GroupBox>
+        <GroupBox x:Name="GrpCollectMethod" Grid.Row="2" Grid.Column="0" Header="{x:Static lang:Resources.Metadata_History_method}">
+            <TextBox x:Name="LblMethod" Text="{Binding Path = Method, Mode = OneWay}" ScrollViewer.VerticalScrollBarVisibility="Auto" MinHeight="50" TextWrapping="Wrap"/>
+        </GroupBox>
+        <GroupBox x:Name="GrpLastModification" Grid.Row="3" Grid.Column="0" Header="{x:Static lang:Resources.Metadata_History_lastupdatedata}">
+            <metadata:LastModificationMetaDataItem x:Name="LastModificationMetaDataItem"/>
+        </GroupBox>
+    </Grid>
+</UserControl>

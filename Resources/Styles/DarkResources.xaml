@@ -1,0 +1,27 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <SolidColorBrush x:Key="MainBackgroundColorBrush">#333333</SolidColorBrush>
+    <SolidColorBrush x:Key="SecondaryBackgroundColorBrush">#242424</SolidColorBrush>
+    <SolidColorBrush x:Key="MainButtonsColorBrush">#0079c0</SolidColorBrush>
+    <SolidColorBrush x:Key="SecondaryButtonsColorBrush">#0079c0</SolidColorBrush>
+    <SolidColorBrush x:Key="MainBorderColorBrush">#0079c0</SolidColorBrush>
+    <SolidColorBrush x:Key="SecondaryBorderColorBrush">LightGray</SolidColorBrush>
+    <SolidColorBrush x:Key="IsPressedBackgroundButtonBrush">#63a8d6</SolidColorBrush>
+    <SolidColorBrush x:Key="IsPressedFontButtonBrush">White</SolidColorBrush>
+    <SolidColorBrush x:Key="HighlightBackgroundButtonBrush">#005e95</SolidColorBrush>
+    <SolidColorBrush x:Key="HighlightFontButtonBrush">White</SolidColorBrush>
+    <SolidColorBrush x:Key="MainFontColorBrush">White</SolidColorBrush>
+    <SolidColorBrush x:Key="SecondaryFontColorBrush">#0079c0</SolidColorBrush>
+    <SolidColorBrush x:Key="NormalFontColorBrush">White</SolidColorBrush>
+    <SolidColorBrush x:Key="HyperLinkColorBrush">#0079c0</SolidColorBrush>
+    <SolidColorBrush x:Key="ItalicFontColorBrush">Gray</SolidColorBrush>
+    <SolidColorBrush x:Key="MainBorderComponentColorBrush">#3d3d40</SolidColorBrush> <!--  expander's border, classic button's border, etc -->
+    <SolidColorBrush x:Key="DisableFontColorBrush">Gray</SolidColorBrush> <!-- Disable button, etc -->
+    <SolidColorBrush x:Key="DisableBackgroundColorBrush">#3d3d40</SolidColorBrush>
+
+    <Style TargetType="Image" x:Key="ImgLogo">
+        <Setter Property="Source" Value="pack://application:,,,/Isogeo.Resources;component/Resources/isogeo_blanc.png"/>
+    </Style>
+
+</ResourceDictionary>

@@ -1,0 +1,675 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Action_type" xml:space="preserve">
+    <value>Action type</value>
+  </data>
+  <data name="Action_type_default" xml:space="preserve">
+    <value>Action type (défaut)</value>
+  </data>
+  <data name="Action_type_download" xml:space="preserve">
+    <value>Télécharger</value>
+  </data>
+  <data name="Action_type_view" xml:space="preserve">
+    <value>Afficher</value>
+  </data>
+  <data name="Advanced_search" xml:space="preserve">
+    <value>Recherche avancée</value>
+  </data>
+  <data name="Alias" xml:space="preserve">
+    <value>Alias</value>
+  </data>
+  <data name="Alternative_login" xml:space="preserve">
+    <value>Connexion alternative</value>
+  </data>
+  <data name="Application_ID" xml:space="preserve">
+    <value>ID d'Application</value>
+  </data>
+  <data name="Application_SECRET" xml:space="preserve">
+    <value>SECRET d'Application</value>
+  </data>
+  <data name="Authentication_settings" xml:space="preserve">
+    <value>Paramètre d'authentification</value>
+  </data>
+  <data name="Authentication_Title" xml:space="preserve">
+    <value>Paramètres d'authentification du plugin</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Annuler</value>
+  </data>
+  <data name="Cant_be_added" xml:space="preserve">
+    <value>Non ajoutable</value>
+  </data>
+  <data name="Check" xml:space="preserve">
+    <value>Check</value>
+  </data>
+  <data name="Conform" xml:space="preserve">
+    <value>Conforme</value>
+  </data>
+  <data name="Contact" xml:space="preserve">
+    <value>Contact</value>
+  </data>
+  <data name="Contact_support" xml:space="preserve">
+    <value>Contacter le support</value>
+  </data>
+  <data name="Contact_Us" xml:space="preserve">
+    <value>Contactez nous</value>
+  </data>
+  <data name="Coordinate_system_source" xml:space="preserve">
+    <value>Système de coordonnées</value>
+  </data>
+  <data name="Copy" xml:space="preserve">
+    <value>Copie</value>
+  </data>
+  <data name="Credit_conception" xml:space="preserve">
+    <value>Conception</value>
+  </data>
+  <data name="Credit_contenu" xml:space="preserve">
+    <value>Contenu</value>
+  </data>
+  <data name="Credit_contenu_label" xml:space="preserve">
+    <value>Réalisé par le développeur freelance Vianney DOLEANS</value>
+  </data>
+  <data name="Credit_developedby" xml:space="preserve">
+    <value>Contributeurs au développement : </value>
+  </data>
+  <data name="Credit_development" xml:space="preserve">
+    <value>Développement</value>
+  </data>
+  <data name="Credit_isogeo" xml:space="preserve">
+    <value>Isogeo - tous droits réservés</value>
+  </data>
+  <data name="Credit_title" xml:space="preserve">
+    <value>Plugin Isogeo - Crédits</value>
+  </data>
+  <data name="Data_file" xml:space="preserve">
+    <value>Ficher de données</value>
+  </data>
+  <data name="Date" xml:space="preserve">
+    <value>Date</value>
+  </data>
+  <data name="Default_search" xml:space="preserve">
+    <value>Recherche par défaut</value>
+  </data>
+  <data name="Default_sort_order" xml:space="preserve">
+    <value>Tri par défaut</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Supprimer</value>
+  </data>
+  <data name="Description" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="Dont_have_an_access" xml:space="preserve">
+    <value>Vous n'avez pas d'accès?</value>
+  </data>
+  <data name="Empty" xml:space="preserve">
+    <value>Vide</value>
+  </data>
+  <data name="en-EN" xml:space="preserve">
+    <value>Anglais</value>
+  </data>
+  <data name="Error_bad_metadata" xml:space="preserve">
+    <value>La métadonnée n'a pas été correctement complétée</value>
+  </data>
+  <data name="Error_contact_support" xml:space="preserve">
+    <value>Erreur : Impossible de contacter le support par email</value>
+  </data>
+  <data name="Error_extent_map" xml:space="preserve">
+    <value>Erreur : Donnée invalide, La carte ne peut pas charger l'étendue</value>
+  </data>
+  <data name="Error_logManager" xml:space="preserve">
+    <value>Erreur : Impossible de charger le manageur de logs</value>
+  </data>
+  <data name="Error_logs" xml:space="preserve">
+    <value>Erreur : Impossible de charger le fichier des logs</value>
+  </data>
+  <data name="Error_proxy" xml:space="preserve">
+    <value>Les informations proxy n'ont pas pu être sauvegardé</value>
+  </data>
+  <data name="FileSDE" xml:space="preserve">
+    <value>Fichier de connexion SDE</value>
+  </data>
+  <data name="Format_source" xml:space="preserve">
+    <value>Format</value>
+  </data>
+  <data name="fr-FR" xml:space="preserve">
+    <value>Français</value>
+  </data>
+  <data name="Geographical_operator_applied_to_the_filter" xml:space="preserve">
+    <value>Opérateur géographique</value>
+  </data>
+  <data name="Geographic_filter" xml:space="preserve">
+    <value>Filtre géographique</value>
+  </data>
+  <data name="Geographic_type_contains" xml:space="preserve">
+    <value>Contient</value>
+  </data>
+  <data name="Geographic_type_intersects" xml:space="preserve">
+    <value>Intersecte</value>
+  </data>
+  <data name="Geographic_type_within" xml:space="preserve">
+    <value>Est contenu</value>
+  </data>
+  <data name="Help" xml:space="preserve">
+    <value>Aide</value>
+  </data>
+  <data name="Import_access_from_a_file" xml:space="preserve">
+    <value>Importer les accès depuis un ficher :</value>
+  </data>
+  <data name="Import_File" xml:space="preserve">
+    <value>Importer un fichier</value>
+  </data>
+  <data name="INSPIRE_keywords" xml:space="preserve">
+    <value>Thématique INSPIRE</value>
+  </data>
+  <data name="Isogeo_authentication_settings" xml:space="preserve">
+    <value>Paramètres d'authentification du plugin</value>
+  </data>
+  <data name="Isogeo_login" xml:space="preserve">
+    <value>Connexion à Isogeo</value>
+  </data>
+  <data name="Key" xml:space="preserve">
+    <value>Clé</value>
+  </data>
+  <data name="Keywords" xml:space="preserve">
+    <value>Mots clés</value>
+  </data>
+  <data name="Lang" xml:space="preserve">
+    <value>Langue</value>
+  </data>
+  <data name="Lang_default" xml:space="preserve">
+    <value>(défaut)</value>
+  </data>
+  <data name="Licence" xml:space="preserve">
+    <value>Licence</value>
+  </data>
+  <data name="Line" xml:space="preserve">
+    <value>Ligne</value>
+  </data>
+  <data name="Log" xml:space="preserve">
+    <value>Log</value>
+  </data>
+  <data name="Map_canvas" xml:space="preserve">
+    <value>Emprise de la carte</value>
+  </data>
+  <data name="Menu_Download" xml:space="preserve">
+    <value>Télécharger</value>
+  </data>
+  <data name="Menu_load" xml:space="preserve">
+    <value>Charger</value>
+  </data>
+  <data name="Menu_Metadata" xml:space="preserve">
+    <value>Metadata</value>
+  </data>
+  <data name="Menu_OpenCatalog" xml:space="preserve">
+    <value>OpenCatalog</value>
+  </data>
+  <data name="Message_contact_support" xml:space="preserve">
+    <value>Vous pouvez contacter le support à cette adresse : 'support+arcgispro@isogeo.fr'</value>
+  </data>
+  <data name="Message_Data_Error" xml:space="preserve">
+    <value>Le service demandé n'est pas compatible ou n'a pas été configuré pour fonctionner dans ArcGis Pro</value>
+  </data>
+  <data name="Message_Data_file_not_found" xml:space="preserve">
+    <value>Fichier non trouvé</value>
+  </data>
+  <data name="Message_Data_layer_not_found" xml:space="preserve">
+    <value>Couche non trouvé</value>
+  </data>
+  <data name="Message_Data_sde_not_configured" xml:space="preserve">
+    <value>Fichier de connexion SDE non configuré dans l'onglet 'Paramètres'.</value>
+  </data>
+  <data name="Message_Data_table_undefined" xml:space="preserve">
+    <value>Le nom de la table n'est pas défini</value>
+  </data>
+  <data name="Message_Data_Type" xml:space="preserve">
+    <value>Type de donnée non géré</value>
+  </data>
+  <data name="Message_Metadata_Advanced" xml:space="preserve">
+    <value>Avancés</value>
+  </data>
+  <data name="Message_Metadata_Contacts" xml:space="preserve">
+    <value>Contacts</value>
+  </data>
+  <data name="Message_Metadata_General" xml:space="preserve">
+    <value>Géneral</value>
+  </data>
+  <data name="Message_Metadata_Geography" xml:space="preserve">
+    <value>Géographie</value>
+  </data>
+  <data name="Message_Metadata_History" xml:space="preserve">
+    <value>Historique</value>
+  </data>
+  <data name="Message_Metadata_Licenses" xml:space="preserve">
+    <value>Licence</value>
+  </data>
+  <data name="Message_Query_authentication_id_mandatory" xml:space="preserve">
+    <value>Le champ ID est obligatoire</value>
+  </data>
+  <data name="Message_Query_authentication_ko" xml:space="preserve">
+    <value>La connexion à échouée.</value>
+  </data>
+  <data name="Message_Query_authentication_ko_internet" xml:space="preserve">
+    <value>Connection impossible. Verifiez votre connecion internet.</value>
+  </data>
+  <data name="Message_Query_authentication_ko_invalid" xml:space="preserve">
+    <value>ID ou SECRET invalide</value>
+  </data>
+  <data name="Message_Query_authentication_ko_proxy" xml:space="preserve">
+    <value>Connection impossible. Verifiez vos paramètres de proxy</value>
+  </data>
+  <data name="Message_Query_authentication_ok" xml:space="preserve">
+    <value>La connexion est valide.</value>
+  </data>
+  <data name="Message_Query_authentication_secret_mandatory" xml:space="preserve">
+    <value>Le champ SECRET doit se composer de 64 caractères</value>
+  </data>
+  <data name="Message_Settings_save" xml:space="preserve">
+    <value>Les paramètres ont été enregistrés</value>
+  </data>
+  <data name="Metadata_Advanced_create" xml:space="preserve">
+    <value>Créée le :</value>
+  </data>
+  <data name="Metadata_Advanced_details" xml:space="preserve">
+    <value>Détail de la métadonnée</value>
+  </data>
+  <data name="Metadata_Advanced_lang" xml:space="preserve">
+    <value>Langue :</value>
+  </data>
+  <data name="Metadata_Advanced_last_update" xml:space="preserve">
+    <value>Dernière modification :</value>
+  </data>
+  <data name="Metadata_Advanced_owner" xml:space="preserve">
+    <value>Propriétaire</value>
+  </data>
+  <data name="Metadata_Contacts_others_contacts" xml:space="preserve">
+    <value>Autres contacts</value>
+  </data>
+  <data name="Metadata_Contacts_points_contacts" xml:space="preserve">
+    <value>Points de contact</value>
+  </data>
+  <data name="Metadata_General_conformity" xml:space="preserve">
+    <value>Conforme :</value>
+  </data>
+  <data name="Metadata_General_description" xml:space="preserve">
+    <value>Description :</value>
+  </data>
+  <data name="Metadata_General_keywords" xml:space="preserve">
+    <value>Mots clés :</value>
+  </data>
+  <data name="Metadata_General_owner" xml:space="preserve">
+    <value>Propriétaire :</value>
+  </data>
+  <data name="Metadata_General_themes" xml:space="preserve">
+    <value>Thème :</value>
+  </data>
+  <data name="Metadata_Geography_format" xml:space="preserve">
+    <value>Format :</value>
+  </data>
+  <data name="Metadata_Geography_geometrytype" xml:space="preserve">
+    <value>Type de géométrie :</value>
+  </data>
+  <data name="Metadata_Geography_info" xml:space="preserve">
+    <value>Informations techniques</value>
+  </data>
+  <data name="Metadata_Geography_nbobjects" xml:space="preserve">
+    <value>Nombre d'objets :</value>
+  </data>
+  <data name="Metadata_Geography_resolution" xml:space="preserve">
+    <value>Résolution :</value>
+  </data>
+  <data name="Metadata_Geography_scale" xml:space="preserve">
+    <value>Echelle :</value>
+  </data>
+  <data name="Metadata_Geography_specification" xml:space="preserve">
+    <value>Spécification</value>
+  </data>
+  <data name="Metadata_Geography_srs" xml:space="preserve">
+    <value>SRS :</value>
+  </data>
+  <data name="Metadata_Geography_typology" xml:space="preserve">
+    <value>Typologie</value>
+  </data>
+  <data name="Metadata_History_comment" xml:space="preserve">
+    <value>Commentaire :</value>
+  </data>
+  <data name="Metadata_History_context" xml:space="preserve">
+    <value>Contexte de collecte</value>
+  </data>
+  <data name="Metadata_History_datecreate" xml:space="preserve">
+    <value>Date création :</value>
+  </data>
+  <data name="Metadata_History_endvalid" xml:space="preserve">
+    <value>Fin de validité :</value>
+  </data>
+  <data name="Metadata_History_history" xml:space="preserve">
+    <value>Historique de la donnée</value>
+  </data>
+  <data name="Metadata_History_lastupdate" xml:space="preserve">
+    <value>Dernière modification :</value>
+  </data>
+  <data name="Metadata_History_lastupdatedata" xml:space="preserve">
+    <value>Dernières modifications sur la donnée</value>
+  </data>
+  <data name="Metadata_History_method" xml:space="preserve">
+    <value>Méthode de collecte</value>
+  </data>
+  <data name="Metadata_History_startvalid" xml:space="preserve">
+    <value>Début de validité :</value>
+  </data>
+  <data name="Metadata_History_updateevery" xml:space="preserve">
+    <value>Mise à jour tous les :</value>
+  </data>
+  <data name="Metadata_Licences_licence" xml:space="preserve">
+    <value>Licences</value>
+  </data>
+  <data name="Metadata_Licences_limitation" xml:space="preserve">
+    <value>Limitations</value>
+  </data>
+  <data name="Metadata_owner" xml:space="preserve">
+    <value>Propriétaire de la métadonnée</value>
+  </data>
+  <data name="Metadata_owner_default" xml:space="preserve">
+    <value>Propriétaire de la métadonnée (défaut)</value>
+  </data>
+  <data name="MultiPolygon" xml:space="preserve">
+    <value>MultiPolygone</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>Nom</value>
+  </data>
+  <data name="New_search" xml:space="preserve">
+    <value>Nouvelle recherche</value>
+  </data>
+  <data name="No" xml:space="preserve">
+    <value>Non</value>
+  </data>
+  <data name="NotReported" xml:space="preserve">
+    <value>NR</value>
+  </data>
+  <data name="No_licence" xml:space="preserve">
+    <value>Pas de licence</value>
+  </data>
+  <data name="Open_help" xml:space="preserve">
+    <value>Ouvrir l'aide en ligne</value>
+  </data>
+  <data name="Open_log" xml:space="preserve">
+    <value>Ouvrir le fichier log</value>
+  </data>
+  <data name="Open_plugin_credits" xml:space="preserve">
+    <value>Ouvrir les crédits de l'application</value>
+  </data>
+  <data name="Page" xml:space="preserve">
+    <value>Page</value>
+  </data>
+  <data name="Point" xml:space="preserve">
+    <value>Point</value>
+  </data>
+  <data name="Polygon" xml:space="preserve">
+    <value>Polygone</value>
+  </data>
+  <data name="PostGIS_table" xml:space="preserve">
+    <value>Table PostGIS</value>
+  </data>
+  <data name="Previous_search" xml:space="preserve">
+    <value>Recherche précédente</value>
+  </data>
+  <data name="Proxy_password" xml:space="preserve">
+    <value>Mot de passe</value>
+  </data>
+  <data name="Proxy_saved" xml:space="preserve">
+    <value>Les informations proxy ont été sauvegardé</value>
+  </data>
+  <data name="Proxy_settings" xml:space="preserve">
+    <value>Paramètres du Proxy</value>
+  </data>
+  <data name="Proxy_url" xml:space="preserve">
+    <value>URL du Proxy</value>
+  </data>
+  <data name="Proxy_user" xml:space="preserve">
+    <value>Utilisateur</value>
+  </data>
+  <data name="Quicksearch_already_exist" xml:space="preserve">
+    <value>Ce nom existe déjà.</value>
+  </data>
+  <data name="Quicksearch_name" xml:space="preserve">
+    <value>Nom de la recherche rapide</value>
+  </data>
+  <data name="Quicksearch_name_mandatory" xml:space="preserve">
+    <value>Le nom est obligatoire.</value>
+  </data>
+  <data name="Quicksearch_new" xml:space="preserve">
+    <value>Nouvelle recherche rapide</value>
+  </data>
+  <data name="Quicksearch_new_name" xml:space="preserve">
+    <value>Nouveau nom</value>
+  </data>
+  <data name="Quicksearch_rename" xml:space="preserve">
+    <value>Renommer une recherche rapide</value>
+  </data>
+  <data name="Quick_search" xml:space="preserve">
+    <value>Recherche rapide</value>
+  </data>
+  <data name="Raster" xml:space="preserve">
+    <value>Raster</value>
+  </data>
+  <data name="Realization" xml:space="preserve">
+    <value>Réalisation</value>
+  </data>
+  <data name="Reload_last_search" xml:space="preserve">
+    <value>Relancer recherche précédente</value>
+  </data>
+  <data name="Rename" xml:space="preserve">
+    <value>Renommer</value>
+  </data>
+  <data name="Reset_search" xml:space="preserve">
+    <value>Réinitialiser la recherche</value>
+  </data>
+  <data name="Resources_" xml:space="preserve">
+    <value>Ressources</value>
+  </data>
+  <data name="Resource_type" xml:space="preserve">
+    <value>Type de ressource</value>
+  </data>
+  <data name="Result" xml:space="preserve">
+    <value>Résultat</value>
+  </data>
+  <data name="Results" xml:space="preserve">
+    <value>Résultats</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>Enregistrer</value>
+  </data>
+  <data name="Save_as" xml:space="preserve">
+    <value>Enregistrer sous...</value>
+  </data>
+  <data name="Search" xml:space="preserve">
+    <value>Rechercher</value>
+  </data>
+  <data name="Search_management" xml:space="preserve">
+    <value>Gestion des recherches</value>
+  </data>
+  <data name="Search_settings" xml:space="preserve">
+    <value>Paramètres de recherche</value>
+  </data>
+  <data name="Search_terms" xml:space="preserve">
+    <value>Termes</value>
+  </data>
+  <data name="Search_word" xml:space="preserve">
+    <value>Recherche</value>
+  </data>
+  <data name="Service" xml:space="preserve">
+    <value>Service</value>
+  </data>
+  <data name="Settings" xml:space="preserve">
+    <value>Paramètres</value>
+  </data>
+  <data name="Set_pluggin_authentication" xml:space="preserve">
+    <value>Changer les paramètres d'authentification</value>
+  </data>
+  <data name="Sorting_direction" xml:space="preserve">
+    <value>Direction du tri</value>
+  </data>
+  <data name="Sorting_method" xml:space="preserve">
+    <value>Methode de tri</value>
+  </data>
+  <data name="Sorting_method_ascending" xml:space="preserve">
+    <value>Ascendant</value>
+  </data>
+  <data name="Sorting_method_created" xml:space="preserve">
+    <value>Donnée créée</value>
+  </data>
+  <data name="Sorting_method_descending" xml:space="preserve">
+    <value>Descendant</value>
+  </data>
+  <data name="Sorting_method_metadata_created" xml:space="preserve">
+    <value>Métadonnée créée</value>
+  </data>
+  <data name="Sorting_method_metadata_modified" xml:space="preserve">
+    <value>Métadonnée modifiée</value>
+  </data>
+  <data name="Sorting_method_modified" xml:space="preserve">
+    <value>Donnée modifiée</value>
+  </data>
+  <data name="Sorting_method_relevance" xml:space="preserve">
+    <value>Pertinence</value>
+  </data>
+  <data name="Sorting_method_title" xml:space="preserve">
+    <value>Ordre alphabétique</value>
+  </data>
+  <data name="Type" xml:space="preserve">
+    <value>Type</value>
+  </data>
+  <data name="Unknown_geometry" xml:space="preserve">
+    <value>Géometrie inconnue</value>
+  </data>
+  <data name="WFS" xml:space="preserve">
+    <value>WFS</value>
+  </data>
+  <data name="WMS" xml:space="preserve">
+    <value>WMS</value>
+  </data>
+  <data name="WMTS" xml:space="preserve">
+    <value>WMTS</value>
+  </data>
+  <data name="Yes" xml:space="preserve">
+    <value>Oui</value>
+  </data>
+</root>

@@ -1,0 +1,36 @@
+﻿<UserControl x:Class="Isogeo.AddIn.Views.Search.AdvancedSearch.AdvancedSearch"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:language="clr-namespace:Isogeo.Language;assembly=Isogeo.Language"
+             xmlns:advancedSearch="clr-namespace:Isogeo.AddIn.Views.Search.AdvancedSearch"
+             mc:Ignorable="d" 
+             d:DesignHeight="235" d:DesignWidth="649">
+    <Grid>
+        <GroupBox x:Name="GrpAdvancedSearch" Header="{x:Static language:Resources.Advanced_search}" HorizontalAlignment="Stretch" Margin="0,0,0,0" VerticalAlignment="Top">
+            <Expander IsExpanded="True" x:Name="AdvancedSearchExpander">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="1*"/>
+                    </Grid.RowDefinitions>
+                    <advancedSearch:AdvancedSearchItem DataContext="{Binding GeographyFilter}" x:Name="GeographyFilter" Grid.Row="0" Grid.Column="0" />
+                    <advancedSearch:AdvancedSearchItem DataContext="{Binding FormatFilter}" x:Name="FormatFilter" Grid.Row="1" Grid.Column="0" />
+                    <advancedSearch:AdvancedSearchItem DataContext="{Binding InspireFilter}" x:Name="InspireFilter" Grid.Row="2" Grid.Column="0" />
+                    <advancedSearch:AdvancedSearchItem DataContext="{Binding ContactFilter}" x:Name="ContactFilter" Grid.Row="3" Grid.Column="0" />
+                    <advancedSearch:AdvancedSearchItem DataContext="{Binding ResourceTypeFilter}" x:Name="ResourceTypeFilter" Grid.Row="0" Grid.Column="1" />
+                    <advancedSearch:AdvancedSearchItem DataContext="{Binding OwnerMetadataFilter}" x:Name="OwnerMetadataFilter" Grid.Row="1" Grid.Column="1" />
+                    <advancedSearch:AdvancedSearchItem DataContext="{Binding CoordinateSystemFilter}" x:Name="CoordinateSystemFilter" Grid.Row="2" Grid.Column="1" />
+                    <advancedSearch:AdvancedSearchItem DataContext="{Binding LicenseFilter}" x:Name="LicenseFilter" Grid.Row="3" Grid.Column="1" />
+                </Grid>
+            </Expander>
+        </GroupBox>
+    </Grid>
+</UserControl>

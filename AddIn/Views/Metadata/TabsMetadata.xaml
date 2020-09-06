@@ -1,0 +1,86 @@
+﻿<UserControl x:Class="Isogeo.AddIn.Views.Metadata.TabsMetadata"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:lang="clr-namespace:Isogeo.Language;assembly=Isogeo.Language"
+             xmlns:extensions="clr-namespace:ArcGIS.Desktop.Extensions;assembly=ArcGIS.Desktop.Extensions"
+             xmlns:metadata="clr-namespace:Isogeo.AddIn.Views.Metadata"
+             mc:Ignorable="d" 
+             d:DesignHeight="626" d:DesignWidth="1255"
+             d:DataContext="{Binding Arcgis_Pro_Isogeo.TabControls.ViewModel.MetadataViewModel}">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <extensions:DesignOnlyResourceDictionary Source="pack://application:,,,/Isogeo.Resources;component/Themes/DarkTheme.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+            <Style  TargetType="{x:Type TabItem}">
+                <Setter Property="Background" Value="{DynamicResource SecondaryBackgroundColorBrush}"></Setter>
+                <Setter Property="Foreground" Value="{DynamicResource NormalFontColorBrush}"></Setter>
+                <Setter Property="Margin" Value="0,2,3,0"></Setter>
+                <Setter Property="Padding" Value="15,12,0,0"></Setter>
+                <Setter Property="Height" Value="50"/>
+                <Setter Property="Width" Value="100"></Setter>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type TabItem}">
+                            <Border>
+                                <Grid>
+                                    <Grid>
+                                        <Border x:Name="border" 
+                                                CornerRadius="3,3,0,0"
+                                                Background="{TemplateBinding Background}"
+                                                BorderBrush="{TemplateBinding BorderBrush}"
+                                                BorderThickness="3,0,0,0" />
+                                    </Grid>
+                                    <Border BorderThickness="{TemplateBinding BorderThickness}"
+                                            Padding="{TemplateBinding Padding}">
+                                        <ContentPresenter ContentSource="Header"
+                                                          HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+                                    </Border>
+                                </Grid>
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsSelected"
+                                         Value="True">
+                                    <Setter Property="Background" Value="{DynamicResource MainBackgroundColorBrush}"></Setter>
+                                    <Setter TargetName="border"
+                                            Property="BorderBrush"
+                                            Value="{DynamicResource HighlightBackgroundButtonBrush}" />
+                                    <Setter TargetName="border"
+                                            Property="BorderThickness"
+                                            Value="3,0,0,0" />
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Grid>
+        <DockPanel Background="{DynamicResource SecondaryBackgroundColorBrush}">
+            <TabControl BorderThickness="0,0,0,0" TabStripPlacement="Left" Background="{DynamicResource MainBackgroundColorBrush}">
+                <TabItem x:Name="TabiGeneral" Header="{x:Static lang:Resources.Message_Metadata_General}">
+                    <metadata:MetadataGeneral x:Name="MetadataGeneral" />
+                </TabItem>
+                <TabItem x:Name="TabiContacts" Header="{x:Static lang:Resources.Message_Metadata_Contacts}">
+                    <metadata:MetadataContacts x:Name="MetadataContacts" />
+                </TabItem>
+                <TabItem x:Name="TabiHistory" Header="{x:Static lang:Resources.Message_Metadata_History}">
+                    <metadata:MetadataHistory x:Name="MetadataHistory" />
+                </TabItem>
+                <TabItem x:Name="TabiGeography" Header="{x:Static lang:Resources.Message_Metadata_Geography}">
+                    <metadata:MetadataGeography x:Name="MetadataGeography"/>
+                </TabItem>
+                <TabItem x:Name="TabiLicense" Header="{x:Static lang:Resources.Message_Metadata_Licenses}">
+                    <metadata:MetadataLicences x:Name="MetadataLicences" />
+                </TabItem>
+                <TabItem x:Name="TabiAdvanced" Header="{x:Static lang:Resources.Message_Metadata_Advanced}">
+                    <metadata:MetadataAdvanced x:Name="MetadataAdvanced" />
+                </TabItem>
+            </TabControl>
+        </DockPanel>
+        </Grid>
+</UserControl>
