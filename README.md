@@ -7,7 +7,7 @@
 ArcGis Pro Add-In for [Isogeo](https://www.isogeo.com/), a SaaS software to give an easier access to geodata.
 Equivalent of [plugins for ArcMap/QGIS](https://www.isogeo.com/nos-produits/Plugins-Widgets).
 
-[Online documentation is available here](http://help.isogeo.com/arcmap/fr/index.html).
+[Online documentation is available here](http://help.isogeo.com/arcgispro/fr/).
 
 ## Purpose
 
@@ -57,8 +57,7 @@ It's fully integrated with ArcGis Pro/ESRI ecosystem:
 
 See the documentation:
 
-* en [Français](http://help.isogeo.com/arcmap/fr/index.html)
-* in [English](http://help.isogeo.com/arcmap/fr/index.html)
+* en [Français](http://help.isogeo.com/arcgispro/fr/)
   
 ## Old versions
 Some old versions can be find inside [this folder](https://github.com/VianneyDoleans/ArcGisPro/tree/master/Old%20Versions)
@@ -69,7 +68,7 @@ Some old versions can be find inside [this folder](https://github.com/VianneyDol
 
 - This Isogeo ArcGis Pro Add-In was developed by freelance developer [Vianney DOLEANS](https://github.com/VianneyDoleans) in 2020 as part of an order from Isogeo company, under GPL3 license.
   - [GitHub](https://github.com/VianneyDoleans)
-  - [LinkedIn](https://www.linkedin.com/in/vianney-doleans-1158a3121/)
+  - [LinkedIn](https://www.linkedin.com/in/vianneydoleans/)
 - For the development of this Isogeo ArcGis Pro Add-In, Isogeo ArcMap Add-In made by company [GEOFIT](https://geofit.fr/), under GPL3 license, has been used.
   - [Website](https://geofit.fr/)
   - [LinkedIn](https://www.linkedin.com/company/geofit/?originalSubdomain=fr)
