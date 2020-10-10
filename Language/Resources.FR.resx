@@ -367,13 +367,13 @@
     <value>La connexion à échouée.</value>
   </data>
   <data name="Message_Query_authentication_ko_internet" xml:space="preserve">
-    <value>Connection impossible. Verifiez votre connecion internet.</value>
+    <value>Connexion impossible. Verifiez votre connecion internet.</value>
   </data>
   <data name="Message_Query_authentication_ko_invalid" xml:space="preserve">
     <value>ID ou SECRET invalide</value>
   </data>
   <data name="Message_Query_authentication_ko_proxy" xml:space="preserve">
-    <value>Connection impossible. Verifiez vos paramètres de proxy</value>
+    <value>Connexion impossible. Verifiez vos paramètres de proxy</value>
   </data>
   <data name="Message_Query_authentication_ok" xml:space="preserve">
     <value>La connexion est valide.</value>

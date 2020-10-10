@@ -29,10 +29,10 @@
             <metadata:HistoryDataItem x:Name="HistoryDataItem" />
         </GroupBox>
         <GroupBox x:Name="GrpCollectContext" Grid.Row="1" Grid.Column="0" Header="{x:Static lang:Resources.Metadata_History_context}">
-            <TextBox x:Name="LblContext" Text="{Binding Path = Context, Mode = OneWay}" ScrollViewer.VerticalScrollBarVisibility="Auto" MinHeight="50" TextWrapping="Wrap"/>
+            <TextBox x:Name="LblContext" Text="{Binding Path = Context, Mode = OneWay}" ScrollViewer.VerticalScrollBarVisibility="Auto" IsReadOnly="True" MinHeight="50" TextWrapping="Wrap"/>
         </GroupBox>
         <GroupBox x:Name="GrpCollectMethod" Grid.Row="2" Grid.Column="0" Header="{x:Static lang:Resources.Metadata_History_method}">
-            <TextBox x:Name="LblMethod" Text="{Binding Path = Method, Mode = OneWay}" ScrollViewer.VerticalScrollBarVisibility="Auto" MinHeight="50" TextWrapping="Wrap"/>
+            <TextBox x:Name="LblMethod" Text="{Binding Path = Method, Mode = OneWay}" ScrollViewer.VerticalScrollBarVisibility="Auto" IsReadOnly="True" MinHeight="50" TextWrapping="Wrap"/>
         </GroupBox>
         <GroupBox x:Name="GrpLastModification" Grid.Row="3" Grid.Column="0" Header="{x:Static lang:Resources.Metadata_History_lastupdatedata}">
             <metadata:LastModificationMetaDataItem x:Name="LastModificationMetaDataItem"/>
