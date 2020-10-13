@@ -29,14 +29,13 @@ namespace Isogeo.AddIn.ViewsModels.Settings
             }
         }
 
-        private string _sdePathFile = "";
         public string SdePathFile
         {
-            get => _sdePathFile;
+            get => Variables.configurationManager.config.fileSde;
             set
             {
-                _sdePathFile = value;
                 Variables.configurationManager.config.fileSde = value;
+                Variables.configurationManager.Save();
                 OnPropertyChanged("SdePathFile");
             }
         }

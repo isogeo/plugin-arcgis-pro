@@ -1,5 +1,5 @@
 ﻿<ArcGIS defaultAssembly="Isogeo.AddIn.dll" defaultNamespace="Isogeo.AddIn" xmlns="http://schemas.esri.com/DADF/Registry" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://schemas.esri.com/DADF/Registry file:///C:/Program%20Files/ArcGIS/Pro/bin/ArcGIS.Desktop.Framework.xsd">
-  <AddInInfo id="{d3cd9cd7-2008-4a27-be55-da1aeb26239f}" version="0.8.2" desktopVersion="2.5">
+  <AddInInfo id="{d3cd9cd7-2008-4a27-be55-da1aeb26239f}" version="0.8.3" desktopVersion="2.5">
     <Name>Isogeo Add-In</Name>
     <Description>ArcGis Pro Isogeo Add-In</Description>
     <Image>Icon\icon_isogeo.png</Image>
