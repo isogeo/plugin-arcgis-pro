@@ -35,9 +35,9 @@
                ItemsSource="{Binding PrimaryMenuList}" 
                SelectedIndex="{Binding SelectedPanelHeaderIndex, Mode=TwoWay}"
                IsSynchronizedWithCurrentItem="True"/>
-            <controls:BurgerButton DockPanel.Dock="Right" Margin="0,0,5,0"
+            <!--<controls:BurgerButton DockPanel.Dock="Right" Margin="0,0,5,0"
                 ToolTip="{Binding BurgerButtonTooltip}"
-                PopupMenu="{Binding BurgerButtonMenu}"/>
+                PopupMenu="{Binding BurgerButtonMenu}"/>-->
         </DockPanel>
         <ContentPresenter Grid.Row="1" Content="{Binding CurrentPage}"></ContentPresenter>
     </Grid>
