@@ -446,7 +446,7 @@ namespace Isogeo.Models.Network
             Variables.searchLists.list.Add(new SearchList("contact", true));
             Variables.searchLists.list.Add(new SearchList("license", true));
 
-            if (Variables.search.tags == null) return;
+            if (Variables.search?.tags == null) return;
             foreach (var item in Variables.search.tags)
             {
                 var key = item.Key;
