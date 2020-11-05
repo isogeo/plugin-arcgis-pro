@@ -19,6 +19,17 @@ namespace Isogeo.AddIn.ViewsModels.Search.Results
 
         public ObservableCollection<ResultItem> ResultsList { get; set; }
 
+        private ResultItem _selectedItem;
+        public ResultItem SelectedItem
+        {
+            get => _selectedItem;
+            set
+            {
+                _selectedItem = value;
+                OnPropertyChanged("SelectedItem");
+            }
+        }
+
         public FilterItem CurrentPage
         {
             get => ListNumberPage.Selected;
@@ -96,7 +107,7 @@ namespace Isogeo.AddIn.ViewsModels.Search.Results
             ListNumberPage.Items.Clear();
             ListNumberPage.Items.Add(new FilterItem { Name = "1" });
             LblNbPage = "/ 1";
-            /*_currentPage*/ ListNumberPage.Selected = ListNumberPage.Items[0];
+            ListNumberPage.Selected = ListNumberPage.Items[0];
             OnPropertyChanged("CurrentPage");
             OnPropertyChanged("ListNumberPage");
             OnPropertyChanged("LblNbPage");
@@ -134,6 +145,8 @@ namespace Isogeo.AddIn.ViewsModels.Search.Results
             }
             SetPages(offset);
             LstResultIsEnabled = true;
+            if (ResultsList.Count > 0) 
+                SelectedItem = ResultsList[0];
         }
 
         private void SetCurrentPageWithoutTriggerReloadApi(int offset)

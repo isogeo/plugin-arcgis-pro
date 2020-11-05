@@ -110,6 +110,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Compile Include="ViewsModels\Metadata\MetadataViewModel.cs" />
+    <Compile Include="ViewsModels\Search\Results\ListBoxBehavior.cs" />
     <Compile Include="ViewsModels\TabControls\SearchViewModel.cs" />
     <Compile Include="ViewsModels\TabControls\SettingsViewModel.cs" />
     <Compile Include="Views\TabControls\Search.xaml.cs">

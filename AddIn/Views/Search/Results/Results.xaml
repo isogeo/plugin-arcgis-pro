@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:language="clr-namespace:Isogeo.Language;assembly=Isogeo.Language"
+             xmlns:results="clr-namespace:Isogeo.AddIn.ViewsModels.Search.Results"
              mc:Ignorable="d" 
              d:DesignHeight="237" d:DesignWidth="489">
     <Grid>
@@ -15,7 +16,8 @@
             <RowDefinition Height="1*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <ListBox ScrollViewer.CanContentScroll="False" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Grid.Row="0" Grid.Column="0" ItemsSource="{Binding ResultsList}">
+        <ListBox ScrollViewer.CanContentScroll="False" results:ListBoxBehavior.ScrollSelectedIntoView="True" SelectedItem="{Binding Path=SelectedItem, Mode=TwoWay}"
+                 SelectionMode="Single" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Grid.Row="0" Grid.Column="0" ItemsSource="{Binding ResultsList}">
             <ListBox.ItemContainerStyle>
                 <Style TargetType="ListBoxItem">
                     <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
