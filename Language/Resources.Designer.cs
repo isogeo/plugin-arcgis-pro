@@ -574,6 +574,15 @@ namespace Isogeo.Language {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Isogeo Metadata.
+        /// </summary>
+        public static string Isogeo_Metadata {
+            get {
+                return ResourceManager.GetString("Isogeo_Metadata", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Key.
         /// </summary>
         public static string Key {

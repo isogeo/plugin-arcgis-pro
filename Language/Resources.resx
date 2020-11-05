@@ -288,6 +288,9 @@
   <data name="Isogeo_login" xml:space="preserve">
     <value>Isogeo login</value>
   </data>
+  <data name="Isogeo_Metadata" xml:space="preserve">
+    <value>Isogeo Metadata</value>
+  </data>
   <data name="Key" xml:space="preserve">
     <value>Key</value>
   </data>

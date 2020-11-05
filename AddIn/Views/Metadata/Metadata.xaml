@@ -6,8 +6,9 @@
                     xmlns:extensions="clr-namespace:ArcGIS.Desktop.Extensions;assembly=ArcGIS.Desktop.Extensions"
                     xmlns:controls="clr-namespace:ArcGIS.Desktop.Framework.Controls;assembly=ArcGIS.Desktop.Framework"
                     xmlns:metadata="clr-namespace:Isogeo.AddIn.Views.Metadata"
+                    xmlns:lang="clr-namespace:Isogeo.Language;assembly=Isogeo.Language"
                     mc:Ignorable="d"
-                    Title="Isogeo Metadata" Height="626" Width="955">
+                    Title="{x:Static lang:Resources.Isogeo_Metadata}" Height="626" Width="955">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="1*"/>
