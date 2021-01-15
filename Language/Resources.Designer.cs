@@ -1033,6 +1033,15 @@ namespace Isogeo.Language {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Layer name :.
+        /// </summary>
+        public static string Metadata_Geography_layerName {
+            get {
+                return ResourceManager.GetString("Metadata_Geography_layerName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Features count :.
         /// </summary>
         public static string Metadata_Geography_nbobjects {

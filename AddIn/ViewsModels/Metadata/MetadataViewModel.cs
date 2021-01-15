@@ -194,6 +194,8 @@ namespace Isogeo.AddIn.ViewsModels.Metadata
             }
         }
 
+        public string Name => _currentResult?.name == null ? Isogeo.Language.Resources.NotReported : _currentResult.name.ToString();
+
         public string FeatCount => _currentResult?.features == null ? Isogeo.Language.Resources.NotReported : _currentResult.features.ToString();
         public string GeometryType => _currentResult?.geometry ?? Isogeo.Language.Resources.NotReported;
 
@@ -281,9 +283,6 @@ namespace Isogeo.AddIn.ViewsModels.Metadata
                         _updateFrequency += " " + Isogeo.Language.Resources.Hour;
                         break;
                 }
-                    
-
-
                 return _updateFrequency;
             }
         }

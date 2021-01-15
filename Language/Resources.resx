@@ -441,6 +441,9 @@
   <data name="Metadata_Geography_info" xml:space="preserve">
     <value>Technical informations</value>
   </data>
+  <data name="Metadata_Geography_layerName" xml:space="preserve">
+    <value>Layer name :</value>
+  </data>
   <data name="Metadata_Geography_nbobjects" xml:space="preserve">
     <value>Features count :</value>
   </data>
