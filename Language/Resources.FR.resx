@@ -204,6 +204,9 @@
   <data name="Date" xml:space="preserve">
     <value>Date</value>
   </data>
+  <data name="Day" xml:space="preserve">
+    <value>jour(s)</value>
+  </data>
   <data name="Default_search" xml:space="preserve">
     <value>Recherche par défaut</value>
   </data>
@@ -269,6 +272,9 @@
   </data>
   <data name="Help" xml:space="preserve">
     <value>Aide</value>
+  </data>
+  <data name="Hour" xml:space="preserve">
+    <value>heure(s)</value>
   </data>
   <data name="Import_access_from_a_file" xml:space="preserve">
     <value>Importer les accès depuis un ficher :</value>
@@ -492,6 +498,9 @@
   <data name="Metadata_owner_default" xml:space="preserve">
     <value>Propriétaire de la métadonnée (défaut)</value>
   </data>
+  <data name="Month" xml:space="preserve">
+    <value>mois</value>
+  </data>
   <data name="MultiPolygon" xml:space="preserve">
     <value>MultiPolygone</value>
   </data>
@@ -663,6 +672,9 @@
   <data name="Unknown_geometry" xml:space="preserve">
     <value>Géometrie inconnue</value>
   </data>
+  <data name="Week" xml:space="preserve">
+    <value>semaine(s)</value>
+  </data>
   <data name="WFS" xml:space="preserve">
     <value>WFS</value>
   </data>
@@ -671,6 +683,9 @@
   </data>
   <data name="WMTS" xml:space="preserve">
     <value>WMTS</value>
+  </data>
+  <data name="Year" xml:space="preserve">
+    <value>an(s)</value>
   </data>
   <data name="Yes" xml:space="preserve">
     <value>Oui</value>

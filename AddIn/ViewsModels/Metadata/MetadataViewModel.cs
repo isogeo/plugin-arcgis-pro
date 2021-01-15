@@ -6,6 +6,7 @@ using Isogeo.Models.API;
 using Isogeo.Utils;
 using MVVMPattern;
 using MVVMPattern.MediatorPattern;
+using System.Text.RegularExpressions;
 
 namespace Isogeo.AddIn.ViewsModels.Metadata
 {
@@ -248,7 +249,44 @@ namespace Isogeo.AddIn.ViewsModels.Metadata
 
         public string DataUpdate => _currentResult?._modified == null ? Isogeo.Language.Resources.NotReported : Formats.FormatDate(_currentResult._modified);
 
-        public string UpdateFrequency => _currentResult?.updateFrequency ?? Isogeo.Language.Resources.NotReported;
+        //public string UpdateFrequency => _currentResult?.updateFrequency ?? Isogeo.Language.Resources.NotReported;
+        private string _updateFrequency;
+        public string UpdateFrequency
+        {
+            get
+            {
+                _updateFrequency = "";
+                if (_currentResult?.updateFrequency == null)
+                    return Isogeo.Language.Resources.NotReported;
+                int stringLength = _currentResult.updateFrequency.Length;
+                string alphaPart = _currentResult.updateFrequency.Substring(stringLength - 1);
+                string numberPart = _currentResult.updateFrequency.Substring(1, stringLength - 2);
+
+                _updateFrequency = numberPart;
+                switch (alphaPart.ToUpper())
+                {
+                    case "Y":
+                        _updateFrequency += " " + Isogeo.Language.Resources.Year;
+                        break;
+                    case "M":
+                        _updateFrequency += " " + Isogeo.Language.Resources.Month;
+                        break;
+                    case "W":
+                        _updateFrequency += " " + Isogeo.Language.Resources.Week;
+                        break;
+                    case "D":
+                        _updateFrequency += " " + Isogeo.Language.Resources.Day;
+                        break;
+                    case "H":
+                        _updateFrequency += " " + Isogeo.Language.Resources.Hour;
+                        break;
+                }
+                    
+
+
+                return _updateFrequency;
+            }
+        }
 
         public string ValidStart => _currentResult?.validFrom == null ? Isogeo.Language.Resources.NotReported : Formats.FormatDate(_currentResult.validFrom);
 
