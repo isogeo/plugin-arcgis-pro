@@ -77,7 +77,7 @@
     <Compile Include="API\Event.cs" />
     <Compile Include="API\Keyword.cs" />
     <Compile Include="API\Layer.cs" />
-    <Compile Include="API\Licence.cs" />
+    <Compile Include="API\License.cs" />
     <Compile Include="API\Limitation.cs" />
     <Compile Include="API\Link.cs" />
     <Compile Include="API\Result.cs" />

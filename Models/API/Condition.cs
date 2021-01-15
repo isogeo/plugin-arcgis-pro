@@ -18,7 +18,7 @@
 
         
 
-        public Licence licence
+        public License license
         {
             get;
             set;

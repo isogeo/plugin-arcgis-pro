@@ -1,6 +1,6 @@
 ﻿namespace Isogeo.Models.API
 {
-    public class Licence
+    public class License
     {
 
         public string _id
