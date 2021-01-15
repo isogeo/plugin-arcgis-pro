@@ -32,6 +32,12 @@ namespace Isogeo.Models.API
             set;
         }
 
+        public Directive directive
+        {
+            get;
+            set;
+        }
+
         
     }
 }

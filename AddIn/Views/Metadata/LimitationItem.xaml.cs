@@ -14,7 +14,9 @@ namespace Isogeo.AddIn.Views.Metadata
         {
             LblLimitation.Text = limitation.type;
             LblDescription.Text = limitation.description;
-            if (limitation.type == "legal")
+            LblDirectiveName.Text = (limitation.directive != null && limitation.directive.name != null )? limitation.directive.name : Isogeo.Language.Resources.NotReported;
+            LblDirectiveDescription.Text = (limitation.directive != null && limitation.directive.description != null) ? limitation.directive.description : Isogeo.Language.Resources.NotReported;
+
             {
                 LblDescription.Text += "\n" + limitation.restriction;
             }

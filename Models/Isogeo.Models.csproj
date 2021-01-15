@@ -67,6 +67,7 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="API\Directive.cs" />
     <Compile Include="API\Condition.cs" />
     <Compile Include="API\Contact.cs" />
     <Compile Include="API\ContactParent.cs" />
