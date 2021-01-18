@@ -11,6 +11,7 @@ namespace Isogeo.AddIn.Views.Settings
         public ResourcesSettings()
         {
             InitializeComponent();
+            TbLogPath.Text = Log.GetLogFilePath();
         }
 
         private void BtnHelp_Click(object sender, RoutedEventArgs e)

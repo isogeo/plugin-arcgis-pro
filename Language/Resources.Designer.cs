@@ -664,6 +664,15 @@ namespace Isogeo.Language {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Log path : .
+        /// </summary>
+        public static string Log_path {
+            get {
+                return ResourceManager.GetString("Log_path", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Map canvas.
         /// </summary>
         public static string Map_canvas {

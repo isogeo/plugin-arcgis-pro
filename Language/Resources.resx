@@ -318,6 +318,9 @@
   <data name="Log" xml:space="preserve">
     <value>Log</value>
   </data>
+  <data name="Log_path" xml:space="preserve">
+    <value>Log path : </value>
+  </data>
   <data name="Map_canvas" xml:space="preserve">
     <value>Map canvas</value>
   </data>
