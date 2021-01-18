@@ -1,4 +1,5 @@
 using System;
+using System.Globalization;
 using System.Linq;
 using System.Net;
 using System.Text;
@@ -332,6 +333,7 @@ namespace Isogeo.Models.Network
                 request.AddParameter("_include", "limitations");
                 request.AddParameter("_include", "keywords");
                 request.AddParameter("_include", "specifications");
+                request.AddParameter("_lang", CultureInfo.InstalledUICulture.TwoLetterISOLanguageName);
 
                 var response = client.Execute(request);
                 var result = JsonConvert.DeserializeObject<Result>(response.Content);
