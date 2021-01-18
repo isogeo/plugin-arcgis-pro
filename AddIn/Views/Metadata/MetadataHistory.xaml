@@ -6,6 +6,7 @@
              xmlns:lang="clr-namespace:Isogeo.Language;assembly=Isogeo.Language"
              xmlns:extensions="clr-namespace:ArcGIS.Desktop.Extensions;assembly=ArcGIS.Desktop.Extensions"
              xmlns:metadata="clr-namespace:Isogeo.AddIn.Views.Metadata"
+             xmlns:mdxam="clr-namespace:MdXaml;assembly=MdXaml"
              mc:Ignorable="d" 
              d:DesignHeight="587" d:DesignWidth="602">
     <UserControl.Resources>
@@ -29,10 +30,10 @@
             <metadata:HistoryDataItem x:Name="HistoryDataItem" />
         </GroupBox>
         <GroupBox x:Name="GrpCollectContext" Grid.Row="1" Grid.Column="0" Header="{x:Static lang:Resources.Metadata_History_context}">
-            <TextBox x:Name="LblContext" Text="{Binding Path = Context, Mode = OneWay}" ScrollViewer.VerticalScrollBarVisibility="Auto" IsReadOnly="True" MinHeight="50" TextWrapping="Wrap"/>
+            <mdxam:MarkdownScrollViewer  MarkdownStyle="{x:Static mdxam:MarkdownStyle.Compact}" xml:space="preserve" ScrollViewer.VerticalScrollBarVisibility="Auto" MinHeight="50" x:Name="LblContext" Markdown="{Binding Path = Context, Mode = OneWay}"/>
         </GroupBox>
         <GroupBox x:Name="GrpCollectMethod" Grid.Row="2" Grid.Column="0" Header="{x:Static lang:Resources.Metadata_History_method}">
-            <TextBox x:Name="LblMethod" Text="{Binding Path = Method, Mode = OneWay}" ScrollViewer.VerticalScrollBarVisibility="Auto" IsReadOnly="True" MinHeight="50" TextWrapping="Wrap"/>
+            <mdxam:MarkdownScrollViewer  MarkdownStyle="{x:Static mdxam:MarkdownStyle.Compact}" xml:space="preserve" ScrollViewer.VerticalScrollBarVisibility="Auto" MinHeight="50" x:Name="LblMethod" Markdown="{Binding Path = Method, Mode = OneWay}"/>
         </GroupBox>
         <GroupBox x:Name="GrpLastModification" Grid.Row="3" Grid.Column="0" Header="{x:Static lang:Resources.Metadata_History_lastupdatedata}">
             <metadata:LastModificationMetaDataItem x:Name="LastModificationMetaDataItem"/>

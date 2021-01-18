@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:language="clr-namespace:Isogeo.Language;assembly=Isogeo.Language"
              mc:Ignorable="d" 
+             xmlns:mdxam="clr-namespace:MdXaml;assembly=MdXaml"
              d:DesignHeight="587" d:DesignWidth="602">
     <UserControl.Resources>
         <ResourceDictionary>
@@ -32,7 +33,7 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
-                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*" />
             </Grid.RowDefinitions>
             <Label x:Name="LblOwner" Grid.Row="0" Grid.Column="0" Content="{x:Static language:Resources.Metadata_General_owner}" />
             <Label x:Name="LblKeywords"  Grid.Row="1" Grid.Column="0" Content="{x:Static language:Resources.Metadata_General_keywords}"/>
@@ -44,7 +45,8 @@
             <TextBox VerticalAlignment="Center" Style="{StaticResource HideBoxTxt}" BorderThickness="0" Grid.Row="1" Grid.Column="1" ScrollViewer.VerticalScrollBarVisibility="Auto" x:Name="LblKeywordsValue" Text="{Binding Path = Keywords, Mode = OneWay}"/>
             <TextBox VerticalAlignment="Center" Style="{StaticResource HideBoxTxt}" BorderThickness="0" Grid.Row="2" Grid.Column="1" ScrollViewer.VerticalScrollBarVisibility="Auto" x:Name="LblThemesValue" Text="{Binding Path = Themes, Mode = OneWay}"/>
             <TextBox VerticalAlignment="Center" Style="{StaticResource HideBoxTxt}" BorderThickness="0" Grid.Row="3" Grid.Column="1" ScrollViewer.VerticalScrollBarVisibility="Auto" x:Name="LblConformityValue" Text="{Binding Path = Conformity, Mode = OneWay}"/>
-            <TextBox Grid.Row="4" Grid.Column="1" Margin="0,3,20,20" ScrollViewer.VerticalScrollBarVisibility="Auto" MinHeight="100" x:Name="TxtDescriptionValue" Text="{Binding Path = Description, Mode = OneWay}"></TextBox>
+            <mdxam:MarkdownScrollViewer  MarkdownStyle="{x:Static mdxam:MarkdownStyle.Compact}" xml:space="preserve" Grid.Row="4" Grid.Column="1" Margin="0,3,20,20" ScrollViewer.VerticalScrollBarVisibility="Auto" MinHeight="100" x:Name="TxtDescriptionValue" Markdown="{Binding Path = Description, Mode = OneWay}"/>
+            
         </Grid>
     </Grid>
 </UserControl>

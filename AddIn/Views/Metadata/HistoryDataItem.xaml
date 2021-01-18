@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:language="clr-namespace:Isogeo.Language;assembly=Isogeo.Language"
+             xmlns:mdxam="clr-namespace:MdXaml;assembly=MdXaml"
              mc:Ignorable="d" 
              d:DesignHeight="100" d:DesignWidth="500">
     <UserControl.Resources>
@@ -16,7 +17,7 @@
     <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*"/>
-            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="2*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="1*"/>
@@ -53,7 +54,7 @@
             <Label x:Name="LblValidComment" Grid.Row="2" Grid.Column="0" Content="{x:Static language:Resources.Metadata_History_comment}" />
             <TextBox VerticalAlignment="Center" Style="{StaticResource HideBoxTxt}" x:Name="LblValidStartValue" Grid.Row="0" Grid.Column="1" Text="{Binding Path = ValidStart, Mode = OneWay}"/>
             <TextBox VerticalAlignment="Center" Style="{StaticResource HideBoxTxt}" x:Name="LblValidEndValue" Grid.Row="1" Grid.Column="1" Text="{Binding Path = ValidEnd, Mode = OneWay}"  />
-            <TextBox VerticalAlignment="Center" Style="{StaticResource HideBoxTxt}" x:Name="LblValidCommentValue" Grid.Row="2" Grid.Column="1" Text="{Binding Path = ValidComment, Mode = OneWay}" />
+            <mdxam:MarkdownScrollViewer  VerticalAlignment="Center" MarkdownStyle="{x:Static mdxam:MarkdownStyle.Compact}" xml:space="preserve" Grid.Row="2" Grid.Column="1" ScrollViewer.VerticalScrollBarVisibility="Auto" MinHeight="100" MaxWidth="300" x:Name="TxtDescriptionValue" Markdown="{Binding Path = ValidComment, Mode = OneWay}"/>
         </Grid>
     </Grid>
 </UserControl>
