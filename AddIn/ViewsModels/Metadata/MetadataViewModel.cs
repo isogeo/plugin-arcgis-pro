@@ -247,9 +247,9 @@ namespace Isogeo.AddIn.ViewsModels.Metadata
 
         public string Envelope => "";
 
-        public string DataCreation => _currentResult?._created == null ? Isogeo.Language.Resources.NotReported : Formats.FormatDate(_currentResult._created);
+        public string DataCreation => _currentResult?.created == null ? Isogeo.Language.Resources.NotReported : Formats.FormatDate(_currentResult.created);
 
-        public string DataUpdate => _currentResult?._modified == null ? Isogeo.Language.Resources.NotReported : Formats.FormatDate(_currentResult._modified);
+        public string DataUpdate => _currentResult?.modified == null ? Isogeo.Language.Resources.NotReported : Formats.FormatDate(_currentResult.modified);
 
         //public string UpdateFrequency => _currentResult?.updateFrequency ?? Isogeo.Language.Resources.NotReported;
         private string _updateFrequency;

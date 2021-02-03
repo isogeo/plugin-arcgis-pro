@@ -28,6 +28,18 @@ namespace Isogeo.Models.API
             set;
         }
 
+        public string created
+        {
+            get;
+            set;
+        }
+
+        public string modified
+        {
+            get;
+            set;
+        }
+
         public Creator _creator
         {
             get;
