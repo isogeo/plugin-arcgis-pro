@@ -7,6 +7,7 @@ using Isogeo.Utils;
 using MVVMPattern;
 using MVVMPattern.MediatorPattern;
 using System.Text.RegularExpressions;
+using System;
 
 namespace Isogeo.AddIn.ViewsModels.Metadata
 {
@@ -271,19 +272,19 @@ namespace Isogeo.AddIn.ViewsModels.Metadata
                 switch (alphaPart.ToUpper())
                 {
                     case "Y":
-                        _updateFrequency += (numberPart.Length > 1) ? (" " + Isogeo.Language.Resources.Years) : (" " + Isogeo.Language.Resources.Year);
+                        _updateFrequency += (Int32.Parse(numberPart) > 1) ? (" " + Isogeo.Language.Resources.Years) : (" " + Isogeo.Language.Resources.Year);
                         break;
                     case "M":
-                        _updateFrequency += (numberPart.Length > 1) ? (" " + Isogeo.Language.Resources.Months) : (" " + Isogeo.Language.Resources.Month);
+                        _updateFrequency += (Int32.Parse(numberPart) > 1) ? (" " + Isogeo.Language.Resources.Months) : (" " + Isogeo.Language.Resources.Month);
                         break;
                     case "W":
-                        _updateFrequency += (numberPart.Length > 1) ? (" " + Isogeo.Language.Resources.Weeks) : (" " + Isogeo.Language.Resources.Week);
+                        _updateFrequency += (Int32.Parse(numberPart) > 1) ? (" " + Isogeo.Language.Resources.Weeks) : (" " + Isogeo.Language.Resources.Week);
                         break;
                     case "D":
-                        _updateFrequency += (numberPart.Length > 1) ? (" " + Isogeo.Language.Resources.Days) : (" " + Isogeo.Language.Resources.Day);
+                        _updateFrequency += (Int32.Parse(numberPart) > 1) ? (" " + Isogeo.Language.Resources.Days) : (" " + Isogeo.Language.Resources.Day);
                         break;
                     case "H":
-                        _updateFrequency += (numberPart.Length > 1) ? (" " + Isogeo.Language.Resources.Hours) : (" " + Isogeo.Language.Resources.Hour);
+                        _updateFrequency += (Int32.Parse(numberPart) > 1) ? (" " + Isogeo.Language.Resources.Hours) : (" " + Isogeo.Language.Resources.Hour);
                         break;
                 }
                 return _updateFrequency;

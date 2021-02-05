@@ -11,11 +11,11 @@ namespace Isogeo.AddIn.Views.Metadata
         }
 
         public void Init(Limitation limitation)
-        {
-            LblLimitation.Text = "Type :" + limitation.type;
+        { 
+            LblLimitation.Text = "Type : " + limitation.type;
             LblDescription.Text = "Description : " + limitation.description;
             LblDirectiveName.Text = (limitation.directive != null && limitation.directive.name != null) ? "Directive : " + limitation.directive.name : Isogeo.Language.Resources.NotReported;
-            LblDirectiveDescription.Text = (limitation.directive != null && limitation.directive.description != null) ? limitation.directive.description : Isogeo.Language.Resources.NotReported;
+            LblDirectiveDescription.Text = (limitation.directive != null && limitation.directive.description != null) ? "Restriction : " +limitation.directive.description : Isogeo.Language.Resources.NotReported;
 
 
             {
