@@ -322,11 +322,20 @@ namespace Isogeo.Language {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à day(s).
+        ///   Recherche une chaîne localisée semblable à day.
         /// </summary>
         public static string Day {
             get {
                 return ResourceManager.GetString("Day", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à days.
+        /// </summary>
+        public static string Days {
+            get {
+                return ResourceManager.GetString("Days", resourceCulture);
             }
         }
         
@@ -538,11 +547,20 @@ namespace Isogeo.Language {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à hour(s).
+        ///   Recherche une chaîne localisée semblable à hour.
         /// </summary>
         public static string Hour {
             get {
                 return ResourceManager.GetString("Hour", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à hours.
+        /// </summary>
+        public static string Hours {
+            get {
+                return ResourceManager.GetString("Hours", resourceCulture);
             }
         }
         
@@ -1231,11 +1249,20 @@ namespace Isogeo.Language {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à month(s).
+        ///   Recherche une chaîne localisée semblable à month.
         /// </summary>
         public static string Month {
             get {
                 return ResourceManager.GetString("Month", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à months.
+        /// </summary>
+        public static string Months {
+            get {
+                return ResourceManager.GetString("Months", resourceCulture);
             }
         }
         
@@ -1762,11 +1789,20 @@ namespace Isogeo.Language {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à week(s).
+        ///   Recherche une chaîne localisée semblable à week.
         /// </summary>
         public static string Week {
             get {
                 return ResourceManager.GetString("Week", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à weeks.
+        /// </summary>
+        public static string Weeks {
+            get {
+                return ResourceManager.GetString("Weeks", resourceCulture);
             }
         }
         
@@ -1798,11 +1834,20 @@ namespace Isogeo.Language {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à year(s).
+        ///   Recherche une chaîne localisée semblable à year.
         /// </summary>
         public static string Year {
             get {
                 return ResourceManager.GetString("Year", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à years.
+        /// </summary>
+        public static string Years {
+            get {
+                return ResourceManager.GetString("Years", resourceCulture);
             }
         }
         

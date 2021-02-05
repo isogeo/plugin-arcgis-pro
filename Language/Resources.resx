@@ -205,7 +205,10 @@
     <value>Date</value>
   </data>
   <data name="Day" xml:space="preserve">
-    <value>day(s)</value>
+    <value>day</value>
+  </data>
+  <data name="Days" xml:space="preserve">
+    <value>days</value>
   </data>
   <data name="Default_search" xml:space="preserve">
     <value>Default search</value>
@@ -277,7 +280,10 @@
     <value>Help</value>
   </data>
   <data name="Hour" xml:space="preserve">
-    <value>hour(s)</value>
+    <value>hour</value>
+  </data>
+  <data name="Hours" xml:space="preserve">
+    <value>hours</value>
   </data>
   <data name="Import_access_from_a_file" xml:space="preserve">
     <value>Import access from a file :</value>
@@ -508,7 +514,10 @@
     <value>Metadata owner (default)</value>
   </data>
   <data name="Month" xml:space="preserve">
-    <value>month(s)</value>
+    <value>month</value>
+  </data>
+  <data name="Months" xml:space="preserve">
+    <value>months</value>
   </data>
   <data name="MultiPolygon" xml:space="preserve">
     <value>Multi Polygon</value>
@@ -685,7 +694,10 @@
     <value>Unknown geometry</value>
   </data>
   <data name="Week" xml:space="preserve">
-    <value>week(s)</value>
+    <value>week</value>
+  </data>
+  <data name="Weeks" xml:space="preserve">
+    <value>weeks</value>
   </data>
   <data name="WFS" xml:space="preserve">
     <value>WFS</value>
@@ -697,7 +709,10 @@
     <value>WMTS</value>
   </data>
   <data name="Year" xml:space="preserve">
-    <value>year(s)</value>
+    <value>year</value>
+  </data>
+  <data name="Years" xml:space="preserve">
+    <value>years</value>
   </data>
   <data name="Yes" xml:space="preserve">
     <value>Yes</value>

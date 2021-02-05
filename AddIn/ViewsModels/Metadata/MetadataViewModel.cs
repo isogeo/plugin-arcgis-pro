@@ -22,7 +22,7 @@ namespace Isogeo.AddIn.ViewsModels.Metadata
 
         public void CurrentResult(object result)
         {
-            _currentResult = (Result) result;
+            _currentResult = (Result)result;
             LoadLicenseList();
             LoadContactsLists();
             LoadLimitationList();
@@ -66,7 +66,7 @@ namespace Isogeo.AddIn.ViewsModels.Metadata
 
         private Result _currentResult;
 
-        public string CreatedAt => _currentResult?._created == null ? Isogeo.Language.Resources.NotReported : Formats.FormatDate(_currentResult._created); 
+        public string CreatedAt => _currentResult?._created == null ? Isogeo.Language.Resources.NotReported : Formats.FormatDate(_currentResult._created);
 
         public string LastModification => _currentResult?._modified == null ? Isogeo.Language.Resources.NotReported : Formats.FormatDate(_currentResult._modified);
 
@@ -81,7 +81,8 @@ namespace Isogeo.AddIn.ViewsModels.Metadata
                     {
                         AddressLine1 = Isogeo.Language.Resources.NotReported,
                         AddressLine2 = Isogeo.Language.Resources.NotReported,
-                        City = Isogeo.Language.Resources.NotReported, 
+                        AddressLine3 = Isogeo.Language.Resources.NotReported,
+                        City = Isogeo.Language.Resources.NotReported,
                         Country = Isogeo.Language.Resources.NotReported,
                         Email = Isogeo.Language.Resources.NotReported,
                         Name = Isogeo.Language.Resources.NotReported,
@@ -104,6 +105,8 @@ namespace Isogeo.AddIn.ViewsModels.Metadata
                 contact.Name = Isogeo.Language.Resources.NotReported;
             if (string.IsNullOrWhiteSpace(contact.AddressLine2))
                 contact.AddressLine2 = "";
+            if (string.IsNullOrWhiteSpace(contact.AddressLine3))
+                contact.AddressLine3 = "";
             if (string.IsNullOrWhiteSpace(contact.Country))
                 contact.Country = "";
             if (string.IsNullOrWhiteSpace(contact.Email))
@@ -123,7 +126,7 @@ namespace Isogeo.AddIn.ViewsModels.Metadata
                 contact.City = Isogeo.Language.Resources.NotReported;
         }
 
-        public ObservableCollection<Contact> ContactItemsList { get; set; } 
+        public ObservableCollection<Contact> ContactItemsList { get; set; }
         public ObservableCollection<Contact> OtherContactItemsList { get; }
 
         private void LoadContactsLists()
@@ -155,10 +158,10 @@ namespace Isogeo.AddIn.ViewsModels.Metadata
 
         public string Owner => _currentResult?._creator?.contact?.Name ?? Isogeo.Language.Resources.NotReported;
 
-        public string Keywords => _currentResult?.tagsLists?.Keywords == null ? 
+        public string Keywords => _currentResult?.tagsLists?.Keywords == null ?
             Isogeo.Language.Resources.NotReported : string.Join(" ; ", _currentResult.tagsLists.Keywords.ToArray());
 
-        public string Themes => _currentResult?.tagsLists?.ThemeInspire == null ? 
+        public string Themes => _currentResult?.tagsLists?.ThemeInspire == null ?
             Isogeo.Language.Resources.NotReported : string.Join(" ; ", _currentResult.tagsLists.ThemeInspire.ToArray());
 
         public string Conformity
@@ -232,11 +235,11 @@ namespace Isogeo.AddIn.ViewsModels.Metadata
                 foreach (var specification in _currentResult.specifications.Where(i => i != null))
                 {
                     var conform = Isogeo.Language.Resources.Conform;
-                    if (specification.conformant == false) 
+                    if (specification.conformant == false)
                         conform = Isogeo.Language.Resources.No + " " + Isogeo.Language.Resources.Conform.ToLower();
 
                     var dateSpec = Formats.FormatDate(specification.specification.published);
-                    if (_specification != "") 
+                    if (_specification != "")
                         _specification += "/n";
                     _specification += specification.specification.name + "(" + dateSpec + ") : " + conform;
                 }
@@ -268,19 +271,19 @@ namespace Isogeo.AddIn.ViewsModels.Metadata
                 switch (alphaPart.ToUpper())
                 {
                     case "Y":
-                        _updateFrequency += " " + Isogeo.Language.Resources.Year;
+                        _updateFrequency += (numberPart.Length > 1) ? (" " + Isogeo.Language.Resources.Years) : (" " + Isogeo.Language.Resources.Year);
                         break;
                     case "M":
-                        _updateFrequency += " " + Isogeo.Language.Resources.Month;
+                        _updateFrequency += (numberPart.Length > 1) ? (" " + Isogeo.Language.Resources.Months) : (" " + Isogeo.Language.Resources.Month);
                         break;
                     case "W":
-                        _updateFrequency += " " + Isogeo.Language.Resources.Week;
+                        _updateFrequency += (numberPart.Length > 1) ? (" " + Isogeo.Language.Resources.Weeks) : (" " + Isogeo.Language.Resources.Week);
                         break;
                     case "D":
-                        _updateFrequency += " " + Isogeo.Language.Resources.Day;
+                        _updateFrequency += (numberPart.Length > 1) ? (" " + Isogeo.Language.Resources.Days) : (" " + Isogeo.Language.Resources.Day);
                         break;
                     case "H":
-                        _updateFrequency += " " + Isogeo.Language.Resources.Hour;
+                        _updateFrequency += (numberPart.Length > 1) ? (" " + Isogeo.Language.Resources.Hours) : (" " + Isogeo.Language.Resources.Hour);
                         break;
                 }
                 return _updateFrequency;
@@ -337,7 +340,7 @@ namespace Isogeo.AddIn.ViewsModels.Metadata
         {
             LimitationItemsList.Clear();
             if (_currentResult?.limitations == null || _currentResult.limitations.Count <= 0) return;
-            foreach (var limitation in _currentResult.limitations.Where(i=> i != null))
+            foreach (var limitation in _currentResult.limitations.Where(i => i != null))
             {
                 var limitationItem = new LimitationItem();
                 limitationItem.Init(limitation);
@@ -346,4 +349,3 @@ namespace Isogeo.AddIn.ViewsModels.Metadata
         }
     }
 }
-

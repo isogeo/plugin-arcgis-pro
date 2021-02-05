@@ -205,7 +205,10 @@
     <value>Date</value>
   </data>
   <data name="Day" xml:space="preserve">
-    <value>jour(s)</value>
+    <value>jour</value>
+  </data>
+  <data name="Days" xml:space="preserve">
+    <value>jours</value>
   </data>
   <data name="Default_search" xml:space="preserve">
     <value>Recherche par défaut</value>
@@ -274,7 +277,10 @@
     <value>Aide</value>
   </data>
   <data name="Hour" xml:space="preserve">
-    <value>heure(s)</value>
+    <value>heure</value>
+  </data>
+  <data name="Hours" xml:space="preserve">
+    <value>heures</value>
   </data>
   <data name="Import_access_from_a_file" xml:space="preserve">
     <value>Importer les accès depuis un ficher :</value>
@@ -507,6 +513,9 @@
   <data name="Month" xml:space="preserve">
     <value>mois</value>
   </data>
+  <data name="Months" xml:space="preserve">
+    <value>mois</value>
+  </data>
   <data name="MultiPolygon" xml:space="preserve">
     <value>MultiPolygone</value>
   </data>
@@ -679,7 +688,10 @@
     <value>Géometrie inconnue</value>
   </data>
   <data name="Week" xml:space="preserve">
-    <value>semaine(s)</value>
+    <value>semaine</value>
+  </data>
+  <data name="Weeks" xml:space="preserve">
+    <value>semaines</value>
   </data>
   <data name="WFS" xml:space="preserve">
     <value>WFS</value>
@@ -691,7 +703,10 @@
     <value>WMTS</value>
   </data>
   <data name="Year" xml:space="preserve">
-    <value>an(s)</value>
+    <value>an</value>
+  </data>
+  <data name="Years" xml:space="preserve">
+    <value>ans</value>
   </data>
   <data name="Yes" xml:space="preserve">
     <value>Oui</value>
