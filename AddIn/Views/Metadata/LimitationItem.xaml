@@ -14,6 +14,8 @@
     </UserControl.Resources>
     <StackPanel>
         <TextBox Style="{StaticResource HideBoxTxt}" x:Name="LblLimitation" Text="{Binding Path = limitation, Mode = OneWay}" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <TextBox Style="{StaticResource HideBoxTxt}" x:Name="LblDirectiveDescription" Text="{Binding Path = description, Mode = OneWay}" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <TextBox Style="{StaticResource HideBoxTxt}" x:Name="LblDirectiveName" Text="{Binding Path = description, Mode = OneWay}" HorizontalAlignment="Left" VerticalAlignment="Top"/>
         <TextBox Style="{StaticResource HideBoxTxt}" x:Name="LblDescription" Text="{Binding Path = description, Mode = OneWay}" HorizontalAlignment="Left" VerticalAlignment="Top"/>
     </StackPanel>
 </UserControl>

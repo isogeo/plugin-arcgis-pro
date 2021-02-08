@@ -204,6 +204,12 @@
   <data name="Date" xml:space="preserve">
     <value>Date</value>
   </data>
+  <data name="Day" xml:space="preserve">
+    <value>jour</value>
+  </data>
+  <data name="Days" xml:space="preserve">
+    <value>jours</value>
+  </data>
   <data name="Default_search" xml:space="preserve">
     <value>Recherche par défaut</value>
   </data>
@@ -270,6 +276,12 @@
   <data name="Help" xml:space="preserve">
     <value>Aide</value>
   </data>
+  <data name="Hour" xml:space="preserve">
+    <value>heure</value>
+  </data>
+  <data name="Hours" xml:space="preserve">
+    <value>heures</value>
+  </data>
   <data name="Import_access_from_a_file" xml:space="preserve">
     <value>Importer les accès depuis un ficher :</value>
   </data>
@@ -308,6 +320,9 @@
   </data>
   <data name="Log" xml:space="preserve">
     <value>Log</value>
+  </data>
+  <data name="Log_path" xml:space="preserve">
+    <value>Chemin des logs : </value>
   </data>
   <data name="Map_canvas" xml:space="preserve">
     <value>Emprise de la carte</value>
@@ -432,6 +447,9 @@
   <data name="Metadata_Geography_info" xml:space="preserve">
     <value>Informations techniques</value>
   </data>
+  <data name="Metadata_Geography_layerName" xml:space="preserve">
+    <value>Nom de la couche :</value>
+  </data>
   <data name="Metadata_Geography_nbobjects" xml:space="preserve">
     <value>Nombre d'objets :</value>
   </data>
@@ -491,6 +509,12 @@
   </data>
   <data name="Metadata_owner_default" xml:space="preserve">
     <value>Propriétaire de la métadonnée (défaut)</value>
+  </data>
+  <data name="Month" xml:space="preserve">
+    <value>mois</value>
+  </data>
+  <data name="Months" xml:space="preserve">
+    <value>mois</value>
   </data>
   <data name="MultiPolygon" xml:space="preserve">
     <value>MultiPolygone</value>
@@ -663,6 +687,12 @@
   <data name="Unknown_geometry" xml:space="preserve">
     <value>Géometrie inconnue</value>
   </data>
+  <data name="Week" xml:space="preserve">
+    <value>semaine</value>
+  </data>
+  <data name="Weeks" xml:space="preserve">
+    <value>semaines</value>
+  </data>
   <data name="WFS" xml:space="preserve">
     <value>WFS</value>
   </data>
@@ -671,6 +701,12 @@
   </data>
   <data name="WMTS" xml:space="preserve">
     <value>WMTS</value>
+  </data>
+  <data name="Year" xml:space="preserve">
+    <value>an</value>
+  </data>
+  <data name="Years" xml:space="preserve">
+    <value>ans</value>
   </data>
   <data name="Yes" xml:space="preserve">
     <value>Oui</value>

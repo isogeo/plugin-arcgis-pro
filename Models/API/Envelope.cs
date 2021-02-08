@@ -41,13 +41,11 @@ namespace Isogeo.Models.API
             get;
             set;
         }
-        public List<List<List<double>>> coordinates
+        public Object coordinates
         {
             get;
             set;
-        }
-                        
-                            
+        }                 
         
         
     }

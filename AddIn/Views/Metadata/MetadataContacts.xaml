@@ -14,10 +14,14 @@
             <DataTemplate x:Key="ContactItem">
                 <StackPanel>
                     <TextBox Style="{StaticResource HideBoxTxt}" Text="{Binding Path = Name, Mode = OneWay}"/>
-                    <TextBox Style="{StaticResource HideBoxTxt}" Text="{Binding Path = Email, Mode = OneWay}"/> <!--MouseDoubleClick="LblEmail_OnMouseDoubleClick"/>-->
+                    <TextBox Style="{StaticResource HideBoxTxt}" Text="{Binding Path = Email, Mode = OneWay}"/>
+                    <!--MouseDoubleClick="LblEmail_OnMouseDoubleClick"/>-->
                     <TextBox Style="{StaticResource HideBoxTxt}" Text="{Binding Path = Phone, Mode = OneWay}"/>
                     <TextBox Style="{StaticResource HideBoxTxt}" Text="{Binding Path = AddressLine1, Mode = OneWay}"/>
+                    <TextBox Style="{StaticResource HideBoxTxt}" Text="{Binding Path = AddressLine2, Mode = OneWay}"/>
+                    <TextBox Style="{StaticResource HideBoxTxt}" Text="{Binding Path = AddressLine3, Mode = OneWay}"/>
                     <TextBox Style="{StaticResource HideBoxTxt}" Text="{Binding Path = City, Mode = OneWay}"/>
+                    <TextBox Style="{StaticResource HideBoxTxt}" Text="{Binding Path = Country, Mode = OneWay}"/>
                 </StackPanel>
             </DataTemplate>
         </ResourceDictionary>

@@ -272,12 +272,31 @@ namespace Isogeo.Map.MapFunctions
             return true;
         }
 
+        private static bool CheckSDEConnection(ServiceType serviceType)
+        {
+            if (serviceType.type?.ToUpper() == "ARCSDE")
+            {
+                if (serviceType.url.Length == 0)
+                {
+                    DisplayMessage(Language.Resources.Message_Data_sde_not_configured);
+                    return false;
+                }                
+            }
+
+            return true;
+        }
+
         public static async void AddLayer(ServiceType serviceType)
         {
             Log.Logger.Info("Add Layer");
 
+            if (!CheckSDEConnection(serviceType))
+                return;
+
             if (!CheckErrorServiceType(serviceType))
                 return;
+
+
             try
             {
                 await QueuedTask.Run(() =>

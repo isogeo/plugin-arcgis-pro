@@ -17,10 +17,10 @@ namespace Isogeo.AddIn.Views.Metadata
             LblContent.Text = "";
 
             condition = conditionInput;
-            if (conditionInput.licence != null)
+            if (conditionInput.license != null)
             {
-                LblLicense.Text = conditionInput.licence.name;
-                LblContent.Text = conditionInput.licence.content;
+                LblLicense.Text = conditionInput.license.name;
+                LblContent.Text = conditionInput.license.link;
             }
             /*else
             {

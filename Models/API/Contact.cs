@@ -38,6 +38,12 @@
             get;
             set;
         }
+
+        public string AddressLine3
+        {
+            get;
+            set;
+        }
         public string ZipCode
         {
             get;
