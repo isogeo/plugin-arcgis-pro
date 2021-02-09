@@ -3,7 +3,7 @@ name: Rapport de bug
 about: Créer un rapport de bug pour aider l'amélioration du plugin Isogeo ArcGis Pro
 title: "[BUG]"
 labels: bug
-assignees: VianneyDoleans
+assignees: jgrosmaire
 
 ---
 
