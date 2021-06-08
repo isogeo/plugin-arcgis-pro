@@ -54,7 +54,7 @@
             get;
             set;
         }
-        public string Country
+        public string CountryCode
         {
             get;
             set;
