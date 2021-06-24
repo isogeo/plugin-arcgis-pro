@@ -17,7 +17,5 @@
         <TextBox Style="{StaticResource HideBoxTxt}" Text="{Binding Path = ContactOwner.Phone, Mode = OneWay}"/>
         <TextBox Style="{StaticResource HideBoxTxt}" Text="{Binding Path = ContactOwner.AddressLine1, Mode = OneWay}"/>
         <TextBox Style="{StaticResource HideBoxTxt}" Text="{Binding Path = ContactOwner.City, Mode = OneWay}"/>
-        <TextBox Style="{StaticResource HideBoxTxt}" Text="{Binding Path = ContactOwner.ZipCode, Mode = OneWay}"/>
-        <TextBox Style="{StaticResource HideBoxTxt}" Text="{Binding Path = ContactOwner.Country, Mode = OneWay}"/>
     </StackPanel>
 </UserControl>

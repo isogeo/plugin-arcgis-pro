@@ -7,6 +7,7 @@ using Isogeo.Utils;
 using MVVMPattern;
 using MVVMPattern.MediatorPattern;
 using System.Text.RegularExpressions;
+using System.Globalization;
 using System;
 
 namespace Isogeo.AddIn.ViewsModels.Metadata
@@ -84,15 +85,15 @@ namespace Isogeo.AddIn.ViewsModels.Metadata
                         AddressLine2 = Isogeo.Language.Resources.NotReported,
                         AddressLine3 = Isogeo.Language.Resources.NotReported,
                         City = Isogeo.Language.Resources.NotReported,
-                        Country = Isogeo.Language.Resources.NotReported,
+                        CountryCode = Isogeo.Language.Resources.NotReported,
                         Email = Isogeo.Language.Resources.NotReported,
                         Name = Isogeo.Language.Resources.NotReported,
                         Organization = Isogeo.Language.Resources.NotReported,
                         Phone = Isogeo.Language.Resources.NotReported,
                         ZipCode = Isogeo.Language.Resources.NotReported
                     };
-                return _currentResult._creator.contact;
 
+                return _currentResult?._creator?.contact;
             }
         }
 
@@ -108,8 +109,8 @@ namespace Isogeo.AddIn.ViewsModels.Metadata
                 contact.AddressLine2 = "";
             if (string.IsNullOrWhiteSpace(contact.AddressLine3))
                 contact.AddressLine3 = "";
-            if (string.IsNullOrWhiteSpace(contact.Country))
-                contact.Country = "";
+            if (string.IsNullOrWhiteSpace(contact.CountryCode))
+                contact.CountryCode = "";
             if (string.IsNullOrWhiteSpace(contact.Email))
                 contact.Email = Isogeo.Language.Resources.NotReported;
             if (string.IsNullOrWhiteSpace(contact.Organization))
@@ -122,9 +123,20 @@ namespace Isogeo.AddIn.ViewsModels.Metadata
 
         private static void FillCity(Contact contact)
         {
-            contact.City = contact.ZipCode + " " + contact.City + " " + contact.Country;
-            if (string.IsNullOrWhiteSpace(contact.City))
-                contact.City = Isogeo.Language.Resources.NotReported;
+            try
+            {
+                contact.City = contact.ZipCode + " " + contact.City + ", " + (new RegionInfo(contact.CountryCode).DisplayName);
+                if (string.IsNullOrWhiteSpace(contact.City))
+                    contact.City = Isogeo.Language.Resources.NotReported;
+            }
+            catch (ArgumentException argEx)
+            {
+                // The code was not a valid country code
+                contact.City = contact.ZipCode + " " + contact.City;
+                if (string.IsNullOrWhiteSpace(contact.City))
+                    contact.City = Isogeo.Language.Resources.NotReported;
+            }
+            
         }
 
         public ObservableCollection<Contact> ContactItemsList { get; set; }
@@ -144,7 +156,9 @@ namespace Isogeo.AddIn.ViewsModels.Metadata
                 FillContactWithEmpty(contact.contact);
 
                 if (contact.contact.AddressLine2 != "")
-                    contact.contact.AddressLine1 += " " + contact.contact.AddressLine2;
+                    contact.contact.AddressLine1 += ", " + contact.contact.AddressLine2;
+                    if (contact.contact.AddressLine3 != "")
+                    contact.contact.AddressLine1 += ", " + contact.contact.AddressLine3;
 
                 FillCity(contact.contact);
 

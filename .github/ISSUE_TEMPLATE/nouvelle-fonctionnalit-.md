@@ -3,7 +3,7 @@ name: Nouvelle fonctionnalité
 about: Créer une issue pour suggérer les évolutions du plugin Isogeo ArcGis Pro
 title: "[Feature] "
 labels: enhancement
-assignees: ''
+assignees: 'jgrosmaire'
 
 ---
 
