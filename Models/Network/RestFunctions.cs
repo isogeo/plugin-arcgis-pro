@@ -273,6 +273,7 @@ namespace Isogeo.Models.Network
         private Token AskForToken(string clientId, string clientSecret)
         {
             Log.Logger.Debug("Ask for Token - cliendId : " + clientId);
+            System.Net.ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
             Token newToken = null;
             try
             {
