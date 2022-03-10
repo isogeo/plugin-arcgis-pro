@@ -40,12 +40,12 @@ namespace Isogeo.Map.MapFunctions
                 {
                     try
                     {
-                        return QueuedTask.Run(() => layer.QueryExtent().SpatialReference.Wkid != SpatialReferences.WGS84.Wkid ? 
-                            GetExtendWgs84(layer.QueryExtent()) : 
+                        return QueuedTask.Run(() => layer.QueryExtent().SpatialReference.Wkid != SpatialReferences.WGS84.Wkid ?
+                            GetExtendWgs84(layer.QueryExtent()) :
                             GetExtend(layer.QueryExtent())).GetAwaiter().GetResult();
                     }
                     catch (Exception e)
-                    { 
+                    {
                         Log.Logger.Error(e.Message);
                     }
                 }
@@ -98,8 +98,8 @@ namespace Isogeo.Map.MapFunctions
         {
             try
             {
-                return MapView.Active.Map.SpatialReference.Wkid != SpatialReferences.WGS84.Wkid ? 
-                    GetExtendWgs84(MapView.Active.Extent) : 
+                return MapView.Active.Map.SpatialReference.Wkid != SpatialReferences.WGS84.Wkid ?
+                    GetExtendWgs84(MapView.Active.Extent) :
                     GetExtend(MapView.Active.Extent);
             }
             catch (Exception e)
@@ -130,11 +130,11 @@ namespace Isogeo.Map.MapFunctions
                     .Select(def => def.GetName()).ToArray();
                 foreach (var defName in defNames)
                 {
-
                     if (defName.Equals(serviceType.name))
                     {
                         using (var featureClass = geoDb.OpenDataset<FeatureClass>(defName))
                         {
+                            Log.Logger.Debug($"Add Layer From GeoDatabase - {featureClass.GetName()}");
                             LayerFactory.Instance.CreateFeatureLayer(featureClass, MapView.Active.Map);
                             return true;
                         }
@@ -160,11 +160,13 @@ namespace Isogeo.Map.MapFunctions
             switch (serviceType?.type.ToUpper())
             {
                 case "ARCSDE":
+                    Log.Logger.Debug("Add GeoDatabase Layer - ARCSDE");
                     CheckErrorFile(serviceType);
                     AddLayerFromGeoDatabase(serviceType);
                     find = true;
                     break;
                 case "FILEGDB":
+                    Log.Logger.Debug("Add GeoDatabase Layer - FILEGDB");
                     CheckErrorFile(serviceType);
                     AddLayerFromGeoDatabase(serviceType);
                     find = true;
@@ -182,9 +184,11 @@ namespace Isogeo.Map.MapFunctions
             switch (serviceType?.type.ToUpper())
             {
                 case "SHP":
+                    Log.Logger.Debug("Add File Layer - SHP");
                     find = true;
                     break;
                 case "RASTER":
+                    Log.Logger.Debug("Add File Layer - RASTER");
                     find = true;
                     break;
                 default:
@@ -195,6 +199,7 @@ namespace Isogeo.Map.MapFunctions
             if (find)
             {
                 CheckErrorFile(serviceType);
+                Log.Logger.Debug($"Add File Layer - Uri: {serviceType.url} | Title: {serviceType.title}");
                 LayerFactory.Instance.CreateLayer(new Uri(serviceType.url), MapView.Active.Map, 0, serviceType.title);
             }
             return find;
@@ -228,15 +233,19 @@ namespace Isogeo.Map.MapFunctions
             switch (serviceType?.type.ToUpper())
             {
                 case "WMS":
+                    Log.Logger.Debug("Add Cim Service Layer - WMS");
                     connection = new CIMWMSServiceConnection { ServerConnection = serverConnection };
                     break;
                 case "WMTS":
+                    Log.Logger.Debug("Add Cim Service Layer - WMTS");
                     connection = new CIMWMTSServiceConnection { ServerConnection = serverConnection };
                     break;
                 case "WCS":
+                    Log.Logger.Debug("Add Cim Service Layer - WCS");
                     connection = new CIMWCSServiceConnection { ServerConnection = serverConnection };
                     break;
                 case "WFS":
+                    Log.Logger.Debug("Add Cim Service Layer - WFS");
                     connection = new CIMWFSServiceConnection { ServerConnection = serverConnection };
                     break;
             }
@@ -244,18 +253,30 @@ namespace Isogeo.Map.MapFunctions
             dynamic layer;
             if (connection == null)
             {
-                if (serviceType?.url == null) return false;
+                if (serviceType?.url == null)
+                {
+                    Log.Logger.Debug("Add Cim Service Layer - Undefined service URL");
+                    return false;
+                }
+
+                Log.Logger.Debug($"Add Cim Service Layer - Try with {serviceType.url + '/' + serviceType.name}");
                 layer = LayerFactory.Instance.CreateLayer(new Uri(serviceType.url + '/' + serviceType.name),
                     MapView.Active.Map);
                 if (layer != null) return true;
+
+                Log.Logger.Debug($"Add Cim Service Layer - Try with {serviceType.url + '/' + serviceType.title}");
                 layer = LayerFactory.Instance.CreateLayer(new Uri(serviceType.url + '/' + serviceType.title),
                     MapView.Active.Map);
-                if (layer != null) return true; 
-                layer = LayerFactory.Instance.CreateLayer(new Uri(serviceType.url), 
+                if (layer != null) return true;
+
+                Log.Logger.Debug($"Add Cim Service Layer - Try with {serviceType.url}");
+                layer = LayerFactory.Instance.CreateLayer(new Uri(serviceType.url),
                     MapView.Active.Map);
+
                 return layer != null;
             }
-            layer =  LayerFactory.Instance.CreateLayer(connection, MapView.Active.Map);
+            Log.Logger.Debug("Add Cim Service Layer - Connection already existing");
+            layer = LayerFactory.Instance.CreateLayer(connection, MapView.Active.Map);
             return layer != null;
         }
 
@@ -280,7 +301,7 @@ namespace Isogeo.Map.MapFunctions
                 {
                     DisplayMessage(Language.Resources.Message_Data_sde_not_configured);
                     return false;
-                }                
+                }
             }
 
             return true;
@@ -288,7 +309,7 @@ namespace Isogeo.Map.MapFunctions
 
         public static async void AddLayer(ServiceType serviceType)
         {
-            Log.Logger.Info("Add Layer");
+            Log.Logger.Info($"START - Add Layer {serviceType?.title}");
 
             if (!CheckSDEConnection(serviceType))
                 return;
@@ -320,21 +341,20 @@ namespace Isogeo.Map.MapFunctions
             }
             catch (FileNotFoundException)
             {
-                Log.Logger.Info("END - Add Layer");
+                Log.Logger.Error("Error Add Layer - File not found");
             }
             catch (Exception ex)
             {
                 DisplayMessage(Language.Resources.Message_Data_Error);
-                Log.Logger.Error("Error Add Layer - " + 
-                                 ex.Message + " " + 
-                                 serviceType?.url + " " +  
-                                 serviceType?.id + " " + 
-                                 serviceType?.name + " " + 
-                                 serviceType?.title + " " + 
-                                 serviceType?.type + " " + 
+                Log.Logger.Error("Error Add Layer - " +
+                                 ex.Message + " " +
+                                 serviceType?.url + " " +
+                                 serviceType?.id + " " +
+                                 serviceType?.name + " " +
+                                 serviceType?.title + " " +
+                                 serviceType?.type + " " +
                                  serviceType?.creator);
             }
-            Log.Logger.Info("END - Add Layer");
         }
     }
 }
