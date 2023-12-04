@@ -2,6 +2,7 @@
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
+using ActiproSoftware.Windows.Extensions;
 using Isogeo.AddIn.Models;
 using Isogeo.Map.MapFunctions;
 using Isogeo.Models;
@@ -85,25 +86,33 @@ namespace Isogeo.AddIn.Models.Filters.Components
             OnPropertyChanged(nameof(SelectedItem));
         }
 
+        // performance: List.Items is an ObservableCollection, by filling a temporary simple list then use addRange() at the end,
+        // we dont trigger the UI for each item added (only once triggered at the end of AddRange())
+        private readonly List<FilterItem> _temporaryFilterItemList = new(); 
+
         public virtual void AddItem(FilterItem item)
         {
             var itemNameToAdd = item.Name;
             while (Items.Any(search => search.Name == itemNameToAdd))
                 itemNameToAdd += " - " + Language.Resources.Copy.ToLower();
             if (!string.IsNullOrWhiteSpace(itemNameToAdd))
-                List.Items.Add(new FilterItem(item.Id, itemNameToAdd));
+                _temporaryFilterItemList.Add(new FilterItem(item.Id, itemNameToAdd));
         }
 
         public virtual void SetItems(List<FilterItem> items)
         {
+            _temporaryFilterItemList.Clear();
             List.Items.Clear();
             AddItem(new FilterItem("", "-"));
             List.Selected = null;
+
 
             for (var i = 0; i < items.Count; i += 1)
             {
                 AddItem(items[i]);
             }
+            List.Items.AddRange(_temporaryFilterItemList);
+
 
             if (List.Items.Count > 0)
             {
