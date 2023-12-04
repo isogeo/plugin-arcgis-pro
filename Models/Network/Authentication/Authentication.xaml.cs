@@ -186,8 +186,16 @@ namespace Isogeo.Models.Network.Authentication
 
         private void Hyperlink_RequestNavigate(object sender, RequestNavigateEventArgs e)
         {
-            Process.Start(new ProcessStartInfo(e.Uri.AbsoluteUri));
-            e.Handled = true;
+            try
+            {
+                Process.Start(new ProcessStartInfo(e.Uri.AbsoluteUri) { UseShellExecute = true });
+                e.Handled = true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(Isogeo.Language.Resources.Error_Open_External_Tool, "Isogeo");
+                Log.Logger.Error(ex.Message);
+            }
         }
 
         private void BtnLoadFile(object sender, RoutedEventArgs e)

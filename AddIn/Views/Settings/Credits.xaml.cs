@@ -2,6 +2,8 @@
 using System.Diagnostics;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
+using ArcGIS.Desktop.Framework.Dialogs;
+using Isogeo.Utils.LogManager;
 
 namespace Isogeo.AddIn.Views.Settings
 {
@@ -30,14 +32,30 @@ namespace Isogeo.AddIn.Views.Settings
 
         private void GithubMouseUp(object sender, MouseButtonEventArgs e)
         {
-            Process.Start(new ProcessStartInfo("https://github.com/VianneyDoleans"));
-            e.Handled = true;
+            try
+            {
+                Process.Start(new ProcessStartInfo("https://github.com/VianneyDoleans") { UseShellExecute = true });
+                e.Handled = true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(Isogeo.Language.Resources.Error_Open_External_Tool, "Isogeo");
+                Log.Logger.Error(ex.Message);
+            }
         }
 
         private void LinkedinMouseUp(object sender, MouseButtonEventArgs e)
         {
-            Process.Start(new ProcessStartInfo("https://www.linkedin.com/in/vianneydoleans"));
-            e.Handled = true;
+            try
+            {
+                Process.Start(new ProcessStartInfo("https://www.linkedin.com/in/vianneydoleans") { UseShellExecute = true });
+                e.Handled = true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(Isogeo.Language.Resources.Error_Open_External_Tool, "Isogeo");
+                Log.Logger.Error(ex.Message);
+            }
         }
     }
 }

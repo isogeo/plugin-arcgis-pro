@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
 using Isogeo.Models;
@@ -16,7 +17,15 @@ namespace Isogeo.AddIn.Views.Settings
 
         private void BtnHelp_Click(object sender, RoutedEventArgs e)
         {
-            System.Diagnostics.Process.Start(Variables.configurationManager.config.urlHelp);
+            try
+            {
+                Process.Start(new ProcessStartInfo(Variables.configurationManager.config.urlHelp) { UseShellExecute = true });
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(Isogeo.Language.Resources.Error_Open_External_Tool, "Isogeo");
+                Log.Logger.Error(ex.Message);
+            }
         }
 
         private void BtnCredits_Click(object sender, RoutedEventArgs e)
@@ -31,7 +40,7 @@ namespace Isogeo.AddIn.Views.Settings
             {
                 var mailto =
                     $"mailto:{Variables.configurationManager.config.emailSupport}?Subject={Variables.configurationManager.config.emailSubject}&Body={Variables.configurationManager.config.emailBody.Replace("/n", "%0D%0A")}";
-                System.Diagnostics.Process.Start(mailto);
+                Process.Start(new ProcessStartInfo(mailto) { UseShellExecute = true });
             }
             catch (Exception ex)
             {
@@ -44,7 +53,7 @@ namespace Isogeo.AddIn.Views.Settings
         {
             try
             {
-                System.Diagnostics.Process.Start(Log.GetLogFilePath());
+                Process.Start(new ProcessStartInfo(Log.GetLogFilePath()) { UseShellExecute = true });
             }
             catch (Exception ex)
             {
