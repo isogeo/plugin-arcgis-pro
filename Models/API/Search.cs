@@ -5,7 +5,7 @@ namespace Isogeo.Models.API
     public class Search
     {
         [JsonPropertyName("tags")]
-        public IDictionary<string, string> tags;
+        public IDictionary<string, string> tags { get; set; }
 
         //[JsonPropertyName("envelope")]
         //public string envelope { get; set; }
