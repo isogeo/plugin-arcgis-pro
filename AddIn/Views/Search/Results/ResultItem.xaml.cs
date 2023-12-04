@@ -22,20 +22,21 @@ namespace Isogeo.AddIn.Views.Search.Results
 {
     public partial class ResultItem
     {
-        public Result result;
+        private Result _result;
+
         // Isogeo geometry types
-        private readonly List<string> _polygonList = new List<string>(new[] { "CurvePolygon", "MultiPolygon", "MultiSurface", "Polygon", "PolyhedralSurface" });
-        private readonly List<string> _pointList = new List<string>(new[] { "Point", "MultiPoint" });
-        private readonly List<string> _lineList = new List<string>(new[] { "CircularString", "CompoundCurve", "Curve", "LineString", "MultiCurve", "MultiLineString" });
-        private readonly List<string> _multiList = new List<string>(new[] { "Geometry", "GeometryCollection" });
+        private readonly List<string> _polygonList = new(new[] { "CurvePolygon", "MultiPolygon", "MultiSurface", "Polygon", "PolyhedralSurface" });
+        private readonly List<string> _pointList = new(new[] { "Point", "MultiPoint" });
+        private readonly List<string> _lineList = new(new[] { "CircularString", "CompoundCurve", "Curve", "LineString", "MultiCurve", "MultiLineString" });
+        private readonly List<string> _multiList = new(new[] { "Geometry", "GeometryCollection" });
 
         //Isogeo formats
-        private readonly List<string> _vectorFormatList = new List<string>(new[] { "shp", "dxf", "dgn", "filegdb", "tab", "arcsde" });
-        private readonly List<string> _rasterFormatList = new List<string>(new[] { "esriasciigrid", "geotiff", "intergraphgdb", "jpeg", "png", "xyz", "ecw" });
+        private readonly List<string> _vectorFormatList = new(new[] { "shp", "dxf", "dgn", "filegdb", "tab", "arcsde" });
+        private readonly List<string> _rasterFormatList = new(new[] { "esriasciigrid", "geotiff", "intergraphgdb", "jpeg", "png", "xyz", "ecw" });
 
-        private readonly List<ServiceType> _dataList = new List<ServiceType>();
+        private readonly List<ServiceType> _dataList = new();
 
-        public ICommand btnMenuOnClick;
+        private ICommand _btnMenuOnClick;
 
         private Metadata.Metadata _metadataInstance;
         private MetadataViewModel _metadataViewModel;
@@ -84,7 +85,7 @@ namespace Isogeo.AddIn.Views.Search.Results
 
         public void Init(Result item)
         {
-            result = item;
+            _result = item;
             SetComponent();
             GetLinks();
             SetCombo();
@@ -94,9 +95,9 @@ namespace Isogeo.AddIn.Views.Search.Results
         {
             get
             {
-                return btnMenuOnClick ?? (btnMenuOnClick = new RelayCommand(
+                return _btnMenuOnClick ??= new RelayCommand(
                     x => BtnMenu_OnClickEvent(),
-                    y => CanRunBtnMenu_OnClick()));
+                    y => CanRunBtnMenu_OnClick());
             }
         }
 
@@ -108,21 +109,20 @@ namespace Isogeo.AddIn.Views.Search.Results
         private void SetComponent()
         {
             ImgType.Content = Isogeo.Language.Resources.Unknown_geometry;
-            if (result.geometry != null)
+            if (_result.geometry != null)
             {
-                // ReturnPicture("pack://application:,,,/Isogeo.Resources;component/Resources/gavel.png");
-                if (_polygonList.Contains(result.geometry)) ImgType.Content = Isogeo.Language.Resources.Polygon;
-                    if (_pointList.Contains(result.geometry)) ImgType.Content = Isogeo.Language.Resources.Point;
-                    if (_lineList.Contains(result.geometry)) ImgType.Content = Isogeo.Language.Resources.Line;
-                    if (_multiList.Contains(result.geometry)) ImgType.Content = Isogeo.Language.Resources.MultiPolygon;
+                if (_polygonList.Contains(_result.geometry)) ImgType.Content = Isogeo.Language.Resources.Polygon;
+                    if (_pointList.Contains(_result.geometry)) ImgType.Content = Isogeo.Language.Resources.Point;
+                    if (_lineList.Contains(_result.geometry)) ImgType.Content = Isogeo.Language.Resources.Line;
+                    if (_multiList.Contains(_result.geometry)) ImgType.Content = Isogeo.Language.Resources.MultiPolygon;
             }
             else
             {
-                if (result.type == "rasterDataset")
+                if (_result.type == "rasterDataset")
                 {
                     ImgType.Content = Isogeo.Language.Resources.Raster;
                 }
-                else if (result.type == "service")
+                else if (_result.type == "service")
                 {
                     ImgType.Content = Isogeo.Language.Resources.Service;
                 }
@@ -131,8 +131,8 @@ namespace Isogeo.AddIn.Views.Search.Results
                     ImgType.Content = Isogeo.Language.Resources.Unknown_geometry;
                 }
             }
-            TxtTitle.Text = result.title;
-            var toolTip = new ToolTip {Content = result.@abstract};
+            TxtTitle.Text = _result.title;
+            var toolTip = new ToolTip {Content = _result.@abstract};
             TxtTitle.ToolTip = toolTip;
         }
 
@@ -152,7 +152,7 @@ namespace Isogeo.AddIn.Views.Search.Results
                     break;
                 case 1:
                     if (_dataList != null && _dataList.Count > 0)
-                        CmbLayer?.Items.Add(_dataList[0].title);
+                        CmbLayer?.Items.Add(_dataList[0].Title);
                     else
                         CmbLayer?.Items.Add(Isogeo.Language.Resources.Empty);
                     if (CmbLayer != null)
@@ -171,10 +171,10 @@ namespace Isogeo.AddIn.Views.Search.Results
                     {
                         var type = Isogeo.Language.Resources.Empty;
                         var title = Isogeo.Language.Resources.Empty;
-                        if (data?.type != null)
-                            type = data.type;
-                        if (data?.title != null)
-                            title = data.title;
+                        if (data?.Type != null)
+                            type = data.Type;
+                        if (data?.Title != null)
+                            title = data.Title;
                         CmbLayer.Items.Add(type + " - " + title);
                     }
                     CmbLayer.SelectedIndex = 0;
@@ -183,7 +183,7 @@ namespace Isogeo.AddIn.Views.Search.Results
 
         }
 
-        private ServiceType CreateServiceType(Result item)
+        private static ServiceType CreateServiceType(Result item)
         {
             var type = " ";
             var title = " ";
@@ -206,10 +206,9 @@ namespace Isogeo.AddIn.Views.Search.Results
                 id = item._id;
 
             return new ServiceType(type, title, url, name, creator, id);
-
         }
 
-        private ServiceType CreateServiceType(Result itemResult, ServiceLayer item)
+        private static ServiceType CreateServiceType(Result itemResult, ServiceLayer item)
         {
             var type = " ";
             var title = " ";
@@ -261,19 +260,18 @@ namespace Isogeo.AddIn.Views.Search.Results
         private void GetLinks()
         {
 
-            if (_vectorFormatList.Contains(result.format))
+            if (_vectorFormatList.Contains(_result.format))
             {
-                _dataList.Add(CreateServiceType(result));
+                _dataList.Add(CreateServiceType(_result));
             }
 
-            if (_rasterFormatList.Contains(result.format))
+            if (_rasterFormatList.Contains(_result.format))
             {
-                var item = CreateServiceType(result);
-                item.type = "raster";
-                _dataList.Add(item);
+                var item = CreateServiceType(_result);
+                _dataList.Add(new ServiceType("raster", item.Title, item.Url, item.Name, item.Creator, item.Id));
             }
 
-            if (result.format == "postgis")
+            if (_result.format == "postgis")
             {
 
             }
@@ -283,24 +281,24 @@ namespace Isogeo.AddIn.Views.Search.Results
             // associated with a vector or raster data.
 
 
-            if (result.type == "vectorDataset" || result.type == "rasterDataset")
+            if (_result.type == "vectorDataset" || _result.type == "rasterDataset")
             {
-                foreach (var serviceLayer in result.serviceLayers)
+                foreach (var serviceLayer in _result.serviceLayers)
                 {
-                    _dataList.Add(CreateServiceType(result, serviceLayer));
+                    _dataList.Add(CreateServiceType(_result, serviceLayer));
                 }
 
             }
 
             // New association mode. For services metadata sheet, the layers
             // are stored in the purposely named include: "layers".
-            if (result.type == "service")
+            if (_result.type == "service")
             {
-                if (result.layers != null)
+                if (_result.layers != null)
                 {
-                    foreach (var layer in result.layers)
+                    foreach (var layer in _result.layers)
                     {
-                        _dataList.Add(CreateServiceType(result, layer));
+                        _dataList.Add(CreateServiceType(_result, layer));
                     }
                 }
             }
@@ -401,15 +399,15 @@ namespace Isogeo.AddIn.Views.Search.Results
 
         private async void OpenMetadata(object sender, MouseButtonEventArgs e)
         {
-            if (!await OpenMetadata(result))
+            if (!await OpenMetadata(_result))
                 _restFunctions.OpenAuthenticationPopUp();
         }
 
         private async Task BtnMenu_OnClickEvent()
         {
-            var resultDetails = await _restFunctions.GetDetails(result._id);
+            var resultDetails = await _restFunctions.GetDetails(_result._id);
             if (resultDetails != null)
-                result = resultDetails;
+                _result = resultDetails;
             MniLoadData_OnClick();
         }
 
@@ -419,8 +417,9 @@ namespace Isogeo.AddIn.Views.Search.Results
                 return;
             var currentService = _dataList.Count == 1 ? _dataList[0] : _dataList[CmbLayer.SelectedIndex];
 
-            if (currentService != null && currentService.type?.ToUpper() == "ARCSDE")
-                currentService.url = Variables.configurationManager?.config?.fileSde;
+            if (currentService != null && currentService.Type?.ToUpper() == "ARCSDE")
+                currentService = new ServiceType(currentService.Type, currentService.Title, Variables.configurationManager?.config?.fileSde, 
+                    currentService.Name, currentService.Creator, currentService.Id);
             QueuedTask.Run(() =>
             {
                 _mapFunctions.AddLayer(currentService);

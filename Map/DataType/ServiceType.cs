@@ -2,23 +2,21 @@
 {
     public class ServiceType
     {
-        public string type;
-        public string title;
-        public string url;
-        public string name;
-        public string creator;        
-        public string id;
-
+        public string Type { get; }
+        public string Title { get; }
+        public string Url { get; }
+        public string Name { get; }
+        public string Creator { get; }
+        public string Id { get; }
 
         public ServiceType(string type, string title, string url, string name, string creator, string id)
         {
-            this.type = type;
-            this.title = title;
-            this.url = url;
-            this.name = name;
-            this.creator = creator;
-            this.id = id;
-            
+            Type = type;
+            Title = title;
+            Url = url;
+            Name = name;
+            Creator = creator;
+            Id = id;
         }
     }
 }

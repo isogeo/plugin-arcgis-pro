@@ -87,14 +87,14 @@ namespace Isogeo.Map.MapFunctions
 
         private static Geodatabase LoadGeoDatabase(ServiceType serviceType)
         {
-            var suffix = Path.GetExtension(serviceType.url)?.ToLower();
+            var suffix = Path.GetExtension(serviceType.Url)?.ToLower();
             dynamic database;
             if (suffix == ".sde")
-                database = new DatabaseConnectionFile(new Uri(serviceType.url));
+                database = new DatabaseConnectionFile(new Uri(serviceType.Url));
             else if (suffix == ".gdb")
-                database = new FileGeodatabaseConnectionPath(new Uri(serviceType.url));
+                database = new FileGeodatabaseConnectionPath(new Uri(serviceType.Url));
             else
-                database = new ServiceConnectionProperties(new Uri(serviceType.url));
+                database = new ServiceConnectionProperties(new Uri(serviceType.Url));
             return new Geodatabase(database);
         }
 
@@ -106,7 +106,7 @@ namespace Isogeo.Map.MapFunctions
                     .Select(def => def.GetName()).ToArray();
                 foreach (var defName in defNames)
                 {
-                    if (defName.Equals(serviceType.name))
+                    if (defName.Equals(serviceType.Name))
                     {
                         using (var featureClass = geoDb.OpenDataset<FeatureClass>(defName))
                         {
@@ -126,10 +126,10 @@ namespace Isogeo.Map.MapFunctions
 
         private static void CheckErrorFile(ServiceType serviceType)
         {
-            if (!(Directory.Exists(serviceType.url) ||
-                  File.Exists(serviceType.url)))
+            if (!(Directory.Exists(serviceType.Url) ||
+                  File.Exists(serviceType.Url)))
             {
-                DisplayMessage(Language.Resources.Message_Data_file_not_found + ": " + '"' + serviceType.url + '"');
+                DisplayMessage(Language.Resources.Message_Data_file_not_found + ": " + '"' + serviceType.Url + '"');
                 throw new FileNotFoundException();
             }
         }
@@ -137,7 +137,7 @@ namespace Isogeo.Map.MapFunctions
         private bool AddGeoDatabaseLayer(ServiceType serviceType)
         {
             bool find;
-            switch (serviceType?.type.ToUpper())
+            switch (serviceType?.Type.ToUpper())
             {
                 case "ARCSDE":
                     Log.Logger.Debug("Add GeoDatabase Layer - ARCSDE");
@@ -161,7 +161,7 @@ namespace Isogeo.Map.MapFunctions
         private bool AddFileLayer(ServiceType serviceType)
         {
             bool find;
-            switch (serviceType?.type.ToUpper())
+            switch (serviceType?.Type.ToUpper())
             {
                 case "SHP":
                     Log.Logger.Debug("Add File Layer - SHP");
@@ -179,17 +179,17 @@ namespace Isogeo.Map.MapFunctions
             if (find)
             {
                 CheckErrorFile(serviceType);
-                Log.Logger.Debug($"Add File Layer - Uri: {serviceType.url} | Title: {serviceType.title}");
-                LayerFactory.Instance.CreateLayer(new Uri(serviceType.url), MapView.Active.Map, 0, serviceType.title);
+                Log.Logger.Debug($"Add File Layer - Uri: {serviceType.Url} | Title: {serviceType.Title}");
+                LayerFactory.Instance.CreateLayer(new Uri(serviceType.Url), MapView.Active.Map, 0, serviceType.Title);
             }
             return find;
         }
 
         private bool AddCimServiceLayer(ServiceType serviceType)
         {
-            var serverConnection = new CIMInternetServerConnection { URL = serviceType?.url };
+            var serverConnection = new CIMInternetServerConnection { URL = serviceType?.Url };
             dynamic connection = null;
-            switch (serviceType?.type.ToUpper())
+            switch (serviceType?.Type.ToUpper())
             {
                 case "WMS":
                     Log.Logger.Debug("Add Cim Service Layer - WMS");
@@ -212,24 +212,24 @@ namespace Isogeo.Map.MapFunctions
             dynamic layer;
             if (connection == null)
             {
-                if (serviceType?.url == null)
+                if (serviceType?.Url == null)
                 {
                     Log.Logger.Debug("Add Cim Service Layer - Undefined service URL");
                     return false;
                 }
 
-                Log.Logger.Debug($"Add Cim Service Layer - Try with {serviceType.url + '/' + serviceType.name}");
-                layer = LayerFactory.Instance.CreateLayer(new Uri(serviceType.url + '/' + serviceType.name),
+                Log.Logger.Debug($"Add Cim Service Layer - Try with {serviceType.Url + '/' + serviceType.Name}");
+                layer = LayerFactory.Instance.CreateLayer(new Uri(serviceType.Url + '/' + serviceType.Name),
                     MapView.Active.Map);
                 if (layer != null) return true;
 
-                Log.Logger.Debug($"Add Cim Service Layer - Try with {serviceType.url + '/' + serviceType.title}");
-                layer = LayerFactory.Instance.CreateLayer(new Uri(serviceType.url + '/' + serviceType.title),
+                Log.Logger.Debug($"Add Cim Service Layer - Try with {serviceType.Url + '/' + serviceType.Title}");
+                layer = LayerFactory.Instance.CreateLayer(new Uri(serviceType.Url + '/' + serviceType.Title),
                     MapView.Active.Map);
                 if (layer != null) return true;
 
-                Log.Logger.Debug($"Add Cim Service Layer - Try with {serviceType.url}");
-                layer = LayerFactory.Instance.CreateLayer(new Uri(serviceType.url),
+                Log.Logger.Debug($"Add Cim Service Layer - Try with {serviceType.Url}");
+                layer = LayerFactory.Instance.CreateLayer(new Uri(serviceType.Url),
                     MapView.Active.Map);
 
                 return layer != null;
@@ -241,10 +241,10 @@ namespace Isogeo.Map.MapFunctions
 
         private static bool CheckErrorServiceType(ServiceType serviceType)
         {
-            Log.Logger.Info("Sheet - name: " + serviceType?.name + " url: " + serviceType?.url + " id: "
-                            + serviceType?.id + " creator: " + serviceType?.creator + "type: " + serviceType?.type +
-                            " title: " + serviceType?.title);
-            if (serviceType?.url == null || string.IsNullOrWhiteSpace(serviceType.url))
+            Log.Logger.Info("Sheet - name: " + serviceType?.Name + " url: " + serviceType?.Url + " id: "
+                            + serviceType?.Id + " creator: " + serviceType?.Creator + "type: " + serviceType?.Type +
+                            " title: " + serviceType?.Title);
+            if (serviceType?.Url == null || string.IsNullOrWhiteSpace(serviceType.Url))
             {
                 DisplayMessage(Language.Resources.Error_bad_metadata);
                 return false;
@@ -254,9 +254,9 @@ namespace Isogeo.Map.MapFunctions
 
         private static bool CheckSdeConnection(ServiceType serviceType)
         {
-            if (serviceType.type?.ToUpper() == "ARCSDE")
+            if (serviceType.Type?.ToUpper() == "ARCSDE")
             {
-                if (serviceType.url.Length == 0)
+                if (serviceType.Url.Length == 0)
                 {
                     DisplayMessage(Language.Resources.Message_Data_sde_not_configured);
                     return false;
@@ -268,7 +268,7 @@ namespace Isogeo.Map.MapFunctions
 
         public Task AddLayer(ServiceType serviceType)
         {
-            Log.Logger.Info($"START - Add Layer {serviceType?.title}");
+            Log.Logger.Info($"START - Add Layer {serviceType?.Title}");
 
             if (!CheckSdeConnection(serviceType))
                 return Task.CompletedTask;
@@ -303,12 +303,12 @@ namespace Isogeo.Map.MapFunctions
                 DisplayMessage(Language.Resources.Message_Data_Error);
                 Log.Logger.Error("Error Add Layer - " +
                                  ex.Message + " " +
-                                 serviceType?.url + " " +
-                                 serviceType?.id + " " +
-                                 serviceType?.name + " " +
-                                 serviceType?.title + " " +
-                                 serviceType?.type + " " +
-                                 serviceType?.creator);
+                                 serviceType?.Url + " " +
+                                 serviceType?.Id + " " +
+                                 serviceType?.Name + " " +
+                                 serviceType?.Title + " " +
+                                 serviceType?.Type + " " +
+                                 serviceType?.Creator);
             }
 
             return Task.CompletedTask;
