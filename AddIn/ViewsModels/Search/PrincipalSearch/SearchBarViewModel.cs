@@ -4,6 +4,11 @@ using Isogeo.Models.Network;
 using Isogeo.Models;
 using MVVMPattern;
 using MVVMPattern.MediatorPattern;
+using Isogeo.Utils.LogManager;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using Isogeo.Models.Configuration;
 
 namespace Isogeo.AddIn.ViewsModels.Search.PrincipalSearch
 {
@@ -11,6 +16,19 @@ namespace Isogeo.AddIn.ViewsModels.Search.PrincipalSearch
     {
         private readonly RestFunctions _restFunctions;
         private readonly FilterManager _filterManager;
+
+        private readonly IEnumerable<SearchList> _searchLists = new List<SearchList>()
+        {
+            new("type", true),
+            new("keyword:inspire-theme", true),
+            new("keyword:isogeo", true),
+            new("format", true),
+            new("coordinate-system", true),
+            new("owner", true),
+            new("action", true),
+            new("contact", true),
+            new("license", true) 
+        };
 
         public string SearchText
         {
@@ -22,9 +40,52 @@ namespace Isogeo.AddIn.ViewsModels.Search.PrincipalSearch
             }
         }
 
-        private void ChangeSearchTextEvent(object obj)
+        public string GetTextBarQuery(string query)
         {
-            SearchText = Variables.searchText;
+          
+            var textInput = "";
+           
+
+            if (Variables.search?.tags == null) 
+                return textInput;
+
+            if (!string.IsNullOrWhiteSpace(query))
+            {
+                var queryItems = query.Split(' ');
+
+                foreach (var queryItem in queryItems)
+                {
+                    var find = false;
+                    if (queryItem.Trim() != "")
+                    {
+                        if (_searchLists.Any(lst => queryItem.IndexOf(lst.filter + ":", StringComparison.Ordinal) == 0))
+                        {
+                            find = true;
+                        }
+                    }
+
+                    if (find) 
+                        continue;
+                    if (textInput != "") 
+                        textInput += " ";
+                    textInput += queryItem;
+                }
+
+            }
+
+            //if (string.IsNullOrWhiteSpace(query))
+            //{
+            //    Variables.searchText = textInput;
+            //}
+
+            return textInput;
+        }
+
+        private void ChangeSearchTextEvent(object queryItem)
+        {
+            var query = ((QueryItem)queryItem).query;
+            SearchText = GetTextBarQuery(query);
+            //SearchText = Variables.searchText;
         }
 
         public SearchBarViewModel(RestFunctions restFunctions, FilterManager filterManager)
