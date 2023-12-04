@@ -20,8 +20,8 @@
     <SolidColorBrush x:Key="DisableFontColorBrush">Gray</SolidColorBrush> <!-- Disable button, etc -->
     <SolidColorBrush x:Key="DisableBackgroundColorBrush">#3d3d40</SolidColorBrush>
 
-    <!--<Style TargetType="Image" x:Key="ImgLogo">
+    <Style TargetType="Image" x:Key="ImgLogo">
         <Setter Property="Source" Value="pack://application:,,,/Isogeo.Resources;component/Resources/isogeo_blanc.png"/>
-    </Style>-->
+    </Style>
 
 </ResourceDictionary>
