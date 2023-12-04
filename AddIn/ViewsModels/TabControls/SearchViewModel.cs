@@ -2,6 +2,7 @@
 using Isogeo.AddIn.ViewsModels.Search.AdvancedSearch;
 using Isogeo.AddIn.ViewsModels.Search.PrincipalSearch;
 using Isogeo.AddIn.ViewsModels.Search.Results;
+using Isogeo.Map.MapFunctions;
 
 namespace Isogeo.AddIn.ViewsModels.TabControls
 {
@@ -14,16 +15,19 @@ namespace Isogeo.AddIn.ViewsModels.TabControls
         public ResultsToolBarViewModel ResultsToolBarViewModel { get; set; }
         public PrincipalSearchViewModel PrincipalSearchViewModel { get; set; }
 
+        private readonly IMapFunctions _mapFunctions;
+
         private void InitViewModel()
         {
-            AdvancedSearchViewModel = new AdvancedSearchViewModel();
-            ResultsViewModel = new ResultsViewModel();
+            AdvancedSearchViewModel = new AdvancedSearchViewModel(_mapFunctions);
+            ResultsViewModel = new ResultsViewModel(_mapFunctions);
             ResultsToolBarViewModel = new ResultsToolBarViewModel();
             PrincipalSearchViewModel = new PrincipalSearchViewModel();
         }
 
         public SearchViewModel()
         {
+            _mapFunctions = new MapFunctions();
             InitViewModel();
         }
     }

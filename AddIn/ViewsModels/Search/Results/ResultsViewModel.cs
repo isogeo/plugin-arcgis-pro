@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows.Input;
 using Isogeo.AddIn.Views.Search.Results;
+using Isogeo.Map.MapFunctions;
 using Isogeo.Models;
 using Isogeo.Models.Filters;
 using MVVMPattern;
@@ -16,6 +17,7 @@ namespace Isogeo.AddIn.ViewsModels.Search.Results
 
         private ICommand _nextCommand;
         private ICommand _previousCommand;
+        private readonly IMapFunctions _mapFunctions;
 
         public ObservableCollection<ResultItem> ResultsList { get; set; }
 
@@ -119,8 +121,9 @@ namespace Isogeo.AddIn.ViewsModels.Search.Results
             ClearResults();
         }
 
-        public ResultsViewModel()
+        public ResultsViewModel(IMapFunctions mapFunctions)
         {
+            _mapFunctions = mapFunctions;
             ResultsList = new ObservableCollection<ResultItem>();
             ListNumberPage = new FilterItemList();
             ListNumberPage.PropertyChanged += Filter_PropertyChanged;
@@ -138,7 +141,7 @@ namespace Isogeo.AddIn.ViewsModels.Search.Results
                 for (var i = Variables.search.results.Count - 1; i >= 0; i--)
                 {
                     var result = Variables.search.results[i];
-                    var resultItem = new ResultItem();
+                    var resultItem = new ResultItem(_mapFunctions);
                     resultItem.Init(result);
                     ResultsList.Insert(0, resultItem);
                 }

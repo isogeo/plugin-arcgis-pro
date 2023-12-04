@@ -2,6 +2,7 @@
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using ArcGIS.Core.CIM;
 using ArcGIS.Core.Data;
 using ArcGIS.Core.Geometry;
@@ -12,10 +13,9 @@ using ArcGIS.Desktop.Mapping;
 using Isogeo.Utils.LogManager;
 using ServiceType = Isogeo.Map.DataType.ServiceType;
 
-
 namespace Isogeo.Map.MapFunctions
 {
-    public static class MapFunctions
+    public class MapFunctions : IMapFunctions
     {
 
         private static void DisplayMessage(string message)
@@ -30,28 +30,6 @@ namespace Isogeo.Map.MapFunctions
                    envelope.YMin.ToString(CultureInfo.InvariantCulture) + "," +
                    envelope.XMax.ToString(CultureInfo.InvariantCulture) + "," +
                    envelope.YMax.ToString(CultureInfo.InvariantCulture);
-        }
-
-        // Same as GetMapExtent() but with first visible Layer of active map, not used, but keep it for example
-        public static string GetFirstLayerExtend()
-        {
-            foreach (var layer in MapView.Active.Map.Layers)
-            {
-                if (layer.IsVisible)
-                {
-                    try
-                    {
-                        return QueuedTask.Run(() => layer.QueryExtent().SpatialReference.Wkid != SpatialReferences.WGS84.Wkid ?
-                            GetExtendWgs84(layer.QueryExtent()) :
-                            GetExtend(layer.QueryExtent())).GetAwaiter().GetResult();
-                    }
-                    catch (Exception e)
-                    {
-                        Log.Logger.Error(e.Message);
-                    }
-                }
-            }
-            return null;
         }
 
         private static string GetExtendWgs84(Envelope envelope)
@@ -78,24 +56,23 @@ namespace Isogeo.Map.MapFunctions
                     SpatialReferences.WGS84)).GetAwaiter().GetResult();
         }
 
-        public static async void SetMapExtent(string envelope)
+        public Task SetMapExtent(string envelope)
         {
             try
             {
-                await QueuedTask.Run(() =>
-                {
-                    var newEnvelope = StringToEnvelope(envelope);
-                    return MapView.Active.ZoomToAsync(newEnvelope, TimeSpan.FromSeconds(0.5));
-                });
+                var newEnvelope = StringToEnvelope(envelope);
+                MapView.Active.ZoomToAsync(newEnvelope, TimeSpan.FromSeconds(0.5));
             }
             catch (Exception e)
             {
                 Log.Logger.Error(e.Message);
                 MessageBox.Show(Language.Resources.Error_extent_map, "Isogeo");
             }
+
+            return Task.CompletedTask;
         }
 
-        public static string GetMapExtent()
+        public string GetMapExtent()
         {
             try
             {
@@ -159,7 +136,7 @@ namespace Isogeo.Map.MapFunctions
             }
         }
 
-        public static bool AddGeoDatabaseLayer(ServiceType serviceType)
+        private bool AddGeoDatabaseLayer(ServiceType serviceType)
         {
             bool find;
             switch (serviceType?.type.ToUpper())
@@ -183,7 +160,7 @@ namespace Isogeo.Map.MapFunctions
             return find;
         }
 
-        public static bool AddFileLayer(ServiceType serviceType)
+        private bool AddFileLayer(ServiceType serviceType)
         {
             bool find;
             switch (serviceType?.type.ToUpper())
@@ -210,28 +187,7 @@ namespace Isogeo.Map.MapFunctions
             return find;
         }
 
-        /// <summary>
-        /// In theory : Transform WMSServer URL to correct URL. 
-        ///  Code from Isogeo Arcmap plugin, don't know if it's really efficiency or useful (so not used currently)
-        /// </summary>
-        /// <param name="url">WMS URL</param>
-        /// <returns></returns>
-        private static string FormatWmsServerUrl(string url)
-        {
-            string retUrl;
-            var startParam = url.LastIndexOf('?') + 1;
-            if (startParam > 0)
-            {
-                retUrl = url.Substring(0, startParam);
-            }
-            else
-            {
-                retUrl = url + "?";
-            }
-            return retUrl;
-        }
-
-        public static bool AddCimServiceLayer(ServiceType serviceType)
+        private bool AddCimServiceLayer(ServiceType serviceType)
         {
             var serverConnection = new CIMInternetServerConnection { URL = serviceType?.url };
             dynamic connection = null;
@@ -298,7 +254,7 @@ namespace Isogeo.Map.MapFunctions
             return true;
         }
 
-        private static bool CheckSDEConnection(ServiceType serviceType)
+        private static bool CheckSdeConnection(ServiceType serviceType)
         {
             if (serviceType.type?.ToUpper() == "ARCSDE")
             {
@@ -312,37 +268,33 @@ namespace Isogeo.Map.MapFunctions
             return true;
         }
 
-        public static async void AddLayer(ServiceType serviceType)
+        public Task AddLayer(ServiceType serviceType)
         {
             Log.Logger.Info($"START - Add Layer {serviceType?.title}");
 
-            if (!CheckSDEConnection(serviceType))
-                return;
+            if (!CheckSdeConnection(serviceType))
+                return Task.CompletedTask;
 
             if (!CheckErrorServiceType(serviceType))
-                return;
-
+                return Task.CompletedTask;
 
             try
             {
-                await QueuedTask.Run(() =>
+                if (AddFileLayer(serviceType))
                 {
-                    if (AddFileLayer(serviceType))
-                    {
-                        Log.Logger.Info("END - Add Layer");
-                        return;
-                    }
-
-                    if (AddGeoDatabaseLayer(serviceType))
-                    {
-                        Log.Logger.Info("END - Add Layer");
-                        return;
-                    }
-
-                    if (!AddCimServiceLayer(serviceType))
-                        DisplayMessage(Language.Resources.Message_Data_Error);
                     Log.Logger.Info("END - Add Layer");
-                });
+                    return Task.CompletedTask;
+                }
+
+                if (AddGeoDatabaseLayer(serviceType))
+                {
+                    Log.Logger.Info("END - Add Layer");
+                    return Task.CompletedTask;
+                }
+
+                if (!AddCimServiceLayer(serviceType))
+                    DisplayMessage(Language.Resources.Message_Data_Error);
+                Log.Logger.Info("END - Add Layer");
             }
             catch (FileNotFoundException)
             {
@@ -360,6 +312,8 @@ namespace Isogeo.Map.MapFunctions
                                  serviceType?.type + " " +
                                  serviceType?.creator);
             }
+
+            return Task.CompletedTask;
         }
     }
 }

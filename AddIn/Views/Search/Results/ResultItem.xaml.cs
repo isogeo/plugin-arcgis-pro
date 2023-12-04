@@ -7,6 +7,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using ArcGIS.Desktop.Framework;
+using ArcGIS.Desktop.Framework.Threading.Tasks;
 using Isogeo.AddIn.ViewsModels.Metadata;
 using Isogeo.Map.DataType;
 using Isogeo.Map.MapFunctions;
@@ -38,6 +39,8 @@ namespace Isogeo.AddIn.Views.Search.Results
         private Metadata.Metadata _metadataInstance;
         private MetadataViewModel _metadataViewModel;
 
+        private readonly IMapFunctions _mapFunctions;
+
         private void InitResources()
         {
             var resources = Resources;
@@ -67,9 +70,10 @@ namespace Isogeo.AddIn.Views.Search.Results
             (bool)DependencyPropertyDescriptor.FromProperty(
                 DesignerProperties.IsInDesignModeProperty, typeof(DependencyObject)).Metadata.DefaultValue;
 
-        public ResultItem()
+        public ResultItem(IMapFunctions mapFunctions)
         {
             InitializeComponent();
+            _mapFunctions = mapFunctions;
             DataContext = this;
             if (!IsInDesignMode)
                 InitResources();
@@ -448,7 +452,10 @@ namespace Isogeo.AddIn.Views.Search.Results
 
             if (currentService != null && currentService.type?.ToUpper() == "ARCSDE")
                 currentService.url = Variables.configurationManager?.config?.fileSde;
-            MapFunctions.AddLayer(currentService);
+            QueuedTask.Run(() =>
+            {
+                _mapFunctions.AddLayer(currentService);
+            });
         }
     }
 }
