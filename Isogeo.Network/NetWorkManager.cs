@@ -29,7 +29,6 @@ namespace Isogeo.Network
         private bool AuthenticationPopUpIsOpen => _frmAuthentication != null && _frmAuthentication.IsLoaded;
 
         private static bool _isFirstLoad = true;
-        private static bool _isFirstUserRequest = true;
 
         private readonly HttpClient _client;
 
@@ -129,15 +128,6 @@ namespace Isogeo.Network
 
         private async Task<(bool, string)> CheckFirstRequestThenTokenThenSearchRequest(string query, int offset, string box, string od, string ob)
         {
-            if (_isFirstUserRequest)
-            {
-                _isFirstUserRequest = false;
-                query = _configurationManager.Config.DefaultSearch;
-                var state = await TokenThenSearchRequest(query, offset, _configurationManager.GlobalSoftwareSettings.NbResult, box,  od, ob);
-                if (!state)
-                    _isFirstUserRequest = true;
-                return (state, query);
-            }
             return ((await TokenThenSearchRequest(query, offset, _configurationManager.GlobalSoftwareSettings.NbResult, box, od, ob)), query);
         }
 

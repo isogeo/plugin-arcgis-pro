@@ -1,5 +1,7 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Reflection;
 using System.Runtime.ExceptionServices;
 using System.Threading.Tasks;
@@ -123,11 +125,14 @@ namespace Isogeo.AddIn
 
             Mediator.Register(MediatorEvent.UserAuthentication, ResetResearch);
 
-            var ob = _filterManager.GetOb();
-            var od = _filterManager.GetOd();
+            var query = configurationManager.Config.DefaultSearch;
+            var box = configurationManager.Config.GeographicalOperator;
+            var od = configurationManager.Config.SortDirection;
+            var ob = configurationManager.Config.sortMethode;
+
             Task.Run(() => Application.Current.Dispatcher.Invoke(async () => {
-                await _networkManager.ResetData(od, ob);
-                _filterManager.SetSearchList("");
+                await _networkManager.LoadData(query, 0,  box,  od, ob);
+                _filterManager.SetSearchList(query);
             }));
             Log.Logger.Info("END Initializing DockPaneViewModel");
         }
