@@ -2,13 +2,12 @@
 
 namespace Isogeo.Models.API
 {
-    public class SpecificationDetail
+    public class CoordinateSystem
     {
-
         [JsonPropertyName("name")]
         public string? Name { get; set; }
 
-        [JsonPropertyName("published")]
-        public string? Published { get; set; }
+        [JsonPropertyName("code")]
+        public string? Code { get; set; }
     }
 }

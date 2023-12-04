@@ -1,14 +1,13 @@
-﻿using System;
-using System.Text.Json.Serialization;
+﻿using System.Text.Json.Serialization;
 
 namespace Isogeo.Models.API
 {
     public class Specification
     {
         [JsonPropertyName("conformant")]
-        public bool conformant { get; set; }
+        public bool? Conformant { get; set; }
 
         [JsonPropertyName("specification")]
-        public SpecificationDetail specification { get; set; }
+        public SpecificationDetail? SpecificationDetails { get; set; }
     }
 }

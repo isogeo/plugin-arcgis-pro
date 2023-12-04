@@ -85,7 +85,7 @@ namespace Isogeo.Models.Network
                 }
                 else
                 {
-                    newToken = new Token() { access_token = _existingApiBearerToken.AccessToken, expires_in = 1, StatusResult = "OK", token_type = "Bearer" };
+                    newToken = new Token() { AccessToken = _existingApiBearerToken.AccessToken, ExpiresIn = 1, StatusResult = "OK", TokenType = "Bearer" };
                 }
                 if (newToken == null)
                 {
@@ -159,13 +159,13 @@ namespace Isogeo.Models.Network
             if (_isFirstUserRequest)
             {
                 _isFirstUserRequest = false;
-                query = Variables.configurationManager.config.defaultSearch;
-                var state = await TokenThenSearchRequest(query, offset, Variables.nbResult, box,  od, ob);
+                query = Variables.configurationManager.config.DefaultSearch;
+                var state = await TokenThenSearchRequest(query, offset, Variables.NbResult, box,  od, ob);
                 if (!state)
                     _isFirstUserRequest = true;
                 return (state, query);
             }
-            return ((await TokenThenSearchRequest(query, offset, Variables.nbResult, box, od, ob)), query);
+            return ((await TokenThenSearchRequest(query, offset, Variables.NbResult, box, od, ob)), query);
         }
 
         public async Task ResetData(string box, string od, string ob)
@@ -174,7 +174,7 @@ namespace Isogeo.Models.Network
             const string query = "";
             Mediator.NotifyColleagues("ChangeBox", "");
             var response = await CheckFirstRequestThenTokenThenSearchRequest(query, 0, box, od, ob);
-            Mediator.NotifyColleagues("ChangeQuery", new QueryItem { query = response.Item2 });
+            Mediator.NotifyColleagues("ChangeQuery", new QueryItem { Query = response.Item2 });
             Mediator.NotifyColleagues("ClearResults", null);
             if (!response.Item1)
                 Application.Current.Dispatcher.Invoke(OpenAuthenticationPopUp); // todo
@@ -186,7 +186,7 @@ namespace Isogeo.Models.Network
             if (!string.IsNullOrWhiteSpace(box))
                 Mediator.NotifyColleagues("ChangeBox", box);
             var response = await CheckFirstRequestThenTokenThenSearchRequest(query, offset, box, od, ob);
-            Mediator.NotifyColleagues("ChangeQuery", new QueryItem { query = response.Item2 });
+            Mediator.NotifyColleagues("ChangeQuery", new QueryItem { Query = response.Item2 });
             if (response.Item1)
                 Mediator.NotifyColleagues("ChangeOffset", offset);
             else
@@ -201,7 +201,7 @@ namespace Isogeo.Models.Network
             Log.Logger.Debug("Execute Reload Data");
             //var query = GetQueryCombos();
             var result = await CheckFirstRequestThenTokenThenSearchRequest(comboQuery, offset, box, od, ob);
-            Mediator.NotifyColleagues("ChangeQuery", new QueryItem { query = result.Item2 });
+            Mediator.NotifyColleagues("ChangeQuery", new QueryItem { Query = result.Item2 });
             if (result.Item1)
                 Mediator.NotifyColleagues("ChangeOffset", offset);
             else
@@ -222,10 +222,10 @@ namespace Isogeo.Models.Network
             Mediator.NotifyColleagues("EnableDockableWindowIsogeo", false);
             try
             {
-                var newToken = await SetConnection(Variables.configurationManager.config.userAuthentication.id,
+                var newToken = await SetConnection(Variables.configurationManager.config.UserAuthentication.Id,
                     RijndaelManagedEncryption.DecryptRijndael(
-                        Variables.configurationManager.config.userAuthentication.secret, Variables.encryptCode));
-                if (!(string.IsNullOrEmpty(newToken?.access_token) || newToken.StatusResult != "OK"))
+                        Variables.configurationManager.config.UserAuthentication.Secret, Variables.EncryptCode));
+                if (!(string.IsNullOrEmpty(newToken?.AccessToken) || newToken.StatusResult != "OK"))
                 {
                     Variables.search = await
                         SearchRequest(new ApiParameters(newToken, query, offset: offset, ob: /*Variables.cmbSortingMethodSelectedItem?.Id*/ob, 
@@ -260,10 +260,10 @@ namespace Isogeo.Models.Network
             Result result = null;
             try
             {
-                var newToken = await SetConnection(Variables.configurationManager.config.userAuthentication.id,
+                var newToken = await SetConnection(Variables.configurationManager.config.UserAuthentication.Id,
                     RijndaelManagedEncryption.DecryptRijndael(
-                        Variables.configurationManager.config.userAuthentication.secret, Variables.encryptCode));
-                if (!(string.IsNullOrEmpty(newToken?.access_token) || newToken.StatusResult != "OK"))
+                        Variables.configurationManager.config.UserAuthentication.Secret, Variables.EncryptCode));
+                if (!(string.IsNullOrEmpty(newToken?.AccessToken) || newToken.StatusResult != "OK"))
                 { 
                     result = await ApiDetailsResourceRequest(mdId, new ApiParameters(newToken));
                 }
@@ -298,7 +298,7 @@ namespace Isogeo.Models.Network
             try
             {
                 var clientCredentials = Encoding.UTF8.GetBytes($"{clientId}:{clientSecret}");
-                var url = Variables.configurationManager.config.apiIdUrl + "oauth/token";
+                var url = Variables.configurationManager.config.ApiIdUrl + "oauth/token";
                 var authenticationHeader = new AuthenticationHeaderValue("Basic", Convert.ToBase64String(clientCredentials));
                 _client.DefaultRequestHeaders.Authorization = authenticationHeader;
                 var response = await _client.PostAsync(url, new FormUrlEncodedContent(form));
@@ -331,7 +331,7 @@ namespace Isogeo.Models.Network
             Log.Logger.Info("Execution DetailsResourceRequest - ID : " + mdId);
             try
             {
-                var url = Variables.configurationManager.config.apiUrl + "resources/" + mdId;
+                var url = Variables.configurationManager.config.ApiUrl + "resources/" + mdId;
 
                 var includes = new List<(string, string)>()
                 {
@@ -349,12 +349,12 @@ namespace Isogeo.Models.Network
                 url += includes.Aggregate("?", (current,
                         element) => current + $"&{element.Item1}={element.Item2}");
 
-                    _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", parameters.token.access_token);
+                    _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", parameters.token.AccessToken);
                 var response = await _client.GetAsync(url);
                 var content = await response.Content.ReadAsStringAsync();
                 var result = JsonSerializer.Deserialize<Result>(content);
 
-                result.tagsLists = new Tags(result);
+                result.TagsLists = new Tags(result);
                 return result;
             }
             catch (Exception ex)
@@ -366,7 +366,7 @@ namespace Isogeo.Models.Network
 
         private static string GetRelRequest()
         {
-            return !string.IsNullOrWhiteSpace(Variables.configurationManager.config.geographicalOperator) ? Variables.configurationManager.config.geographicalOperator : "";
+            return !string.IsNullOrWhiteSpace(Variables.configurationManager.config.GeographicalOperator) ? Variables.configurationManager.config.GeographicalOperator : "";
         }
 
         private async Task<Search> SearchRequest(ApiParameters apiParameters, int nbResult)
@@ -376,7 +376,7 @@ namespace Isogeo.Models.Network
             {
                 Variables.search = new Search();
 
-                var url = Variables.configurationManager.config.apiUrl + "resources/search";
+                var url = Variables.configurationManager.config.ApiUrl + "resources/search";
 
                 var dictionary = new Dictionary<string, string>
                 {
@@ -394,7 +394,7 @@ namespace Isogeo.Models.Network
                 url += dictionary.Aggregate("?_include=layers", (current, 
                     element) => current + $"&{element.Key}={element.Value}");
 
-                _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", apiParameters.token.access_token);
+                _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", apiParameters.token.AccessToken);
                 var response = await _client.GetAsync(url);
 
                 var content = await response.Content.ReadAsStringAsync();
@@ -411,14 +411,14 @@ namespace Isogeo.Models.Network
         private WebProxy GetProxy()
         {
             Log.Logger.Debug("Initializing Proxy...");
-            if (string.IsNullOrEmpty(Variables.configurationManager.config.proxy.proxyUrl)) 
+            if (string.IsNullOrEmpty(Variables.configurationManager.config.Proxy.ProxyUrl)) 
                 return null;
             Log.Logger.Info( "Setting Proxy...");
-            var proxy = new WebProxy(Variables.configurationManager.config.proxy.proxyUrl, false);
-            if (!string.IsNullOrEmpty(Variables.configurationManager.config.proxy.proxyUser) && !string.IsNullOrEmpty(Variables.configurationManager.config.proxy.proxyPassword))
+            var proxy = new WebProxy(Variables.configurationManager.config.Proxy.ProxyUrl, false);
+            if (!string.IsNullOrEmpty(Variables.configurationManager.config.Proxy.ProxyUser) && !string.IsNullOrEmpty(Variables.configurationManager.config.Proxy.ProxyPassword))
             {
-                proxy.Credentials = new NetworkCredential(Variables.configurationManager.config.proxy.proxyUser, RijndaelManagedEncryption.DecryptRijndael(
-                    Variables.configurationManager.config.proxy.proxyPassword, Variables.encryptCode));
+                proxy.Credentials = new NetworkCredential(Variables.configurationManager.config.Proxy.ProxyUser, RijndaelManagedEncryption.DecryptRijndael(
+                    Variables.configurationManager.config.Proxy.ProxyPassword, Variables.EncryptCode));
             }
 
             Log.Logger.Debug("END Initializing Proxy");
@@ -432,26 +432,26 @@ namespace Isogeo.Models.Network
         {
             Log.Logger.Info("Save Last search");
             Configuration.Search currentSearch = null;
-            if (Variables.configurationManager?.config?.searchs?.searchs == null)
+            if (Variables.configurationManager?.config?.Searchs?.SearchDetails == null)
                 return;
-            foreach (var search in Variables.configurationManager.config.searchs.searchs)
+            foreach (var search in Variables.configurationManager.config.Searchs.SearchDetails)
             {
-                if (search.name == Resource.Previous_search)
+                if (search.Name == Resource.Previous_search)
                 {
                     currentSearch = search;
                     break;
                 }
             }
             if (currentSearch == null) {
-                currentSearch = new Configuration.Search {name = Resource.Previous_search};
+                currentSearch = new Configuration.Search {Name = Resource.Previous_search};
 
-                Variables.configurationManager.config.searchs.searchs.Add(currentSearch);
+                Variables.configurationManager.config.Searchs.SearchDetails.Add(currentSearch);
             }
-            currentSearch.query = query;
-            currentSearch.box = box;
+            currentSearch.Query = query;
+            currentSearch.Box = box;
             Variables.configurationManager.Save();
             Mediator.NotifyColleagues("ChangeQuickSearch", null);
-            Log.Logger.Info("END Save Last search - Query saved : " + '"' + currentSearch.query + '"');
+            Log.Logger.Info("END Save Last search - Query saved : " + '"' + currentSearch.Query + '"');
         }
     }
 }

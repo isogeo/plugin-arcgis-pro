@@ -138,8 +138,8 @@ namespace Isogeo.AddIn.Models
             _searchLists.list.Add(new SearchList("contact", true));
             _searchLists.list.Add(new SearchList("license", true));
 
-            if (Variables.search?.tags == null) return;
-            foreach (var item in Variables.search.tags)
+            if (Variables.search?.Tags == null) return;
+            foreach (var item in Variables.search.Tags)
             {
                 var key = item.Key;
                 var val = item.Value;
@@ -193,7 +193,7 @@ namespace Isogeo.AddIn.Models
 
 
             Variables.listLoading = true;
-            foreach (var func in Variables.functionsSetlist)
+            foreach (var func in Variables.FunctionsSetlist)
             {
                 func();
             }

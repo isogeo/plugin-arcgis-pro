@@ -1,11 +1,10 @@
-﻿using System.Collections.Generic;
-using System.Text.Json.Serialization;
+﻿using System.Text.Json.Serialization;
 
 namespace Isogeo.Models.Configuration
 {
     public class Searchs
     {
         [JsonPropertyName("searchs")]
-        public List<Search> searchs { get; set; }
+        public List<Search>? SearchDetails { get; set; }
     }
 }

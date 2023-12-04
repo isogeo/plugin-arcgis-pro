@@ -46,7 +46,7 @@ namespace Isogeo.AddIn.ViewsModels.Search.PrincipalSearch
             var textInput = "";
            
 
-            if (Variables.search?.tags == null) 
+            if (Variables.search?.Tags == null) 
                 return textInput;
 
             if (!string.IsNullOrWhiteSpace(query))
@@ -83,7 +83,7 @@ namespace Isogeo.AddIn.ViewsModels.Search.PrincipalSearch
 
         private void ChangeSearchTextEvent(object queryItem)
         {
-            var query = ((QueryItem)queryItem).query;
+            var query = ((QueryItem)queryItem).Query;
             SearchText = GetTextBarQuery(query);
             //SearchText = Variables.searchText;
         }

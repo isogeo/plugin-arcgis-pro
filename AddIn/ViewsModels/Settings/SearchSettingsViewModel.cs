@@ -41,10 +41,10 @@ namespace Isogeo.AddIn.ViewsModels.Settings
 
         public string SdePathFile
         {
-            get => Variables.configurationManager.config.fileSde;
+            get => Variables.configurationManager.config.FileSde;
             set
             {
-                Variables.configurationManager.config.fileSde = value;
+                Variables.configurationManager.config.FileSde = value;
                 Variables.configurationManager.Save();
                 OnPropertyChanged(nameof(SdePathFile));
             }
@@ -85,7 +85,7 @@ namespace Isogeo.AddIn.ViewsModels.Settings
 
         private static bool IsDuplicateQuickSearchName(string name)
         {
-            return Variables.configurationManager.config.searchs.searchs.Any(search => search.name == name);
+            return Variables.configurationManager.config.Searchs.SearchDetails.Any(search => search.Name == name);
         }
 
         private static bool NewQuickSearchNameIsValid(string name)
@@ -117,11 +117,11 @@ namespace Isogeo.AddIn.ViewsModels.Settings
             if (!NewQuickSearchNameIsValid(frm.TxtQuickSearchName.Text))
                 return;
 
-            for (var i = 0; i < Variables.configurationManager.config.searchs.searchs.Count; i += 1) // todo
+            for (var i = 0; i < Variables.configurationManager.config.Searchs.SearchDetails.Count; i += 1) // todo
             {
-                if (Variables.configurationManager.config.searchs.searchs[i].name !=
+                if (Variables.configurationManager.config.Searchs.SearchDetails[i].Name !=
                     QuickSearchSettingsFilters.SelectedItem.Name) continue;
-                Variables.configurationManager.config.searchs.searchs[i].name = frm.TxtQuickSearchName.Text;
+                Variables.configurationManager.config.Searchs.SearchDetails[i].Name = frm.TxtQuickSearchName.Text;
                 var item = QuickSearchSettingsFilters.SelectedItem;
                 QuickSearchSettingsFilters.Items.Remove(item);
                 var newItem = new FilterItem(item.Id, frm.TxtQuickSearchName.Text);
@@ -149,9 +149,9 @@ namespace Isogeo.AddIn.ViewsModels.Settings
 
         private void Delete()
         {
-            foreach (var search in Variables.configurationManager.config.searchs.searchs.Where(search => search.name == QuickSearchSettingsFilters.SelectedItem.Name))
+            foreach (var search in Variables.configurationManager.config.Searchs.SearchDetails.Where(search => search.Name == QuickSearchSettingsFilters.SelectedItem.Name))
             {
-                Variables.configurationManager.config.searchs.searchs.Remove(search);
+                Variables.configurationManager.config.Searchs.SearchDetails.Remove(search);
                 QuickSearchSettingsFilters.Items.Remove(QuickSearchSettingsFilters.SelectedItem);
                 Mediator.NotifyColleagues("ChangeQuickSearch", null);
                 Variables.configurationManager.Save();
@@ -166,7 +166,7 @@ namespace Isogeo.AddIn.ViewsModels.Settings
 
         private void Save()
         {
-            Variables.configurationManager.config.defaultSearch = QuickSearchSettingsFilters.SelectedItem.Id;
+            Variables.configurationManager.config.DefaultSearch = QuickSearchSettingsFilters.SelectedItem.Id;
             Variables.configurationManager.Save();
         }
 
@@ -179,10 +179,10 @@ namespace Isogeo.AddIn.ViewsModels.Settings
         private void InitGeographicalOperator()
         {// todo
             GeoGraphicalSettingsFilters = new GeoGraphicalSettingsFilters("GeoGraphicalSettings", _restFunctions, _filterManager, _mapFunctions);
-            if (Variables.configurationManager.config.geographicalOperator == "contains" ||  
-                Variables.configurationManager.config.geographicalOperator == "within" ||
-                Variables.configurationManager.config.geographicalOperator == "intersects") 
-                GeoGraphicalSettingsFilters.SelectItem("", Variables.configurationManager.config.geographicalOperator);
+            if (Variables.configurationManager.config.GeographicalOperator == "contains" ||  
+                Variables.configurationManager.config.GeographicalOperator == "within" ||
+                Variables.configurationManager.config.GeographicalOperator == "intersects") 
+                GeoGraphicalSettingsFilters.SelectItem("", Variables.configurationManager.config.GeographicalOperator);
             GeoGraphicalSettingsFilters.PropertyChanged += GeoGraphicalSettings_PropertyChanged;
             OnPropertyChanged(nameof(GeoGraphicalSettingsFilters));
         }
@@ -195,14 +195,14 @@ namespace Isogeo.AddIn.ViewsModels.Settings
         private void AddNewQuickSearchEvent(object newSearch)
         {
             QuickSearchSettingsFilters.AddItem((Isogeo.Models.Configuration.Search)newSearch);
-            QuickSearchSettingsFilters.SelectItem(((Isogeo.Models.Configuration.Search)newSearch).name);
+            QuickSearchSettingsFilters.SelectItem(((Isogeo.Models.Configuration.Search)newSearch).Name);
         }
 
         private void InitQuickSearch()
         {
             QuickSearchSettingsFilters = new QuickSearchSettingsFilters("QuickSearchSettings", _restFunctions, _filterManager, _mapFunctions);
             QuickSearchSettingsFilters.PropertyChanged += QuickSearchSettings_PropertyChanged;
-            QuickSearchSettingsFilters.SetItems(Variables.configurationManager.config.searchs.searchs);
+            QuickSearchSettingsFilters.SetItems(Variables.configurationManager.config.Searchs.SearchDetails);
         }
 
         private ICommand _loadSdeFileCommand;

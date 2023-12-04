@@ -1,140 +1,136 @@
-﻿using System.Collections.Generic;
-using System.Text.Json.Serialization;
+﻿using System.Text.Json.Serialization;
 
 namespace Isogeo.Models.API
 {
     public class Result
     {
         [JsonPropertyName("_id")]
-        public string _id { get; set; }
+        public string? Id { get; set; }
 
         [JsonPropertyName("_created")]
-        public string _created { get; set; }
+        public string? Created { get; set; }
 
         [JsonPropertyName("_modified")]
-        public string _modified { get; set; }
+        public string? Modified { get; set; }
 
         [JsonPropertyName("_deleted")]
-        public bool _deleted { get; set; }
+        public bool? Deleted { get; set; }
 
         [JsonPropertyName("created")]
-        public string created { get; set; }
+        public string? DataCreationDate { get; set; }
 
         [JsonPropertyName("modified")]
-        public string modified { get; set; }
+        public string? DataModificationDate { get; set; }
 
         [JsonPropertyName("_creator")]
-        public Creator _creator { get; set; }
+        public Creator? Creator { get; set; }
 
         [JsonPropertyName("keywords")]
-        public List<Keyword> keywords { get; set; }
+        public List<Keyword>? Keywords { get; set; }
 
         [JsonPropertyName("type")]
-        public string type { get; set; }
+        public string? Type { get; set; }
 
         [JsonPropertyName("series")]
-        public bool series { get; set; }
+        public bool? Series { get; set; }
 
         [JsonPropertyName("scale")]
-        public int scale { get; set; }
+        public int? Scale { get; set; }
 
         [JsonPropertyName("distance")]
-        public double distance { get; set; }
+        public double? Distance { get; set; }
 
         [JsonPropertyName("validFrom")]
-        public string validFrom { get; set; }
+        public string? ValidFrom { get; set; }
 
         [JsonPropertyName("validTo")]
-        public string validTo { get; set; }
+        public string? ValidTo { get; set; }
 
         [JsonPropertyName("validityComment")]
-        public string validityComment { get; set; }
+        public string? ValidityComment { get; set; }
 
         [JsonPropertyName("updateFrequency")]
-        public string updateFrequency { get; set; }
+        public string? UpdateFrequency { get; set; }
 
         [JsonPropertyName("encoding")]
-        public string encoding { get; set; }
+        public string? Encoding { get; set; }
 
         [JsonPropertyName("collectionMethod")]
-        public string collectionMethod { get; set; }
+        public string? CollectionMethod { get; set; }
 
         [JsonPropertyName("collectionContext")]
-        public string collectionContext { get; set; }
+        public string? CollectionContext { get; set; }
 
         [JsonPropertyName("editionProfile")]
-        public string editionProfile { get; set; }
+        public string? EditionProfile { get; set; }
 
         [JsonPropertyName("title")]
-        public string title { get; set; }
+        public string? Title { get; set; }
 
         [JsonPropertyName("abstract")]
-        public string @abstract { get; set; }
+        public string? Abstract { get; set; }
 
         [JsonPropertyName("format")]
-        public string format { get; set; }
+        public string? Format { get; set; }
 
         [JsonPropertyName("formatVersion")]
-        public string formatVersion { get; set; }
+        public string? FormatVersion { get; set; }
 
         [JsonPropertyName("language")]
-        public string language { get; set; }
+        public string? Language { get; set; }
 
         [JsonPropertyName("envelope")]
-        public Envelope envelope { get; set; }
+        public Envelope? Envelope { get; set; }
 
         [JsonPropertyName("geometry")]
-        public string geometry { get; set; }
+        public string? Geometry { get; set; }
 
         [JsonPropertyName("features")]
-        public int features { get; set; }
+        public int? Features { get; set; }
 
         [JsonPropertyName("name")]
-        public string name { get; set; }
+        public string? Name { get; set; }
 
         [JsonPropertyName("path")]
-        public string path { get; set; }
+        public string? Path { get; set; }
 
         [JsonPropertyName("topologicalConsistency")]
-        public string topologicalConsistency { get; set; }
+        public string? TopologicalConsistency { get; set; }
 
         [JsonPropertyName("_abilities")]
-        public List<string> _abilities { get; set; }
+        public List<string>? Abilities { get; set; }
 
         [JsonPropertyName("bbox")]
-        public List<double> bbox { get; set; }
-
-        //[JsonPropertyName("links")]
-        //public List<Link> links { get; set; }
+        public List<double>? Bbox { get; set; }
 
         [JsonPropertyName("layers")]
-        public List<Layer> layers { get; set; }
+        public List<Layer>? Layers { get; set; }
 
         [JsonPropertyName("serviceLayers")]
-        public List<ServiceLayer> serviceLayers { get; set; }
+        public List<ServiceLayer>? ServiceLayers { get; set; }
 
         [JsonPropertyName("tags")]
-        public IDictionary<string, string> tags { get; set; }
+        public IDictionary<string, string>? Tags { get; set; }
 
         [JsonPropertyName("tagsLists")]
-        public Tags tagsLists { get; set; }
+        public Tags? TagsLists { get; set; }
 
         [JsonPropertyName("contacts")]
-        public List<ContactParent> contacts { get; set; }
+        public List<ContactParent>? Contacts { get; set; }
 
         [JsonPropertyName("coordinate_system")]
-        public Coordinate_system coordinate_system { get; set; }
+        public CoordinateSystem? CoordinateSystem { get; set; }
 
         [JsonPropertyName("events")]
-        public List<Event> events { get; set; }
+        public List<Event>? Events { get; set; }
 
         [JsonPropertyName("specifications")]
-        public List<Specification> specifications { get; set; }
+        public List<Specification>? Specifications { get; set; }
 
         [JsonPropertyName("conditions")]
-        public List<Condition> conditions { get; set; }
+        public List<Condition>? Conditions { get; set; }
 
         [JsonPropertyName("limitations")]
-        public List<Limitation> limitations { get; set; }
+        public List<Limitation>? Limitations { get; set; }
     }	
 }

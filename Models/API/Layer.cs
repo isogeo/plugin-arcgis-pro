@@ -5,24 +5,12 @@ namespace Isogeo.Models.API
     public class Layer
     {
         [JsonPropertyName("_id")]
-        public string _id
-        {
-            get;
-            set;
-        }
+        public string? AnotherId { get; set; }
 
         [JsonPropertyName("id")]
-        public string id
-        {
-            get;
-            set;
-        }
+        public string? Id { get; set; }
 
         [JsonPropertyName("titles")]
-        public List<Title> titles
-        {
-            get;
-            set;
-        }
+        public List<Title>? Titles { get; set; }
     }
 }

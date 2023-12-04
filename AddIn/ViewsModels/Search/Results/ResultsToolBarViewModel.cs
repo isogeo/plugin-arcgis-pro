@@ -164,7 +164,7 @@ namespace Isogeo.AddIn.ViewsModels.Search.Results
 
         private static bool IsDuplicateQuickSearchName(string name)
         {
-            return Variables.configurationManager.config.searchs.searchs.Any(search => search.name == name);
+            return Variables.configurationManager.config.Searchs.SearchDetails.Any(search => search.Name == name);
         }
 
         private static bool NewQuickSearchNameIsValid(string name)
@@ -198,12 +198,12 @@ namespace Isogeo.AddIn.ViewsModels.Search.Results
 
             var newSearch = new Isogeo.Models.Configuration.Search
             {
-                name = frm.TxtQuickSearchName.Text,
-                query = _filterManager.GetQueryCombos(),
-                box =  _filterManager.GetBoxRequest()
+                Name = frm.TxtQuickSearchName.Text,
+                Query = _filterManager.GetQueryCombos(),
+                Box =  _filterManager.GetBoxRequest()
             };
 
-            Variables.configurationManager.config.searchs.searchs.Add(newSearch);
+            Variables.configurationManager.config.Searchs.SearchDetails.Add(newSearch);
             Variables.configurationManager.Save();
 
             Mediator.NotifyColleagues("AddNewQuickSearch", newSearch);
@@ -252,7 +252,7 @@ namespace Isogeo.AddIn.ViewsModels.Search.Results
             _filterManager.SetCmbSortingMethod(_cmbSortingMethodSelectedItem);
             OnPropertyChanged(nameof(CmbSortingMethodSelectedItem));
 
-            switch (Variables.configurationManager.config.sortDirection)
+            switch (Variables.configurationManager.config.SortDirection)
             {
                 case "asc":
                     _cmbSortingDirectionSelectedItem = CmbSortingDirection.First(x => x.Id == "asc");
@@ -286,19 +286,19 @@ namespace Isogeo.AddIn.ViewsModels.Search.Results
 
         private void DefineBtnResultsContent()
         {
-            if (Variables.search == null || Variables.search.total.Equals(0))
+            if (Variables.search == null || Variables.search.Total.Equals(0))
             {
                 BtnResultsContent = "0 " + Language.Resources.Result;
             }
             else
             {
-                BtnResultsContent = Variables.search.total + " " + Language.Resources.Results;
+                BtnResultsContent = Variables.search.Total + " " + Language.Resources.Results;
             }
         }
 
         private static bool CanRunBtnResults()
         {
-            return (Variables.search != null && !Variables.search.total.Equals(0));
+            return (Variables.search != null && !Variables.search.Total.Equals(0));
         }
 
         public ICommand ResetCommand

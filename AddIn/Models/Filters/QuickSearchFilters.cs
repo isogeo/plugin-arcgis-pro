@@ -37,7 +37,7 @@ namespace Isogeo.AddIn.Models.Filters
 
         public virtual void AddItem(Search item)
         {
-            base.AddItem(new FilterItem(item.query, item.name));
+            base.AddItem(new FilterItem(item.Query, item.Name));
         }
 
         public virtual void SetItems(List<Search> items)
@@ -46,7 +46,7 @@ namespace Isogeo.AddIn.Models.Filters
 
             for (var i = 0; i < items.Count; i += 1)
             {
-                comboItems.Add(new FilterItem(items[i].query, items[i].name) { GeographicalOperator = items[i].box});
+                comboItems.Add(new FilterItem(items[i].Query, items[i].Name) { GeographicalOperator = items[i].Box});
             }
             base.SetItems(comboItems);
         }

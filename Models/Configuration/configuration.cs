@@ -3,60 +3,60 @@ using System.Text.Json.Serialization;
 
 namespace Isogeo.Models.Configuration
 {
-    public class configuration
+    public class Configuration
     {
         [JsonPropertyName("language")]
-        public string language { get; set; }
+        public string? Language { get; set; }
 
         [JsonPropertyName("defaultSearch")]
-        public string defaultSearch { get; set; }
+        public string? DefaultSearch { get; set; }
 
         [JsonPropertyName("actionType")]
-        public string actionType { get; set; }
+        public string? ActionType { get; set; }
 
         [JsonPropertyName("owner")]
-        public string owner { get; set; }
+        public string? Owner { get; set; }
 
         [JsonPropertyName("geographicalOperator")]
-        public string geographicalOperator { get; set; }
+        public string? GeographicalOperator { get; set; }
 
         [JsonPropertyName("sortMethode")]
-        public string sortMethode { get; set; }
+        public string? sortMethode { get; set; }
 
         [JsonPropertyName("sortDirection")]
-        public string sortDirection { get; set; }
+        public string? SortDirection { get; set; }
 
         [JsonPropertyName("userAuthentication")]
-        public UserAuthentication userAuthentication { get; set; }
+        public UserAuthentication? UserAuthentication { get; set; }
 
         [JsonPropertyName("searchs")]
-        public Searchs searchs { get; set; }
+        public Searchs? Searchs { get; set; }
 
         [JsonPropertyName("proxy")]
-        public Proxy proxy { get; set; }
+        public Proxy? Proxy { get; set; }
 
         [JsonPropertyName("emailSupport")]
-        public string emailSupport { get; set; }
+        public string? EmailSupport { get; set; }
 
         [JsonPropertyName("emailSubject")]
-        public string emailSubject { get; set; }
+        public string? EmailSubject { get; set; }
 
         [JsonPropertyName("emailBody")]
-        public string emailBody { get; set; }
+        public string? EmailBody { get; set; }
 
         [JsonPropertyName("urlHelp")]
-        public string urlHelp { get; set; }
+        public string? UrlHelp { get; set; }
 
         [JsonPropertyName("query")]
-        public string query { get; set; }
+        public string? Query { get; set; }
 
         [JsonPropertyName("fileSde")]
-        public string fileSde { get; set; }
+        public string? FileSde { get; set; }
 
         [JsonPropertyName("apiIdUrl")]
-        public string apiIdUrl { get; set; }
+        public string? ApiIdUrl { get; set; }
 
         [JsonPropertyName("apiUrl")]
-        public string apiUrl { get; set; }
+        public string? ApiUrl { get; set; }
     }
 }

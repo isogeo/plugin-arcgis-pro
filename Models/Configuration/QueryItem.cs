@@ -6,6 +6,6 @@ namespace Isogeo.Models.Configuration
     public class QueryItem
     {
         [JsonPropertyName("query")]
-        public string query { get; set; }
+        public string? Query { get; set; }
     }
 }

@@ -19,7 +19,7 @@ namespace Isogeo.AddIn.Views.Settings
         {
             try
             {
-                Process.Start(new ProcessStartInfo(Variables.configurationManager.config.urlHelp) { UseShellExecute = true });
+                Process.Start(new ProcessStartInfo(Variables.configurationManager.config.UrlHelp) { UseShellExecute = true });
             }
             catch (Exception ex)
             {
@@ -39,7 +39,7 @@ namespace Isogeo.AddIn.Views.Settings
             try
             {
                 var mailto =
-                    $"mailto:{Variables.configurationManager.config.emailSupport}?Subject={Variables.configurationManager.config.emailSubject}&Body={Variables.configurationManager.config.emailBody.Replace("/n", "%0D%0A")}";
+                    $"mailto:{Variables.configurationManager.config.EmailSupport}?Subject={Variables.configurationManager.config.EmailSubject}&Body={Variables.configurationManager.config.EmailBody.Replace("/n", "%0D%0A")}";
                 Process.Start(new ProcessStartInfo(mailto) { UseShellExecute = true });
             }
             catch (Exception ex)

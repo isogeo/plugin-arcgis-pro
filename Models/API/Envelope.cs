@@ -1,61 +1,28 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text.Json.Serialization;
+﻿using System.Text.Json.Serialization;
 
 namespace Isogeo.Models.API
 {
     public class Envelope
     {
-
         [JsonPropertyName("type")]
-        public string type
-        {
-            get;
-            set;
-        }
+        public string? Type { get; set; }
 
         [JsonPropertyName("editionProfile")]
-        public string editionProfile
-        {
-            get;
-            set;
-        }
+        public string? EditionProfile { get; set; }
 
         [JsonPropertyName("series")]
-        public Boolean series
-        {
-            get;
-            set;
-        }
+        public bool? Series { get; set; }
 
         [JsonPropertyName("geometry")]
-        public string geometry
-        {
-            get;
-            set;
-        }
+        public string? Geometry { get; set; }
 
         [JsonPropertyName("features")]
-        public int features
-        {
-            get;
-            set;
-        }
+        public int? Features { get; set; }
 
         [JsonPropertyName("box")]
-        public List<Double> box
-        {
-            get;
-            set;
-        }
+        public List<double>? Box { get; set; }
 
         [JsonPropertyName("coordinates")]
-        public Object coordinates
-        {
-            get;
-            set;
-        }
-
-
+        public object? Coordinates { get; set; }
     }
 }

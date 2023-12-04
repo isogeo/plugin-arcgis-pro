@@ -6,9 +6,9 @@ namespace Isogeo.Models.Configuration
     public class UserAuthentication
     {
         [JsonPropertyName("id")]
-        public string id { get; set; }
+        public string? Id { get; set; }
 
         [JsonPropertyName("secret")]
-        public string secret { get; set; }
+        public string? Secret { get; set; }
     }
 }

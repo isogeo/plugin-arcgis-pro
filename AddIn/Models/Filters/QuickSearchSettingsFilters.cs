@@ -25,7 +25,7 @@ namespace Isogeo.AddIn.Models.Filters
 
         public override void AddItem(Search item)
         {
-            if (item?.name == Language.Resources.Previous_search || item?.name == "-") return;
+            if (item?.Name == Language.Resources.Previous_search || item?.Name == "-") return;
             base.AddItem(item);
         }
 
@@ -48,8 +48,8 @@ namespace Isogeo.AddIn.Models.Filters
 
             for (var i = 0; i < items.Count; i += 1)
             {
-                if (items[i].name == Language.Resources.Previous_search) continue;
-                comboItems.Add(new FilterItem (items[i].query, items[i].name) { GeographicalOperator = items[i].box});
+                if (items[i].Name == Language.Resources.Previous_search) continue;
+                comboItems.Add(new FilterItem (items[i].Query, items[i].Name) { GeographicalOperator = items[i].Box});
             }
             SetItems(comboItems);
         }

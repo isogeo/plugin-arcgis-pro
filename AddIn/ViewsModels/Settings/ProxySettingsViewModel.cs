@@ -65,17 +65,17 @@ namespace Isogeo.AddIn.ViewsModels.Settings
 
         private void Save(object parameter)
         {
-            Variables.configurationManager.config.proxy.proxyUrl = ProxyUrl;
-            Variables.configurationManager.config.proxy.proxyUser = User;
-            Variables.configurationManager.config.proxy.proxyPassword = "";
+            Variables.configurationManager.config.Proxy.ProxyUrl = ProxyUrl;
+            Variables.configurationManager.config.Proxy.ProxyUser = User;
+            Variables.configurationManager.config.Proxy.ProxyPassword = "";
 
             var password = ((PasswordBox) parameter).Password;
             try
             {
                 if (password != "")
                 {
-                    var encryptedString = RijndaelManagedEncryption.EncryptRijndael(password, Variables.encryptCode);
-                    Variables.configurationManager.config.proxy.proxyPassword = encryptedString;
+                    var encryptedString = RijndaelManagedEncryption.EncryptRijndael(password, Variables.EncryptCode);
+                    Variables.configurationManager.config.Proxy.ProxyPassword = encryptedString;
                 }
                 Variables.configurationManager.Save();
                 MessageBox.Show(Language.Resources.Proxy_saved);
@@ -93,8 +93,8 @@ namespace Isogeo.AddIn.ViewsModels.Settings
 
         private void Cancel()
         {// todo
-            ProxyUrl = Variables.configurationManager.config.proxy.proxyUrl;
-            User = Variables.configurationManager.config.proxy.proxyUser;
+            ProxyUrl = Variables.configurationManager.config.Proxy.ProxyUrl;
+            User = Variables.configurationManager.config.Proxy.ProxyUser;
         }
 
         private bool CanCancel()

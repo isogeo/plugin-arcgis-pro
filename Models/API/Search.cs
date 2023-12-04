@@ -5,21 +5,18 @@ namespace Isogeo.Models.API
     public class Search
     {
         [JsonPropertyName("tags")]
-        public IDictionary<string, string> tags { get; set; }
-
-        //[JsonPropertyName("envelope")]
-        //public string envelope { get; set; }
+        public IDictionary<string, string>? Tags { get; set; }
 
         [JsonPropertyName("offset")]
-        public double offset { get; set; }
+        public double Offset { get; set; }
 
         [JsonPropertyName("limit")]
-        public double limit { get; set; }
+        public double Limit { get; set; }
 
         [JsonPropertyName("total")]
-        public double total { get; set; }
+        public double Total { get; set; }
 
         [JsonPropertyName("results")]
-        public List<Result> results { get; set; }
+        public List<Result>? Results { get; set; }
     }
 }

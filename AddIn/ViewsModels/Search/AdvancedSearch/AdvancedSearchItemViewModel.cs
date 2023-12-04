@@ -60,7 +60,7 @@ namespace Isogeo.AddIn.ViewsModels.Search.AdvancedSearch
             _filterName = listName;
             if (listName != "keyword:isogeo")
             {
-                Variables.functionsSetlist.Add(SetList);
+                Variables.FunctionsSetlist.Add(SetList);
                 _filterManager.AddFilters(Filters);
             }
             else

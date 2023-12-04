@@ -44,7 +44,7 @@ namespace Isogeo.AddIn.Models.Filters
 
         protected override void SelectionChanged()
         {
-            Variables.configurationManager.config.geographicalOperator = SelectedItem.Id;
+            Variables.configurationManager.config.GeographicalOperator = SelectedItem.Id;
             Variables.configurationManager.Save();
             base.SelectionChanged();
         }

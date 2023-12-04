@@ -5,31 +5,15 @@ namespace Isogeo.Models.API
     public class Keyword
     {
         [JsonPropertyName("_id")]
-        public string _id
-        {
-            get;
-            set;
-        }
+        public string? Id { get; set; }
 
         [JsonPropertyName("_tag")]
-        public string _tag
-        {
-            get;
-            set;
-        }
+        public string? Tag { get; set; }
 
         [JsonPropertyName("code")]
-        public string code
-        {
-            get;
-            set;
-        }
+        public string? Code { get; set; }
 
         [JsonPropertyName("text")]
-        public string text
-        {
-            get;
-            set;
-        }
+        public string? Text { get; set; }
     }
 }

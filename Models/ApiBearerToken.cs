@@ -11,8 +11,8 @@ namespace Isogeo.Models
 
         public ApiBearerToken(Token token)
         {
-            AccessToken = token.access_token;
-            ExpirationDate = DateTimeOffset.UtcNow.AddSeconds(token.expires_in - 20); // -20 secs : security because we don't have a precise expiration date given inside the token received
+            AccessToken = token.AccessToken;
+            ExpirationDate = DateTimeOffset.UtcNow.AddSeconds(token.ExpiresIn - 20); // -20 secs : security because we don't have a precise expiration date given inside the token received
         }
     }
 }

@@ -5,12 +5,12 @@ namespace Isogeo.Models.Configuration
     public class Search
     {
         [JsonPropertyName("name")]
-        public string name { get; set; } = "";
+        public string? Name { get; set; } = "";
 
         [JsonPropertyName("query")]
-        public string query { get; set; } = "";
+        public string? Query { get; set; } = "";
 
         [JsonPropertyName("box")]
-        public string box { get; set; } = "";
+        public string? Box { get; set; } = "";
     }
 }

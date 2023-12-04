@@ -4,74 +4,34 @@ namespace Isogeo.Models.API
 {
     public class Condition
     {
-        public string _id
-        {
-            get;
-            set;
-        }
-
+        [JsonPropertyName("_id")]
+        public string? Id { get; set; }
 
         [JsonPropertyName("description")]
-        public string description
-        {
-            get;
-            set;
-        }
+        public string? Description { get; set; }
 
         [JsonPropertyName("license")]
-        public License license
-        {
-            get;
-            set;
-        }
+        public License? License { get; set; }
 
-        public string email
-        {
-            get;
-            set;
-        }
+        [JsonPropertyName("email")]
+        public string? Email { get; set; }
 
-        public string phone
-        {
-            get;
-            set;
-        }
+        [JsonPropertyName("phone")]
+        public string? Phone { get; set; }
 
-        public string addressLine1
-        {
-            get;
-            set;
-        }
+        [JsonPropertyName("addressLine1")]
+        public string? AddressLine1 { get; set; }
 
-        public string addressLine2
-        {
-            get;
-            set;
-        }
-        public string zipCode
-        {
-            get;
-            set;
-        }
-        public string city
-        {
-            get;
-            set;
-        }
-        public string country
-        {
-            get;
-            set;
-        }
-        
-                
-                
-                    
-                    
-                        
-                        
-                            
-        
-        
+        [JsonPropertyName("addressLine2")]
+        public string? AddressLine2 { get; set; }
+
+        [JsonPropertyName("zipCode")]
+        public string? ZipCode { get; set; }
+
+        [JsonPropertyName("city")]
+        public string? City { get; set; }
+
+        [JsonPropertyName("country")]
+        public string? Country { get; set; }
     }
 }

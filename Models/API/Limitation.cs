@@ -4,40 +4,19 @@ namespace Isogeo.Models.API
 {
     public class Limitation
     {
-
         [JsonPropertyName("_id")]
-        public string _id
-        {
-            get;
-            set;
-        }
+        public string? Id { get; set; }
 
         [JsonPropertyName("type")]
-        public string type
-        {
-            get;
-            set;
-        }
+        public string? Type { get; set; }
 
         [JsonPropertyName("description")]
-        public string description
-        {
-            get;
-            set;
-        }
+        public string? Description { get; set; }
 
         [JsonPropertyName("restriction")]
-        public string restriction
-        {
-            get;
-            set;
-        }
+        public string? Restriction { get; set; }
 
         [JsonPropertyName("directive")]
-        public Directive directive
-        {
-            get;
-            set;
-        }
+        public Directive? Directive { get; set; }
     }
 }

@@ -47,7 +47,7 @@ namespace Isogeo.AddIn.ViewsModels.Search.Results
                     return;
                 _listNumberPage.Selected = value;
                 OnPropertyChanged(nameof(CurrentPage));
-                Task.Run(() => Application.Current.Dispatcher.Invoke(async () => await SelectionChanged((int.Parse(value.Name) - 1) * Variables.nbResult)));
+                Task.Run(() => Application.Current.Dispatcher.Invoke(async () => await SelectionChanged((int.Parse(value.Name) - 1) * Variables.NbResult)));
             }
         }
 
@@ -99,8 +99,8 @@ namespace Isogeo.AddIn.ViewsModels.Search.Results
         private static int GetNbPage()
         {
             var nbPage = 1;
-            if (Variables.search != null && !Variables.search.total.Equals(0))
-                nbPage = Convert.ToInt32(Math.Ceiling(Variables.search.total / Variables.nbResult));
+            if (Variables.search != null && !Variables.search.Total.Equals(0))
+                nbPage = Convert.ToInt32(Math.Ceiling(Variables.search.Total / Variables.NbResult));
             return nbPage;
         }
 
@@ -149,11 +149,11 @@ namespace Isogeo.AddIn.ViewsModels.Search.Results
         {
             LstResultIsEnabled = false;
             ResultsList.Clear();
-            if (Variables.search != null && Variables.search.results != null)
+            if (Variables.search != null && Variables.search.Results != null)
             {
-                for (var i = Variables.search.results.Count - 1; i >= 0; i--)
+                for (var i = Variables.search.Results.Count - 1; i >= 0; i--)
                 {
-                    var result = Variables.search.results[i];
+                    var result = Variables.search.Results[i];
                     var resultItem = new ResultItem(_mapFunctions, _restFunctions);
                     resultItem.Init(result);
                     ResultsList.Insert(0, resultItem);
@@ -167,8 +167,8 @@ namespace Isogeo.AddIn.ViewsModels.Search.Results
 
         private void SetCurrentPageWithoutTriggerReloadApi(int offset)
         {
-            var index = (offset / Variables.nbResult + 1) - 1;
-            if (offset < 0 || Variables.nbResult <= 0 && ListNumberPage.Items.Count <= index) 
+            var index = (offset / Variables.NbResult + 1) - 1;
+            if (offset < 0 || Variables.NbResult <= 0 && ListNumberPage.Items.Count <= index) 
                 ListNumberPage.Selected = ListNumberPage.Items[0];
             else
                 ListNumberPage.Selected = ListNumberPage.Items[index];

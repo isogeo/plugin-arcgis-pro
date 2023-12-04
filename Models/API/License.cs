@@ -4,40 +4,19 @@ namespace Isogeo.Models.API
 {
     public class License
     {
-
         [JsonPropertyName("_id")]
-        public string _id
-        {
-            get;
-            set;
-        }
+        public string? Id { get; set; }
 
         [JsonPropertyName("_tag")]
-        public string _tag
-        {
-            get;
-            set;
-        }
+        public string? Tag { get; set; }
 
         [JsonPropertyName("name")]
-        public string name
-        {
-            get;
-            set;
-        }
+        public string? Name { get; set; }
 
         [JsonPropertyName("link")]
-        public string link
-        {
-            get;
-            set;
-        }
+        public string? Link { get; set; }
 
         [JsonPropertyName("content")]
-        public string content
-        {
-            get;
-            set;
-        }
+        public string? Content { get; set; }
     }
 }

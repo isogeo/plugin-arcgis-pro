@@ -78,11 +78,11 @@ namespace Isogeo.Models.Network.Authentication
         {
             try
             {
-                TxtId.Text = Variables.configurationManager.config.userAuthentication.id;
-                var secretValue = Variables.configurationManager.config.userAuthentication.secret;
+                TxtId.Text = Variables.configurationManager.config.UserAuthentication.Id;
+                var secretValue = Variables.configurationManager.config.UserAuthentication.Secret;
                 if (!string.IsNullOrWhiteSpace(secretValue))
                 {
-                    TxtSecret.Password = RijndaelManagedEncryption.DecryptRijndael(secretValue, Variables.encryptCode);
+                    TxtSecret.Password = RijndaelManagedEncryption.DecryptRijndael(secretValue, Variables.EncryptCode);
                 }
 
             }
@@ -124,11 +124,11 @@ namespace Isogeo.Models.Network.Authentication
 
             if (token?.StatusResult == "OK")
             {
-                Variables.configurationManager.config.userAuthentication.id = username;
+                Variables.configurationManager.config.UserAuthentication.Id = username;
                 try
                 {
-                    var encryptedstring = RijndaelManagedEncryption.EncryptRijndael(password, Variables.encryptCode);
-                    Variables.configurationManager.config.userAuthentication.secret = encryptedstring;
+                    var encryptedstring = RijndaelManagedEncryption.EncryptRijndael(password, Variables.EncryptCode);
+                    Variables.configurationManager.config.UserAuthentication.Secret = encryptedstring;
                     Variables.configurationManager.Save();
                     Mediator.NotifyColleagues("UserAuthentication", null);
                     Close();

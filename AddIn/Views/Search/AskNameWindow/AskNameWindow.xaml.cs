@@ -39,9 +39,9 @@ namespace Isogeo.AddIn.Views.Search.AskNameWindow
             }
 
             // todo
-            foreach (var search in Variables.configurationManager.config.searchs.searchs)
+            foreach (var search in Variables.configurationManager.config.Searchs.SearchDetails)
             {
-                if (search.name == TxtQuickSearchName.Text && search.name != oldName)
+                if (search.Name == TxtQuickSearchName.Text && search.Name != oldName)
                 {
                     MessageBox.Show(this,
                         Isogeo.Language.Resources.Quicksearch_already_exist, Title);

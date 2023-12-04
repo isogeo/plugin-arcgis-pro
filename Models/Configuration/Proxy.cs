@@ -5,21 +5,13 @@ namespace Isogeo.Models.Configuration
     public class Proxy
     {
         [JsonPropertyName("proxyUrl")]
-        public string proxyUrl { get; set; }
+        public string ProxyUrl { get; set; } = "";
 
         [JsonPropertyName("proxyUser")]
-        public string proxyUser { get; set; }
+        public string ProxyUser { get; set; } = "";
 
         [JsonPropertyName("proxyPassword")]
-        public string proxyPassword { get; set; }
-
-        public Proxy()
-        {
-            proxyUrl = "";
-            proxyUser = "";
-            proxyPassword = "";
-        }
-    
+        public string ProxyPassword { get; set; } = "";
     }
 
 

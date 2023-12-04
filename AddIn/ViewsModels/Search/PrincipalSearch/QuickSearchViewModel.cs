@@ -38,13 +38,13 @@ namespace Isogeo.AddIn.ViewsModels.Search.PrincipalSearch
         private void AddQuickSearchEvent(object newSearch)
         {
             Filters.AddItem((Isogeo.Models.Configuration.Search)newSearch);
-            Filters.SelectItem(((Isogeo.Models.Configuration.Search)newSearch).name);
+            Filters.SelectItem(((Isogeo.Models.Configuration.Search)newSearch).Name);
         }
 
         private void InitializeQuickSearch()
         {
             var cmbName = Filters.SelectedItem?.Name;
-            Filters.SetItems(Variables.configurationManager.config.searchs.searchs);
+            Filters.SetItems(Variables.configurationManager.config.Searchs.SearchDetails);
             Filters.SelectItem(Filters.Items.Any(s => s?.Name != null && 
                                                       !string.IsNullOrWhiteSpace(cmbName) &&
                                                       cmbName == s.Name)
@@ -68,7 +68,7 @@ namespace Isogeo.AddIn.ViewsModels.Search.PrincipalSearch
 
         private void ChangeSelectedQuickSearchItemEvent(object queryItem)
         {
-            var query = ((QueryItem) queryItem).query;
+            var query = ((QueryItem) queryItem).Query;
             var box = _filterManager.GetBoxRequest(); //((QueryItem) queryItem).box;
             var filterItems = Filters.Items.Where(s =>
                 s?.Id != null && !string.IsNullOrWhiteSpace(query) && s.Name != Language.Resources.Previous_search &&
@@ -105,7 +105,7 @@ namespace Isogeo.AddIn.ViewsModels.Search.PrincipalSearch
             _filterManager = filterManager;
             Filters = new QuickSearchFilters("QuickSearch", restFunctions, filterManager, mapFunctions);
             Filters.PropertyChanged += QuickSearch_PropertyChanged;
-            Filters.SetItems(Variables.configurationManager.config.searchs.searchs);
+            Filters.SetItems(Variables.configurationManager.config.Searchs.SearchDetails);
             Mediator.Register("AddNewQuickSearch", AddQuickSearchEvent);
             Mediator.Register("ChangeQuickSearch", ChangeQuickSearchEvent);
             Mediator.Register("ChangeQuery", ChangeSelectedQuickSearchItemEvent);

@@ -58,8 +58,8 @@ namespace Isogeo.AddIn
         private static void InitializeQuery()
         {
             Log.Logger.Info("Initialize Query");
-            if (Variables.configurationManager.config.query == "-") 
-                Variables.configurationManager.config.query = " ";
+            if (Variables.configurationManager.config.Query == "-") 
+                Variables.configurationManager.config.Query = " ";
         }
 
         private static void InitConfigurationManager()

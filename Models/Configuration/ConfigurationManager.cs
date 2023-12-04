@@ -1,8 +1,6 @@
-using System;
 using System.IO;
 using System.Text.Json;
 using System.Windows;
-using System.Xml;
 using System.Xml.Linq;
 using Isogeo.Utils.LogManager;
 
@@ -12,7 +10,7 @@ namespace Isogeo.Models.Configuration
     public class ConfigurationManager
     {
 
-        public configuration config;
+        public Configuration config;
 
         private XDocument _doc;
         private string _configPath;
@@ -35,7 +33,7 @@ namespace Isogeo.Models.Configuration
                 else
                 {
                     var json = File.ReadAllText(_filePath);
-                    config = JsonSerializer.Deserialize<configuration>(json);
+                    config = JsonSerializer.Deserialize<Configuration>(json);
                 }
             }
             catch (Exception ex)
@@ -54,10 +52,10 @@ namespace Isogeo.Models.Configuration
                           "App.config";
             _doc = XDocument.Load(_configPath);
 
-            config = SerializationUtil.Deserialize<configuration>(_doc);
-            if (config.proxy == null) config.proxy = new Proxy();
-            if (config.fileSde == null) config.fileSde = "";
-            if (config.owner == null) config.owner = "";
+            config = SerializationUtil.Deserialize<Configuration>(_doc);
+            config.Proxy ??= new Proxy();
+            config.FileSde ??= "";
+            config.Owner ??= "";
         }
 
         public ConfigurationManager()
