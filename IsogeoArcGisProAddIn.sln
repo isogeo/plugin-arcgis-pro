@@ -7,8 +7,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tests", "Tests\Tests.csproj
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Isogeo.Utils", "Utils\Isogeo.Utils.csproj", "{CBA2A1A2-9374-4EB5-B812-74CCCD427D25}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MVVMPattern", "MVVMPattern\MVVMPattern.csproj", "{56D3F8E9-8476-4413-819E-CCD79480AADB}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Isogeo.AddIn", "Addin\Isogeo.AddIn.csproj", "{3380BD95-8579-444B-9257-0384DD9710E4}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Isogeo.Models", "Models\Isogeo.Models.csproj", "{76FFE0AF-6B1D-4B70-A672-62FFAEA7ADA7}"
@@ -18,6 +16,8 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Isogeo.Resources", "Resources\Isogeo.Resources.csproj", "{F96ADC1C-725B-442C-9764-0E736BCDE6FD}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Isogeo.Language", "Language\Isogeo.Language.csproj", "{3B151493-C181-407B-B546-0D438BFF08BE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MVVMPattern", "MVVMPattern\MVVMPattern.csproj", "{23225387-FAB8-49AA-842E-D554A7D1F73F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -43,14 +43,6 @@ Global
 		{CBA2A1A2-9374-4EB5-B812-74CCCD427D25}.Release|Any CPU.Build.0 = Release|Any CPU
 		{CBA2A1A2-9374-4EB5-B812-74CCCD427D25}.Release|x64.ActiveCfg = Release|x64
 		{CBA2A1A2-9374-4EB5-B812-74CCCD427D25}.Release|x64.Build.0 = Release|x64
-		{56D3F8E9-8476-4413-819E-CCD79480AADB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{56D3F8E9-8476-4413-819E-CCD79480AADB}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{56D3F8E9-8476-4413-819E-CCD79480AADB}.Debug|x64.ActiveCfg = Debug|x64
-		{56D3F8E9-8476-4413-819E-CCD79480AADB}.Debug|x64.Build.0 = Debug|x64
-		{56D3F8E9-8476-4413-819E-CCD79480AADB}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{56D3F8E9-8476-4413-819E-CCD79480AADB}.Release|Any CPU.Build.0 = Release|Any CPU
-		{56D3F8E9-8476-4413-819E-CCD79480AADB}.Release|x64.ActiveCfg = Release|x64
-		{56D3F8E9-8476-4413-819E-CCD79480AADB}.Release|x64.Build.0 = Release|x64
 		{3380BD95-8579-444B-9257-0384DD9710E4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{3380BD95-8579-444B-9257-0384DD9710E4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3380BD95-8579-444B-9257-0384DD9710E4}.Debug|x64.ActiveCfg = Debug|Any CPU
@@ -91,6 +83,14 @@ Global
 		{3B151493-C181-407B-B546-0D438BFF08BE}.Release|Any CPU.Build.0 = Release|Any CPU
 		{3B151493-C181-407B-B546-0D438BFF08BE}.Release|x64.ActiveCfg = Release|Any CPU
 		{3B151493-C181-407B-B546-0D438BFF08BE}.Release|x64.Build.0 = Release|Any CPU
+		{23225387-FAB8-49AA-842E-D554A7D1F73F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{23225387-FAB8-49AA-842E-D554A7D1F73F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{23225387-FAB8-49AA-842E-D554A7D1F73F}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{23225387-FAB8-49AA-842E-D554A7D1F73F}.Debug|x64.Build.0 = Debug|Any CPU
+		{23225387-FAB8-49AA-842E-D554A7D1F73F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{23225387-FAB8-49AA-842E-D554A7D1F73F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{23225387-FAB8-49AA-842E-D554A7D1F73F}.Release|x64.ActiveCfg = Release|Any CPU
+		{23225387-FAB8-49AA-842E-D554A7D1F73F}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
