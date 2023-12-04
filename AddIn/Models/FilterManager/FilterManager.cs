@@ -18,10 +18,16 @@ namespace Isogeo.AddIn.Models.FilterManager
         private FilterItem _cmbSortingMethodSelectedItem;
         private FilterItem _cmbSortingDirectionSelectedItem;
 
+        private readonly List<Action> _functionsToSetlist = new();
 
         public FilterManager(IMapManager mapManager)
         {
             _mapManager = mapManager;
+        }
+
+        public void AddFunctionToSetFilterList(Action setListFunction)
+        {
+            _functionsToSetlist.Add(setListFunction);
         }
 
         public void AddFilters(Filters.Components.Filters filters)
@@ -193,7 +199,7 @@ namespace Isogeo.AddIn.Models.FilterManager
 
 
             Variables.listLoading = true;
-            foreach (var func in Variables.FunctionsSetlist)
+            foreach (var func in _functionsToSetlist)
             {
                 func();
             }

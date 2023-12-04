@@ -10,8 +10,6 @@ namespace Isogeo.Models
     {
         public static ConfigurationManager configurationManager;
 
-        public static readonly List<Action> FunctionsSetlist = new();
-
         public static readonly string EncryptCode = "alo(-'oàkd:jdthe";
 
         public static Search search = new();

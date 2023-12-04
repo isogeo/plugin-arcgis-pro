@@ -1,4 +1,5 @@
 ﻿using Isogeo.AddIn.Models.Filters.Components;
+using System;
 
 namespace Isogeo.AddIn.Models.FilterManager
 {
@@ -17,6 +18,8 @@ namespace Isogeo.AddIn.Models.FilterManager
         public string GetOb();
 
         public string GetBoxRequest();
+
+        public void AddFunctionToSetFilterList(Action setListFunction);
 
         /// <summary>
         /// Set Filters used by UI with current search lists

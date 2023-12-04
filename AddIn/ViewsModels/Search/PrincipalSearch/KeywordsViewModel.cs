@@ -35,7 +35,7 @@ namespace Isogeo.AddIn.ViewsModels.Search.PrincipalSearch
             _filterManager = filterManager;
             Filters = new Filters("keyword:isogeo", networkManager, filterManager, mapManager);
             Filters.PropertyChanged += Filter_PropertyChanged;
-            Variables.FunctionsSetlist.Add(SetList);
+            _filterManager.AddFunctionToSetFilterList(SetList);
             _filterManager.AddFilters(Filters);
         }
 
