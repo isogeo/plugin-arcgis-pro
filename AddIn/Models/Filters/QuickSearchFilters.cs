@@ -2,7 +2,6 @@
 using Isogeo.AddIn.Models.FilterManager;
 using Isogeo.AddIn.Models.Filters.Components;
 using Isogeo.Map;
-using Isogeo.Models;
 using Isogeo.Models.Configuration;
 using Isogeo.Network;
 
@@ -16,7 +15,7 @@ namespace Isogeo.AddIn.Models.Filters
 
         protected override async void SelectionChanged()
         {
-            if (Variables.listLoading || SelectedItem == null || SelectedItem.Name == "-")
+            if (FilterManager.FilterListsLoading || SelectedItem == null || SelectedItem.Name == "-")
                 return;
             var ob = FilterManager.GetOb();
             var od = FilterManager.GetOd();

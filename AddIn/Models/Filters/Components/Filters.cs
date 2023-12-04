@@ -60,7 +60,7 @@ namespace Isogeo.AddIn.Models.Filters.Components
 
         protected virtual async void SelectionChanged()
         {
-            if (Variables.listLoading)
+            if (FilterManager.FilterListsLoading)
                 return;
             var query = FilterManager.GetQueryCombos();
             var box = FilterManager.GetBoxRequest();

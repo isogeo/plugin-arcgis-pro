@@ -20,6 +20,8 @@ namespace Isogeo.AddIn.Models.FilterManager
 
         private readonly List<Action> _functionsToSetlist = new();
 
+        public bool FilterListsLoading { get; private set; }
+
         public FilterManager(IMapManager mapManager)
         {
             _mapManager = mapManager;
@@ -198,7 +200,7 @@ namespace Isogeo.AddIn.Models.FilterManager
             }
 
 
-            Variables.listLoading = true;
+            FilterListsLoading = true;
             foreach (var func in _functionsToSetlist)
             {
                 func();
@@ -209,7 +211,7 @@ namespace Isogeo.AddIn.Models.FilterManager
                 Variables.searchText = textInput;
             }
 
-            Variables.listLoading = false;
+            FilterListsLoading = false;
             Log.Logger.Debug("END Set search List");
         }
     }

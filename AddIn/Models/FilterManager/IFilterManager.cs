@@ -21,6 +21,8 @@ namespace Isogeo.AddIn.Models.FilterManager
 
         public void AddFunctionToSetFilterList(Action setListFunction);
 
+        public bool FilterListsLoading { get; }
+
         /// <summary>
         /// Set Filters used by UI with current search lists
         /// </summary>
