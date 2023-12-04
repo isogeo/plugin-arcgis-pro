@@ -17,8 +17,6 @@
         public static MediatorEvent UserAuthentication => new("UserAuthentication");
         public static MediatorEvent EnableDockableWindowIsogeo => new("EnableDockableWindowIsogeo");
 
-        public static MediatorEvent WaitingCmbLayerVisibilities => new("WaitingCmbLayerVisibilities");
-
         public static implicit operator string(MediatorEvent item) { return item.Value; }
 
         public override string ToString()

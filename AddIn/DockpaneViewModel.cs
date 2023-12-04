@@ -51,7 +51,6 @@ namespace Isogeo.AddIn
 
         public void EnableDockableWindowIsogeo(object obj)
         {
-            Mediator.NotifyColleagues(MediatorEvent.WaitingCmbLayerVisibilities, false);
             IsEnabled = (bool) obj;
         }
 
