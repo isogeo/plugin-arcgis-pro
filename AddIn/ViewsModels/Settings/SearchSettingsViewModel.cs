@@ -182,6 +182,9 @@ namespace Isogeo.AddIn.ViewsModels.Settings
         private void Save()
         {
             _configurationManager.Config.DefaultSearch = QuickSearchSettingsFilters.SelectedItem.Id;
+            _configurationManager.Config.SortDirection = _filterManager.GetOd();
+            _configurationManager.Config.SortMethode = _filterManager.GetOb();
+            _configurationManager.Config.GeographicalOperator = _filterManager.GetBoxRequest();
             _configurationManager.Save();
         }
 

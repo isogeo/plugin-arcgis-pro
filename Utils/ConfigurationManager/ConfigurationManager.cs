@@ -63,7 +63,6 @@ namespace Isogeo.Utils.ConfigurationManager
             Config = SerializationUtil.Deserialize<Configuration.Configuration>(doc);
             Config.Proxy ??= new Proxy();
             Config.FileSde ??= "";
-            Config.Owner ??= "";
         }
 
         public void Save()

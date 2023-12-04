@@ -228,7 +228,7 @@ namespace Isogeo.AddIn.ViewsModels.Search.Results
         public void SetSortingDefault()
         {
             _isUpdateCombo = true;
-            switch (_configurationManager.Config.sortMethode)
+            switch (_configurationManager.Config.SortMethode)
             {
                 case "relevance":
                     _cmbSortingMethodSelectedItem = CmbSortingMethod.First(x => x.Id == "relevance");

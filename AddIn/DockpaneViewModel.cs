@@ -56,13 +56,6 @@ namespace Isogeo.AddIn
             IsEnabled = (bool) obj;
         }
 
-        private static void InitializeQuery(IConfigurationManager configurationManager)
-        {
-            Log.Logger.Info("Initialize Query");
-            if (configurationManager.Config.Query == "-") 
-                configurationManager.Config.Query = " ";
-        }
-
         public void Exception(object sender, FirstChanceExceptionEventArgs e)
         {
             if (e.Exception.TargetSite.DeclaringType != null && e.Exception.TargetSite.DeclaringType.Assembly == Assembly.GetExecutingAssembly())
@@ -128,7 +121,7 @@ namespace Isogeo.AddIn
             var query = configurationManager.Config.DefaultSearch;
             var box = configurationManager.Config.GeographicalOperator;
             var od = configurationManager.Config.SortDirection;
-            var ob = configurationManager.Config.sortMethode;
+            var ob = configurationManager.Config.SortMethode;
 
             Task.Run(() => Application.Current.Dispatcher.Invoke(async () => {
                 await _networkManager.LoadData(query, 0,  box,  od, ob);
