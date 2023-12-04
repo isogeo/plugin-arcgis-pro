@@ -213,9 +213,8 @@ namespace Isogeo.Network
                 if (!(string.IsNullOrEmpty(newToken?.AccessToken) || newToken.StatusResult != "OK"))
                 {
                     Variables.search = await
-                        SearchRequest(new ApiParameters(newToken, query, offset: offset, ob: /*Variables.cmbSortingMethodSelectedItem?.Id*/ob, 
-                            od: /*Variables.cmbSortingDirectionSelectedItem?.Id*/od, box: box, rel: GetRelRequest()), nbResult);
-                    //SetSearchList(query);
+                        SearchRequest(new ApiParameters(newToken, query, offset: offset, ob: ob, 
+                            od: od, box: box, rel: GetRelRequest()), nbResult);
                 }
                 else
                     state = false;
@@ -393,7 +392,7 @@ namespace Isogeo.Network
         }
       
 
-        private WebProxy GetProxy()
+        private static WebProxy GetProxy()
         {
             Log.Logger.Debug("Initializing Proxy...");
             if (string.IsNullOrEmpty(Variables.configurationManager.config.Proxy.ProxyUrl)) 
