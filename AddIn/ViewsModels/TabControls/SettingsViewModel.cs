@@ -2,7 +2,6 @@
 using Isogeo.AddIn.Models;
 using Isogeo.AddIn.ViewsModels.Settings;
 using Isogeo.Map.MapFunctions;
-using Isogeo.Models.Network;
 using Isogeo.Network;
 
 namespace Isogeo.AddIn.ViewsModels.TabControls

@@ -1,6 +1,4 @@
-﻿using Isogeo.Models.Network;
-using System.Windows;
-using Isogeo.Models.Network.Authentication;
+﻿using System.Windows;
 
 namespace Isogeo.AddIn.Views.Settings
 {

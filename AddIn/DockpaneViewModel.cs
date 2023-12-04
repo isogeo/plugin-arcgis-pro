@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Runtime.ExceptionServices;
@@ -11,7 +10,6 @@ using Isogeo.AddIn.Models;
 using Isogeo.AddIn.ViewsModels.TabControls;
 using Isogeo.Map.MapFunctions;
 using Isogeo.Models;
-using Isogeo.Models.Network;
 using Isogeo.Network;
 using Isogeo.Utils.LogManager;
 using MVVMPattern.MediatorPattern;

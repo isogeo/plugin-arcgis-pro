@@ -6,7 +6,6 @@ using Isogeo.AddIn.Models.Filters.Components;
 using Isogeo.Map.MapFunctions;
 using Isogeo.Models;
 using Isogeo.Models.Configuration;
-using Isogeo.Models.Network;
 using Isogeo.Network;
 using Isogeo.Utils.Box;
 using MVVMPattern;

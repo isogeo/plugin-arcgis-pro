@@ -1,10 +1,8 @@
 ﻿using System.Threading.Tasks;
 using Isogeo.AddIn.Models;
-using Isogeo.Models.Network;
 using Isogeo.Models;
 using MVVMPattern;
 using MVVMPattern.MediatorPattern;
-using Isogeo.Utils.LogManager;
 using System;
 using System.Collections.Generic;
 using System.Linq;

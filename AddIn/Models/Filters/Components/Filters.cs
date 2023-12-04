@@ -3,10 +3,8 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using ActiproSoftware.Windows.Extensions;
-using Isogeo.AddIn.Models;
 using Isogeo.Map.MapFunctions;
 using Isogeo.Models;
-using Isogeo.Models.Network;
 using Isogeo.Network;
 using MVVMPattern;
 

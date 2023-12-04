@@ -1,5 +1,4 @@
 ﻿using Isogeo.Models.Network.Authentication;
-using Isogeo.Models.Network;
 using MVVMPattern;
 using System.Windows.Input;
 using Isogeo.Network;

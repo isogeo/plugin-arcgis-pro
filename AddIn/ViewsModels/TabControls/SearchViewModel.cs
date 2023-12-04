@@ -4,7 +4,6 @@ using Isogeo.AddIn.ViewsModels.Search.AdvancedSearch;
 using Isogeo.AddIn.ViewsModels.Search.PrincipalSearch;
 using Isogeo.AddIn.ViewsModels.Search.Results;
 using Isogeo.Map.MapFunctions;
-using Isogeo.Models.Network;
 using Isogeo.Network;
 
 namespace Isogeo.AddIn.ViewsModels.TabControls

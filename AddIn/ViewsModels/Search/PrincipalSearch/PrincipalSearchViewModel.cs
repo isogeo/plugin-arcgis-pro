@@ -1,6 +1,5 @@
 ﻿using Isogeo.AddIn.Models;
 using Isogeo.Map.MapFunctions;
-using Isogeo.Models.Network;
 using Isogeo.Network;
 using MVVMPattern;
 

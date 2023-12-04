@@ -4,7 +4,6 @@ using Isogeo.AddIn.Models;
 using Isogeo.AddIn.Models.Filters.Components;
 using Isogeo.Map.MapFunctions;
 using Isogeo.Models;
-using Isogeo.Models.Network;
 using Isogeo.Network;
 using MVVMPattern;
 using MVVMPattern.MediatorPattern;

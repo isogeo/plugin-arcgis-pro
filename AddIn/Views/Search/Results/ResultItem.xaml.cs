@@ -13,7 +13,6 @@ using Isogeo.Map.DataType;
 using Isogeo.Map.MapFunctions;
 using Isogeo.Models;
 using Isogeo.Models.API;
-using Isogeo.Models.Network;
 using Isogeo.Network;
 using Isogeo.Utils.LogManager;
 using MVVMPattern.MediatorPattern;
