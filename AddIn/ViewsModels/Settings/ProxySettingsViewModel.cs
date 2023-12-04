@@ -3,6 +3,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using Isogeo.Models;
+using Isogeo.Models.Configuration;
 using Isogeo.Utils.LogManager;
 using Isogeo.Utils.ManageEncrypt;
 using MVVMPattern;
@@ -12,6 +13,13 @@ namespace Isogeo.AddIn.ViewsModels.Settings
 {
     public class ProxySettingsViewModel : ViewModelBase
     {
+
+        private readonly ConfigurationManager _configurationManager;
+
+        public ProxySettingsViewModel(ConfigurationManager configurationManager)
+        {
+            _configurationManager = configurationManager;
+        }
 
         private string _proxyUrl;
         public string ProxyUrl
@@ -65,9 +73,9 @@ namespace Isogeo.AddIn.ViewsModels.Settings
 
         private void Save(object parameter)
         {
-            Variables.configurationManager.config.Proxy.ProxyUrl = ProxyUrl;
-            Variables.configurationManager.config.Proxy.ProxyUser = User;
-            Variables.configurationManager.config.Proxy.ProxyPassword = "";
+            _configurationManager.config.Proxy.ProxyUrl = ProxyUrl;
+            _configurationManager.config.Proxy.ProxyUser = User;
+            _configurationManager.config.Proxy.ProxyPassword = "";
 
             var password = ((PasswordBox) parameter).Password;
             try
@@ -75,9 +83,9 @@ namespace Isogeo.AddIn.ViewsModels.Settings
                 if (password != "")
                 {
                     var encryptedString = RijndaelManagedEncryption.EncryptRijndael(password, Variables.EncryptCode);
-                    Variables.configurationManager.config.Proxy.ProxyPassword = encryptedString;
+                    _configurationManager.config.Proxy.ProxyPassword = encryptedString;
                 }
-                Variables.configurationManager.Save();
+                _configurationManager.Save();
                 MessageBox.Show(Language.Resources.Proxy_saved);
             }
             catch (Exception ex)
@@ -93,8 +101,8 @@ namespace Isogeo.AddIn.ViewsModels.Settings
 
         private void Cancel()
         {// todo
-            ProxyUrl = Variables.configurationManager.config.Proxy.ProxyUrl;
-            User = Variables.configurationManager.config.Proxy.ProxyUser;
+            ProxyUrl = _configurationManager.config.Proxy.ProxyUrl;
+            User = _configurationManager.config.Proxy.ProxyUser;
         }
 
         private bool CanCancel()

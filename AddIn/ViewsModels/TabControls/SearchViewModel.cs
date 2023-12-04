@@ -18,20 +18,23 @@ namespace Isogeo.AddIn.ViewsModels.TabControls
         private readonly IMapManager _mapManager;
         private readonly INetworkManager _networkManager;
         private readonly IFilterManager _filterManager;
+        private readonly Isogeo.Models.Configuration.ConfigurationManager _configurationManager;
 
         private void InitViewModel()
         {
             AdvancedSearchViewModel = new AdvancedSearchViewModel(_mapManager, _filterManager, _networkManager);
-            ResultsViewModel = new ResultsViewModel(_mapManager, _networkManager, _filterManager);
-            ResultsToolBarViewModel = new ResultsToolBarViewModel(_networkManager, _filterManager);
-            PrincipalSearchViewModel = new PrincipalSearchViewModel(_filterManager, _networkManager, _mapManager);
+            ResultsViewModel = new ResultsViewModel(_mapManager, _networkManager, _filterManager, _configurationManager);
+            ResultsToolBarViewModel = new ResultsToolBarViewModel(_networkManager, _filterManager, _configurationManager);
+            PrincipalSearchViewModel = new PrincipalSearchViewModel(_filterManager, _networkManager, _mapManager, _configurationManager);
         }
 
-        public SearchViewModel(INetworkManager networkManager, IFilterManager filterManager, IMapManager mapManager)
+        public SearchViewModel(INetworkManager networkManager, IFilterManager filterManager, IMapManager mapManager,
+            Isogeo.Models.Configuration.ConfigurationManager configurationManager)
         {
             _filterManager = filterManager;
             _mapManager = mapManager;
             _networkManager = networkManager;
+            _configurationManager = configurationManager;
             InitViewModel();
         }
     }

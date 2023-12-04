@@ -9,6 +9,7 @@ using Isogeo.AddIn.Models.Filters.Components;
 using Isogeo.AddIn.Views.Search.Results;
 using Isogeo.Map;
 using Isogeo.Models;
+using Isogeo.Models.Configuration;
 using Isogeo.Network;
 using MVVMPattern;
 using MVVMPattern.MediatorPattern;
@@ -24,6 +25,7 @@ namespace Isogeo.AddIn.ViewsModels.Search.Results
         private readonly IMapManager _mapManager;
         private readonly INetworkManager _networkManager;
         private readonly IFilterManager _filterManager;
+        private readonly ConfigurationManager _configurationManager;
 
         public ObservableCollection<ResultItem> ResultsList { get; set; }
 
@@ -132,8 +134,10 @@ namespace Isogeo.AddIn.ViewsModels.Search.Results
             ClearResults();
         }
 
-        public ResultsViewModel(IMapManager mapManager, INetworkManager networkManager, IFilterManager filterManager)
+        public ResultsViewModel(IMapManager mapManager, INetworkManager networkManager, IFilterManager filterManager,
+            ConfigurationManager configurationManager)
         {
+            _configurationManager = configurationManager;
             _mapManager = mapManager;
             _networkManager = networkManager;
             _filterManager = filterManager;
@@ -154,7 +158,7 @@ namespace Isogeo.AddIn.ViewsModels.Search.Results
                 for (var i = Variables.search.Results.Count - 1; i >= 0; i--)
                 {
                     var result = Variables.search.Results[i];
-                    var resultItem = new ResultItem(_mapManager, _networkManager);
+                    var resultItem = new ResultItem(_mapManager, _networkManager, _configurationManager);
                     resultItem.Init(result);
                     ResultsList.Insert(0, resultItem);
                 }

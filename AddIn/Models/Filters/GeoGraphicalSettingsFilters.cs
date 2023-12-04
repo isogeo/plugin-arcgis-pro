@@ -2,15 +2,19 @@
 using Isogeo.AddIn.Models.FilterManager;
 using Isogeo.AddIn.Models.Filters.Components;
 using Isogeo.Map;
-using Isogeo.Models;
+using Isogeo.Models.Configuration;
 using Isogeo.Network;
 
 namespace Isogeo.AddIn.Models.Filters
 {
     public class GeoGraphicalSettingsFilters : Components.Filters
     {
-        public GeoGraphicalSettingsFilters(string name, INetworkManager networkManager, IFilterManager filterManager, IMapManager mapManager) : base(name, networkManager, filterManager, mapManager)
+        private readonly ConfigurationManager _configurationManager;
+
+        public GeoGraphicalSettingsFilters(string name, INetworkManager networkManager, IFilterManager filterManager, IMapManager mapManager,
+            ConfigurationManager configurationManager) : base(name, networkManager, filterManager, mapManager)
         {
+            _configurationManager = configurationManager;
             var items = new List<FilterItem>
             {
                 new("intersects", Language.Resources.Geographic_type_intersects),
@@ -45,8 +49,8 @@ namespace Isogeo.AddIn.Models.Filters
 
         protected override void SelectionChanged()
         {
-            Variables.configurationManager.config.GeographicalOperator = SelectedItem.Id;
-            Variables.configurationManager.Save();
+            _configurationManager.config.GeographicalOperator = SelectedItem.Id;
+            _configurationManager.Save();
             base.SelectionChanged();
         }
 

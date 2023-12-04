@@ -9,7 +9,6 @@ using ArcGIS.Desktop.Framework.Contracts;
 using Isogeo.AddIn.Models.FilterManager;
 using Isogeo.AddIn.ViewsModels.TabControls;
 using Isogeo.Map;
-using Isogeo.Models;
 using Isogeo.Network;
 using Isogeo.Utils.LogManager;
 using MVVMPattern.MediatorPattern;
@@ -53,17 +52,11 @@ namespace Isogeo.AddIn
             IsEnabled = (bool) obj;
         }
 
-        private static void InitializeQuery()
+        private static void InitializeQuery(ConfigurationManager configurationManager)
         {
             Log.Logger.Info("Initialize Query");
-            if (Variables.configurationManager.config.Query == "-") 
-                Variables.configurationManager.config.Query = " ";
-        }
-
-        private static void InitConfigurationManager()
-        {
-            Log.Logger.Info("Initializing Configuration Manager");
-            Variables.configurationManager = new ConfigurationManager();
+            if (configurationManager.config.Query == "-") 
+                configurationManager.config.Query = " ";
         }
 
         public void Exception(object sender, FirstChanceExceptionEventArgs e)
@@ -98,18 +91,20 @@ namespace Isogeo.AddIn
             Log.Logger.Info("Isogeo ArcGisPro Add-In is opening...");
             Log.Logger.Info("Initializing DockPaneViewModel ...");
             Mediator.Register("EnableDockableWindowIsogeo", EnableDockableWindowIsogeo);
-            InitConfigurationManager();
-            InitializeQuery();
+
+            Log.Logger.Info("Initializing Configuration Manager");
+            var configurationManager = new ConfigurationManager();
 
             PrimaryMenuList.Add(new TabControl { Text = Language.Resources.Search_word });
             PrimaryMenuList.Add(new TabControl { Text = Language.Resources.Settings });
 
+           
             IMapManager mapManager = new MapManager();
-            _networkManager = new NetworkManager();
+            _networkManager = new NetworkManager(configurationManager);
             _filterManager = new FilterManager(mapManager);
 
-            _paneH1Vm = new SearchViewModel(_networkManager, _filterManager, mapManager);
-            _paneH2Vm = new SettingsViewModel(_networkManager, _filterManager, mapManager);
+            _paneH1Vm = new SearchViewModel(_networkManager, _filterManager, mapManager, configurationManager);
+            _paneH2Vm = new SettingsViewModel(_networkManager, _filterManager, mapManager, configurationManager);
             _selectedPanelHeaderIndex = 0;
             CurrentPage = _paneH1Vm;
 

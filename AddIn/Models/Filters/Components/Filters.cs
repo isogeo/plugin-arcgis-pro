@@ -5,7 +5,6 @@ using System.Linq;
 using ActiproSoftware.Windows.Extensions;
 using Isogeo.AddIn.Models.FilterManager;
 using Isogeo.Map;
-using Isogeo.Models;
 using Isogeo.Network;
 using MVVMPattern;
 

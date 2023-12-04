@@ -7,6 +7,7 @@ using Isogeo.AddIn.Models.FilterManager;
 using Isogeo.AddIn.Models.Filters.Components;
 using Isogeo.AddIn.Views.Search.AskNameWindow;
 using Isogeo.Models;
+using Isogeo.Models.Configuration;
 using Isogeo.Network;
 using Isogeo.Utils.LogManager;
 using MVVMPattern;
@@ -20,6 +21,8 @@ namespace Isogeo.AddIn.ViewsModels.Search.Results
         private readonly INetworkManager _networkManager;
 
         private readonly IFilterManager _filterManager;
+
+        private readonly ConfigurationManager _configurationManager;
 
         private bool _isUpdateCombo;
 
@@ -131,10 +134,11 @@ namespace Isogeo.AddIn.ViewsModels.Search.Results
             SetSortingDefault();
         }
 
-        public ResultsToolBarViewModel(INetworkManager networkManager, IFilterManager filterManager)
+        public ResultsToolBarViewModel(INetworkManager networkManager, IFilterManager filterManager, ConfigurationManager configurationManager)
         {
             _networkManager = networkManager;
             _filterManager = filterManager;
+            _configurationManager = configurationManager;
             Mediator.Register("ChangeQuery", TotalResultsEvent);
             Mediator.Register("setSortingDefault", SetSortingDefaultEvent);
             BtnResultsContent = Language.Resources.Results;
@@ -142,7 +146,6 @@ namespace Isogeo.AddIn.ViewsModels.Search.Results
             SetSortingDefault();
             CmbSortingDirectionSelectedItem.PropertyChanged += Refresh_PropertyChanged;
             CmbSortingMethodSelectedItem.PropertyChanged += Refresh_PropertyChanged;
-
         }
 
         private ICommand _saveCommand;
@@ -161,12 +164,12 @@ namespace Isogeo.AddIn.ViewsModels.Search.Results
             return true;
         }
 
-        private static bool IsDuplicateQuickSearchName(string name)
+        private bool IsDuplicateQuickSearchName(string name)
         {
-            return Variables.configurationManager.config.Searchs.SearchDetails.Any(search => search.Name == name);
+            return _configurationManager.config.Searchs.SearchDetails.Any(search => search.Name == name);
         }
 
-        private static bool NewQuickSearchNameIsValid(string name)
+        private bool NewQuickSearchNameIsValid(string name)
         {
             if (string.IsNullOrWhiteSpace(name))
             {
@@ -187,7 +190,7 @@ namespace Isogeo.AddIn.ViewsModels.Search.Results
 
         private void Save()
         {
-            var frm = new AskNameWindow(false, "");
+            var frm = new AskNameWindow(false, "", _configurationManager);
             frm.ShowDialog();
 
             if (frm.isSave == false) return;
@@ -202,8 +205,8 @@ namespace Isogeo.AddIn.ViewsModels.Search.Results
                 Box =  _filterManager.GetBoxRequest()
             };
 
-            Variables.configurationManager.config.Searchs.SearchDetails.Add(newSearch);
-            Variables.configurationManager.Save();
+            _configurationManager.config.Searchs.SearchDetails.Add(newSearch);
+            _configurationManager.Save();
 
             Mediator.NotifyColleagues("AddNewQuickSearch", newSearch);
         }
@@ -223,7 +226,7 @@ namespace Isogeo.AddIn.ViewsModels.Search.Results
         public void SetSortingDefault()
         {
             _isUpdateCombo = true;
-            switch (Variables.configurationManager.config.sortMethode)
+            switch (_configurationManager.config.sortMethode)
             {
                 case "relevance":
                     _cmbSortingMethodSelectedItem = CmbSortingMethod.First(x => x.Id == "relevance");
@@ -251,7 +254,7 @@ namespace Isogeo.AddIn.ViewsModels.Search.Results
             _filterManager.SetCmbSortingMethod(_cmbSortingMethodSelectedItem);
             OnPropertyChanged(nameof(CmbSortingMethodSelectedItem));
 
-            switch (Variables.configurationManager.config.SortDirection)
+            switch (_configurationManager.config.SortDirection)
             {
                 case "asc":
                     _cmbSortingDirectionSelectedItem = CmbSortingDirection.First(x => x.Id == "asc");

@@ -4,7 +4,6 @@ using Isogeo.AddIn.Models.FilterManager;
 using Isogeo.AddIn.Models.Filters;
 using Isogeo.AddIn.Models.Filters.Components;
 using Isogeo.Map;
-using Isogeo.Models;
 using Isogeo.Models.Configuration;
 using Isogeo.Network;
 using Isogeo.Utils.Box;
@@ -15,6 +14,8 @@ namespace Isogeo.AddIn.ViewsModels.Search.PrincipalSearch
 {
     public class QuickSearchViewModel : ViewModelBase
     {
+        private readonly ConfigurationManager _configurationManager;
+
         public string ComponentName => Language.Resources.Quick_search;
 
         private readonly IFilterManager _filterManager;
@@ -44,7 +45,7 @@ namespace Isogeo.AddIn.ViewsModels.Search.PrincipalSearch
         private void InitializeQuickSearch()
         {
             var cmbName = Filters.SelectedItem?.Name;
-            Filters.SetItems(Variables.configurationManager.config.Searchs.SearchDetails);
+            Filters.SetItems(_configurationManager.config.Searchs.SearchDetails);
             Filters.SelectItem(Filters.Items.Any(s => s?.Name != null && 
                                                       !string.IsNullOrWhiteSpace(cmbName) &&
                                                       cmbName == s.Name)
@@ -100,12 +101,14 @@ namespace Isogeo.AddIn.ViewsModels.Search.PrincipalSearch
             Filters.SelectItem("-");
         }
 
-        public QuickSearchViewModel(INetworkManager networkManager, IFilterManager filterManager, IMapManager mapManager)
+        public QuickSearchViewModel(INetworkManager networkManager, IFilterManager filterManager, IMapManager mapManager,
+            ConfigurationManager configurationManager)
         {
+            _configurationManager = configurationManager;
             _filterManager = filterManager;
             Filters = new QuickSearchFilters("QuickSearch", networkManager, filterManager, mapManager);
             Filters.PropertyChanged += QuickSearch_PropertyChanged;
-            Filters.SetItems(Variables.configurationManager.config.Searchs.SearchDetails);
+            Filters.SetItems(_configurationManager.config.Searchs.SearchDetails);
             Mediator.Register("AddNewQuickSearch", AddQuickSearchEvent);
             Mediator.Register("ChangeQuickSearch", ChangeQuickSearchEvent);
             Mediator.Register("ChangeQuery", ChangeSelectedQuickSearchItemEvent);

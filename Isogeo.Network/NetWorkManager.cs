@@ -19,6 +19,8 @@ namespace Isogeo.Network
 {
     public class NetworkManager : INetworkManager
     {
+        private readonly ConfigurationManager _configurationManager;
+
         private Models.Network.Authentication.Authentication _frmAuthentication;
 
         private ApiBearerToken? _existingApiBearerToken;
@@ -30,8 +32,9 @@ namespace Isogeo.Network
 
         private readonly HttpClient _client;
 
-        public NetworkManager()
+        public NetworkManager(ConfigurationManager configurationManager)
         {
+            _configurationManager = configurationManager;
             var proxy = GetProxy();
             var httpClientHandler = new HttpClientHandler()
             {
@@ -150,7 +153,7 @@ namespace Isogeo.Network
         public void OpenAuthenticationPopUp()
         {
             if (AuthenticationPopUpIsOpen) return;
-            _frmAuthentication = new Models.Network.Authentication.Authentication(this);
+            _frmAuthentication = new Models.Network.Authentication.Authentication(this, _configurationManager);
             _frmAuthentication.ShowDialog();
         }
 
@@ -159,7 +162,7 @@ namespace Isogeo.Network
             if (_isFirstUserRequest)
             {
                 _isFirstUserRequest = false;
-                query = Variables.configurationManager.config.DefaultSearch;
+                query = _configurationManager.config.DefaultSearch;
                 var state = await TokenThenSearchRequest(query, offset, Variables.NbResult, box,  od, ob);
                 if (!state)
                     _isFirstUserRequest = true;
@@ -207,9 +210,9 @@ namespace Isogeo.Network
             Mediator.NotifyColleagues("EnableDockableWindowIsogeo", false);
             try
             {
-                var newToken = await SetConnection(Variables.configurationManager.config.UserAuthentication.Id,
+                var newToken = await SetConnection(_configurationManager.config.UserAuthentication.Id,
                     RijndaelManagedEncryption.DecryptRijndael(
-                        Variables.configurationManager.config.UserAuthentication.Secret, Variables.EncryptCode));
+                        _configurationManager.config.UserAuthentication.Secret, Variables.EncryptCode));
                 if (!(string.IsNullOrEmpty(newToken?.AccessToken) || newToken.StatusResult != "OK"))
                 {
                     Variables.search = await
@@ -244,9 +247,9 @@ namespace Isogeo.Network
             Result result = null;
             try
             {
-                var newToken = await SetConnection(Variables.configurationManager.config.UserAuthentication.Id,
+                var newToken = await SetConnection(_configurationManager.config.UserAuthentication.Id,
                     RijndaelManagedEncryption.DecryptRijndael(
-                        Variables.configurationManager.config.UserAuthentication.Secret, Variables.EncryptCode));
+                        _configurationManager.config.UserAuthentication.Secret, Variables.EncryptCode));
                 if (!(string.IsNullOrEmpty(newToken?.AccessToken) || newToken.StatusResult != "OK"))
                 { 
                     result = await ApiDetailsResourceRequest(mdId, new ApiParameters(newToken));
@@ -282,7 +285,7 @@ namespace Isogeo.Network
             try
             {
                 var clientCredentials = Encoding.UTF8.GetBytes($"{clientId}:{clientSecret}");
-                var url = Variables.configurationManager.config.ApiIdUrl + "oauth/token";
+                var url = _configurationManager.config.ApiIdUrl + "oauth/token";
                 var authenticationHeader = new AuthenticationHeaderValue("Basic", Convert.ToBase64String(clientCredentials));
                 _client.DefaultRequestHeaders.Authorization = authenticationHeader;
                 var response = await _client.PostAsync(url, new FormUrlEncodedContent(form));
@@ -315,7 +318,7 @@ namespace Isogeo.Network
             Log.Logger.Info("Execution DetailsResourceRequest - ID : " + mdId);
             try
             {
-                var url = Variables.configurationManager.config.ApiUrl + "resources/" + mdId;
+                var url = _configurationManager.config.ApiUrl + "resources/" + mdId;
 
                 var includes = new List<(string, string)>()
                 {
@@ -348,9 +351,9 @@ namespace Isogeo.Network
             return null;
         }
 
-        private static string GetRelRequest()
+        private string GetRelRequest()
         {
-            return !string.IsNullOrWhiteSpace(Variables.configurationManager.config.GeographicalOperator) ? Variables.configurationManager.config.GeographicalOperator : "";
+            return !string.IsNullOrWhiteSpace(_configurationManager.config.GeographicalOperator) ? _configurationManager.config.GeographicalOperator : "";
         }
 
         private async Task<Search> SearchRequest(ApiParameters apiParameters, int nbResult)
@@ -360,7 +363,7 @@ namespace Isogeo.Network
             {
                 Variables.search = new Search();
 
-                var url = Variables.configurationManager.config.ApiUrl + "resources/search";
+                var url = _configurationManager.config.ApiUrl + "resources/search";
 
                 var dictionary = new Dictionary<string, string>
                 {
@@ -392,17 +395,17 @@ namespace Isogeo.Network
         }
       
 
-        private static WebProxy GetProxy()
+        private WebProxy GetProxy()
         {
             Log.Logger.Debug("Initializing Proxy...");
-            if (string.IsNullOrEmpty(Variables.configurationManager.config.Proxy.ProxyUrl)) 
+            if (string.IsNullOrEmpty(_configurationManager.config.Proxy.ProxyUrl)) 
                 return null;
             Log.Logger.Info( "Setting Proxy...");
-            var proxy = new WebProxy(Variables.configurationManager.config.Proxy.ProxyUrl, false);
-            if (!string.IsNullOrEmpty(Variables.configurationManager.config.Proxy.ProxyUser) && !string.IsNullOrEmpty(Variables.configurationManager.config.Proxy.ProxyPassword))
+            var proxy = new WebProxy(_configurationManager.config.Proxy.ProxyUrl, false);
+            if (!string.IsNullOrEmpty(_configurationManager.config.Proxy.ProxyUser) && !string.IsNullOrEmpty(_configurationManager.config.Proxy.ProxyPassword))
             {
-                proxy.Credentials = new NetworkCredential(Variables.configurationManager.config.Proxy.ProxyUser, RijndaelManagedEncryption.DecryptRijndael(
-                    Variables.configurationManager.config.Proxy.ProxyPassword, Variables.EncryptCode));
+                proxy.Credentials = new NetworkCredential(_configurationManager.config.Proxy.ProxyUser, RijndaelManagedEncryption.DecryptRijndael(
+                    _configurationManager.config.Proxy.ProxyPassword, Variables.EncryptCode));
             }
 
             Log.Logger.Debug("END Initializing Proxy");
@@ -416,9 +419,9 @@ namespace Isogeo.Network
         {
             Log.Logger.Info("Save Last search");
             Models.Configuration.Search currentSearch = null;
-            if (Variables.configurationManager?.config?.Searchs?.SearchDetails == null)
+            if (_configurationManager?.config?.Searchs?.SearchDetails == null)
                 return;
-            foreach (var search in Variables.configurationManager.config.Searchs.SearchDetails)
+            foreach (var search in _configurationManager.config.Searchs.SearchDetails)
             {
                 if (search.Name == Resource.Previous_search)
                 {
@@ -429,11 +432,11 @@ namespace Isogeo.Network
             if (currentSearch == null) {
                 currentSearch = new Models.Configuration.Search {Name = Resource.Previous_search};
 
-                Variables.configurationManager.config.Searchs.SearchDetails.Add(currentSearch);
+                _configurationManager.config.Searchs.SearchDetails.Add(currentSearch);
             }
             currentSearch.Query = query;
             currentSearch.Box = box;
-            Variables.configurationManager.Save();
+            _configurationManager.Save();
             Mediator.NotifyColleagues("ChangeQuickSearch", null);
             Log.Logger.Info("END Save Last search - Query saved : " + '"' + currentSearch.Query + '"');
         }
