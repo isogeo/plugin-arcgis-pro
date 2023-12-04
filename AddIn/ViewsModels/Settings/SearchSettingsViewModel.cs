@@ -34,7 +34,7 @@ namespace Isogeo.AddIn.ViewsModels.Settings
             set
             {
                 _geoGraphicalSettings = value;
-                OnPropertyChanged("GeoGraphicalSettings");
+                OnPropertyChanged(nameof(GeoGraphicalSettings));
             }
         }
 
@@ -45,7 +45,7 @@ namespace Isogeo.AddIn.ViewsModels.Settings
             {
                 Variables.configurationManager.config.fileSde = value;
                 Variables.configurationManager.Save();
-                OnPropertyChanged("SdePathFile");
+                OnPropertyChanged(nameof(SdePathFile));
             }
         }
 
@@ -54,9 +54,9 @@ namespace Isogeo.AddIn.ViewsModels.Settings
         {
             get
             {
-                return _saveCommand ?? (_saveCommand = new RelayCommand(
+                return _saveCommand ??= new RelayCommand(
                     x => Save(),
-                    y => CanSave()));
+                    y => CanSave());
             }
         }
 
@@ -65,9 +65,9 @@ namespace Isogeo.AddIn.ViewsModels.Settings
         {
             get
             {
-                return _deleteCommand ?? (_deleteCommand = new RelayCommand(
+                return _deleteCommand ??= new RelayCommand(
                     x => Delete(),
-                    y => CanDelete()));
+                    y => CanDelete());
             }
         }
 
@@ -76,9 +76,9 @@ namespace Isogeo.AddIn.ViewsModels.Settings
         {
             get
             {
-                return _renameCommand ?? (_renameCommand = new RelayCommand(
+                return _renameCommand ??= new RelayCommand(
                     x => Rename(),
-                    y => CanRename()));
+                    y => CanRename());
             }
         }
 
@@ -87,7 +87,7 @@ namespace Isogeo.AddIn.ViewsModels.Settings
             return Variables.configurationManager.config.searchs.searchs.Any(search => search.name == name);
         }
 
-        private bool NewQuickSearchNameIsValid(string name)
+        private static bool NewQuickSearchNameIsValid(string name)
         {
             if (string.IsNullOrWhiteSpace(name))
             {
@@ -123,9 +123,9 @@ namespace Isogeo.AddIn.ViewsModels.Settings
                 Variables.configurationManager.config.searchs.searchs[i].name = frm.TxtQuickSearchName.Text;
                 var item = QuickSearchSettings.SelectedItem;
                 QuickSearchSettings.Items.Remove(item);
-                item.Name = frm.TxtQuickSearchName.Text;
-                QuickSearchSettings.AddItem(item);
-                QuickSearchSettings.SelectItem(item.Name);
+                var newItem = new FilterItem(item.Id, frm.TxtQuickSearchName.Text);
+                QuickSearchSettings.AddItem(newItem);
+                QuickSearchSettings.SelectItem(newItem.Name);
                 Variables.configurationManager.Save();
                 Mediator.NotifyColleagues("ChangeQuickSearch", null);
                 break;
@@ -172,7 +172,7 @@ namespace Isogeo.AddIn.ViewsModels.Settings
 
         private void GeoGraphicalSettings_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            OnPropertyChanged("GeoGraphicalSettings");
+            OnPropertyChanged(nameof(GeoGraphicalSettings));
         }
 
         private void InitGeographicalOperator()
@@ -183,12 +183,12 @@ namespace Isogeo.AddIn.ViewsModels.Settings
                 Variables.configurationManager.config.geographicalOperator == "intersects") 
                 GeoGraphicalSettings.SelectItem("", Variables.configurationManager.config.geographicalOperator);
             GeoGraphicalSettings.PropertyChanged += GeoGraphicalSettings_PropertyChanged;
-            OnPropertyChanged("GeoGraphicalSettings");
+            OnPropertyChanged(nameof(GeoGraphicalSettings));
         }
 
         private void QuickSearchSettings_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            OnPropertyChanged("QuickSearchSettings");
+            OnPropertyChanged(nameof(QuickSearchSettings));
         }
 
         private void AddNewQuickSearchEvent(object newSearch)
@@ -209,9 +209,9 @@ namespace Isogeo.AddIn.ViewsModels.Settings
         {
             get
             {
-                return _loadSdeFileCommand ?? (_loadSdeFileCommand = new RelayCommand(
+                return _loadSdeFileCommand ??= new RelayCommand(
                     x => LoadSdeFile(),
-                    y => CanLoadSdeFile()));
+                    y => CanLoadSdeFile());
             }
         }
 

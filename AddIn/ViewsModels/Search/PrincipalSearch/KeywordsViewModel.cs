@@ -21,13 +21,13 @@ namespace Isogeo.AddIn.ViewsModels.Search.PrincipalSearch
             set
             {
                 _filters = value;
-                OnPropertyChanged("Filters");
+                OnPropertyChanged(nameof(Filters));
             }
         }
 
         private void Filter_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            OnPropertyChanged("Filters");
+            OnPropertyChanged(nameof(Filters));
         }
 
         public KeywordsViewModel(FilterManager filterManager, RestFunctions restFunctions, IMapFunctions mapFunctions)

@@ -20,7 +20,7 @@ namespace Isogeo.AddIn.ViewsModels.Settings
             set
             {
                 _proxyUrl = value;
-                OnPropertyChanged("ProxyUrl");
+                OnPropertyChanged(nameof(ProxyUrl));
             }
         }
 
@@ -31,7 +31,7 @@ namespace Isogeo.AddIn.ViewsModels.Settings
             set
             {
                 _user = value;
-                OnPropertyChanged("User");
+                OnPropertyChanged(nameof(User));
             }
         }
 
@@ -42,9 +42,9 @@ namespace Isogeo.AddIn.ViewsModels.Settings
         {
             get
             {
-                return _cancelCommand ?? (_cancelCommand = new RelayCommand(
+                return _cancelCommand ??= new RelayCommand(
                     x => Cancel(),
-                    y => CanCancel()));
+                    y => CanCancel());
             }
         }
 
@@ -52,9 +52,9 @@ namespace Isogeo.AddIn.ViewsModels.Settings
         {
             get
             {
-                return _saveCommand ?? (_saveCommand = new RelayCommand(
+                return _saveCommand ??= new RelayCommand(
                     x => Save(x),
-                    y => CanSave()));
+                    y => CanSave());
             }
         }
 

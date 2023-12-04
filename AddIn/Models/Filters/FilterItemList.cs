@@ -14,7 +14,7 @@ namespace Isogeo.Models.Filters
             set
             {
                 _items = value;
-                OnPropertyChanged("Items");
+                OnPropertyChanged(nameof(Items));
             }
         }
 
@@ -26,7 +26,7 @@ namespace Isogeo.Models.Filters
             set
             {
                 _selected = value;
-                OnPropertyChanged("Selected");
+                OnPropertyChanged(nameof(Selected));
             }
         }
 
@@ -37,7 +37,7 @@ namespace Isogeo.Models.Filters
 
         internal void SelectByName(string p)
         {
-            this.Selected = this.Items.FirstOrDefault(s => s?.Name != null && s.Name.Equals(p));
+            Selected = Items.FirstOrDefault(s => s?.Name != null && s.Name.Equals(p));
         }
 
         /// <summary>

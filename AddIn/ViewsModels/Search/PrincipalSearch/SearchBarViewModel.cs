@@ -18,7 +18,7 @@ namespace Isogeo.AddIn.ViewsModels.Search.PrincipalSearch
             set
             {
                 Variables.searchText = value;
-                OnPropertyChanged("SearchText");
+                OnPropertyChanged(nameof(SearchText));
             }
         }
 

@@ -11,9 +11,9 @@ namespace Isogeo.Models.Filters
         {
             var items = new List<FilterItem>
             {
-                new FilterItem {Id = "intersects", Name = Language.Resources.Geographic_type_intersects},
-                new FilterItem {Id = "within", Name = Language.Resources.Geographic_type_within},
-                new FilterItem {Id = "contains", Name = Language.Resources.Geographic_type_contains}
+                new("intersects", Language.Resources.Geographic_type_intersects),
+                new("within", Language.Resources.Geographic_type_within),
+                new("contains", Language.Resources.Geographic_type_contains)
             };
             base.SetItems(items);
             RemoveFirstItem();
@@ -33,7 +33,7 @@ namespace Isogeo.Models.Filters
             get => List.Selected;
             set
             {
-                OnPropertyChanged("SelectedItem");
+                OnPropertyChanged(nameof(SelectedItem));
                 if (value == null || (List.Selected != null && value.Name == List.Selected.Name))
                     return;
                 List.Selected = value;

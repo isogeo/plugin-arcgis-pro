@@ -4,28 +4,16 @@ namespace Isogeo.Models.Filters
 {
     public class FilterItem : ViewModelBase
     {
-        private string _name;
-        private string _id;
         private string _geographicalOperator;
 
-        public string Name
-        {
-            get => _name;
-            set
-            {
-                _name = value;
-                OnPropertyChanged("Name");
-            }
-        }
+        public string Name { get; }
 
-        public string Id
+        public string Id { get; }
+
+        public FilterItem(string id, string name)
         {
-            get => _id;
-            set
-            {
-                _id = value;
-                OnPropertyChanged("Id");
-            }
+            Id = id;
+            Name = name;
         }
 
         public string GeographicalOperator
@@ -34,7 +22,7 @@ namespace Isogeo.Models.Filters
             set
             {
                 _geographicalOperator = value;
-                OnPropertyChanged("GeographicalOperator");
+                OnPropertyChanged(nameof(GeographicalOperator));
             }
         }
     }

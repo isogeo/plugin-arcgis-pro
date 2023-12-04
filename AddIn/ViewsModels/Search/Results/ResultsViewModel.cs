@@ -34,7 +34,7 @@ namespace Isogeo.AddIn.ViewsModels.Search.Results
             set
             {
                 _selectedItem = value;
-                OnPropertyChanged("SelectedItem");
+                OnPropertyChanged(nameof(SelectedItem));
             }
         }
 
@@ -46,7 +46,7 @@ namespace Isogeo.AddIn.ViewsModels.Search.Results
                 if (value == null || (ListNumberPage.Selected != null && value.Name == ListNumberPage.Selected.Name))
                     return;
                 _listNumberPage.Selected = value;
-                OnPropertyChanged("CurrentPage");
+                OnPropertyChanged(nameof(CurrentPage));
                 Task.Run(() => Application.Current.Dispatcher.Invoke(async () => await SelectionChanged((int.Parse(value.Name) - 1) * Variables.nbResult)));
             }
         }
@@ -69,7 +69,7 @@ namespace Isogeo.AddIn.ViewsModels.Search.Results
             set
             {
                 _lblPage = value;
-                OnPropertyChanged("LblNbPage");
+                OnPropertyChanged(nameof(LblNbPage));
             }
         }
 
@@ -80,7 +80,7 @@ namespace Isogeo.AddIn.ViewsModels.Search.Results
             set
             {
                 _lstResultIsEnabled = value;
-                OnPropertyChanged("LstResultIsEnabled");
+                OnPropertyChanged(nameof(LstResultIsEnabled));
             }
 
         }
@@ -92,7 +92,7 @@ namespace Isogeo.AddIn.ViewsModels.Search.Results
             set
             {
                 _listNumberPage = value;
-                OnPropertyChanged("ListNumberPage");
+                OnPropertyChanged(nameof(ListNumberPage));
             }
         }
 
@@ -111,20 +111,20 @@ namespace Isogeo.AddIn.ViewsModels.Search.Results
 
         private void Filter_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            OnPropertyChanged("ListNumberPage");
+            OnPropertyChanged(nameof(ListNumberPage));
         }
 
         private void ClearResults()
         {
             ResultsList.Clear();
             ListNumberPage.Items.Clear();
-            ListNumberPage.Items.Add(new FilterItem { Name = "1" });
+            ListNumberPage.Items.Add(new FilterItem("1", "1" ));
             LblNbPage = "/ 1";
             ListNumberPage.Selected = ListNumberPage.Items[0];
-            OnPropertyChanged("CurrentPage");
-            OnPropertyChanged("ListNumberPage");
-            OnPropertyChanged("LblNbPage");
-            OnPropertyChanged("CurrentPage");
+            OnPropertyChanged(nameof(CurrentPage));
+            OnPropertyChanged(nameof(ListNumberPage));
+            OnPropertyChanged(nameof(LblNbPage));
+            OnPropertyChanged(nameof(CurrentPage));
         }
 
         private void ClearResultsEvent(object obj)
@@ -172,7 +172,7 @@ namespace Isogeo.AddIn.ViewsModels.Search.Results
                 ListNumberPage.Selected = ListNumberPage.Items[0];
             else
                 ListNumberPage.Selected = ListNumberPage.Items[index];
-            OnPropertyChanged("CurrentPage");
+            OnPropertyChanged(nameof(CurrentPage));
         }
 
         private void SetPages(int offset)
@@ -180,7 +180,7 @@ namespace Isogeo.AddIn.ViewsModels.Search.Results
             var nbPage = GetNbPage();
             ListNumberPage.Items.Clear();
             for (var i = 0; i < nbPage; i++) 
-                ListNumberPage.Items.Add(new FilterItem { Name = (i + 1).ToString()});
+                ListNumberPage.Items.Add(new FilterItem((i + 1).ToString(), (i + 1).ToString()));
             LblNbPage = "/ " + nbPage;
             SetCurrentPageWithoutTriggerReloadApi(offset);
         }

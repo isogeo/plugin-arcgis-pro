@@ -4,7 +4,6 @@ using System.Reflection;
 using System.Runtime.ExceptionServices;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
 using ArcGIS.Desktop.Framework;
 using ArcGIS.Desktop.Framework.Contracts;
 using Isogeo.AddIn.Models;
@@ -23,7 +22,6 @@ namespace Isogeo.AddIn
 {
     public class DockpaneViewModel : DockPane
     {
-        private const string MenuId = "Isogeo_plugin_Menu";
         private readonly ViewModelBase _paneH1Vm;
         private readonly ViewModelBase _paneH2Vm;
         private const string DockPaneId = "Arcgis_Pro_Isogeo_Dockpane";
@@ -44,10 +42,9 @@ namespace Isogeo.AddIn
             IsEnabled = (bool) obj;
         }
 
-        private static void InitRestFunctions()
+        private static void InitializeQuery()
         {
-            Log.Logger.Info("Initializing Rest Functions");
-            //Variables.restFunctions = new RestFunctions(); // todo
+            Log.Logger.Info("Initialize Query");
             if (Variables.configurationManager.config.query == "-") 
                 Variables.configurationManager.config.query = " ";
         }
@@ -72,7 +69,7 @@ namespace Isogeo.AddIn
             {
                 var dllPAth = GetType().Assembly.Location;
 
-                var configPath = dllPAth.Substring(0, dllPAth.LastIndexOf("\\", StringComparison.Ordinal)) + "\\";
+                var configPath = dllPAth[..dllPAth.LastIndexOf("\\", StringComparison.Ordinal)] + "\\";
                 Log.InitializeLogManager(configPath + "log4net.config");
                 Log.InitializeLogPath(configPath);
             }
@@ -91,7 +88,7 @@ namespace Isogeo.AddIn
             Log.Logger.Info("Initializing DockPaneViewModel ...");
             Mediator.Register("EnableDockableWindowIsogeo", EnableDockableWindowIsogeo);
             InitConfigurationManager();
-            InitRestFunctions();
+            InitializeQuery();
 
             PrimaryMenuList.Add(new TabControl { Text = Language.Resources.Search_word });
             PrimaryMenuList.Add(new TabControl { Text = Language.Resources.Settings });
@@ -117,13 +114,9 @@ namespace Isogeo.AddIn
         internal static void Show()
         {
             var pane = FrameworkApplication.DockPaneManager.Find(DockPaneId);
-            if (pane == null)
-                return;
 
-            pane.Activate();
+            pane?.Activate();
         }
-
-        #region properties
 
         /// <summary>
         /// Text shown near the top of the DockPane.
@@ -131,22 +124,19 @@ namespace Isogeo.AddIn
         private string _heading = "Isogeo";
         public string Heading
         {
-            get { return _heading; }
+            get => _heading;
             set
             {
                 SetProperty(ref _heading, value, () => Heading);
             }
         }
 
-        private readonly List<TabControl> _primaryMenuList = new List<TabControl>();
-        public List<TabControl> PrimaryMenuList
-        {
-            get { return _primaryMenuList; }
-        }
+        public List<TabControl> PrimaryMenuList { get; } = new();
+
         private int _selectedPanelHeaderIndex;
         public int SelectedPanelHeaderIndex
         {
-            get { return _selectedPanelHeaderIndex; }
+            get => _selectedPanelHeaderIndex;
             set
             {
                 SetProperty(ref _selectedPanelHeaderIndex, value, () => SelectedPanelHeaderIndex);
@@ -156,35 +146,16 @@ namespace Isogeo.AddIn
                     CurrentPage = _paneH2Vm;
             }
         }
+
         private PropertyChangedBase _currentPage;
         public PropertyChangedBase CurrentPage
         {
-            get { return _currentPage; }
+            get => _currentPage;
             set
             {
                 SetProperty(ref _currentPage, value, () => CurrentPage);
             }
         }
-
-        #endregion
-        #region Burger Button
-
-        /// <summary>
-        /// Tooltip shown when hovering over the burger button.
-        /// </summary>
-        public string BurgerButtonTooltip
-        {
-            get { return "Options"; }
-        }
-
-        /// <summary>
-        /// Menu shown when burger button is clicked.
-        /// </summary>
-        public ContextMenu BurgerButtonMenu
-        {
-            get { return FrameworkApplication.CreateContextMenu(MenuId); }
-        }
-        #endregion
     }
 
     /// <summary>
@@ -197,6 +168,7 @@ namespace Isogeo.AddIn
             DockpaneViewModel.Show();
         }
     }
+
     internal class PanelIndicatorStaticMenuButton : Button
     {
         protected override void OnClick()

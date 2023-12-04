@@ -16,7 +16,7 @@ namespace Isogeo.AddIn.ViewsModels.Search.AdvancedSearch
         public string ImgPath { get; set; }
         private string _filterName;
         private readonly IMapFunctions _mapFunctions;
-        private readonly RestFunctions _restFunctions;
+
         private readonly FilterManager _filterManager;
 
         public bool IsCustomQuery { get; private set; }
@@ -28,13 +28,13 @@ namespace Isogeo.AddIn.ViewsModels.Search.AdvancedSearch
             set
             {
                 _filters = value;
-                OnPropertyChanged("Filters");
+                OnPropertyChanged(nameof(Filters));
             }
         }
 
         private void Filter_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            OnPropertyChanged("Filters");
+            OnPropertyChanged(nameof(Filters));
         }
 
         public AdvancedSearchItemViewModel(string displayName, string imageSearchPath, string apiFilterName, RestFunctions restFunctions,
@@ -44,7 +44,6 @@ namespace Isogeo.AddIn.ViewsModels.Search.AdvancedSearch
             ImgPath = imageSearchPath;
             _mapFunctions = mapFunctions;
             _filterManager = filterManager;
-            _restFunctions = restFunctions;
             Filters = new Filters(apiFilterName, restFunctions, filterManager, mapFunctions);
             Filters.PropertyChanged += Filter_PropertyChanged;
             Mediator.Register("isCustomQuery", IsCustomQueryEvent);
@@ -92,7 +91,7 @@ namespace Isogeo.AddIn.ViewsModels.Search.AdvancedSearch
 
         private void SetGeographicOperator()
         {
-            var mapCanvas = new FilterItem {Name = Language.Resources.Map_canvas};
+            var mapCanvas = new FilterItem("-1", Language.Resources.Map_canvas);
             Filters.Items.Add(mapCanvas);
             Mediator.Register("ChangeBox", ChangeBoxEvent);
         }

@@ -33,12 +33,12 @@ namespace Isogeo.Models.Filters
                     List.Selected = item;
                 }
             }
-            OnPropertyChanged("SelectedItem");
+            OnPropertyChanged(nameof(SelectedItem));
         }
 
         public virtual void AddItem(Search item)
         {
-            base.AddItem(new FilterItem {Id = item.query, Name = item.name});
+            base.AddItem(new FilterItem(item.query, item.name));
         }
 
         public virtual void SetItems(List<Search> items)
@@ -47,7 +47,7 @@ namespace Isogeo.Models.Filters
 
             for (var i = 0; i < items.Count; i += 1)
             {
-                comboItems.Add(new FilterItem {Id = items[i].query, Name = items[i].name, GeographicalOperator = items[i].box});
+                comboItems.Add(new FilterItem(items[i].query, items[i].name) { GeographicalOperator = items[i].box});
             }
             base.SetItems(comboItems);
         }

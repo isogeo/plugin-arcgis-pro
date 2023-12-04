@@ -20,8 +20,6 @@ namespace Isogeo.AddIn.ViewsModels.Search.Results
     {
         private readonly RestFunctions _restFunctions;
 
-        private readonly IMapFunctions _mapFunctions;
-
         private readonly FilterManager _filterManager;
 
         private bool _isUpdateCombo;
@@ -33,7 +31,7 @@ namespace Isogeo.AddIn.ViewsModels.Search.Results
             set
             {
                 _btnResultsContent = value;
-                OnPropertyChanged("BtnResultsContent");
+                OnPropertyChanged(nameof(BtnResultsContent));
             }
         }
 
@@ -44,7 +42,7 @@ namespace Isogeo.AddIn.ViewsModels.Search.Results
             set
             {
                 _cmbSortingMethod = value;
-                OnPropertyChanged("CmbSortingMethod");
+                OnPropertyChanged(nameof(CmbSortingMethod));
             }
         }
 
@@ -55,7 +53,7 @@ namespace Isogeo.AddIn.ViewsModels.Search.Results
             set
             {
                 _cmbSortingDirection = value;
-                OnPropertyChanged("CmbSortingDirection");
+                OnPropertyChanged(nameof(CmbSortingDirection));
             }
         }
 
@@ -63,27 +61,27 @@ namespace Isogeo.AddIn.ViewsModels.Search.Results
         {
             CmbSortingMethod = new ObservableCollection<FilterItem>
             {
-                new FilterItem {Id = "relevance", Name = Language.Resources.Sorting_method_relevance},
-                new FilterItem {Id = "title", Name = Language.Resources.Sorting_method_title},
-                new FilterItem {Id = "modified", Name = Language.Resources.Sorting_method_modified},
-                new FilterItem {Id = "created", Name = Language.Resources.Sorting_method_created},
-                new FilterItem {Id = "_modified", Name = Language.Resources.Sorting_method_metadata_modified},
-                new FilterItem {Id = "_created", Name = Language.Resources.Sorting_method_metadata_created}
+                new("relevance", Language.Resources.Sorting_method_relevance),
+                new("title", Language.Resources.Sorting_method_title),
+                new("modified", Language.Resources.Sorting_method_modified),
+                new("created", Language.Resources.Sorting_method_created),
+                new("_modified", Language.Resources.Sorting_method_metadata_modified),
+                new("_created", Language.Resources.Sorting_method_metadata_created)
             };
 
             CmbSortingDirection = new ObservableCollection<FilterItem>
             {
-                new FilterItem {Id = "asc", Name = Language.Resources.Sorting_method_ascending},
-                new FilterItem {Id = "desc", Name = Language.Resources.Sorting_method_descending}
+                new("asc", Language.Resources.Sorting_method_ascending),
+                new("desc", Language.Resources.Sorting_method_descending)
             };
 
             _cmbSortingMethodSelectedItem = CmbSortingMethod[0];
             _filterManager.SetCmbSortingMethod(_cmbSortingMethodSelectedItem);
-            OnPropertyChanged("CmbSortingMethodSelectedItem");
+            OnPropertyChanged(nameof(CmbSortingMethodSelectedItem));
 
             _cmbSortingDirectionSelectedItem = CmbSortingDirection[1];
             _filterManager.SetCmbSortingDirection(_cmbSortingDirectionSelectedItem);
-            OnPropertyChanged("CmbSortingDirectionSelectedItem");
+            OnPropertyChanged(nameof(CmbSortingDirectionSelectedItem));
         }
 
         private FilterItem _cmbSortingDirectionSelectedItem;
@@ -97,7 +95,7 @@ namespace Isogeo.AddIn.ViewsModels.Search.Results
                 _cmbSortingDirectionSelectedItem = value;
                 _filterManager.SetCmbSortingDirection(_cmbSortingDirectionSelectedItem);
                 //Task.Run(async () => await Refresh());
-                OnPropertyChanged("CmbSortingDirectionSelectedItem");
+                OnPropertyChanged(nameof(CmbSortingDirectionSelectedItem));
             }
         }
 
@@ -112,7 +110,7 @@ namespace Isogeo.AddIn.ViewsModels.Search.Results
                 _cmbSortingMethodSelectedItem = value;
                 _filterManager.SetCmbSortingMethod(_cmbSortingMethodSelectedItem);
                 //Task.Run(async () => await Refresh());
-                OnPropertyChanged("CmbSortingMethodSelectedItem");
+                OnPropertyChanged(nameof(CmbSortingMethodSelectedItem));
             }
         }
 
@@ -134,10 +132,9 @@ namespace Isogeo.AddIn.ViewsModels.Search.Results
             SetSortingDefault();
         }
 
-        public ResultsToolBarViewModel(RestFunctions restFunctions, IMapFunctions mapFunctions, FilterManager filterManager)
+        public ResultsToolBarViewModel(RestFunctions restFunctions, FilterManager filterManager)
         {
             _restFunctions = restFunctions;
-            _mapFunctions = mapFunctions;
             _filterManager = filterManager;
             Mediator.Register("ChangeQuery", TotalResultsEvent);
             Mediator.Register("setSortingDefault", SetSortingDefaultEvent);
@@ -253,7 +250,7 @@ namespace Isogeo.AddIn.ViewsModels.Search.Results
             }
 
             _filterManager.SetCmbSortingMethod(_cmbSortingMethodSelectedItem);
-            OnPropertyChanged("CmbSortingMethodSelectedItem");
+            OnPropertyChanged(nameof(CmbSortingMethodSelectedItem));
 
             switch (Variables.configurationManager.config.sortDirection)
             {
@@ -268,7 +265,7 @@ namespace Isogeo.AddIn.ViewsModels.Search.Results
                     break;
             }
             _filterManager.SetCmbSortingDirection(_cmbSortingDirectionSelectedItem);
-            OnPropertyChanged("CmbSortingDirectionSelectedItem");
+            OnPropertyChanged(nameof(CmbSortingDirectionSelectedItem));
             _isUpdateCombo = false;
         }
 

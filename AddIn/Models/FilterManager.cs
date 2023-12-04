@@ -147,7 +147,7 @@ namespace Isogeo.AddIn.Models
                 foreach (var lst in _searchLists.list)
                 {
                     if (key.IndexOf(lst.filter, StringComparison.Ordinal) != 0) continue;
-                    lst.lstItem.Add(new FilterItem { Id = key, Name = val });
+                    lst.lstItem.Add(new FilterItem(key, val));
                     break;
                 }
             }

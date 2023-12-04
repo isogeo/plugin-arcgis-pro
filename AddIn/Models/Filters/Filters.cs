@@ -2,7 +2,6 @@
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
-using System.Threading.Tasks;
 using Isogeo.AddIn.Models;
 using Isogeo.Map.MapFunctions;
 using Isogeo.Models.Network;
@@ -28,13 +27,13 @@ namespace Isogeo.Models.Filters
             {
                 List.Items = value;
                 SelectedItem = value[0];
-                OnPropertyChanged("Items");
+                OnPropertyChanged(nameof(Items));
             }
         }
 
         private void List_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            OnPropertyChanged("Items");
+            OnPropertyChanged(nameof(Items));
         }
 
         public Filters(string name, RestFunctions restFunctions, FilterManager filterManager, IMapFunctions mapFunctions)
@@ -45,7 +44,7 @@ namespace Isogeo.Models.Filters
             Name = name;
             List = new FilterItemList();
             List.PropertyChanged += List_PropertyChanged;
-            var item = new FilterItem { Name = "-" };
+            var item = new FilterItem("-1", "-");
             List.Items.Add(item);
             List.Selected = item;
         }
@@ -55,7 +54,7 @@ namespace Isogeo.Models.Filters
             get => List.Selected;
             set
             {
-                OnPropertyChanged("SelectedItem");
+                OnPropertyChanged(nameof(SelectedItem));
                 if (value == null || (List.Selected != null && value.Name == List.Selected.Name))
                     return;
                 var query = FilterManager.GetQueryCombos();
@@ -91,21 +90,22 @@ namespace Isogeo.Models.Filters
                     return;
                 List.SelectByName(name);
             }
-            OnPropertyChanged("SelectedItem");
+            OnPropertyChanged(nameof(SelectedItem));
         }
 
         public virtual void AddItem(FilterItem item)
         {
-            while (Items.Any(search => search.Name == item.Name))
-                item.Name += " - " + Language.Resources.Copy.ToLower();
-            if (!string.IsNullOrWhiteSpace(item.Name))
-                List.Items.Add(item);
+            var itemNameToAdd = item.Name;
+            while (Items.Any(search => search.Name == itemNameToAdd))
+                itemNameToAdd += " - " + Language.Resources.Copy.ToLower();
+            if (!string.IsNullOrWhiteSpace(itemNameToAdd))
+                List.Items.Add(new FilterItem(item.Id, itemNameToAdd));
         }
 
         public virtual void SetItems(List<FilterItem> items)
         {
             List.Items.Clear();
-            AddItem(new FilterItem {Id = "", Name = "-"});
+            AddItem(new FilterItem("", "-"));
             List.Selected = null;
 
             for (var i = 0; i < items.Count; i += 1)
@@ -116,7 +116,7 @@ namespace Isogeo.Models.Filters
             if (List.Items.Count > 0)
             {
                 List.Selected = List.Items[0];
-                OnPropertyChanged("SelectedItem");
+                OnPropertyChanged(nameof(SelectedItem));
             }
         }
     }

@@ -25,13 +25,13 @@ namespace Isogeo.AddIn.ViewsModels.Search.PrincipalSearch
             set
             {
                 _quickSearch = value;
-                OnPropertyChanged("Filters");
+                OnPropertyChanged(nameof(Filters));
             }
         }
 
         private void QuickSearch_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            OnPropertyChanged("Filters");
+            OnPropertyChanged(nameof(Filters));
         }
 
         private void AddQuickSearchEvent(object newSearch)

@@ -33,7 +33,7 @@ namespace Isogeo.Models.Filters
             get => List.Selected;
             set
             {
-                OnPropertyChanged("SelectedItem");
+                OnPropertyChanged(nameof(SelectedItem));
                 if (value == null || (List.Selected != null && value.Name == List.Selected.Name))
                     return;
                 List.Selected = value;
@@ -48,7 +48,7 @@ namespace Isogeo.Models.Filters
             for (var i = 0; i < items.Count; i += 1)
             {
                 if (items[i].name == Language.Resources.Previous_search) continue;
-                comboItems.Add(new FilterItem {Id = items[i].query, Name = items[i].name, GeographicalOperator = items[i].box});
+                comboItems.Add(new FilterItem (items[i].query, items[i].name) { GeographicalOperator = items[i].box});
             }
             SetItems(comboItems);
         }
