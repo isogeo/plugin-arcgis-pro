@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 using ArcGIS.Desktop.Framework.Threading.Tasks;
-using Isogeo.AddIn.Models;
+using Isogeo.AddIn.Models.FilterManager;
 using Isogeo.AddIn.Models.Filters.Components;
 using Isogeo.Map;
 using Isogeo.Models;
@@ -18,7 +18,7 @@ namespace Isogeo.AddIn.ViewsModels.Search.AdvancedSearch
         private string _filterName;
         private readonly IMapManager _mapManager;
 
-        private readonly FilterManager _filterManager;
+        private readonly IFilterManager _filterManager;
 
         public bool IsCustomQuery { get; private set; }
 
@@ -39,7 +39,7 @@ namespace Isogeo.AddIn.ViewsModels.Search.AdvancedSearch
         }
 
         public AdvancedSearchItemViewModel(string displayName, string imageSearchPath, string apiFilterName, INetworkManager networkManager,
-            IMapManager mapManager, FilterManager filterManager)
+            IMapManager mapManager, IFilterManager filterManager)
         {
             DisplayName = displayName;
             ImgPath = imageSearchPath;

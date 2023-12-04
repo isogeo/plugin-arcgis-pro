@@ -1,5 +1,5 @@
 ﻿using ArcGIS.Desktop.Framework.Contracts;
-using Isogeo.AddIn.Models;
+using Isogeo.AddIn.Models.FilterManager;
 using Isogeo.AddIn.ViewsModels.Search.AdvancedSearch;
 using Isogeo.AddIn.ViewsModels.Search.PrincipalSearch;
 using Isogeo.AddIn.ViewsModels.Search.Results;
@@ -17,7 +17,7 @@ namespace Isogeo.AddIn.ViewsModels.TabControls
 
         private readonly IMapManager _mapManager;
         private readonly INetworkManager _networkManager;
-        private readonly FilterManager _filterManager;
+        private readonly IFilterManager _filterManager;
 
         private void InitViewModel()
         {
@@ -27,7 +27,7 @@ namespace Isogeo.AddIn.ViewsModels.TabControls
             PrincipalSearchViewModel = new PrincipalSearchViewModel(_filterManager, _networkManager, _mapManager);
         }
 
-        public SearchViewModel(INetworkManager networkManager, FilterManager filterManager, IMapManager mapManager)
+        public SearchViewModel(INetworkManager networkManager, IFilterManager filterManager, IMapManager mapManager)
         {
             _filterManager = filterManager;
             _mapManager = mapManager;

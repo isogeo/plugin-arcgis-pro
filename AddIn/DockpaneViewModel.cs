@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using ArcGIS.Desktop.Framework;
 using ArcGIS.Desktop.Framework.Contracts;
-using Isogeo.AddIn.Models;
+using Isogeo.AddIn.Models.FilterManager;
 using Isogeo.AddIn.ViewsModels.TabControls;
 using Isogeo.Map;
 using Isogeo.Models;
@@ -27,7 +27,7 @@ namespace Isogeo.AddIn
         private const string DockPaneId = "Arcgis_Pro_Isogeo_Dockpane";
 
         private readonly INetworkManager _networkManager;
-        private readonly FilterManager _filterManager;
+        private readonly IFilterManager _filterManager;
 
         private bool _isEnabled = true;
         public bool IsEnabled

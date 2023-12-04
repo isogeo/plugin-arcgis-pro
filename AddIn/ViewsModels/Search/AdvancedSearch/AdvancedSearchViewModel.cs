@@ -1,4 +1,4 @@
-﻿using Isogeo.AddIn.Models;
+﻿using Isogeo.AddIn.Models.FilterManager;
 using Isogeo.Map;
 using Isogeo.Network;
 
@@ -15,11 +15,11 @@ namespace Isogeo.AddIn.ViewsModels.Search.AdvancedSearch
         public AdvancedSearchItemViewModel OwnerMetadataFilter { get; set; }
         public AdvancedSearchItemViewModel ResourceTypeFilter { get; set; }
         private readonly IMapManager _mapManager;
-        private readonly FilterManager _filterManager;
+        private readonly IFilterManager _filterManager;
         private readonly INetworkManager _networkManager;
 
 
-        public AdvancedSearchViewModel(IMapManager mapManager, FilterManager filterManager, INetworkManager networkManager)
+        public AdvancedSearchViewModel(IMapManager mapManager, IFilterManager filterManager, INetworkManager networkManager)
         {
             _mapManager = mapManager;
             _filterManager = filterManager;

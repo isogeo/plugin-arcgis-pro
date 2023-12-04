@@ -3,7 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using ArcGIS.Desktop.Framework.Dialogs;
-using Isogeo.AddIn.Models;
+using Isogeo.AddIn.Models.FilterManager;
 using Isogeo.AddIn.Models.Filters.Components;
 using Isogeo.AddIn.Views.Search.AskNameWindow;
 using Isogeo.Models;
@@ -19,7 +19,7 @@ namespace Isogeo.AddIn.ViewsModels.Search.Results
     {
         private readonly INetworkManager _networkManager;
 
-        private readonly FilterManager _filterManager;
+        private readonly IFilterManager _filterManager;
 
         private bool _isUpdateCombo;
 
@@ -131,7 +131,7 @@ namespace Isogeo.AddIn.ViewsModels.Search.Results
             SetSortingDefault();
         }
 
-        public ResultsToolBarViewModel(INetworkManager networkManager, FilterManager filterManager)
+        public ResultsToolBarViewModel(INetworkManager networkManager, IFilterManager filterManager)
         {
             _networkManager = networkManager;
             _filterManager = filterManager;

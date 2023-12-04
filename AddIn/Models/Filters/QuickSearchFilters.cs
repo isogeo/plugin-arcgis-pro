@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Isogeo.AddIn.Models.FilterManager;
 using Isogeo.AddIn.Models.Filters.Components;
 using Isogeo.Map;
 using Isogeo.Models;
@@ -9,7 +10,7 @@ namespace Isogeo.AddIn.Models.Filters
 {
     public class QuickSearchFilters : Components.Filters
     {
-        public QuickSearchFilters(string name, INetworkManager networkManager, FilterManager filterManager, IMapManager mapManager) : base(name, networkManager, filterManager, mapManager)
+        public QuickSearchFilters(string name, INetworkManager networkManager, IFilterManager filterManager, IMapManager mapManager) : base(name, networkManager, filterManager, mapManager)
         {
         }
 

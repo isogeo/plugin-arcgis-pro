@@ -6,9 +6,9 @@ using System.Linq;
 using Isogeo.AddIn.Models.Filters.Components;
 using Isogeo.Map;
 
-namespace Isogeo.AddIn.Models
+namespace Isogeo.AddIn.Models.FilterManager
 {
-    public class FilterManager
+    public class FilterManager : IFilterManager
     {
         private SearchLists _searchLists;
         private readonly List<Filters.Components.Filters> _listComboFilter = new();
@@ -79,7 +79,7 @@ namespace Isogeo.AddIn.Models
                         cmb.SetItems(lst.lstItem);
                         if (cmb.Items.Any(s => s?.Id != null && !string.IsNullOrWhiteSpace(lst.query) &&
                                                string.Concat(s.Id.Where(c => !char.IsWhiteSpace(c))).ToLower()
-                                                   .Equals(string.Concat((lst.query).Where(c => !char.IsWhiteSpace(c))).ToLower())))
+                                                   .Equals(string.Concat(lst.query.Where(c => !char.IsWhiteSpace(c))).ToLower())))
                             cmb.SelectItem("", lst.query);
                         else
                             cmb.SelectItem("-");

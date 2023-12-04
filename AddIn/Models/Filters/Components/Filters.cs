@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using ActiproSoftware.Windows.Extensions;
+using Isogeo.AddIn.Models.FilterManager;
 using Isogeo.Map;
 using Isogeo.Models;
 using Isogeo.Network;
@@ -17,7 +18,7 @@ namespace Isogeo.AddIn.Models.Filters.Components
 
         protected INetworkManager NetworkManager { get; }
 
-        protected FilterManager FilterManager { get; }
+        protected IFilterManager FilterManager { get; }
 
         protected IMapManager MapManager { get; }
 
@@ -28,7 +29,7 @@ namespace Isogeo.AddIn.Models.Filters.Components
             OnPropertyChanged(nameof(Items));
         }
 
-        public Filters(string name, INetworkManager networkManager, FilterManager filterManager, IMapManager mapManager)
+        public Filters(string name, INetworkManager networkManager, IFilterManager filterManager, IMapManager mapManager)
         {
             NetworkManager = networkManager;
             FilterManager = filterManager;

@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 using System.Linq;
-using Isogeo.AddIn.Models;
+using Isogeo.AddIn.Models.FilterManager;
 using Isogeo.AddIn.Models.Filters;
 using Isogeo.AddIn.Models.Filters.Components;
 using Isogeo.Map;
@@ -17,7 +17,7 @@ namespace Isogeo.AddIn.ViewsModels.Search.PrincipalSearch
     {
         public string ComponentName => Language.Resources.Quick_search;
 
-        private readonly FilterManager _filterManager;
+        private readonly IFilterManager _filterManager;
 
         private QuickSearchFilters _quickSearchFilter;
         public QuickSearchFilters Filters
@@ -100,7 +100,7 @@ namespace Isogeo.AddIn.ViewsModels.Search.PrincipalSearch
             Filters.SelectItem("-");
         }
 
-        public QuickSearchViewModel(INetworkManager networkManager, FilterManager filterManager, IMapManager mapManager)
+        public QuickSearchViewModel(INetworkManager networkManager, IFilterManager filterManager, IMapManager mapManager)
         {
             _filterManager = filterManager;
             Filters = new QuickSearchFilters("QuickSearch", networkManager, filterManager, mapManager);

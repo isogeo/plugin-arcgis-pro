@@ -3,7 +3,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Windows.Input;
 using ArcGIS.Desktop.Framework.Dialogs;
-using Isogeo.AddIn.Models;
+using Isogeo.AddIn.Models.FilterManager;
 using Isogeo.AddIn.Models.Filters;
 using Isogeo.AddIn.Models.Filters.Components;
 using Isogeo.AddIn.Views.Search.AskNameWindow;
@@ -24,7 +24,7 @@ namespace Isogeo.AddIn.ViewsModels.Settings
 
         private readonly INetworkManager _networkManager;
 
-        private readonly FilterManager _filterManager;
+        private readonly IFilterManager _filterManager;
 
         private readonly IMapManager _mapManager;
 
@@ -236,7 +236,7 @@ namespace Isogeo.AddIn.ViewsModels.Settings
             }
         }
 
-        public SearchSettingsViewModel(INetworkManager networkManager, FilterManager filterManager, IMapManager mapManager)
+        public SearchSettingsViewModel(INetworkManager networkManager, IFilterManager filterManager, IMapManager mapManager)
         {
             _networkManager = networkManager;
             _filterManager = filterManager;

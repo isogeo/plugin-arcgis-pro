@@ -4,7 +4,7 @@ using System.ComponentModel;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
-using Isogeo.AddIn.Models;
+using Isogeo.AddIn.Models.FilterManager;
 using Isogeo.AddIn.Models.Filters.Components;
 using Isogeo.AddIn.Views.Search.Results;
 using Isogeo.Map;
@@ -23,7 +23,7 @@ namespace Isogeo.AddIn.ViewsModels.Search.Results
         private ICommand _previousCommand;
         private readonly IMapManager _mapManager;
         private readonly INetworkManager _networkManager;
-        private readonly FilterManager _filterManager;
+        private readonly IFilterManager _filterManager;
 
         public ObservableCollection<ResultItem> ResultsList { get; set; }
 
@@ -132,7 +132,7 @@ namespace Isogeo.AddIn.ViewsModels.Search.Results
             ClearResults();
         }
 
-        public ResultsViewModel(IMapManager mapManager, INetworkManager networkManager, FilterManager filterManager)
+        public ResultsViewModel(IMapManager mapManager, INetworkManager networkManager, IFilterManager filterManager)
         {
             _mapManager = mapManager;
             _networkManager = networkManager;
