@@ -3,12 +3,13 @@ using Isogeo.AddIn.Models.Filters.Components;
 using Isogeo.Map.MapFunctions;
 using Isogeo.Models.Configuration;
 using Isogeo.Models.Network;
+using Isogeo.Network;
 
 namespace Isogeo.AddIn.Models.Filters
 {
     public class QuickSearchSettingsFilters : QuickSearchFilters
     {
-        public QuickSearchSettingsFilters(string name, RestFunctions restFunctions, FilterManager filterManager, IMapFunctions mapFunctions) : base(name, restFunctions, filterManager, mapFunctions)
+        public QuickSearchSettingsFilters(string name, IRestFunctions restFunctions, FilterManager filterManager, IMapFunctions mapFunctions) : base(name, restFunctions, filterManager, mapFunctions)
         {
         }
 

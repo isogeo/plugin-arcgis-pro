@@ -14,6 +14,7 @@ using Isogeo.Map.MapFunctions;
 using Isogeo.Models;
 using Isogeo.Models.API;
 using Isogeo.Models.Network;
+using Isogeo.Network;
 using Isogeo.Utils.LogManager;
 using MVVMPattern.MediatorPattern;
 using RelayCommand = MVVMPattern.RelayCommand.RelayCommand;
@@ -40,7 +41,7 @@ namespace Isogeo.AddIn.Views.Search.Results
         private MetadataViewModel _metadataViewModel;
 
         private readonly IMapFunctions _mapFunctions;
-        private readonly RestFunctions _restFunctions;
+        private readonly IRestFunctions _restFunctions;
 
         private void InitResources()
         {
@@ -71,7 +72,7 @@ namespace Isogeo.AddIn.Views.Search.Results
             (bool)DependencyPropertyDescriptor.FromProperty(
                 DesignerProperties.IsInDesignModeProperty, typeof(DependencyObject)).Metadata.DefaultValue;
 
-        public ResultItem(IMapFunctions mapFunctions, RestFunctions restFunctions)
+        public ResultItem(IMapFunctions mapFunctions, IRestFunctions restFunctions)
         {
             InitializeComponent();
             _mapFunctions = mapFunctions;

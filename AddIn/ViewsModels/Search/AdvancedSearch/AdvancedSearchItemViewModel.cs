@@ -5,6 +5,7 @@ using Isogeo.AddIn.Models.Filters.Components;
 using Isogeo.Map.MapFunctions;
 using Isogeo.Models;
 using Isogeo.Models.Network;
+using Isogeo.Network;
 using MVVMPattern;
 using MVVMPattern.MediatorPattern;
 
@@ -37,7 +38,7 @@ namespace Isogeo.AddIn.ViewsModels.Search.AdvancedSearch
             OnPropertyChanged(nameof(Filters));
         }
 
-        public AdvancedSearchItemViewModel(string displayName, string imageSearchPath, string apiFilterName, RestFunctions restFunctions,
+        public AdvancedSearchItemViewModel(string displayName, string imageSearchPath, string apiFilterName, IRestFunctions restFunctions,
             IMapFunctions mapFunctions, FilterManager filterManager)
         {
             DisplayName = displayName;

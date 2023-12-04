@@ -2,7 +2,7 @@
 
 namespace Isogeo.Network
 {
-    internal interface IRestFunctions
+    public interface IRestFunctions
     {
         public void OpenAuthenticationPopUp();
 
@@ -22,5 +22,7 @@ namespace Isogeo.Network
         /// Save the last search request realized inside configurationManager
         /// </summary>
         public void SaveSearch(string box, string query);
+
+        internal Task<Token> SetConnection(string clientId, string clientSecret);
     }
 }

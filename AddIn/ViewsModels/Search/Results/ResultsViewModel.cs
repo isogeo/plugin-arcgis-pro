@@ -10,6 +10,7 @@ using Isogeo.AddIn.Views.Search.Results;
 using Isogeo.Map.MapFunctions;
 using Isogeo.Models;
 using Isogeo.Models.Network;
+using Isogeo.Network;
 using MVVMPattern;
 using MVVMPattern.MediatorPattern;
 using MVVMPattern.RelayCommand;
@@ -22,7 +23,7 @@ namespace Isogeo.AddIn.ViewsModels.Search.Results
         private ICommand _nextCommand;
         private ICommand _previousCommand;
         private readonly IMapFunctions _mapFunctions;
-        private readonly RestFunctions _restFunctions;
+        private readonly IRestFunctions _restFunctions;
         private readonly FilterManager _filterManager;
 
         public ObservableCollection<ResultItem> ResultsList { get; set; }
@@ -132,7 +133,7 @@ namespace Isogeo.AddIn.ViewsModels.Search.Results
             ClearResults();
         }
 
-        public ResultsViewModel(IMapFunctions mapFunctions, RestFunctions restFunctions, FilterManager filterManager)
+        public ResultsViewModel(IMapFunctions mapFunctions, IRestFunctions restFunctions, FilterManager filterManager)
         {
             _mapFunctions = mapFunctions;
             _restFunctions = restFunctions;

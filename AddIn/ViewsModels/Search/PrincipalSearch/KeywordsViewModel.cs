@@ -4,6 +4,7 @@ using Isogeo.AddIn.Models.Filters.Components;
 using Isogeo.Map.MapFunctions;
 using Isogeo.Models;
 using Isogeo.Models.Network;
+using Isogeo.Network;
 using MVVMPattern;
 
 namespace Isogeo.AddIn.ViewsModels.Search.PrincipalSearch
@@ -30,7 +31,7 @@ namespace Isogeo.AddIn.ViewsModels.Search.PrincipalSearch
             OnPropertyChanged(nameof(Filters));
         }
 
-        public KeywordsViewModel(FilterManager filterManager, RestFunctions restFunctions, IMapFunctions mapFunctions)
+        public KeywordsViewModel(FilterManager filterManager, IRestFunctions restFunctions, IMapFunctions mapFunctions)
         {
             _filterManager = filterManager;
             Filters = new Filters("keyword:isogeo", restFunctions, filterManager, mapFunctions);

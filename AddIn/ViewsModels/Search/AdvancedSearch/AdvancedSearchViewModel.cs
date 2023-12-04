@@ -1,6 +1,7 @@
 ﻿using Isogeo.AddIn.Models;
 using Isogeo.Map.MapFunctions;
 using Isogeo.Models.Network;
+using Isogeo.Network;
 
 namespace Isogeo.AddIn.ViewsModels.Search.AdvancedSearch
 {
@@ -16,10 +17,10 @@ namespace Isogeo.AddIn.ViewsModels.Search.AdvancedSearch
         public AdvancedSearchItemViewModel ResourceTypeFilter { get; set; }
         private readonly IMapFunctions _mapFunctions;
         private readonly FilterManager _filterManager;
-        private readonly RestFunctions _restFunctions;
+        private readonly IRestFunctions _restFunctions;
 
 
-        public AdvancedSearchViewModel(IMapFunctions mapFunctions, FilterManager filterManager, RestFunctions restFunctions)
+        public AdvancedSearchViewModel(IMapFunctions mapFunctions, FilterManager filterManager, IRestFunctions restFunctions)
         {
             _mapFunctions = mapFunctions;
             _filterManager = filterManager;

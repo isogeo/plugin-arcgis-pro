@@ -5,9 +5,9 @@ using System.Net.Http.Headers;
 using System.Text;
 using System.Text.Json;
 using System.Windows;
+using Isogeo.Models;
 using Isogeo.Models.API;
 using Isogeo.Models.Configuration;
-using Isogeo.Network;
 using Isogeo.Utils.LogManager;
 using Isogeo.Utils.ManageEncrypt;
 using MVVMPattern.MediatorPattern;
@@ -15,11 +15,11 @@ using MessageBox = ArcGIS.Desktop.Framework.Dialogs.MessageBox;
 using Resource = Isogeo.Language.Resources;
 using Search = Isogeo.Models.API.Search;
 
-namespace Isogeo.Models.Network
+namespace Isogeo.Network
 {
     public class RestFunctions : IRestFunctions
     {
-        private Authentication.Authentication _frmAuthentication;
+        private Models.Network.Authentication.Authentication _frmAuthentication;
 
         private ApiBearerToken? _existingApiBearerToken;
 
@@ -71,7 +71,7 @@ namespace Isogeo.Models.Network
             }
         }
 
-        internal async Task<Token> SetConnection(string clientId, string clientSecret)
+        public async Task<Token> SetConnection(string clientId, string clientSecret)
         {
             Token newToken;
 
@@ -150,7 +150,7 @@ namespace Isogeo.Models.Network
         public void OpenAuthenticationPopUp()
         {
             if (AuthenticationPopUpIsOpen) return;
-            _frmAuthentication = new Authentication.Authentication(this);
+            _frmAuthentication = new Models.Network.Authentication.Authentication(this);
             _frmAuthentication.ShowDialog();
         }
 
@@ -431,7 +431,7 @@ namespace Isogeo.Models.Network
         public void SaveSearch(string box, string query)
         {
             Log.Logger.Info("Save Last search");
-            Configuration.Search currentSearch = null;
+            Models.Configuration.Search currentSearch = null;
             if (Variables.configurationManager?.config?.Searchs?.SearchDetails == null)
                 return;
             foreach (var search in Variables.configurationManager.config.Searchs.SearchDetails)
@@ -443,7 +443,7 @@ namespace Isogeo.Models.Network
                 }
             }
             if (currentSearch == null) {
-                currentSearch = new Configuration.Search {Name = Resource.Previous_search};
+                currentSearch = new Models.Configuration.Search {Name = Resource.Previous_search};
 
                 Variables.configurationManager.config.Searchs.SearchDetails.Add(currentSearch);
             }

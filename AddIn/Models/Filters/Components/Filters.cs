@@ -7,6 +7,7 @@ using Isogeo.AddIn.Models;
 using Isogeo.Map.MapFunctions;
 using Isogeo.Models;
 using Isogeo.Models.Network;
+using Isogeo.Network;
 using MVVMPattern;
 
 namespace Isogeo.AddIn.Models.Filters.Components
@@ -16,7 +17,7 @@ namespace Isogeo.AddIn.Models.Filters.Components
         public string Name { get; }
         protected FilterItemList List { get; }
 
-        protected RestFunctions RestFunctions { get; }
+        protected IRestFunctions RestFunctions { get; }
 
         protected FilterManager FilterManager { get; }
 
@@ -29,7 +30,7 @@ namespace Isogeo.AddIn.Models.Filters.Components
             OnPropertyChanged(nameof(Items));
         }
 
-        public Filters(string name, RestFunctions restFunctions, FilterManager filterManager, IMapFunctions mapFunctions)
+        public Filters(string name, IRestFunctions restFunctions, FilterManager filterManager, IMapFunctions mapFunctions)
         {
             RestFunctions = restFunctions;
             FilterManager = filterManager;

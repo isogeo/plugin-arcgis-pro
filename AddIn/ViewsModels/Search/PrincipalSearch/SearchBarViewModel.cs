@@ -9,12 +9,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Isogeo.Models.Configuration;
+using Isogeo.Network;
 
 namespace Isogeo.AddIn.ViewsModels.Search.PrincipalSearch
 {
     public class SearchBarViewModel : ViewModelBase
     {
-        private readonly RestFunctions _restFunctions;
+        private readonly IRestFunctions _restFunctions;
         private readonly FilterManager _filterManager;
 
         private readonly IEnumerable<SearchList> _searchLists = new List<SearchList>()
@@ -88,7 +89,7 @@ namespace Isogeo.AddIn.ViewsModels.Search.PrincipalSearch
             //SearchText = Variables.searchText;
         }
 
-        public SearchBarViewModel(RestFunctions restFunctions, FilterManager filterManager)
+        public SearchBarViewModel(IRestFunctions restFunctions, FilterManager filterManager)
         {
             _restFunctions = restFunctions;
             _filterManager = filterManager;

@@ -3,12 +3,13 @@ using Isogeo.AddIn.Models.Filters.Components;
 using Isogeo.Map.MapFunctions;
 using Isogeo.Models;
 using Isogeo.Models.Network;
+using Isogeo.Network;
 
 namespace Isogeo.AddIn.Models.Filters
 {
     public class GeoGraphicalSettingsFilters : Components.Filters
     {
-        public GeoGraphicalSettingsFilters(string name, RestFunctions restFunctions, FilterManager filterManager, IMapFunctions mapFunctions) : base(name, restFunctions, filterManager, mapFunctions)
+        public GeoGraphicalSettingsFilters(string name, IRestFunctions restFunctions, FilterManager filterManager, IMapFunctions mapFunctions) : base(name, restFunctions, filterManager, mapFunctions)
         {
             var items = new List<FilterItem>
             {

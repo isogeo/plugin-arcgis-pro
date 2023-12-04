@@ -6,6 +6,7 @@ using System.Text.Json.Serialization;
 using System.Windows;
 using System.Windows.Navigation;
 using ArcGIS.Desktop.Framework;
+using Isogeo.Network;
 using Isogeo.Resources;
 using Isogeo.Utils.LogManager;
 using Isogeo.Utils.ManageEncrypt;
@@ -18,7 +19,7 @@ namespace Isogeo.Models.Network.Authentication
     public partial class Authentication
     {
 
-        private readonly RestFunctions _restFunctions;
+        private readonly IRestFunctions _restFunctions;
 
         private void InitResources()
         {
@@ -51,7 +52,7 @@ namespace Isogeo.Models.Network.Authentication
             (bool)DependencyPropertyDescriptor.FromProperty(
                 DesignerProperties.IsInDesignModeProperty, typeof(DependencyObject)).Metadata.DefaultValue;
 
-        public Authentication(RestFunctions restFunctions)
+        public Authentication(IRestFunctions restFunctions)
         {
             InitializeComponent();
             if (!IsInDesignMode)

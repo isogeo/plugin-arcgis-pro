@@ -12,6 +12,7 @@ using Isogeo.AddIn.ViewsModels.TabControls;
 using Isogeo.Map.MapFunctions;
 using Isogeo.Models;
 using Isogeo.Models.Network;
+using Isogeo.Network;
 using Isogeo.Utils.LogManager;
 using MVVMPattern.MediatorPattern;
 using Button = ArcGIS.Desktop.Framework.Contracts.Button;
@@ -27,7 +28,7 @@ namespace Isogeo.AddIn
         private readonly ViewModelBase _paneH2Vm;
         private const string DockPaneId = "Arcgis_Pro_Isogeo_Dockpane";
 
-        private readonly RestFunctions _restFunctions;
+        private readonly IRestFunctions _restFunctions;
         private readonly FilterManager _filterManager;
 
         private bool _isEnabled = true;

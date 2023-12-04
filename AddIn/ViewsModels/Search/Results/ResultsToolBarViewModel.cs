@@ -9,6 +9,7 @@ using Isogeo.AddIn.Views.Search.AskNameWindow;
 using Isogeo.Map.MapFunctions;
 using Isogeo.Models;
 using Isogeo.Models.Network;
+using Isogeo.Network;
 using Isogeo.Utils.LogManager;
 using MVVMPattern;
 using MVVMPattern.MediatorPattern;
@@ -18,7 +19,7 @@ namespace Isogeo.AddIn.ViewsModels.Search.Results
 {
     public class ResultsToolBarViewModel : ViewModelBase
     {
-        private readonly RestFunctions _restFunctions;
+        private readonly IRestFunctions _restFunctions;
 
         private readonly FilterManager _filterManager;
 
@@ -132,7 +133,7 @@ namespace Isogeo.AddIn.ViewsModels.Search.Results
             SetSortingDefault();
         }
 
-        public ResultsToolBarViewModel(RestFunctions restFunctions, FilterManager filterManager)
+        public ResultsToolBarViewModel(IRestFunctions restFunctions, FilterManager filterManager)
         {
             _restFunctions = restFunctions;
             _filterManager = filterManager;

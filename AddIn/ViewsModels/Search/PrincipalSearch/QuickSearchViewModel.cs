@@ -7,6 +7,7 @@ using Isogeo.Map.MapFunctions;
 using Isogeo.Models;
 using Isogeo.Models.Configuration;
 using Isogeo.Models.Network;
+using Isogeo.Network;
 using Isogeo.Utils.Box;
 using MVVMPattern;
 using MVVMPattern.MediatorPattern;
@@ -100,7 +101,7 @@ namespace Isogeo.AddIn.ViewsModels.Search.PrincipalSearch
             Filters.SelectItem("-");
         }
 
-        public QuickSearchViewModel(RestFunctions restFunctions, FilterManager filterManager, IMapFunctions mapFunctions)
+        public QuickSearchViewModel(IRestFunctions restFunctions, FilterManager filterManager, IMapFunctions mapFunctions)
         {
             _filterManager = filterManager;
             Filters = new QuickSearchFilters("QuickSearch", restFunctions, filterManager, mapFunctions);

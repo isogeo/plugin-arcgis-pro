@@ -10,6 +10,7 @@ using Isogeo.AddIn.Views.Search.AskNameWindow;
 using Isogeo.Map.MapFunctions;
 using Isogeo.Models;
 using Isogeo.Models.Network;
+using Isogeo.Network;
 using Isogeo.Utils.LogManager;
 using Microsoft.Win32;
 using MVVMPattern;
@@ -22,7 +23,7 @@ namespace Isogeo.AddIn.ViewsModels.Settings
     {
         public QuickSearchSettingsFilters QuickSearchSettingsFilters { get; set; }
 
-        private readonly RestFunctions _restFunctions;
+        private readonly IRestFunctions _restFunctions;
 
         private readonly FilterManager _filterManager;
 
@@ -236,7 +237,7 @@ namespace Isogeo.AddIn.ViewsModels.Settings
             }
         }
 
-        public SearchSettingsViewModel(RestFunctions restFunctions, FilterManager filterManager, IMapFunctions mapFunctions)
+        public SearchSettingsViewModel(IRestFunctions restFunctions, FilterManager filterManager, IMapFunctions mapFunctions)
         {
             _restFunctions = restFunctions;
             _filterManager = filterManager;

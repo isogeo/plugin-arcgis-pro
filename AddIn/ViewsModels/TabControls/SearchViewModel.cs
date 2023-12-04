@@ -5,6 +5,7 @@ using Isogeo.AddIn.ViewsModels.Search.PrincipalSearch;
 using Isogeo.AddIn.ViewsModels.Search.Results;
 using Isogeo.Map.MapFunctions;
 using Isogeo.Models.Network;
+using Isogeo.Network;
 
 namespace Isogeo.AddIn.ViewsModels.TabControls
 {
@@ -16,7 +17,7 @@ namespace Isogeo.AddIn.ViewsModels.TabControls
         public PrincipalSearchViewModel PrincipalSearchViewModel { get; set; }
 
         private readonly IMapFunctions _mapFunctions;
-        private readonly RestFunctions _restFunctions;
+        private readonly IRestFunctions _restFunctions;
         private readonly FilterManager _filterManager;
 
         private void InitViewModel()
@@ -27,7 +28,7 @@ namespace Isogeo.AddIn.ViewsModels.TabControls
             PrincipalSearchViewModel = new PrincipalSearchViewModel(_filterManager, _restFunctions, _mapFunctions);
         }
 
-        public SearchViewModel(RestFunctions restFunctions, FilterManager filterManager, IMapFunctions mapFunctions)
+        public SearchViewModel(IRestFunctions restFunctions, FilterManager filterManager, IMapFunctions mapFunctions)
         {
             _filterManager = filterManager;
             _mapFunctions = mapFunctions;

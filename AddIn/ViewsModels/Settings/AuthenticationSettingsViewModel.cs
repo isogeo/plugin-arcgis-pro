@@ -2,15 +2,16 @@
 using Isogeo.Models.Network;
 using MVVMPattern;
 using System.Windows.Input;
+using Isogeo.Network;
 using MVVMPattern.RelayCommand;
 
 namespace Isogeo.AddIn.ViewsModels.Settings
 {
     public class AuthenticationSettingsViewModel : ViewModelBase
     {
-        private readonly RestFunctions _restFunctions;
+        private readonly IRestFunctions _restFunctions;
 
-        public AuthenticationSettingsViewModel(RestFunctions restFunctions)
+        public AuthenticationSettingsViewModel(IRestFunctions restFunctions)
         {
             _restFunctions = restFunctions;
         }
