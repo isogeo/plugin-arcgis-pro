@@ -45,6 +45,7 @@ namespace Isogeo.AddIn.ViewsModels.Search.PrincipalSearch
             _restFunctions = restFunctions;
             _filterManager = filterManager;
             Mediator.Register("ChangeQuery", ChangeSearchTextEvent);
+
         }
 
         private void SearchTextBox_OnSearch(object sender, RoutedEventArgs e)
