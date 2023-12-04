@@ -13,8 +13,8 @@
         </ResourceDictionary>
     </UserControl.Resources>
     <StackPanel>
-        <TextBox Style="{StaticResource HideBoxTxt}"  x:Name="LblLicense" Text="{Binding Path = licence, Mode = OneWay}" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-        <TextBox Style="{StaticResource HideBoxTxt}"  x:Name="LblContent" Text="{Binding Path = content, Mode = OneWay}" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-        <TextBox Style="{StaticResource HideBoxTxt}"  x:Name="LblDescription" Text="{Binding Path = description, Mode = OneWay}" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <TextBox Style="{StaticResource HideBoxTxt}"  x:Name="LblLicense" Text="{Binding Path = Licence, Mode = OneWay}" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <TextBox Style="{StaticResource HideBoxTxt}"  x:Name="LblContent" Text="{Binding Path = Content, Mode = OneWay}" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <TextBox Style="{StaticResource HideBoxTxt}"  x:Name="LblDescription" Text="{Binding Path = Description, Mode = OneWay}" HorizontalAlignment="Left" VerticalAlignment="Top"/>
     </StackPanel>
 </UserControl>
