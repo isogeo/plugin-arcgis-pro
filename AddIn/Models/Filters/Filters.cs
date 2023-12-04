@@ -20,16 +20,7 @@ namespace Isogeo.Models.Filters
 
         protected IMapFunctions MapFunctions { get; }
 
-        public ObservableCollection<FilterItem> Items
-        {
-            get => List.Items;
-            set
-            {
-                List.Items = value;
-                SelectedItem = value[0];
-                OnPropertyChanged(nameof(Items));
-            }
-        }
+        public ObservableCollection<FilterItem> Items => List.Items;
 
         private void List_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {

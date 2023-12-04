@@ -6,17 +6,7 @@ namespace Isogeo.Models.Filters
 {
     public class FilterItemList : ViewModelBase
     {
-        private ObservableCollection<FilterItem> _items;
-
-        public ObservableCollection<FilterItem> Items
-        {
-            get => _items;
-            set
-            {
-                _items = value;
-                OnPropertyChanged(nameof(Items));
-            }
-        }
+        public ObservableCollection<FilterItem> Items { get; } = new();
 
         private FilterItem _selected;
 
@@ -28,11 +18,6 @@ namespace Isogeo.Models.Filters
                 _selected = value;
                 OnPropertyChanged(nameof(Selected));
             }
-        }
-
-        public FilterItemList()
-        {
-            Items = new ObservableCollection<FilterItem>();
         }
 
         internal void SelectByName(string p)

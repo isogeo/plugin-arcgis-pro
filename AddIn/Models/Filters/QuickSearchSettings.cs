@@ -14,6 +14,7 @@ namespace Isogeo.Models.Filters
 
         protected override void SelectionChanged()
         {
+            // Method intentionally left empty.
         }
 
         public override void AddItem(FilterItem item)
