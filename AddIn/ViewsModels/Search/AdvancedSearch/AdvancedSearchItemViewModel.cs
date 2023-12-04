@@ -20,8 +20,6 @@ namespace Isogeo.AddIn.ViewsModels.Search.AdvancedSearch
 
         private readonly IFilterManager _filterManager;
 
-        public bool IsCustomQuery { get; private set; }
-
         private Filters _filters;
         public Filters Filters
         {
