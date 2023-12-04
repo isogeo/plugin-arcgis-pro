@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
-using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using System.Windows.Threading;
 using ArcGIS.Desktop.Framework.Threading.Tasks;
 using Isogeo.AddIn.Models;
 using Isogeo.AddIn.ViewsModels.Metadata;
@@ -23,12 +21,10 @@ using RelayCommand = MVVMPattern.RelayCommand.RelayCommand;
 
 namespace Isogeo.AddIn.ViewsModels.Search.Results
 {
-    public class ResultItemViewModel : ViewModelBase/*, IAsyncDisposable*/
+    public class ResultItemViewModel : ViewModelBase
     {
         private readonly IConfigurationManager _configurationManager;
         public Result Result { get; set; }
-        //private readonly CancellationTokenSource _cmbLayerCancellationToken = new();
-        //private Task? _cmbLayerLoadingTask;
 
         // Isogeo geometry types
         private readonly List<string> _polygonList = new(new[] { "CurvePolygon", "MultiPolygon", "MultiSurface", "Polygon", "PolyhedralSurface" });
@@ -62,23 +58,11 @@ namespace Isogeo.AddIn.ViewsModels.Search.Results
             _networkManager = networkManager;
             CmbLayer = new CmbLayer();
             WaitingCmbLayerVisibility = Visibility.Visible;
-            //Mediator.Register(MediatorEvent.WaitingCmbLayerVisibilities, DisableWaitingCmbLayerVisibility);
         }
 
-        private void DisableWaitingCmbLayerVisibility(object isEnabled)
+        public void LoadComboBox()
         {
-            if ((bool)isEnabled) 
-                return;
-            Application.Current.Dispatcher.Invoke(async () =>
-            {
-                WaitingCmbLayerVisibility = Visibility.Hidden;
-                OnPropertyChanged(nameof(WaitingCmbLayerVisibility));
-            });
-        }
-
-        public async Task LoadComboBox()
-        {
-            await GetLinks();
+            GetLinks();
             SetCombo();
             WaitingCmbLayerVisibility = Visibility.Hidden;
             OnPropertyChanged(nameof(CmbLayer));
@@ -89,7 +73,6 @@ namespace Isogeo.AddIn.ViewsModels.Search.Results
         {
             Result = item;
             SetComponent();
-            //_cmbLayerLoadingTask = Task.Run(async () => await LoadComboBox());
         }
 
         private ICommand _openMetadataClickCommand;
@@ -124,7 +107,7 @@ namespace Isogeo.AddIn.ViewsModels.Search.Results
             var resultDetails = await _networkManager.GetDetails(Result.Id);
             if (resultDetails != null)
                 Result = resultDetails;
-            await MniLoadData_OnClick();
+            MniLoadData_OnClick();
         }
 
         private bool CanRunBtnMenu_OnClick()
@@ -284,11 +267,8 @@ namespace Isogeo.AddIn.ViewsModels.Search.Results
             return new ServiceType(type, title, url, name, creator, id);
         }
 
-        private async Task GetLinks()
+        private void GetLinks()
         {
-            //if ((Result.Type == "vectorDataset" || Result.Type == "rasterDataset" || Result.Type == "service") && Result.Id != null)
-            //    result = await _networkManager.GetDetails(Result.Id, _cmbLayerCancellationToken.Token); // get Layer & ServiceLayer, they are nulls by default
-
             if (_vectorFormatList.Contains(Result.Format))
             {
                 _dataList.Add(CreateServiceType(Result));
@@ -428,11 +408,11 @@ namespace Isogeo.AddIn.ViewsModels.Search.Results
                 _networkManager.OpenAuthenticationPopUp();
         }
 
-        private async Task MniLoadData_OnClick()
+        private void MniLoadData_OnClick()
         {
             if (_dataList == null || _dataList.Count == 0)
                 return;
-            await GetLinks();
+            GetLinks();
             var currentService = _dataList.Count == 1 ? _dataList[0] : _dataList[CmbLayer.SelectedIndex];
 
             if (currentService != null && currentService.Type?.ToUpper() == "ARCSDE")
@@ -443,12 +423,5 @@ namespace Isogeo.AddIn.ViewsModels.Search.Results
                 _mapManager.AddLayer(currentService);
             });
         }
-
-        //public async ValueTask DisposeAsync()
-        //{
-        //    _cmbLayerCancellationToken.Cancel();
-        //    if (_cmbLayerLoadingTask != null)
-        //        await _cmbLayerLoadingTask;
-        //}
     }
 }

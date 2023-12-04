@@ -3,6 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using ArcGIS.Desktop.Framework.Dialogs;
+using Isogeo.AddIn.Models;
 using Isogeo.AddIn.Models.FilterManager;
 using Isogeo.AddIn.Models.Filters.Components;
 using Isogeo.AddIn.Views.Search.AskNameWindow;
@@ -297,6 +298,7 @@ namespace Isogeo.AddIn.ViewsModels.Search.Results
             {
                 BtnResultsContent = Variables.search.Total + " " + Language.Resources.Results;
             }
+            WpfHelper.ForceFrontToCheckCommands();
         }
 
         private static bool CanRunBtnResults()

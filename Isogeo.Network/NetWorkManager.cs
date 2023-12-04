@@ -384,8 +384,6 @@ namespace Isogeo.Network
             Log.Logger.Info("Execution SearchRequest - query : " + '"' + apiParameters.query + '"' + ", offset : " + apiParameters.offset);
             try
             {
-                Variables.search = new Search();
-
                 var url = _configurationManager.Config.ApiUrl + "resources/search";
 
                 var dictionary = new Dictionary<string, string>

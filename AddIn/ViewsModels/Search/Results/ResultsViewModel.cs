@@ -7,7 +7,9 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using System.Windows.Threading;
 using ActiproSoftware.Windows.Extensions;
+using Isogeo.AddIn.Models;
 using Isogeo.AddIn.Models.FilterManager;
 using Isogeo.AddIn.Models.Filters.Components;
 using Isogeo.Map;
@@ -160,7 +162,7 @@ namespace Isogeo.AddIn.ViewsModels.Search.Results
             ClearResults();
         }
 
-        private async Task LoadResultItemsViewModelResultsLinks()
+        private void LoadResultItemsViewModelResultsLinks()
         {
             var ob = _filterManager.GetOb();
             var od = _filterManager.GetOd();
@@ -179,11 +181,9 @@ namespace Isogeo.AddIn.ViewsModels.Search.Results
                     if (item == null)
                         continue;
                     item.Result = result;
-                    await Application.Current.Dispatcher.Invoke(async () =>
-                    {
-                        await item.LoadComboBox();
-                    });
+                    Application.Current.Dispatcher.Invoke(item.LoadComboBox);
                 }
+                Application.Current.Dispatcher.Invoke(WpfHelper.ForceFrontToCheckCommands);
             });
         }
 
@@ -217,7 +217,8 @@ namespace Isogeo.AddIn.ViewsModels.Search.Results
             LstResultIsEnabled = true;
             if (ResultsList.Count > 0)
                 SelectedItem = ResultsList[0];
-            await LoadResultItemsViewModelResultsLinks();
+            LoadResultItemsViewModelResultsLinks();
+            WpfHelper.ForceFrontToCheckCommands();
         }
 
         private void SetCurrentPageWithoutTriggerReloadApi(int offset)
