@@ -12,12 +12,14 @@ namespace Isogeo.AddIn.ViewsModels.TabControls
         public SearchSettingsViewModel SearchSettingsViewModel { get; set; }
         public ProxySettingsViewModel ProxySettingsViewModel { get; set; }
         public AuthenticationSettingsViewModel AuthenticationSettingsViewModel { get; set; }
+        public ResourcesSettingsViewModel ResourcesSettingsViewModel { get; set; }
 
         public SettingsViewModel(INetworkManager networkManager, IFilterManager filterManager, IMapManager mapManager, IConfigurationManager configurationManager)
         {
             SearchSettingsViewModel = new SearchSettingsViewModel(networkManager, filterManager, mapManager, configurationManager);
             ProxySettingsViewModel = new ProxySettingsViewModel(configurationManager);
             AuthenticationSettingsViewModel = new AuthenticationSettingsViewModel(networkManager, configurationManager);
+            ResourcesSettingsViewModel = new ResourcesSettingsViewModel(configurationManager);
         }
     }
 }

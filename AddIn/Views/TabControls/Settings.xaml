@@ -19,6 +19,6 @@
         <settings:SearchSettings DataContext="{Binding SearchSettingsViewModel}" Grid.Row="0" Grid.Column="0" /> 
         <settings:ProxySettings DataContext="{Binding ProxySettingsViewModel}" Grid.Row="1" Grid.Column="0" />
         <settings:AuthenticationSettings DataContext="{Binding AuthenticationSettingsViewModel}"  Grid.Row="2" Grid.Column="0"/>
-        <settings:ResourcesSettings Grid.Row="3" Grid.Column="0" />
+        <settings:ResourcesSettings DataContext="{Binding ResourcesSettingsViewModel}" Grid.Row="3" Grid.Column="0" />
     </Grid>
 </UserControl>
