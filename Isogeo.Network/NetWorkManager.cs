@@ -394,7 +394,6 @@ namespace Isogeo.Network
                 return null;
             }
         }
-      
 
         private WebProxy GetProxy()
         {

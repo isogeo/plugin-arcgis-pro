@@ -7,6 +7,8 @@ namespace Isogeo.AddIn.Models.FilterManager
     {
         public void AddFilters(Filters.Components.Filters filters);
 
+        public void SetTextSearchFilter(SearchTextFilter searchTextFilter);
+
         public void SetGeographicFilter(Filters.Components.Filters filters);
 
         public void SetCmbSortingMethod(FilterItem cmbSortingMethodSelectedItem);

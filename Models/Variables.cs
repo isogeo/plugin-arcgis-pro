@@ -12,8 +12,5 @@ namespace Isogeo.Models
         public static Search search = new();
 
         public static readonly int NbResult = 10;
-
-        public static string searchText;
-
     }
 }

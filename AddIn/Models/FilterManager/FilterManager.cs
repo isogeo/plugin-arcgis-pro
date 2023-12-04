@@ -12,6 +12,7 @@ namespace Isogeo.AddIn.Models.FilterManager
     {
         private SearchLists _searchLists;
         private readonly List<Filters.Components.Filters> _listComboFilter = new();
+        private SearchTextFilter _searchTextFilter;
         private Filters.Components.Filters _geographicFilter;
         private readonly IMapManager _mapManager;
 
@@ -25,6 +26,11 @@ namespace Isogeo.AddIn.Models.FilterManager
         public FilterManager(IMapManager mapManager)
         {
             _mapManager = mapManager;
+        }
+
+        public void SetTextSearchFilter(SearchTextFilter searchTextFilter)
+        {
+            _searchTextFilter = searchTextFilter;
         }
 
         public void AddFunctionToSetFilterList(Action setListFunction)
@@ -119,7 +125,7 @@ namespace Isogeo.AddIn.Models.FilterManager
                     filter += cmb.SelectedItem.Id;
                 }
             }
-            filter += " " + Variables.searchText;
+            filter += " " + _searchTextFilter.CurrentSearchText;
 
             Log.Logger.Debug("END Get query from UI - Query : " + filter);
             return filter;
@@ -208,7 +214,7 @@ namespace Isogeo.AddIn.Models.FilterManager
 
             if (string.IsNullOrWhiteSpace(query))
             {
-                Variables.searchText = textInput;
+                _searchTextFilter.CurrentSearchText = textInput;
             }
 
             FilterListsLoading = false;

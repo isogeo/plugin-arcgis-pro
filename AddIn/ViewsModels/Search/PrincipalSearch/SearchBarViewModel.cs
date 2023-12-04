@@ -9,6 +9,7 @@ using System.Linq;
 using Isogeo.Models.Configuration;
 using Isogeo.Network;
 using Isogeo.AddIn.Models.FilterManager;
+using Isogeo.AddIn.Models.Filters.Components;
 
 namespace Isogeo.AddIn.ViewsModels.Search.PrincipalSearch
 {
@@ -16,6 +17,7 @@ namespace Isogeo.AddIn.ViewsModels.Search.PrincipalSearch
     {
         private readonly INetworkManager _networkManager;
         private readonly IFilterManager _filterManager;
+        private readonly SearchTextFilter _searchTextFilter;
 
         private readonly IEnumerable<SearchList> _searchLists = new List<SearchList>()
         {
@@ -32,19 +34,17 @@ namespace Isogeo.AddIn.ViewsModels.Search.PrincipalSearch
 
         public string SearchText
         {
-            get => Variables.searchText;
+            get => _searchTextFilter.CurrentSearchText;
             set
             {
-                Variables.searchText = value;
+                _searchTextFilter.CurrentSearchText = value;
                 OnPropertyChanged(nameof(SearchText));
             }
         }
 
         public string GetTextBarQuery(string query)
         {
-          
             var textInput = "";
-           
 
             if (Variables.search?.Tags == null) 
                 return textInput;
@@ -73,11 +73,6 @@ namespace Isogeo.AddIn.ViewsModels.Search.PrincipalSearch
 
             }
 
-            //if (string.IsNullOrWhiteSpace(query))
-            //{
-            //    Variables.searchText = textInput;
-            //}
-
             return textInput;
         }
 
@@ -85,13 +80,14 @@ namespace Isogeo.AddIn.ViewsModels.Search.PrincipalSearch
         {
             var query = ((QueryItem)queryItem).Query;
             SearchText = GetTextBarQuery(query);
-            //SearchText = Variables.searchText;
         }
 
         public SearchBarViewModel(INetworkManager networkManager, IFilterManager filterManager)
         {
             _networkManager = networkManager;
             _filterManager = filterManager;
+            _searchTextFilter = new SearchTextFilter();
+            _filterManager.SetTextSearchFilter(_searchTextFilter);
             Mediator.Register("ChangeQuery", ChangeSearchTextEvent);
         }
 
