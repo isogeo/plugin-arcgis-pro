@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -164,15 +164,18 @@ namespace Isogeo.AddIn.ViewsModels.Search.Results
 
         private void LoadResultItemsViewModelResultsLinks()
         {
-            var ob = _filterManager.GetOb();
-            var od = _filterManager.GetOd();
-            var query = _filterManager.GetQueryCombos();
-            var box = _filterManager.GetBoxRequest();
+            var token = _loadDetailResultsCancellationToken.Token;
+            _loadDetailResultsTask = Task.Run(async () =>
+            {
+                var ob = _filterManager.GetOb();
+                var od = _filterManager.GetOd();
+                var query = _filterManager.GetQueryCombos();
+                var box = _filterManager.GetBoxRequest();
 
-            _loadDetailResultsTask = Task.Run(async () => {
                 var search = await _networkManager.GetDataWithoutMediatorEventRaised(query,
                     (int.Parse(CurrentPage.Name) - 1) * _configurationManager.GlobalSoftwareSettings.NbResult, box, od, ob,
-                    _loadDetailResultsCancellationToken.Token);
+                    token);
+
                 if (search?.Results == null)
                     return;
                 foreach (var result in search.Results)
@@ -184,7 +187,7 @@ namespace Isogeo.AddIn.ViewsModels.Search.Results
                     Application.Current.Dispatcher.Invoke(item.LoadComboBox);
                 }
                 Application.Current.Dispatcher.Invoke(WpfHelper.ForceFrontToCheckCommands);
-            });
+            }, token);
         }
 
         public async Task CancelDetailResultsLoading()

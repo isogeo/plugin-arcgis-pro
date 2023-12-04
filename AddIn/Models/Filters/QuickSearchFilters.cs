@@ -19,8 +19,8 @@ namespace Isogeo.AddIn.Models.Filters
                 return;
             var ob = FilterManager.GetOb();
             var od = FilterManager.GetOd();
-            await NetworkManager.LoadData(SelectedItem.Id, 0, SelectedItem.GeographicalOperator, od, ob);
             FilterManager.SetSearchList(SelectedItem.Id);
+            await NetworkManager.LoadData(SelectedItem.Id, 0, SelectedItem.GeographicalOperator, od, ob);
         }
 
         public void SelectItem(string name, string id, string box)
