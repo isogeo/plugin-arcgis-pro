@@ -1,40 +1,40 @@
 <Project Sdk="Microsoft.NET.Sdk">
-	<PropertyGroup>
-		<TargetFramework>net6.0-windows</TargetFramework>
-		<UseWPF>true</UseWPF>
-		<RuntimeIdentifier>win10-x64</RuntimeIdentifier>
-	</PropertyGroup>
-	<ItemGroup>
-		<PackageReference Include="log4net" Version="2.0.15" />
-	</ItemGroup>
-	<ItemGroup>
-		<ProjectReference Include="..\Language\Isogeo.Language.csproj" />
-		<ProjectReference Include="..\Utils\Isogeo.Utils.csproj" />
-	</ItemGroup>
-	<ItemGroup>
-		<Reference Include="ArcGIS.Desktop.Core">
-			<HintPath>C:\Program Files\ArcGIS\Pro\bin\Extensions\Core\ArcGIS.Desktop.Core.dll</HintPath>
-		</Reference>
-		<Reference Include="ArcGIS.Desktop.Framework">
-			<HintPath>C:\Program Files\ArcGIS\Pro\bin\ArcGIS.Desktop.Framework.dll</HintPath>
-		</Reference>
-		<Reference Include="ArcGIS.Core">
-			<HintPath>C:\Program Files\ArcGIS\Pro\bin\ArcGIS.Core.dll</HintPath>
-		</Reference>
-		<Reference Include="ArcGIS.Desktop.Editing">
-			<HintPath>C:\Program Files\ArcGIS\Pro\bin\Extensions\Editing\ArcGIS.Desktop.Editing.dll</HintPath>
-		</Reference>
-		<Reference Include="ArcGIS.Desktop.Extensions">
-			<HintPath>C:\Program Files\ArcGIS\Pro\bin\Extensions\DesktopExtensions\ArcGIS.Desktop.Extensions.dll</HintPath>
-		</Reference>
-		<Reference Include="ArcGIS.Desktop.Mapping">
-			<HintPath>C:\Program Files\ArcGIS\Pro\bin\Extensions\Mapping\ArcGIS.Desktop.Mapping.dll</HintPath>
-		</Reference>
-		<Reference Include="ArcGIS.Desktop.Ribbon.Wpf">
-			<HintPath>C:\Program Files\ArcGIS\Pro\bin\ArcGIS.Desktop.Ribbon.Wpf.dll</HintPath>
-		</Reference>
-		<Reference Include="ArcGIS.Desktop.Shared.Wpf">
-			<HintPath>C:\Program Files\ArcGIS\Pro\bin\ArcGIS.Desktop.Shared.Wpf.dll</HintPath>
-		</Reference>
-	</ItemGroup>
+    <PropertyGroup>
+        <TargetFramework>net6.0-windows</TargetFramework>
+        <UseWPF>true</UseWPF>
+        <RuntimeIdentifier>win10-x64</RuntimeIdentifier>
+    </PropertyGroup>
+    <ItemGroup>
+        <PackageReference Include="log4net" Version="2.0.15" />
+    </ItemGroup>
+    <ItemGroup>
+        <ProjectReference Include="..\Language\Isogeo.Language.csproj" />
+        <ProjectReference Include="..\Utils\Isogeo.Utils.csproj" />
+    </ItemGroup>
+    <ItemGroup>
+        <Reference Include="ArcGIS.Desktop.Core">
+            <HintPath>C:\Program Files\ArcGIS\Pro\bin\Extensions\Core\ArcGIS.Desktop.Core.dll</HintPath>
+        </Reference>
+        <Reference Include="ArcGIS.Desktop.Framework">
+            <HintPath>C:\Program Files\ArcGIS\Pro\bin\ArcGIS.Desktop.Framework.dll</HintPath>
+        </Reference>
+        <Reference Include="ArcGIS.Core">
+            <HintPath>C:\Program Files\ArcGIS\Pro\bin\ArcGIS.Core.dll</HintPath>
+        </Reference>
+        <Reference Include="ArcGIS.Desktop.Editing">
+            <HintPath>C:\Program Files\ArcGIS\Pro\bin\Extensions\Editing\ArcGIS.Desktop.Editing.dll</HintPath>
+        </Reference>
+        <Reference Include="ArcGIS.Desktop.Extensions">
+            <HintPath>C:\Program Files\ArcGIS\Pro\bin\Extensions\DesktopExtensions\ArcGIS.Desktop.Extensions.dll</HintPath>
+        </Reference>
+        <Reference Include="ArcGIS.Desktop.Mapping">
+            <HintPath>C:\Program Files\ArcGIS\Pro\bin\Extensions\Mapping\ArcGIS.Desktop.Mapping.dll</HintPath>
+        </Reference>
+        <Reference Include="ArcGIS.Desktop.Ribbon.Wpf">
+            <HintPath>C:\Program Files\ArcGIS\Pro\bin\ArcGIS.Desktop.Ribbon.Wpf.dll</HintPath>
+        </Reference>
+        <Reference Include="ArcGIS.Desktop.Shared.Wpf">
+            <HintPath>C:\Program Files\ArcGIS\Pro\bin\ArcGIS.Desktop.Shared.Wpf.dll</HintPath>
+        </Reference>
+    </ItemGroup>
 </Project>

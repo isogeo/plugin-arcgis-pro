@@ -1,57 +1,54 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.Web">
-	<PropertyGroup>
-		<TargetFramework>net6.0-windows</TargetFramework>
-		<OutputType>library</OutputType>
-	</PropertyGroup>
-	<PropertyGroup>
-		<UseWPF>true</UseWPF>
-		<GenerateAssemblyInfo>false</GenerateAssemblyInfo>
-	</PropertyGroup>
-	<ItemGroup>
-		<Resource Include="Resources\arrowCollapse.png" />
-		<Resource Include="Resources\arrowExtent.png" />
-		<Resource Include="Resources\asterisk.png" />
-		<Resource Include="Resources\bolt.png" />
-		<Resource Include="Resources\check.png" />
-		<Resource Include="Resources\cube.png" />
-		<Resource Include="Resources\delete.png" />
-		<Resource Include="Resources\email.png" />
-		<Resource Include="Resources\eye.png" />
-		<Resource Include="Resources\flash.png" />
-		<Resource Include="Resources\gavel.png" />
-		<Resource Include="Resources\gear.png" />
-		<Resource Include="Resources\github-logo.png" />
-		<Resource Include="Resources\globe.png" />
-		<Resource Include="Resources\icon.png" />
-		<Resource Include="Resources\info.png" />
-		<Resource Include="Resources\isogeo_blanc.png" />
-		<Resource Include="Resources\key.png" />
-		<Resource Include="Resources\leaf.png" />
-		<Resource Include="Resources\lgpl-logo.png" />
-		<Resource Include="Resources\Linkedin-logo.png" />
-		<Resource Include="Resources\logo-isogeo.png"/>
-		<Resource Include="Resources\map.png" />
-		<Resource Include="Resources\phone_orange.png" />
-		<Resource Include="Resources\previousSearch.png" />
-		<Resource Include="Resources\rename.png" />
-		<Resource Include="Resources\save.png" />
-		<Resource Include="Resources\saveas.png" />
-		<Resource Include="Resources\search.png" />
-		<Resource Include="Resources\undo.png" />
-		<Resource Include="Resources\users.png" />
-		<Resource Include="Resources\highlightReset.png" />
-	</ItemGroup>
-	<ItemGroup>
-	  <Compile Update="Properties\Settings.Designer.cs">
-	    <DesignTimeSharedInput>True</DesignTimeSharedInput>
-	    <AutoGen>True</AutoGen>
-	    <DependentUpon>Settings.settings</DependentUpon>
-	  </Compile>
-	</ItemGroup>
-	<ItemGroup>
-	  <None Update="Properties\Settings.settings">
-	    <Generator>SettingsSingleFileGenerator</Generator>
-	    <LastGenOutput>Settings.Designer.cs</LastGenOutput>
-	  </None>
-	</ItemGroup>
+<Project Sdk="Microsoft.NET.Sdk">
+    <PropertyGroup>
+        <TargetFramework>net6.0-windows</TargetFramework>
+        <UseWPF>true</UseWPF>
+        <RuntimeIdentifier>win10-x64</RuntimeIdentifier>
+    </PropertyGroup>
+    <ItemGroup>
+        <Resource Include="Resources\arrowCollapse.png" />
+        <Resource Include="Resources\arrowExtent.png" />
+        <Resource Include="Resources\asterisk.png" />
+        <Resource Include="Resources\bolt.png" />
+        <Resource Include="Resources\check.png" />
+        <Resource Include="Resources\cube.png" />
+        <Resource Include="Resources\delete.png" />
+        <Resource Include="Resources\email.png" />
+        <Resource Include="Resources\eye.png" />
+        <Resource Include="Resources\flash.png" />
+        <Resource Include="Resources\gavel.png" />
+        <Resource Include="Resources\gear.png" />
+        <Resource Include="Resources\github-logo.png" />
+        <Resource Include="Resources\globe.png" />
+        <Resource Include="Resources\icon.png" />
+        <Resource Include="Resources\info.png" />
+        <Resource Include="Resources\isogeo_blanc.png" />
+        <Resource Include="Resources\key.png" />
+        <Resource Include="Resources\leaf.png" />
+        <Resource Include="Resources\lgpl-logo.png" />
+        <Resource Include="Resources\Linkedin-logo.png" />
+        <Resource Include="Resources\logo-isogeo.png"/>
+        <Resource Include="Resources\map.png" />
+        <Resource Include="Resources\phone_orange.png" />
+        <Resource Include="Resources\previousSearch.png" />
+        <Resource Include="Resources\rename.png" />
+        <Resource Include="Resources\save.png" />
+        <Resource Include="Resources\saveas.png" />
+        <Resource Include="Resources\search.png" />
+        <Resource Include="Resources\undo.png" />
+        <Resource Include="Resources\users.png" />
+        <Resource Include="Resources\highlightReset.png" />
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Update="Properties\Settings.Designer.cs">
+            <DesignTimeSharedInput>True</DesignTimeSharedInput>
+            <AutoGen>True</AutoGen>
+            <DependentUpon>Settings.settings</DependentUpon>
+        </Compile>
+    </ItemGroup>
+    <ItemGroup>
+        <None Update="Properties\Settings.settings">
+            <Generator>SettingsSingleFileGenerator</Generator>
+            <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+        </None>
+    </ItemGroup>
 </Project>
