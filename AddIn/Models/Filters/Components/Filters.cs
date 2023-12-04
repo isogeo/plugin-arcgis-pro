@@ -95,7 +95,7 @@ namespace Isogeo.AddIn.Models.Filters.Components
             while (Items.Any(search => search.Name == itemNameToAdd))
                 itemNameToAdd += " - " + Language.Resources.Copy.ToLower();
             if (!string.IsNullOrWhiteSpace(itemNameToAdd))
-                _temporaryFilterItemList.Add(new FilterItem(item.Id, itemNameToAdd));
+                _temporaryFilterItemList.Add(new FilterItem(item.Id, itemNameToAdd) { GeographicalOperator = item.GeographicalOperator});
         }
 
         public virtual void SetItems(List<FilterItem> items)

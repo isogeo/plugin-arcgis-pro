@@ -72,7 +72,7 @@ namespace Isogeo.AddIn.ViewsModels.Search.PrincipalSearch
         private void ChangeSelectedQuickSearchItemEvent(object queryItem)
         {
             var query = ((QueryItem) queryItem).Query;
-            var box = _filterManager.GetBoxRequest(); //((QueryItem) queryItem).box;
+            var box = _filterManager.GetBoxRequest();
             var filterItems = Filters.Items.Where(s =>
                 s?.Id != null && !string.IsNullOrWhiteSpace(query) && s.Name != Language.Resources.Previous_search &&
                 CheckEqualityBox(box, s.GeographicalOperator, 0.01) &&

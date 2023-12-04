@@ -196,8 +196,7 @@ namespace Isogeo.Network
         public async Task LoadData(string query, int offset, string box, string od, string ob)
         {
             Log.Logger.Debug("Execute Load Data");
-            if (!string.IsNullOrWhiteSpace(box))
-                Mediator.NotifyColleagues(MediatorEvent.ChangeBox, box);
+            Mediator.NotifyColleagues(MediatorEvent.ChangeBox, box);
             var response = await CheckFirstRequestThenTokenThenSearchRequest(query, offset, box, od, ob);
             Mediator.NotifyColleagues(MediatorEvent.ChangeQuery, new QueryItem { Query = response.Item2 });
             if (response.Item1)
