@@ -1,21 +1,24 @@
 ﻿using System.Collections.Generic;
+using ArcGIS.Desktop.Framework.Threading.Tasks;
 using Isogeo.Models.Configuration;
+using Isogeo.Models.Network;
 
 namespace Isogeo.Models.Filters
 {
     public class QuickSearch : Filters
     {
-        public QuickSearch(string name) : base(name)
+        public QuickSearch(string name, RestFunctions restFunctions) : base(name, restFunctions)
         {
         }
 
         protected override void SelectionChanged()
         {
-            if (Variables.listLoading || SelectedItem == null || SelectedItem.Name == "-") return;
-            if (Variables.restFunctions != null)
+            if (Variables.listLoading || SelectedItem == null || SelectedItem.Name == "-") 
+                return;
+            QueuedTask.Run(() =>
             {
-                Variables.restFunctions.LoadData(SelectedItem.Id, 0, SelectedItem.GeographicalOperator);
-            }
+                _restFunctions.LoadData(SelectedItem.Id, 0, SelectedItem.GeographicalOperator);
+            });
         }
 
         public void SelectItem(string name, string id, string box)

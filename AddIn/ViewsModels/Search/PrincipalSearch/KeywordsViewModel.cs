@@ -1,6 +1,8 @@
 ﻿using System.ComponentModel;
+using Isogeo.AddIn.Models;
 using Isogeo.Models;
 using Isogeo.Models.Filters;
+using Isogeo.Models.Network;
 using MVVMPattern;
 
 namespace Isogeo.AddIn.ViewsModels.Search.PrincipalSearch
@@ -8,6 +10,8 @@ namespace Isogeo.AddIn.ViewsModels.Search.PrincipalSearch
     public class KeywordsViewModel : ViewModelBase
     {
         public string ComponentName => Language.Resources.Keywords;
+
+        private FilterManager _filterManager;
 
         private Filters _filters;
         public Filters Filters
@@ -25,17 +29,18 @@ namespace Isogeo.AddIn.ViewsModels.Search.PrincipalSearch
             OnPropertyChanged("Filters");
         }
 
-        public KeywordsViewModel()
+        public KeywordsViewModel(FilterManager filterManager, RestFunctions restFunctions)
         {
-            Filters = new Filters("keyword:isogeo");
+            _filterManager = filterManager;
+            Filters = new Filters("keyword:isogeo", restFunctions);
             Filters.PropertyChanged += Filter_PropertyChanged;
             Variables.functionsSetlist.Add(SetList);
-            Variables.listComboFilter.Add(Filters);
+            _filterManager.AddFilters(Filters);
         }
 
         private void SetList()
         {
-            Variables.restFunctions.SetListCombo(Filters, "keyword:isogeo");
+            _filterManager.SetListCombo(Filters, "keyword:isogeo");
         }
     }
 }

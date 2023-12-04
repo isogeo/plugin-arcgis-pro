@@ -1,8 +1,10 @@
 ﻿using System.ComponentModel;
 using ArcGIS.Desktop.Framework.Threading.Tasks;
+using Isogeo.AddIn.Models;
 using Isogeo.Map.MapFunctions;
 using Isogeo.Models;
 using Isogeo.Models.Filters;
+using Isogeo.Models.Network;
 using MVVMPattern;
 using MVVMPattern.MediatorPattern;
 
@@ -14,6 +16,8 @@ namespace Isogeo.AddIn.ViewsModels.Search.AdvancedSearch
         public string ImgPath { get; set; }
         private string _filterName;
         private readonly IMapFunctions _mapFunctions;
+        private readonly RestFunctions _restFunctions;
+        private readonly FilterManager _filterManager;
 
         public bool IsCustomQuery { get; private set; }
 
@@ -34,13 +38,14 @@ namespace Isogeo.AddIn.ViewsModels.Search.AdvancedSearch
         }
 
         public AdvancedSearchItemViewModel(string displayName, string imageSearchPath, string apiFilterName,
-            IMapFunctions mapFunctions)
+            IMapFunctions mapFunctions, FilterManager filterManager)
         {
             DisplayName = displayName;
             ImgPath = imageSearchPath;
-            Filters = new Filters(apiFilterName);
+            Filters = new Filters(apiFilterName, _restFunctions);
             Filters.PropertyChanged += Filter_PropertyChanged;
             _mapFunctions = mapFunctions;
+            _filterManager = filterManager;
             Mediator.Register("isCustomQuery", IsCustomQueryEvent);
             Init(apiFilterName);
         }
@@ -56,18 +61,18 @@ namespace Isogeo.AddIn.ViewsModels.Search.AdvancedSearch
             if (listName != "keyword:isogeo")
             {
                 Variables.functionsSetlist.Add(SetList);
-                Variables.listComboFilter.Add(Filters);
+                _filterManager.AddFilters(Filters);
             }
             else
             {
-                Variables.geographicFilter = Filters;
+                _filterManager.SetGeographicFilter(Filters);
                 SetGeographicOperator();
             }
         }
 
         private void SetList()
         {
-            Variables.restFunctions.SetListCombo(Filters, _filterName);
+            _filterManager.SetListCombo(Filters, _filterName);
         }
 
         private void ChangeBoxEvent(object box)

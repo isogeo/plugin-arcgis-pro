@@ -13,6 +13,7 @@ using Isogeo.Map.DataType;
 using Isogeo.Map.MapFunctions;
 using Isogeo.Models;
 using Isogeo.Models.API;
+using Isogeo.Models.Network;
 using Isogeo.Utils.LogManager;
 using MVVMPattern.MediatorPattern;
 using RelayCommand = MVVMPattern.RelayCommand.RelayCommand;
@@ -40,6 +41,7 @@ namespace Isogeo.AddIn.Views.Search.Results
         private MetadataViewModel _metadataViewModel;
 
         private readonly IMapFunctions _mapFunctions;
+        private readonly RestFunctions _restFunctions;
 
         private void InitResources()
         {
@@ -70,10 +72,11 @@ namespace Isogeo.AddIn.Views.Search.Results
             (bool)DependencyPropertyDescriptor.FromProperty(
                 DesignerProperties.IsInDesignModeProperty, typeof(DependencyObject)).Metadata.DefaultValue;
 
-        public ResultItem(IMapFunctions mapFunctions)
+        public ResultItem(IMapFunctions mapFunctions, RestFunctions restFunctions)
         {
             InitializeComponent();
             _mapFunctions = mapFunctions;
+            _restFunctions = restFunctions;
             DataContext = this;
             if (!IsInDesignMode)
                 InitResources();
@@ -406,7 +409,7 @@ namespace Isogeo.AddIn.Views.Search.Results
         /// <param name="item">API Metadata result</param>
         public async Task<bool> OpenMetadata(Result item)
         {
-            var resultDetails = await Variables.restFunctions.GetDetails(item._id);
+            var resultDetails = await _restFunctions.GetDetails(item._id);
             if (resultDetails == null)
                 return false;
             item = resultDetails;
@@ -433,12 +436,12 @@ namespace Isogeo.AddIn.Views.Search.Results
         private async void OpenMetadata(object sender, MouseButtonEventArgs e)
         {
             if (!await OpenMetadata(result))
-                Variables.restFunctions.OpenAuthenticationPopUp();
+                _restFunctions.OpenAuthenticationPopUp();
         }
 
         private async Task BtnMenu_OnClickEvent()
         {
-            var resultDetails = await Variables.restFunctions.GetDetails(result._id);
+            var resultDetails = await _restFunctions.GetDetails(result._id);
             if (resultDetails != null)
                 result = resultDetails;
             MniLoadData_OnClick();

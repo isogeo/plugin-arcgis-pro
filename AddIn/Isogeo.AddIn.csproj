@@ -24,6 +24,7 @@
     <PackageReference Include="log4net" Version="2.0.15" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Isogeo.Network\Isogeo.Network.csproj" />
     <ProjectReference Include="..\Language\Isogeo.Language.csproj" />
     <ProjectReference Include="..\Map\Isogeo.Map.csproj" />
     <ProjectReference Include="..\Models\Isogeo.Models.csproj" />

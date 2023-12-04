@@ -2,10 +2,12 @@
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows.Input;
+using ArcGIS.Desktop.Framework.Threading.Tasks;
 using Isogeo.AddIn.Views.Search.Results;
 using Isogeo.Map.MapFunctions;
 using Isogeo.Models;
 using Isogeo.Models.Filters;
+using Isogeo.Models.Network;
 using MVVMPattern;
 using MVVMPattern.MediatorPattern;
 using MVVMPattern.RelayCommand;
@@ -18,6 +20,7 @@ namespace Isogeo.AddIn.ViewsModels.Search.Results
         private ICommand _nextCommand;
         private ICommand _previousCommand;
         private readonly IMapFunctions _mapFunctions;
+        private readonly RestFunctions _restFunctions;
 
         public ObservableCollection<ResultItem> ResultsList { get; set; }
 
@@ -45,10 +48,12 @@ namespace Isogeo.AddIn.ViewsModels.Search.Results
             }
         }
 
-        private static void SelectionChanged(int offset)
+        private void SelectionChanged(int offset)
         {
-            if (Variables.restFunctions != null) 
-                Variables.restFunctions.ReloadData(offset);
+            QueuedTask.Run(() =>
+            {
+                _restFunctions.ReloadData(offset);
+            });
         }
 
         private string _lblPage;
@@ -121,7 +126,7 @@ namespace Isogeo.AddIn.ViewsModels.Search.Results
             ClearResults();
         }
 
-        public ResultsViewModel(IMapFunctions mapFunctions)
+        public ResultsViewModel(IMapFunctions mapFunctions, RestFunctions restFunctions)
         {
             _mapFunctions = mapFunctions;
             ResultsList = new ObservableCollection<ResultItem>();
@@ -141,7 +146,7 @@ namespace Isogeo.AddIn.ViewsModels.Search.Results
                 for (var i = Variables.search.results.Count - 1; i >= 0; i--)
                 {
                     var result = Variables.search.results[i];
-                    var resultItem = new ResultItem(_mapFunctions);
+                    var resultItem = new ResultItem(_mapFunctions, _restFunctions);
                     resultItem.Init(result);
                     ResultsList.Insert(0, resultItem);
                 }

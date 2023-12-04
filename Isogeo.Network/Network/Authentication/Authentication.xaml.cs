@@ -19,6 +19,8 @@ namespace Isogeo.Models.Network.Authentication
     public partial class Authentication
     {
 
+        private readonly RestFunctions _restFunctions;
+
         private void InitResources()
         {
             Dummy.DummyCode();
@@ -50,7 +52,7 @@ namespace Isogeo.Models.Network.Authentication
             (bool)DependencyPropertyDescriptor.FromProperty(
                 DesignerProperties.IsInDesignModeProperty, typeof(DependencyObject)).Metadata.DefaultValue;
 
-        public Authentication()
+        public Authentication(RestFunctions restFunctions)
         {
             InitializeComponent();
             if (!IsInDesignMode)
@@ -118,7 +120,7 @@ namespace Isogeo.Models.Network.Authentication
 
         private async Task Authenticate(string username, string password)
         {
-            var token = await Variables.restFunctions.SetConnection(username, password);
+            var token = await _restFunctions.SetConnection(username, password);
 
             if (token?.StatusResult == "OK")
             {
@@ -128,7 +130,7 @@ namespace Isogeo.Models.Network.Authentication
                     var encryptedstring = RijndaelManagedEncryption.EncryptRijndael(password, Variables.encryptCode);
                     Variables.configurationManager.config.userAuthentication.secret = encryptedstring;
                     Variables.configurationManager.Save();
-                    Variables.restFunctions.ResetData();
+                    await _restFunctions.ResetData();
                     Close();
                 }
                 catch (Exception ex)

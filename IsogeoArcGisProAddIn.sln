@@ -15,7 +15,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Isogeo.Language", "Language
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MVVMPattern", "MVVMPattern\MVVMPattern.csproj", "{23225387-FAB8-49AA-842E-D554A7D1F73F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Isogeo.Utils", "Utils\Isogeo.Utils.csproj", "{34B5AD85-8E32-4DA1-B2CB-4D4FDADCD0EF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Isogeo.Utils", "Utils\Isogeo.Utils.csproj", "{34B5AD85-8E32-4DA1-B2CB-4D4FDADCD0EF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Isogeo.Network", "Isogeo.Network\Isogeo.Network.csproj", "{8AB1F50B-3729-4C2E-9E0D-214802664BF4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -81,6 +83,14 @@ Global
 		{34B5AD85-8E32-4DA1-B2CB-4D4FDADCD0EF}.Release|Any CPU.Build.0 = Release|Any CPU
 		{34B5AD85-8E32-4DA1-B2CB-4D4FDADCD0EF}.Release|x64.ActiveCfg = Release|Any CPU
 		{34B5AD85-8E32-4DA1-B2CB-4D4FDADCD0EF}.Release|x64.Build.0 = Release|Any CPU
+		{8AB1F50B-3729-4C2E-9E0D-214802664BF4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8AB1F50B-3729-4C2E-9E0D-214802664BF4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8AB1F50B-3729-4C2E-9E0D-214802664BF4}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{8AB1F50B-3729-4C2E-9E0D-214802664BF4}.Debug|x64.Build.0 = Debug|Any CPU
+		{8AB1F50B-3729-4C2E-9E0D-214802664BF4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8AB1F50B-3729-4C2E-9E0D-214802664BF4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8AB1F50B-3729-4C2E-9E0D-214802664BF4}.Release|x64.ActiveCfg = Release|Any CPU
+		{8AB1F50B-3729-4C2E-9E0D-214802664BF4}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

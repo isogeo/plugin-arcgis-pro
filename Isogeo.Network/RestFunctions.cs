@@ -1,13 +1,12 @@
 using System.Globalization;
 using System.Net;
-using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Text.Json;
 using ArcGIS.Desktop.Framework.Dialogs;
+using Isogeo.Map.MapFunctions;
 using Isogeo.Models.API;
 using Isogeo.Models.Configuration;
-using Isogeo.Models.Filters;
 using Isogeo.Utils.LogManager;
 using Isogeo.Utils.ManageEncrypt;
 using MVVMPattern.MediatorPattern;
@@ -27,7 +26,9 @@ namespace Isogeo.Models.Network
 
         private readonly HttpClient _client;
 
-        public RestFunctions()
+        private readonly IMapFunctions _mapFunctions;
+
+        public RestFunctions(IMapFunctions mapFunctions)
         {
             var proxy = GetProxy();
             var httpClientHandler = new HttpClientHandler()
@@ -35,6 +36,7 @@ namespace Isogeo.Models.Network
                 Proxy = proxy
             };
             _client = new HttpClient(httpClientHandler);
+            _mapFunctions = mapFunctions;
         }
 
         public class ApiParameters
@@ -139,7 +141,7 @@ namespace Isogeo.Models.Network
         public void OpenAuthenticationPopUp()
         {
             if (AuthenticationPopUpIsOpen) return;
-            _frmAuthentication = new Authentication.Authentication();
+            _frmAuthentication = new Authentication.Authentication(this);
             _frmAuthentication.ShowDialog();
         }
 
@@ -364,14 +366,6 @@ namespace Isogeo.Models.Network
             return !string.IsNullOrWhiteSpace(Variables.configurationManager.config.geographicalOperator) ? Variables.configurationManager.config.geographicalOperator : "";
         }
 
-        public string GetBoxRequest()
-        {
-            var box = "";
-            if (Variables.geographicFilter.SelectedItem.Name != "-")
-                box = MapFunctions.MapFunctions.GetMapExtent();
-            return box;
-        }
-
         private async Task<Search> SearchRequest(ApiParameters apiParameters, int nbResult)
         {
             Log.Logger.Info("Execution SearchRequest - query : " + '"' + apiParameters.query + '"' + ", offset : " + apiParameters.offset);
@@ -429,120 +423,6 @@ namespace Isogeo.Models.Network
         }
 
         /// <summary>
-        /// Set current search lists with query parameters
-        /// Set at the end of the method combobox' sourceItems
-        /// </summary>
-        /// <param name="query">query is used to define current search lists</param>
-        private static void SetSearchList(string query)
-        {
-            Log.Logger.Debug("Set search List - query : " + query);
-            var textInput = "";
-            Variables.searchLists = new SearchLists();
-
-            Variables.searchLists.list.Add(new SearchList("type", true));
-            Variables.searchLists.list.Add(new SearchList("keyword:inspire-theme", true));
-            Variables.searchLists.list.Add(new SearchList("keyword:isogeo", true));
-            Variables.searchLists.list.Add(new SearchList("format", true));
-            Variables.searchLists.list.Add(new SearchList("coordinate-system", true));
-            Variables.searchLists.list.Add(new SearchList("owner", true));
-            Variables.searchLists.list.Add(new SearchList("action", true));
-            Variables.searchLists.list.Add(new SearchList("contact", true));
-            Variables.searchLists.list.Add(new SearchList("license", true));
-
-            if (Variables.search?.tags == null) return;
-            foreach (var item in Variables.search.tags)
-            {
-                var key = item.Key;
-                var val = item.Value;
-                foreach (var lst in Variables.searchLists.list)
-                {
-                    if (key.IndexOf(lst.filter, StringComparison.Ordinal) != 0) continue;
-                    lst.lstItem.Add(new FilterItem { Id = key, Name = val});
-                    break;
-                }
-            }
-
-            if (!string.IsNullOrWhiteSpace(query))
-            {
-                var queryItems = query.Split(' ');
-
-                foreach (var lst in Variables.searchLists.list)
-                {
-                    lst.query = "";
-                }
-
-                foreach (var queryItem in queryItems)
-                {
-                    var find = false;
-                    if (queryItem.Trim() != "")
-                    {
-                        foreach (var lst in Variables.searchLists.list)
-                        {
-
-                            if (queryItem.IndexOf(lst.filter + ":", StringComparison.Ordinal) == 0)
-                            {
-                                lst.query = queryItem;
-                                find = true;
-                                break;
-                            }
-                        }
-                    }
-
-                    if (find == false)
-                    {
-                        if (textInput != "") textInput += " ";
-                        textInput += queryItem;
-                    }
-                }
-
-            }
-
-            foreach (var lst in Variables.searchLists.list)
-            {
-                lst.lstItem = lst.lstItem.OrderBy(x => x.Name).ToList();
-            }
-
-
-            Variables.listLoading = true;
-            foreach (var func in Variables.functionsSetlist)
-            {
-                func();
-            }
-
-            if (string.IsNullOrWhiteSpace(query))
-            {
-                Variables.searchText = textInput;
-            }
-
-            Variables.listLoading = false;
-            Log.Logger.Debug("END Set search List");
-        }
-
-        /// <summary>
-        /// Get current query chosen by the user (UI)
-        /// </summary>
-        /// <returns></returns>
-        public string GetQueryCombos()
-        {
-            Log.Logger.Debug("Get query from UI");
-            var filter = "";
-
-            foreach (var cmb in Variables.listComboFilter)
-            {
-                if (cmb?.SelectedItem != null && cmb.SelectedItem?.Name != "-" && cmb.SelectedItem.Id != null)
-                {
-                    if (filter != "")
-                        filter += " ";
-                    filter += cmb.SelectedItem.Id;
-                }
-            }
-            filter += " " + Variables.searchText;
-
-            Log.Logger.Debug("END Get query from UI - Query : " + filter);
-            return filter;
-        }
-
-        /// <summary>
         /// Save the last search request realized inside configurationManager
         /// </summary>
         public void SaveSearch()
@@ -569,37 +449,6 @@ namespace Isogeo.Models.Network
             Variables.configurationManager.Save();
             Mediator.NotifyColleagues("ChangeQuickSearch", null);
             Log.Logger.Info("END Save Last search - Query saved : " + '"' + currentSearch.query + '"');
-        }
-
-        /// <summary>
-        /// Set Filters used by UI with current search lists
-        /// </summary>
-        /// <param name="cmb"></param>
-        /// <param name="listName"></param>
-        public void SetListCombo(Filters.Filters cmb, string listName)
-        {
-            Log.Logger.Debug("Set UI Filter " + listName);
-            foreach (var lst in Variables.searchLists.list)
-            {
-                if (lst.filter == listName)
-                {
-                    try
-                    {
-                        cmb.SetItems(lst.lstItem);
-                        if (cmb.Items.Any(s => s?.Id != null && !string.IsNullOrWhiteSpace(lst.query) &&
-                                               string.Concat(s.Id.Where(c => !char.IsWhiteSpace(c))).ToLower()
-                                                   .Equals(string.Concat((lst.query).Where(c => !char.IsWhiteSpace(c))).ToLower())))
-                            cmb.SelectItem("", lst.query);
-                        else
-                            cmb.SelectItem("-");
-                    }
-                    catch (Exception ex)
-                    {
-                        Log.Logger.Error("Error - " + listName + " : " + ex.Message);
-                    }
-                }
-            }
-            Log.Logger.Debug("END - Set UI Filter " + listName);
         }
     }
 }

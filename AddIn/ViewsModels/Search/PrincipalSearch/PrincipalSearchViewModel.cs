@@ -1,4 +1,7 @@
-﻿using Isogeo.Models;
+﻿using ArcGIS.Desktop.Framework.Threading.Tasks;
+using Isogeo.AddIn.Models;
+using Isogeo.Models;
+using Isogeo.Models.Network;
 using MVVMPattern;
 using MVVMPattern.MediatorPattern;
 
@@ -6,6 +9,7 @@ namespace Isogeo.AddIn.ViewsModels.Search.PrincipalSearch
 {
     public class PrincipalSearchViewModel : ViewModelBase
     {
+        private readonly RestFunctions _restFunctions;
 
         public string SearchText
         {
@@ -25,16 +29,20 @@ namespace Isogeo.AddIn.ViewsModels.Search.PrincipalSearch
             SearchText = Variables.searchText;
         }
 
-        public PrincipalSearchViewModel()
+        public PrincipalSearchViewModel(FilterManager filterManager, RestFunctions restFunctions)
         {
-            KeywordsViewModel = new KeywordsViewModel();
+            _restFunctions = restFunctions;
+            KeywordsViewModel = new KeywordsViewModel(filterManager, _restFunctions);
             QuickSearchViewModel = new QuickSearchViewModel();
             Mediator.Register("ChangeQuery", ChangeSearchTextEvent);
         }
 
         public void Search()
         {
-            Variables.restFunctions.ReloadData(0);
+            QueuedTask.Run(() =>
+            {
+                _restFunctions.ReloadData(0);
+            });
         }
     }
 }

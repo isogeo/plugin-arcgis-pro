@@ -1,0 +1,31 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Network\Authentication\Authentication.xaml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Include="Network\Authentication\Authentication.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Map\Isogeo.Map.csproj" />
+    <ProjectReference Include="..\Models\Isogeo.Models.csproj" />
+  </ItemGroup>
+	<ItemGroup>
+		<Reference Include="ArcGIS.Desktop.Framework">
+			<HintPath>C:\Program Files\ArcGIS\Pro\bin\ArcGIS.Desktop.Framework.dll</HintPath>
+			<CopyLocal>False</CopyLocal>
+			<Private>False</Private>
+		</Reference>
+	</ItemGroup>
+
+</Project>

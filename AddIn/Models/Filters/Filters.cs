@@ -2,6 +2,8 @@
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
+using ArcGIS.Desktop.Framework.Threading.Tasks;
+using Isogeo.Models.Network;
 using MVVMPattern;
 
 namespace Isogeo.Models.Filters
@@ -10,6 +12,8 @@ namespace Isogeo.Models.Filters
     {
         public string Name { get; }
         protected FilterItemList List { get; }
+
+        protected RestFunctions _restFunctions { get; }
 
         public ObservableCollection<FilterItem> Items
         {
@@ -27,8 +31,9 @@ namespace Isogeo.Models.Filters
             OnPropertyChanged("Items");
         }
 
-        public Filters(string name)
+        public Filters(string name, RestFunctions restFunctions)
         {
+            _restFunctions = restFunctions;
             Name = name;
             List = new FilterItemList();
             List.PropertyChanged += List_PropertyChanged;
@@ -45,7 +50,7 @@ namespace Isogeo.Models.Filters
                 OnPropertyChanged("SelectedItem");
                 if (value == null || (List.Selected != null && value.Name == List.Selected.Name))
                     return;
-                Variables.restFunctions.SaveSearch();
+                _restFunctions.SaveSearch();
                 List.Selected = value;
                 SelectionChanged();
             }
@@ -53,9 +58,12 @@ namespace Isogeo.Models.Filters
 
         protected virtual void SelectionChanged()
         {
-            if (Variables.listLoading) return;
-            if (Variables.restFunctions != null) 
-                Variables.restFunctions.ReloadData(0);
+            if (Variables.listLoading) 
+                return;
+            QueuedTask.Run(() =>
+            {
+                _restFunctions.ReloadData(0);
+            });
         }
 
         public virtual void SelectItem(string name = null, string id = null)
