@@ -23,6 +23,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
-        <controls:SearchTextBox Text="{Binding SearchText}" x:Name="SearchTextBox" InfoText="{x:Static language:Resources.Search}" ShowHistory="True" SearchMode="Manual" Search="SearchTextBox_OnSearch"/>
+        <controls:SearchTextBox Text="{Binding SearchText}" x:Name="SearchTextBox" InfoText="{x:Static language:Resources.Search}" ShowHistory="True" SearchMode="Manual" />
+        <!-- Search="{Binding SearchTextBox_OnSearch}" -->
     </Grid>
 </UserControl>

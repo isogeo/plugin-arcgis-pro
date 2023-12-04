@@ -3,9 +3,12 @@ using System.ComponentModel;
 using System.Linq;
 using System.Windows.Input;
 using ArcGIS.Desktop.Framework.Dialogs;
+using Isogeo.AddIn.Models;
 using Isogeo.AddIn.Views.Search.AskNameWindow;
+using Isogeo.Map.MapFunctions;
 using Isogeo.Models;
 using Isogeo.Models.Filters;
+using Isogeo.Models.Network;
 using Isogeo.Utils.LogManager;
 using Microsoft.Win32;
 using MVVMPattern;
@@ -17,6 +20,12 @@ namespace Isogeo.AddIn.ViewsModels.Settings
     public class SearchSettingsViewModel : ViewModelBase
     {
         public QuickSearchSettings QuickSearchSettings { get; set; }
+
+        private readonly RestFunctions _restFunctions;
+
+        private readonly FilterManager _filterManager;
+
+        private readonly IMapFunctions _mapFunctions;
 
         private GeoGraphicalSettings _geoGraphicalSettings;
         public GeoGraphicalSettings GeoGraphicalSettings
@@ -168,7 +177,7 @@ namespace Isogeo.AddIn.ViewsModels.Settings
 
         private void InitGeographicalOperator()
         {
-            GeoGraphicalSettings = new GeoGraphicalSettings("GeoGraphicalSettings");
+            GeoGraphicalSettings = new GeoGraphicalSettings("GeoGraphicalSettings", _restFunctions, _filterManager, _mapFunctions);
             if (Variables.configurationManager.config.geographicalOperator == "contains" ||  
                 Variables.configurationManager.config.geographicalOperator == "within" ||
                 Variables.configurationManager.config.geographicalOperator == "intersects") 
@@ -184,13 +193,13 @@ namespace Isogeo.AddIn.ViewsModels.Settings
 
         private void AddNewQuickSearchEvent(object newSearch)
         {
-            QuickSearchSettings.AddItem((Models.Configuration.Search)newSearch);
-            QuickSearchSettings.SelectItem(((Models.Configuration.Search)newSearch).name);
+            QuickSearchSettings.AddItem((Isogeo.Models.Configuration.Search)newSearch);
+            QuickSearchSettings.SelectItem(((Isogeo.Models.Configuration.Search)newSearch).name);
         }
 
         private void InitQuickSearch()
         {
-            QuickSearchSettings = new QuickSearchSettings("QuickSearchSettings");
+            QuickSearchSettings = new QuickSearchSettings("QuickSearchSettings", _restFunctions, _filterManager, _mapFunctions);
             QuickSearchSettings.PropertyChanged += QuickSearchSettings_PropertyChanged;
             QuickSearchSettings.SetItems(Variables.configurationManager.config.searchs.searchs);
         }
@@ -226,8 +235,11 @@ namespace Isogeo.AddIn.ViewsModels.Settings
             }
         }
 
-        public SearchSettingsViewModel()
+        public SearchSettingsViewModel(RestFunctions restFunctions, FilterManager filterManager, IMapFunctions mapFunctions)
         {
+            _restFunctions = restFunctions;
+            _filterManager = filterManager;
+            _mapFunctions = mapFunctions;
             InitGeographicalOperator();
             InitQuickSearch();
             Mediator.Register("AddNewQuickSearch", AddNewQuickSearchEvent);

@@ -6,7 +6,9 @@ using System.Windows.Controls;
 using ArcGIS.Desktop.Framework;
 using ArcGIS.Desktop.Framework.Contracts;
 using ArcGIS.Desktop.Framework.Dialogs;
+using Isogeo.AddIn.Models;
 using Isogeo.AddIn.ViewsModels.TabControls;
+using Isogeo.Map.MapFunctions;
 using Isogeo.Models;
 using Isogeo.Models.Network;
 using Isogeo.Utils.LogManager;
@@ -43,7 +45,7 @@ namespace Isogeo.AddIn
         private static void InitRestFunctions()
         {
             Log.Logger.Info("Initializing Rest Functions");
-            Variables.restFunctions = new RestFunctions();
+            //Variables.restFunctions = new RestFunctions(); // todo
             if (Variables.configurationManager.config.query == "-") Variables.configurationManager.config.query = " ";
         }
 
@@ -90,11 +92,16 @@ namespace Isogeo.AddIn
 
             PrimaryMenuList.Add(new TabControl { Text = Language.Resources.Search_word });
             PrimaryMenuList.Add(new TabControl { Text = Language.Resources.Settings });
-            _paneH1Vm = new SearchViewModel();
-            _paneH2Vm = new SettingsViewModel();
+
+            IMapFunctions mapFunctions = new MapFunctions();
+            var restFunctions = new RestFunctions();
+            var filterManager = new FilterManager(mapFunctions);
+
+            _paneH1Vm = new SearchViewModel(restFunctions, filterManager, mapFunctions);
+            _paneH2Vm = new SettingsViewModel(restFunctions, filterManager, mapFunctions);
             _selectedPanelHeaderIndex = 0;
             CurrentPage = _paneH1Vm;
-            Variables.restFunctions.ResetData();
+            //Variables.restFunctions.ResetData(); todo
             Log.Logger.Info("END Initializing DockPaneViewModel");
         }
 

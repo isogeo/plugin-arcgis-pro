@@ -1,11 +1,14 @@
 ﻿using System.Collections.Generic;
+using Isogeo.AddIn.Models;
+using Isogeo.Map.MapFunctions;
 using Isogeo.Models.Configuration;
+using Isogeo.Models.Network;
 
 namespace Isogeo.Models.Filters
 {
     public class QuickSearchSettings : QuickSearch
     {
-        public QuickSearchSettings(string name) : base(name)
+        public QuickSearchSettings(string name, RestFunctions restFunctions, FilterManager filterManager, IMapFunctions mapFunctions) : base(name, restFunctions, filterManager, mapFunctions)
         {
         }
 

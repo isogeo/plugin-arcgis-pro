@@ -1,8 +1,11 @@
 ﻿using System.ComponentModel;
 using System.Linq;
+using Isogeo.AddIn.Models;
+using Isogeo.Map.MapFunctions;
 using Isogeo.Models;
 using Isogeo.Models.Configuration;
 using Isogeo.Models.Filters;
+using Isogeo.Models.Network;
 using Isogeo.Utils.Box;
 using MVVMPattern;
 using MVVMPattern.MediatorPattern;
@@ -12,6 +15,8 @@ namespace Isogeo.AddIn.ViewsModels.Search.PrincipalSearch
     public class QuickSearchViewModel : ViewModelBase
     {
         public string ComponentName => Language.Resources.Quick_search;
+
+        private readonly FilterManager _filterManager;
 
         private QuickSearch _quickSearch;
         public QuickSearch Filters
@@ -31,8 +36,8 @@ namespace Isogeo.AddIn.ViewsModels.Search.PrincipalSearch
 
         private void AddQuickSearchEvent(object newSearch)
         {
-            Filters.AddItem((Models.Configuration.Search)newSearch);
-            Filters.SelectItem(((Models.Configuration.Search)newSearch).name);
+            Filters.AddItem((Isogeo.Models.Configuration.Search)newSearch);
+            Filters.SelectItem(((Isogeo.Models.Configuration.Search)newSearch).name);
         }
 
         private void InitializeQuickSearch()
@@ -63,7 +68,7 @@ namespace Isogeo.AddIn.ViewsModels.Search.PrincipalSearch
         private void ChangeSelectedQuickSearchItemEvent(object queryItem)
         {
             var query = ((QueryItem) queryItem).query;
-            var box = ((QueryItem) queryItem).box;
+            var box = _filterManager.GetBoxRequest(); //((QueryItem) queryItem).box;
             var filterItems = Filters.Items.Where(s =>
                 s?.Id != null && !string.IsNullOrWhiteSpace(query) && s.Name != Language.Resources.Previous_search &&
                 CheckEqualityBox(box, s.GeographicalOperator, 0.01) &&
@@ -94,9 +99,10 @@ namespace Isogeo.AddIn.ViewsModels.Search.PrincipalSearch
             Filters.SelectItem("-");
         }
 
-        public QuickSearchViewModel()
+        public QuickSearchViewModel(RestFunctions restFunctions, FilterManager filterManager, IMapFunctions mapFunctions)
         {
-            Filters = new QuickSearch("QuickSearch");
+            _filterManager = filterManager;
+            Filters = new QuickSearch("QuickSearch", restFunctions, filterManager, mapFunctions);
             Filters.PropertyChanged += QuickSearch_PropertyChanged;
             Filters.SetItems(Variables.configurationManager.config.searchs.searchs);
             Mediator.Register("AddNewQuickSearch", AddQuickSearchEvent);

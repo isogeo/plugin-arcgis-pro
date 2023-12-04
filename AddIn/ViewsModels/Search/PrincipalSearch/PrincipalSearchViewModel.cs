@@ -1,5 +1,6 @@
 ﻿using ArcGIS.Desktop.Framework.Threading.Tasks;
 using Isogeo.AddIn.Models;
+using Isogeo.Map.MapFunctions;
 using Isogeo.Models;
 using Isogeo.Models.Network;
 using MVVMPattern;
@@ -10,39 +11,21 @@ namespace Isogeo.AddIn.ViewsModels.Search.PrincipalSearch
     public class PrincipalSearchViewModel : ViewModelBase
     {
         private readonly RestFunctions _restFunctions;
+        private readonly FilterManager _filterManager;
 
-        public string SearchText
-        {
-            get => Variables.searchText;
-            set
-            {
-                Variables.searchText = value; 
-                OnPropertyChanged("SearchText");
-            }
-        }
 
         public KeywordsViewModel KeywordsViewModel { get; set; }
         public QuickSearchViewModel QuickSearchViewModel { get; set; }
+        public SearchBarViewModel SearchBarViewModel { get; set; }
 
-        private void ChangeSearchTextEvent(object obj)
-        {
-            SearchText = Variables.searchText;
-        }
 
-        public PrincipalSearchViewModel(FilterManager filterManager, RestFunctions restFunctions)
+        public PrincipalSearchViewModel(FilterManager filterManager, RestFunctions restFunctions, IMapFunctions mapFunctions)
         {
             _restFunctions = restFunctions;
-            KeywordsViewModel = new KeywordsViewModel(filterManager, _restFunctions);
-            QuickSearchViewModel = new QuickSearchViewModel();
-            Mediator.Register("ChangeQuery", ChangeSearchTextEvent);
-        }
-
-        public void Search()
-        {
-            QueuedTask.Run(() =>
-            {
-                _restFunctions.ReloadData(0);
-            });
+            _filterManager = filterManager;
+            KeywordsViewModel = new KeywordsViewModel(filterManager, restFunctions, mapFunctions);
+            QuickSearchViewModel = new QuickSearchViewModel(_restFunctions, filterManager, mapFunctions);
+            SearchBarViewModel = new SearchBarViewModel(_restFunctions, filterManager);
         }
     }
 }

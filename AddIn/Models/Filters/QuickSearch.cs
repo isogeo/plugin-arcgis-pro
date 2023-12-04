@@ -1,5 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using ArcGIS.Desktop.Framework.Threading.Tasks;
+using Isogeo.AddIn.Models;
+using Isogeo.Map.MapFunctions;
 using Isogeo.Models.Configuration;
 using Isogeo.Models.Network;
 
@@ -7,7 +10,7 @@ namespace Isogeo.Models.Filters
 {
     public class QuickSearch : Filters
     {
-        public QuickSearch(string name, RestFunctions restFunctions) : base(name, restFunctions)
+        public QuickSearch(string name, RestFunctions restFunctions, FilterManager filterManager, IMapFunctions mapFunctions) : base(name, restFunctions, filterManager, mapFunctions)
         {
         }
 
@@ -17,7 +20,11 @@ namespace Isogeo.Models.Filters
                 return;
             QueuedTask.Run(() =>
             {
-                _restFunctions.LoadData(SelectedItem.Id, 0, SelectedItem.GeographicalOperator);
+                var ob = FilterManager.GetOb();
+                var od = FilterManager.GetOd();
+                var query = FilterManager.GetQueryCombos();
+                FilterManager.SetSearchList(query);
+                RestFunctions.LoadData(SelectedItem.Id, 0, SelectedItem.GeographicalOperator, od, ob);
             });
         }
 

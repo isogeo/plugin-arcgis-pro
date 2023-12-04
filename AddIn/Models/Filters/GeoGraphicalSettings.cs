@@ -1,10 +1,13 @@
-﻿using System.Collections.Generic;
+﻿using Isogeo.AddIn.Models;
+using Isogeo.Map.MapFunctions;
+using Isogeo.Models.Network;
+using System.Collections.Generic;
 
 namespace Isogeo.Models.Filters
 {
     public class GeoGraphicalSettings : Filters
     {
-        public GeoGraphicalSettings(string name) : base(name)
+        public GeoGraphicalSettings(string name, RestFunctions restFunctions, FilterManager filterManager, IMapFunctions mapFunctions) : base(name, restFunctions, filterManager, mapFunctions)
         {
             var items = new List<FilterItem>
             {

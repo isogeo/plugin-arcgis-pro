@@ -37,15 +37,16 @@ namespace Isogeo.AddIn.ViewsModels.Search.AdvancedSearch
             OnPropertyChanged("Filters");
         }
 
-        public AdvancedSearchItemViewModel(string displayName, string imageSearchPath, string apiFilterName,
+        public AdvancedSearchItemViewModel(string displayName, string imageSearchPath, string apiFilterName, RestFunctions restFunctions,
             IMapFunctions mapFunctions, FilterManager filterManager)
         {
             DisplayName = displayName;
             ImgPath = imageSearchPath;
-            Filters = new Filters(apiFilterName, _restFunctions);
-            Filters.PropertyChanged += Filter_PropertyChanged;
             _mapFunctions = mapFunctions;
             _filterManager = filterManager;
+            _restFunctions = restFunctions;
+            Filters = new Filters(apiFilterName, restFunctions, filterManager, mapFunctions);
+            Filters.PropertyChanged += Filter_PropertyChanged;
             Mediator.Register("isCustomQuery", IsCustomQueryEvent);
             Init(apiFilterName);
         }

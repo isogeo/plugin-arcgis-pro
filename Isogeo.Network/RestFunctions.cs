@@ -1,10 +1,10 @@
 using System.Globalization;
 using System.Net;
+using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Text.Json;
 using ArcGIS.Desktop.Framework.Dialogs;
-using Isogeo.Map.MapFunctions;
 using Isogeo.Models.API;
 using Isogeo.Models.Configuration;
 using Isogeo.Utils.LogManager;
@@ -26,9 +26,7 @@ namespace Isogeo.Models.Network
 
         private readonly HttpClient _client;
 
-        private readonly IMapFunctions _mapFunctions;
-
-        public RestFunctions(IMapFunctions mapFunctions)
+        public RestFunctions()
         {
             var proxy = GetProxy();
             var httpClientHandler = new HttpClientHandler()
@@ -36,7 +34,6 @@ namespace Isogeo.Models.Network
                 Proxy = proxy
             };
             _client = new HttpClient(httpClientHandler);
-            _mapFunctions = mapFunctions;
         }
 
         public class ApiParameters
@@ -145,39 +142,39 @@ namespace Isogeo.Models.Network
             _frmAuthentication.ShowDialog();
         }
 
-        private async Task<(bool, string)> CheckFirstRequestThenTokenThenSearchRequest(string query, int offset)
+        private async Task<(bool, string)> CheckFirstRequestThenTokenThenSearchRequest(string query, int offset, string box, string od, string ob)
         {
             if (_isFirstUserRequest)
             {
                 _isFirstUserRequest = false;
                 query = Variables.configurationManager.config.defaultSearch;
-                var state = await TokenThenSearchRequest(query, offset, Variables.nbResult);
+                var state = await TokenThenSearchRequest(query, offset, Variables.nbResult, box,  od, ob);
                 if (!state)
                     _isFirstUserRequest = true;
                 return (state, query);
             }
-            return ((await TokenThenSearchRequest(query, offset, Variables.nbResult)), query);
+            return ((await TokenThenSearchRequest(query, offset, Variables.nbResult, box, od, ob)), query);
         }
 
-        public async Task ResetData()
+        public async Task ResetData(string box, string od, string ob)
         {
             Log.Logger.Debug("Execute Reset Data");
             const string query = "";
             Mediator.NotifyColleagues("ChangeBox", "");
-            var response = await CheckFirstRequestThenTokenThenSearchRequest(query, 0);
-            Mediator.NotifyColleagues("ChangeQuery", new QueryItem { query = response.Item2, box = GetBoxRequest()});
+            var response = await CheckFirstRequestThenTokenThenSearchRequest(query, 0, box, od, ob);
+            Mediator.NotifyColleagues("ChangeQuery", new QueryItem { query = response.Item2 });
             Mediator.NotifyColleagues("ClearResults", null);
             if (!response.Item1)
                 OpenAuthenticationPopUp();
         }
 
-        public async Task LoadData(string query, int offset, string box = null)
+        public async Task LoadData(string query, int offset, string box, string od, string ob)
         {
             Log.Logger.Debug("Execute Load Data");
             if (!string.IsNullOrWhiteSpace(box))
                 Mediator.NotifyColleagues("ChangeBox", box);
-            var response = await CheckFirstRequestThenTokenThenSearchRequest(query, offset);
-            Mediator.NotifyColleagues("ChangeQuery", new QueryItem { query = response.Item2, box = GetBoxRequest() });
+            var response = await CheckFirstRequestThenTokenThenSearchRequest(query, offset, box, od, ob);
+            Mediator.NotifyColleagues("ChangeQuery", new QueryItem { query = response.Item2 });
             if (response.Item1)
                 Mediator.NotifyColleagues("ChangeOffset", offset);
             else
@@ -187,12 +184,12 @@ namespace Isogeo.Models.Network
             }
         }
 
-        public async Task ReloadData(int offset)
+        public async Task ReloadData(int offset, string comboQuery, string box, string od, string ob)
         {
             Log.Logger.Debug("Execute Reload Data");
-            var query = GetQueryCombos();
-            var result = await CheckFirstRequestThenTokenThenSearchRequest(query, offset);
-            Mediator.NotifyColleagues("ChangeQuery", new QueryItem { query = result.Item2, box = GetBoxRequest() });
+            //var query = GetQueryCombos();
+            var result = await CheckFirstRequestThenTokenThenSearchRequest(comboQuery, offset, box, od, ob);
+            Mediator.NotifyColleagues("ChangeQuery", new QueryItem { query = result.Item2 });
             if (result.Item1)
                 Mediator.NotifyColleagues("ChangeOffset", offset);
             else
@@ -209,7 +206,7 @@ namespace Isogeo.Models.Network
         /// <param name="query"></param>
         /// <param name="offset"></param>
         /// <param name="nbResult"></param>
-        private async Task<bool> TokenThenSearchRequest(string query, int offset, int nbResult)
+        private async Task<bool> TokenThenSearchRequest(string query, int offset, int nbResult, string box, string od, string ob)
         {
             var state = true;
 
@@ -222,9 +219,9 @@ namespace Isogeo.Models.Network
                 if (!(string.IsNullOrEmpty(newToken?.access_token) || newToken.StatusResult != "OK"))
                 {
                     Variables.search = await
-                        SearchRequest(new ApiParameters(newToken, query, offset: offset, ob: Variables.cmbSortingMethodSelectedItem?.Id, 
-                            od: Variables.cmbSortingDirectionSelectedItem?.Id, box: GetBoxRequest(), rel: GetRelRequest()), nbResult);
-                    SetSearchList(query);
+                        SearchRequest(new ApiParameters(newToken, query, offset: offset, ob: /*Variables.cmbSortingMethodSelectedItem?.Id*/ob, 
+                            od: /*Variables.cmbSortingDirectionSelectedItem?.Id*/od, box: box, rel: GetRelRequest()), nbResult);
+                    //SetSearchList(query);
                 }
                 else
                     state = false;
@@ -425,7 +422,7 @@ namespace Isogeo.Models.Network
         /// <summary>
         /// Save the last search request realized inside configurationManager
         /// </summary>
-        public void SaveSearch()
+        public void SaveSearch(string box, string query)
         {
             Log.Logger.Info("Save Last search");
             Configuration.Search currentSearch = null;
@@ -444,8 +441,8 @@ namespace Isogeo.Models.Network
 
                 Variables.configurationManager.config.searchs.searchs.Add(currentSearch);
             }
-            currentSearch.query = GetQueryCombos();
-            currentSearch.box = GetBoxRequest();
+            currentSearch.query = query; //GetQueryCombos();
+            currentSearch.box = box;//GetBoxRequest();
             Variables.configurationManager.Save();
             Mediator.NotifyColleagues("ChangeQuickSearch", null);
             Log.Logger.Info("END Save Last search - Query saved : " + '"' + currentSearch.query + '"');

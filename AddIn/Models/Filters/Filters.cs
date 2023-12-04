@@ -3,6 +3,8 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using ArcGIS.Desktop.Framework.Threading.Tasks;
+using Isogeo.AddIn.Models;
+using Isogeo.Map.MapFunctions;
 using Isogeo.Models.Network;
 using MVVMPattern;
 
@@ -13,7 +15,11 @@ namespace Isogeo.Models.Filters
         public string Name { get; }
         protected FilterItemList List { get; }
 
-        protected RestFunctions _restFunctions { get; }
+        protected RestFunctions RestFunctions { get; }
+
+        protected FilterManager FilterManager { get; }
+
+        protected IMapFunctions MapFunctions { get; }
 
         public ObservableCollection<FilterItem> Items
         {
@@ -31,9 +37,11 @@ namespace Isogeo.Models.Filters
             OnPropertyChanged("Items");
         }
 
-        public Filters(string name, RestFunctions restFunctions)
+        public Filters(string name, RestFunctions restFunctions, FilterManager filterManager, IMapFunctions mapFunctions)
         {
-            _restFunctions = restFunctions;
+            RestFunctions = restFunctions;
+            FilterManager = filterManager;
+            MapFunctions = mapFunctions;
             Name = name;
             List = new FilterItemList();
             List.PropertyChanged += List_PropertyChanged;
@@ -50,7 +58,9 @@ namespace Isogeo.Models.Filters
                 OnPropertyChanged("SelectedItem");
                 if (value == null || (List.Selected != null && value.Name == List.Selected.Name))
                     return;
-                _restFunctions.SaveSearch();
+                var query = FilterManager.GetQueryCombos();
+                var box = FilterManager.GetBoxRequest();
+                RestFunctions.SaveSearch(box, query);
                 List.Selected = value;
                 SelectionChanged();
             }
@@ -62,7 +72,13 @@ namespace Isogeo.Models.Filters
                 return;
             QueuedTask.Run(() =>
             {
-                _restFunctions.ReloadData(0);
+                var query = FilterManager.GetQueryCombos();
+                var box = FilterManager.GetBoxRequest();
+
+                var ob = FilterManager.GetOb();
+                var od = FilterManager.GetOd();
+                FilterManager.SetSearchList(query);
+                RestFunctions.ReloadData(0, query, box, od, ob);
             });
         }
 

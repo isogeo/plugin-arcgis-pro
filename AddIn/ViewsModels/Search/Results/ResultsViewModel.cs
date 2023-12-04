@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows.Input;
 using ArcGIS.Desktop.Framework.Threading.Tasks;
+using Isogeo.AddIn.Models;
 using Isogeo.AddIn.Views.Search.Results;
 using Isogeo.Map.MapFunctions;
 using Isogeo.Models;
@@ -21,6 +22,7 @@ namespace Isogeo.AddIn.ViewsModels.Search.Results
         private ICommand _previousCommand;
         private readonly IMapFunctions _mapFunctions;
         private readonly RestFunctions _restFunctions;
+        private readonly FilterManager _filterManager;
 
         public ObservableCollection<ResultItem> ResultsList { get; set; }
 
@@ -52,7 +54,11 @@ namespace Isogeo.AddIn.ViewsModels.Search.Results
         {
             QueuedTask.Run(() =>
             {
-                _restFunctions.ReloadData(offset);
+                var ob = _filterManager.GetOb();
+                var od = _filterManager.GetOd();
+                var query = _filterManager.GetQueryCombos();
+                var box = _filterManager.GetBoxRequest();
+                _restFunctions.ReloadData(offset, query, box, od, ob);
             });
         }
 
@@ -126,9 +132,11 @@ namespace Isogeo.AddIn.ViewsModels.Search.Results
             ClearResults();
         }
 
-        public ResultsViewModel(IMapFunctions mapFunctions, RestFunctions restFunctions)
+        public ResultsViewModel(IMapFunctions mapFunctions, RestFunctions restFunctions, FilterManager filterManager)
         {
             _mapFunctions = mapFunctions;
+            _restFunctions = restFunctions;
+            _filterManager = filterManager;
             ResultsList = new ObservableCollection<ResultItem>();
             ListNumberPage = new FilterItemList();
             ListNumberPage.PropertyChanged += Filter_PropertyChanged;

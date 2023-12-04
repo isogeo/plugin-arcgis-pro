@@ -1,22 +1,14 @@
 ﻿using Isogeo.Models.Network;
 using System.Windows;
+using Isogeo.Models.Network.Authentication;
 
 namespace Isogeo.AddIn.Views.Settings
 {
     public partial class AuthenticationSettings
     {
-        private readonly RestFunctions _restFunctions;
-
-        public AuthenticationSettings(RestFunctions restFunctions)
+        public AuthenticationSettings()
         {
             InitializeComponent();
-            _restFunctions = restFunctions;
-        }
-
-        private void BtnAuthentication_Click(object sender, RoutedEventArgs e)
-        {
-            var frmAuthentication = new Models.Network.Authentication.Authentication(_restFunctions);
-            frmAuthentication.ShowDialog();
         }
     }
 }

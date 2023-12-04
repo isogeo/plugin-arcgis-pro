@@ -16,6 +16,10 @@ namespace Isogeo.AddIn.Models
         private Filters _geographicFilter;
         private readonly IMapFunctions _mapFunctions;
 
+        private FilterItem _cmbSortingMethodSelectedItem;
+        private FilterItem _cmbSortingDirectionSelectedItem;
+
+
         public FilterManager(IMapFunctions mapFunctions)
         {
             _mapFunctions = mapFunctions;
@@ -29,6 +33,26 @@ namespace Isogeo.AddIn.Models
         public void SetGeographicFilter(Filters filters)
         {
             _geographicFilter = filters;
+        }
+
+        public void SetCmbSortingMethod(FilterItem cmbSortingMethodSelectedItem)
+        {
+            _cmbSortingMethodSelectedItem = cmbSortingMethodSelectedItem;
+        }
+
+        public void SetCmbSortingDirection(FilterItem cmbSortingDirectionSelectedItem)
+        {
+            _cmbSortingDirectionSelectedItem = cmbSortingDirectionSelectedItem;
+        }
+
+        public string GetOd()
+        {
+            return _cmbSortingDirectionSelectedItem?.Id;
+        }
+
+        public string GetOb()
+        {
+            return _cmbSortingMethodSelectedItem?.Id;
         }
 
         public string GetBoxRequest()
@@ -99,7 +123,7 @@ namespace Isogeo.AddIn.Models
         /// Set at the end of the method combobox' sourceItems
         /// </summary>
         /// <param name="query">query is used to define current search lists</param>
-        private void SetSearchList(string query)
+        public void SetSearchList(string query)
         {
             Log.Logger.Debug("Set search List - query : " + query);
             var textInput = "";

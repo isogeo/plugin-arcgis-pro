@@ -7,8 +7,5 @@ namespace Isogeo.Models.Configuration
     {
         [JsonPropertyName("query")]
         public string query { get; set; }
-
-        [JsonPropertyName("box")]
-        public string box { get; set; }
     }
 }

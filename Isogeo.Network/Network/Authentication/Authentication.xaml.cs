@@ -57,6 +57,7 @@ namespace Isogeo.Models.Network.Authentication
             InitializeComponent();
             if (!IsInDesignMode)
                 InitResources();
+            _restFunctions = restFunctions;
             GetAuthentication();
         }
 
@@ -130,7 +131,10 @@ namespace Isogeo.Models.Network.Authentication
                     var encryptedstring = RijndaelManagedEncryption.EncryptRijndael(password, Variables.encryptCode);
                     Variables.configurationManager.config.userAuthentication.secret = encryptedstring;
                     Variables.configurationManager.Save();
-                    await _restFunctions.ResetData();
+                    //var ob = _filterManager.GetOb();
+                    //var od = _filterManager.GetOd();
+                    //var query = _filterManager.GetQueryCombos();
+                    //await _restFunctions.ResetData(); // todo event
                     Close();
                 }
                 catch (Exception ex)
