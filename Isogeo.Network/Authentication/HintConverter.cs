@@ -2,7 +2,7 @@
 using System.Windows;
 using System.Windows.Data;
 
-namespace Isogeo.Models.Network.Authentication
+namespace Isogeo.Network.Authentication
 {
     public class HintConverter : IMultiValueConverter
     {

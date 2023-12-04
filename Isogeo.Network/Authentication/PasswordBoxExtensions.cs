@@ -1,7 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 
-namespace Isogeo.Models.Network.Authentication
+namespace Isogeo.Network.Authentication
 {
     public static class PasswordBoxExtensions
     {
