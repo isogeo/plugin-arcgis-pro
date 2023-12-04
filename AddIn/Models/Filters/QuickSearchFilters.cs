@@ -29,7 +29,7 @@ namespace Isogeo.AddIn.Models.Filters
             {
                 if (item.Name == name && item.Id == id && item.GeographicalOperator == box)
                 {
-                    List.SetSelected(item);
+                    List.Selected = item;
                 }
             }
             OnPropertyChanged(nameof(SelectedItem));

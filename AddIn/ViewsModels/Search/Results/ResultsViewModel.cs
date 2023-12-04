@@ -45,7 +45,7 @@ namespace Isogeo.AddIn.ViewsModels.Search.Results
             {
                 if (value == null || (ListNumberPage.Selected != null && value.Name == ListNumberPage.Selected.Name))
                     return;
-                _listNumberPage.SetSelected(value);
+                _listNumberPage.Selected = value;
                 OnPropertyChanged(nameof(CurrentPage));
                 Task.Run(() => Application.Current.Dispatcher.Invoke(async () => await SelectionChanged((int.Parse(value.Name) - 1) * Variables.nbResult)));
             }
@@ -120,7 +120,7 @@ namespace Isogeo.AddIn.ViewsModels.Search.Results
             ListNumberPage.Items.Clear();
             ListNumberPage.Items.Add(new FilterItem("1", "1" ));
             LblNbPage = "/ 1";
-            ListNumberPage.SetSelected(ListNumberPage.Items[0]);
+            ListNumberPage.Selected = ListNumberPage.Items[0];
             OnPropertyChanged(nameof(CurrentPage));
             OnPropertyChanged(nameof(ListNumberPage));
             OnPropertyChanged(nameof(LblNbPage));
@@ -169,9 +169,9 @@ namespace Isogeo.AddIn.ViewsModels.Search.Results
         {
             var index = (offset / Variables.nbResult + 1) - 1;
             if (offset < 0 || Variables.nbResult <= 0 && ListNumberPage.Items.Count <= index) 
-                ListNumberPage.SetSelected(ListNumberPage.Items[0]);
+                ListNumberPage.Selected = ListNumberPage.Items[0];
             else
-                ListNumberPage.SetSelected(ListNumberPage.Items[index]);
+                ListNumberPage.Selected = ListNumberPage.Items[index];
             OnPropertyChanged(nameof(CurrentPage));
         }
 

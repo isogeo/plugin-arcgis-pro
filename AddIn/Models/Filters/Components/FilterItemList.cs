@@ -13,19 +13,11 @@ namespace Isogeo.AddIn.Models.Filters.Components
         public FilterItem Selected
         {
             get => _selected;
-            private set
+            set
             {
                 _selected = value;
                 OnPropertyChanged(nameof(Selected));
             }
-        }
-
-        public bool SetSelected(FilterItem selected)
-        {
-            var exists = Items.Contains(selected);
-            if (exists)
-                _selected = selected;
-            return exists;
         }
 
         internal void SelectByName(string p)
