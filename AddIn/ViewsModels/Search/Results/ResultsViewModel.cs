@@ -9,8 +9,8 @@ using Isogeo.AddIn.Models.Filters.Components;
 using Isogeo.AddIn.Views.Search.Results;
 using Isogeo.Map;
 using Isogeo.Models;
-using Isogeo.Models.Configuration;
 using Isogeo.Network;
+using Isogeo.Utils.ConfigurationManager;
 using MVVMPattern;
 using MVVMPattern.MediatorPattern;
 using MVVMPattern.RelayCommand;
@@ -25,9 +25,24 @@ namespace Isogeo.AddIn.ViewsModels.Search.Results
         private readonly IMapManager _mapManager;
         private readonly INetworkManager _networkManager;
         private readonly IFilterManager _filterManager;
-        private readonly ConfigurationManager _configurationManager;
+        private readonly IConfigurationManager _configurationManager;
 
         public ObservableCollection<ResultItem> ResultsList { get; set; }
+
+        public ResultsViewModel(IMapManager mapManager, INetworkManager networkManager, IFilterManager filterManager,
+            IConfigurationManager configurationManager)
+        {
+            _configurationManager = configurationManager;
+            _mapManager = mapManager;
+            _networkManager = networkManager;
+            _filterManager = filterManager;
+            ResultsList = new ObservableCollection<ResultItem>();
+            ListNumberPage = new FilterItemList();
+            ListNumberPage.PropertyChanged += Filter_PropertyChanged;
+            Refresh(0);
+            Mediator.Register("ChangeOffset", ChangePageEvent);
+            Mediator.Register("ClearResults", ClearResultsEvent);
+        }
 
         private ResultItem _selectedItem;
         public ResultItem SelectedItem
@@ -132,21 +147,6 @@ namespace Isogeo.AddIn.ViewsModels.Search.Results
         private void ClearResultsEvent(object obj)
         {
             ClearResults();
-        }
-
-        public ResultsViewModel(IMapManager mapManager, INetworkManager networkManager, IFilterManager filterManager,
-            ConfigurationManager configurationManager)
-        {
-            _configurationManager = configurationManager;
-            _mapManager = mapManager;
-            _networkManager = networkManager;
-            _filterManager = filterManager;
-            ResultsList = new ObservableCollection<ResultItem>();
-            ListNumberPage = new FilterItemList();
-            ListNumberPage.PropertyChanged += Filter_PropertyChanged;
-            Refresh(0);
-            Mediator.Register("ChangeOffset", ChangePageEvent);
-            Mediator.Register("ClearResults", ClearResultsEvent);
         }
 
         public void Refresh(int offset)

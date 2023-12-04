@@ -10,10 +10,11 @@ using Isogeo.AddIn.Models.FilterManager;
 using Isogeo.AddIn.ViewsModels.TabControls;
 using Isogeo.Map;
 using Isogeo.Network;
+using Isogeo.Utils.ConfigurationManager;
 using Isogeo.Utils.LogManager;
 using MVVMPattern.MediatorPattern;
 using Button = ArcGIS.Desktop.Framework.Contracts.Button;
-using ConfigurationManager = Isogeo.Models.Configuration.ConfigurationManager;
+using ConfigurationManager = Isogeo.Utils.ConfigurationManager.ConfigurationManager;
 using MessageBox = ArcGIS.Desktop.Framework.Dialogs.MessageBox;
 using TabControl = ArcGIS.Desktop.Framework.Controls.TabControl;
 
@@ -52,11 +53,11 @@ namespace Isogeo.AddIn
             IsEnabled = (bool) obj;
         }
 
-        private static void InitializeQuery(ConfigurationManager configurationManager)
+        private static void InitializeQuery(IConfigurationManager configurationManager)
         {
             Log.Logger.Info("Initialize Query");
-            if (configurationManager.config.Query == "-") 
-                configurationManager.config.Query = " ";
+            if (configurationManager.Config.Query == "-") 
+                configurationManager.Config.Query = " ";
         }
 
         public void Exception(object sender, FirstChanceExceptionEventArgs e)
@@ -93,7 +94,18 @@ namespace Isogeo.AddIn
             Mediator.Register("EnableDockableWindowIsogeo", EnableDockableWindowIsogeo);
 
             Log.Logger.Info("Initializing Configuration Manager");
-            var configurationManager = new ConfigurationManager();
+
+            ConfigurationManager configurationManager = null;
+
+            try
+            {
+                configurationManager = new ConfigurationManager();
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Error configuration : missing or wrong App.config file", "Isogeo");
+                throw;
+            }
 
             PrimaryMenuList.Add(new TabControl { Text = Language.Resources.Search_word });
             PrimaryMenuList.Add(new TabControl { Text = Language.Resources.Settings });

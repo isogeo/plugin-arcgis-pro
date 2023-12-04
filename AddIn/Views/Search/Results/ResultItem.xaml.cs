@@ -11,10 +11,9 @@ using ArcGIS.Desktop.Framework.Threading.Tasks;
 using Isogeo.AddIn.ViewsModels.Metadata;
 using Isogeo.Map;
 using Isogeo.Map.DataType;
-using Isogeo.Models;
 using Isogeo.Models.API;
-using Isogeo.Models.Configuration;
 using Isogeo.Network;
+using Isogeo.Utils.ConfigurationManager;
 using Isogeo.Utils.LogManager;
 using MVVMPattern.MediatorPattern;
 using RelayCommand = MVVMPattern.RelayCommand.RelayCommand;
@@ -23,7 +22,7 @@ namespace Isogeo.AddIn.Views.Search.Results
 {
     public partial class ResultItem
     {
-        private readonly ConfigurationManager _configurationManager;
+        private readonly IConfigurationManager _configurationManager;
         private Result _result;
 
         // Isogeo geometry types
@@ -73,7 +72,7 @@ namespace Isogeo.AddIn.Views.Search.Results
             (bool)DependencyPropertyDescriptor.FromProperty(
                 DesignerProperties.IsInDesignModeProperty, typeof(DependencyObject)).Metadata.DefaultValue;
 
-        public ResultItem(IMapManager mapManager, INetworkManager networkManager, ConfigurationManager configurationManager)
+        public ResultItem(IMapManager mapManager, INetworkManager networkManager, IConfigurationManager configurationManager)
         {
             InitializeComponent();
             _configurationManager = configurationManager;
@@ -420,7 +419,7 @@ namespace Isogeo.AddIn.Views.Search.Results
             var currentService = _dataList.Count == 1 ? _dataList[0] : _dataList[CmbLayer.SelectedIndex];
 
             if (currentService != null && currentService.Type?.ToUpper() == "ARCSDE")
-                currentService = new ServiceType(currentService.Type, currentService.Title, _configurationManager?.config?.FileSde, 
+                currentService = new ServiceType(currentService.Type, currentService.Title, _configurationManager?.Config?.FileSde, 
                     currentService.Name, currentService.Creator, currentService.Id);
             QueuedTask.Run(() =>
             {

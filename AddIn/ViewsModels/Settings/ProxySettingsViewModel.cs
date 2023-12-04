@@ -3,7 +3,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using Isogeo.Models;
-using Isogeo.Models.Configuration;
+using Isogeo.Utils.ConfigurationManager;
 using Isogeo.Utils.LogManager;
 using Isogeo.Utils.ManageEncrypt;
 using MVVMPattern;
@@ -14,9 +14,9 @@ namespace Isogeo.AddIn.ViewsModels.Settings
     public class ProxySettingsViewModel : ViewModelBase
     {
 
-        private readonly ConfigurationManager _configurationManager;
+        private readonly IConfigurationManager _configurationManager;
 
-        public ProxySettingsViewModel(ConfigurationManager configurationManager)
+        public ProxySettingsViewModel(IConfigurationManager configurationManager)
         {
             _configurationManager = configurationManager;
         }
@@ -73,9 +73,9 @@ namespace Isogeo.AddIn.ViewsModels.Settings
 
         private void Save(object parameter)
         {
-            _configurationManager.config.Proxy.ProxyUrl = ProxyUrl;
-            _configurationManager.config.Proxy.ProxyUser = User;
-            _configurationManager.config.Proxy.ProxyPassword = "";
+            _configurationManager.Config.Proxy.ProxyUrl = ProxyUrl;
+            _configurationManager.Config.Proxy.ProxyUser = User;
+            _configurationManager.Config.Proxy.ProxyPassword = "";
 
             var password = ((PasswordBox) parameter).Password;
             try
@@ -83,7 +83,7 @@ namespace Isogeo.AddIn.ViewsModels.Settings
                 if (password != "")
                 {
                     var encryptedString = RijndaelManagedEncryption.EncryptRijndael(password, Variables.EncryptCode);
-                    _configurationManager.config.Proxy.ProxyPassword = encryptedString;
+                    _configurationManager.Config.Proxy.ProxyPassword = encryptedString;
                 }
                 _configurationManager.Save();
                 MessageBox.Show(Language.Resources.Proxy_saved);
@@ -101,8 +101,8 @@ namespace Isogeo.AddIn.ViewsModels.Settings
 
         private void Cancel()
         {// todo
-            ProxyUrl = _configurationManager.config.Proxy.ProxyUrl;
-            User = _configurationManager.config.Proxy.ProxyUser;
+            ProxyUrl = _configurationManager.Config.Proxy.ProxyUrl;
+            User = _configurationManager.Config.Proxy.ProxyUser;
         }
 
         private bool CanCancel()

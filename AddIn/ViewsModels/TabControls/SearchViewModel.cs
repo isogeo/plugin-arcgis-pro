@@ -5,6 +5,7 @@ using Isogeo.AddIn.ViewsModels.Search.PrincipalSearch;
 using Isogeo.AddIn.ViewsModels.Search.Results;
 using Isogeo.Map;
 using Isogeo.Network;
+using Isogeo.Utils.ConfigurationManager;
 
 namespace Isogeo.AddIn.ViewsModels.TabControls
 {
@@ -18,7 +19,7 @@ namespace Isogeo.AddIn.ViewsModels.TabControls
         private readonly IMapManager _mapManager;
         private readonly INetworkManager _networkManager;
         private readonly IFilterManager _filterManager;
-        private readonly Isogeo.Models.Configuration.ConfigurationManager _configurationManager;
+        private readonly IConfigurationManager _configurationManager;
 
         private void InitViewModel()
         {
@@ -29,7 +30,7 @@ namespace Isogeo.AddIn.ViewsModels.TabControls
         }
 
         public SearchViewModel(INetworkManager networkManager, IFilterManager filterManager, IMapManager mapManager,
-            Isogeo.Models.Configuration.ConfigurationManager configurationManager)
+            IConfigurationManager configurationManager)
         {
             _filterManager = filterManager;
             _mapManager = mapManager;

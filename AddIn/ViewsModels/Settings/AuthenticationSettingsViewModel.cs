@@ -1,8 +1,8 @@
 ﻿using Isogeo.Models.Network.Authentication;
 using MVVMPattern;
 using System.Windows.Input;
-using Isogeo.Models.Configuration;
 using Isogeo.Network;
+using Isogeo.Utils.ConfigurationManager;
 using MVVMPattern.RelayCommand;
 
 namespace Isogeo.AddIn.ViewsModels.Settings
@@ -10,10 +10,11 @@ namespace Isogeo.AddIn.ViewsModels.Settings
     public class AuthenticationSettingsViewModel : ViewModelBase
     {
         private readonly INetworkManager _networkManager;
-        private ConfigurationManager _configurationManager;
+        private IConfigurationManager _configurationManager;
 
-        public AuthenticationSettingsViewModel(INetworkManager networkManager, ConfigurationManager configurationManager)
+        public AuthenticationSettingsViewModel(INetworkManager networkManager, IConfigurationManager configurationManager)
         {
+            _configurationManager = configurationManager;
             _networkManager = networkManager;
         }
 
@@ -34,7 +35,7 @@ namespace Isogeo.AddIn.ViewsModels.Settings
             return true;
         }
 
-        private void Authenticate(ConfigurationManager configurationManager)
+        private void Authenticate(IConfigurationManager configurationManager)
         {
             _configurationManager = configurationManager;
             var frmAuthentication = new Authentication(_networkManager, configurationManager);

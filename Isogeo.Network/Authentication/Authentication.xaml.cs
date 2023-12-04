@@ -8,6 +8,7 @@ using System.Windows.Navigation;
 using ArcGIS.Desktop.Framework;
 using Isogeo.Network;
 using Isogeo.Resources;
+using Isogeo.Utils.ConfigurationManager;
 using Isogeo.Utils.LogManager;
 using Isogeo.Utils.ManageEncrypt;
 using Microsoft.Win32;
@@ -20,7 +21,7 @@ namespace Isogeo.Models.Network.Authentication
     {
 
         private readonly INetworkManager _networkManager;
-        private readonly Configuration.ConfigurationManager _configurationManager;
+        private readonly IConfigurationManager _configurationManager;
 
         private void InitResources()
         {
@@ -53,7 +54,7 @@ namespace Isogeo.Models.Network.Authentication
             (bool)DependencyPropertyDescriptor.FromProperty(
                 DesignerProperties.IsInDesignModeProperty, typeof(DependencyObject)).Metadata.DefaultValue;
 
-        public Authentication(INetworkManager networkManager, Configuration.ConfigurationManager configurationManager)
+        public Authentication(INetworkManager networkManager, IConfigurationManager configurationManager)
         {
             InitializeComponent();
             if (!IsInDesignMode)
@@ -81,8 +82,8 @@ namespace Isogeo.Models.Network.Authentication
         {
             try
             {
-                TxtId.Text = _configurationManager.config.UserAuthentication.Id;
-                var secretValue = _configurationManager.config.UserAuthentication.Secret;
+                TxtId.Text = _configurationManager.Config.UserAuthentication.Id;
+                var secretValue = _configurationManager.Config.UserAuthentication.Secret;
                 if (!string.IsNullOrWhiteSpace(secretValue))
                 {
                     TxtSecret.Password = RijndaelManagedEncryption.DecryptRijndael(secretValue, Variables.EncryptCode);
@@ -127,11 +128,11 @@ namespace Isogeo.Models.Network.Authentication
 
             if (token?.StatusResult == "OK")
             {
-                _configurationManager.config.UserAuthentication.Id = username;
+                _configurationManager.Config.UserAuthentication.Id = username;
                 try
                 {
                     var encryptedstring = RijndaelManagedEncryption.EncryptRijndael(password, Variables.EncryptCode);
-                    _configurationManager.config.UserAuthentication.Secret = encryptedstring;
+                    _configurationManager.Config.UserAuthentication.Secret = encryptedstring;
                     _configurationManager.Save();
                     Mediator.NotifyColleagues("UserAuthentication", null);
                     Close();

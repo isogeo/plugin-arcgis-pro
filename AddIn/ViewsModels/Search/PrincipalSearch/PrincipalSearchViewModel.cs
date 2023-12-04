@@ -1,7 +1,7 @@
 ﻿using Isogeo.AddIn.Models.FilterManager;
 using Isogeo.Map;
-using Isogeo.Models.Configuration;
 using Isogeo.Network;
+using Isogeo.Utils.ConfigurationManager;
 using MVVMPattern;
 
 namespace Isogeo.AddIn.ViewsModels.Search.PrincipalSearch
@@ -13,7 +13,7 @@ namespace Isogeo.AddIn.ViewsModels.Search.PrincipalSearch
         public SearchBarViewModel SearchBarViewModel { get; set; }
 
         public PrincipalSearchViewModel(IFilterManager filterManager, INetworkManager networkManager, IMapManager mapManager,
-            ConfigurationManager configurationManager)
+            IConfigurationManager configurationManager)
         {
             KeywordsViewModel = new KeywordsViewModel(filterManager, networkManager, mapManager);
             QuickSearchViewModel = new QuickSearchViewModel(networkManager, filterManager, mapManager, configurationManager);

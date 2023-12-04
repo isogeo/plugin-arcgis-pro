@@ -7,8 +7,8 @@ using Isogeo.AddIn.Models.FilterManager;
 using Isogeo.AddIn.Models.Filters.Components;
 using Isogeo.AddIn.Views.Search.AskNameWindow;
 using Isogeo.Models;
-using Isogeo.Models.Configuration;
 using Isogeo.Network;
+using Isogeo.Utils.ConfigurationManager;
 using Isogeo.Utils.LogManager;
 using MVVMPattern;
 using MVVMPattern.MediatorPattern;
@@ -22,9 +22,23 @@ namespace Isogeo.AddIn.ViewsModels.Search.Results
 
         private readonly IFilterManager _filterManager;
 
-        private readonly ConfigurationManager _configurationManager;
+        private readonly IConfigurationManager _configurationManager;
 
         private bool _isUpdateCombo;
+
+        public ResultsToolBarViewModel(INetworkManager networkManager, IFilterManager filterManager, IConfigurationManager configurationManager)
+        {
+            _networkManager = networkManager;
+            _filterManager = filterManager;
+            _configurationManager = configurationManager;
+            Mediator.Register("ChangeQuery", TotalResultsEvent);
+            Mediator.Register("setSortingDefault", SetSortingDefaultEvent);
+            BtnResultsContent = Language.Resources.Results;
+            InitCmbs();
+            SetSortingDefault();
+            CmbSortingDirectionSelectedItem.PropertyChanged += Refresh_PropertyChanged;
+            CmbSortingMethodSelectedItem.PropertyChanged += Refresh_PropertyChanged;
+        }
 
         private string _btnResultsContent;
         public string BtnResultsContent
@@ -134,20 +148,6 @@ namespace Isogeo.AddIn.ViewsModels.Search.Results
             SetSortingDefault();
         }
 
-        public ResultsToolBarViewModel(INetworkManager networkManager, IFilterManager filterManager, ConfigurationManager configurationManager)
-        {
-            _networkManager = networkManager;
-            _filterManager = filterManager;
-            _configurationManager = configurationManager;
-            Mediator.Register("ChangeQuery", TotalResultsEvent);
-            Mediator.Register("setSortingDefault", SetSortingDefaultEvent);
-            BtnResultsContent = Language.Resources.Results;
-            InitCmbs();
-            SetSortingDefault();
-            CmbSortingDirectionSelectedItem.PropertyChanged += Refresh_PropertyChanged;
-            CmbSortingMethodSelectedItem.PropertyChanged += Refresh_PropertyChanged;
-        }
-
         private ICommand _saveCommand;
         public ICommand SaveCommand
         {
@@ -166,7 +166,7 @@ namespace Isogeo.AddIn.ViewsModels.Search.Results
 
         private bool IsDuplicateQuickSearchName(string name)
         {
-            return _configurationManager.config.Searchs.SearchDetails.Any(search => search.Name == name);
+            return _configurationManager.Config.Searchs.SearchDetails.Any(search => search.Name == name);
         }
 
         private bool NewQuickSearchNameIsValid(string name)
@@ -205,7 +205,7 @@ namespace Isogeo.AddIn.ViewsModels.Search.Results
                 Box =  _filterManager.GetBoxRequest()
             };
 
-            _configurationManager.config.Searchs.SearchDetails.Add(newSearch);
+            _configurationManager.Config.Searchs.SearchDetails.Add(newSearch);
             _configurationManager.Save();
 
             Mediator.NotifyColleagues("AddNewQuickSearch", newSearch);
@@ -226,7 +226,7 @@ namespace Isogeo.AddIn.ViewsModels.Search.Results
         public void SetSortingDefault()
         {
             _isUpdateCombo = true;
-            switch (_configurationManager.config.sortMethode)
+            switch (_configurationManager.Config.sortMethode)
             {
                 case "relevance":
                     _cmbSortingMethodSelectedItem = CmbSortingMethod.First(x => x.Id == "relevance");
@@ -254,7 +254,7 @@ namespace Isogeo.AddIn.ViewsModels.Search.Results
             _filterManager.SetCmbSortingMethod(_cmbSortingMethodSelectedItem);
             OnPropertyChanged(nameof(CmbSortingMethodSelectedItem));
 
-            switch (_configurationManager.config.SortDirection)
+            switch (_configurationManager.Config.SortDirection)
             {
                 case "asc":
                     _cmbSortingDirectionSelectedItem = CmbSortingDirection.First(x => x.Id == "asc");

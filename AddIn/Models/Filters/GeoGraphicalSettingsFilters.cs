@@ -2,17 +2,17 @@
 using Isogeo.AddIn.Models.FilterManager;
 using Isogeo.AddIn.Models.Filters.Components;
 using Isogeo.Map;
-using Isogeo.Models.Configuration;
 using Isogeo.Network;
+using Isogeo.Utils.ConfigurationManager;
 
 namespace Isogeo.AddIn.Models.Filters
 {
     public class GeoGraphicalSettingsFilters : Components.Filters
     {
-        private readonly ConfigurationManager _configurationManager;
+        private readonly IConfigurationManager _configurationManager;
 
         public GeoGraphicalSettingsFilters(string name, INetworkManager networkManager, IFilterManager filterManager, IMapManager mapManager,
-            ConfigurationManager configurationManager) : base(name, networkManager, filterManager, mapManager)
+            IConfigurationManager configurationManager) : base(name, networkManager, filterManager, mapManager)
         {
             _configurationManager = configurationManager;
             var items = new List<FilterItem>
@@ -49,7 +49,7 @@ namespace Isogeo.AddIn.Models.Filters
 
         protected override void SelectionChanged()
         {
-            _configurationManager.config.GeographicalOperator = SelectedItem.Id;
+            _configurationManager.Config.GeographicalOperator = SelectedItem.Id;
             _configurationManager.Save();
             base.SelectionChanged();
         }

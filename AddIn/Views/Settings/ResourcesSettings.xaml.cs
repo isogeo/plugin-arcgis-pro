@@ -2,17 +2,16 @@
 using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
-using Isogeo.Models;
-using Isogeo.Models.Configuration;
+using Isogeo.Utils.ConfigurationManager;
 using Isogeo.Utils.LogManager;
 
 namespace Isogeo.AddIn.Views.Settings
 {
     public partial class ResourcesSettings : UserControl
     {
-        private ConfigurationManager _configurationManager;
+        private readonly IConfigurationManager _configurationManager;
 
-        public ResourcesSettings(ConfigurationManager configurationManager)
+        public ResourcesSettings(IConfigurationManager configurationManager)
         {
             InitializeComponent();
             _configurationManager = configurationManager;
@@ -23,7 +22,7 @@ namespace Isogeo.AddIn.Views.Settings
         {
             try
             {
-                Process.Start(new ProcessStartInfo(_configurationManager.config.UrlHelp) { UseShellExecute = true });
+                Process.Start(new ProcessStartInfo(_configurationManager.Config.UrlHelp) { UseShellExecute = true });
             }
             catch (Exception ex)
             {
@@ -43,7 +42,7 @@ namespace Isogeo.AddIn.Views.Settings
             try
             {
                 var mailto =
-                    $"mailto:{_configurationManager.config.EmailSupport}?Subject={_configurationManager.config.EmailSubject}&Body={_configurationManager.config.EmailBody.Replace("/n", "%0D%0A")}";
+                    $"mailto:{_configurationManager.Config.EmailSupport}?Subject={_configurationManager.Config.EmailSubject}&Body={_configurationManager.Config.EmailBody.Replace("/n", "%0D%0A")}";
                 Process.Start(new ProcessStartInfo(mailto) { UseShellExecute = true });
             }
             catch (Exception ex)
