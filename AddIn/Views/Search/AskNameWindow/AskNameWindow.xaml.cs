@@ -41,7 +41,6 @@ namespace Isogeo.AddIn.Views.Search.AskNameWindow
                 return;
             }
 
-            // todo
             foreach (var search in _configurationManager.Config.Searchs.SearchDetails)
             {
                 if (search.Name == TxtQuickSearchName.Text && search.Name != oldName)

@@ -1,4 +1,4 @@
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -219,7 +219,7 @@ namespace Isogeo.AddIn.ViewsModels.Search.Results
             var box = _filterManager.GetBoxRequest();
             var query = _filterManager.GetQueryCombos();
             if (_isUpdateCombo) return;
-            DefineBtnResultsContent(); // todo
+            DefineBtnResultsContent();
             await _networkManager.LoadData(query, 0, box, od, ob);
             OnPropertyChanged(nameof(BtnResultsContent));
         }

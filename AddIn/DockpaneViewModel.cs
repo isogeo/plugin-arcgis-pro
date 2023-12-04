@@ -48,7 +48,6 @@ namespace Isogeo.AddIn
             var ob = _filterManager.GetOb();
             var od = _filterManager.GetOd();
             await _networkManager.ResetData(od, ob);
-            _filterManager.SetSearchList("");
         }
 
         public void EnableDockableWindowIsogeo(object obj)

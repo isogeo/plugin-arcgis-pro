@@ -1,4 +1,4 @@
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Isogeo.AddIn.Models;
 using Isogeo.Models;
 using MVVMPattern;

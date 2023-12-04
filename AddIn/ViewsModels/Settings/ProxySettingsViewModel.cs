@@ -100,7 +100,7 @@ namespace Isogeo.AddIn.ViewsModels.Settings
         }
 
         private void Cancel()
-        {// todo
+        {
             ProxyUrl = _configurationManager.Config.Proxy.ProxyUrl;
             User = _configurationManager.Config.Proxy.ProxyUser;
         }

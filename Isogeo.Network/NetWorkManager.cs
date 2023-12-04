@@ -194,7 +194,7 @@ namespace Isogeo.Network
             else
             {
                 Mediator.NotifyColleagues(MediatorEvent.ClearResults, offset);
-                Application.Current.Dispatcher.Invoke(OpenAuthenticationPopUp); // todo
+                Application.Current.Dispatcher.Invoke(OpenAuthenticationPopUp);
             }
         }
 

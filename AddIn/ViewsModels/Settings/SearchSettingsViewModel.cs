@@ -132,7 +132,7 @@ namespace Isogeo.AddIn.ViewsModels.Settings
             if (!NewQuickSearchNameIsValid(frm.TxtQuickSearchName.Text))
                 return;
 
-            for (var i = 0; i < _configurationManager.Config.Searchs.SearchDetails.Count; i += 1) // todo
+            for (var i = 0; i < _configurationManager.Config.Searchs.SearchDetails.Count; i += 1)
             {
                 if (_configurationManager.Config.Searchs.SearchDetails[i].Name !=
                     QuickSearchSettingsFilters.SelectedItem.Name) continue;
@@ -170,7 +170,7 @@ namespace Isogeo.AddIn.ViewsModels.Settings
                 QuickSearchSettingsFilters.Items.Remove(QuickSearchSettingsFilters.SelectedItem);
                 Mediator.NotifyColleagues(MediatorEvent.ChangeQuickSearch, null);
                 _configurationManager.Save();
-                break; // todo find
+                break; // todo this foreach do the same as a find()/first() method
             }
         }
 
@@ -195,7 +195,7 @@ namespace Isogeo.AddIn.ViewsModels.Settings
         }
 
         private void InitGeographicalOperator()
-        {// todo
+        {
             GeoGraphicalSettingsFilters = new GeoGraphicalSettingsFilters("GeoGraphicalSettings", _networkManager, _filterManager, _mapManager,
                 _configurationManager);
             if (_configurationManager.Config.GeographicalOperator == "contains" ||  
