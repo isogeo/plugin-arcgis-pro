@@ -342,8 +342,6 @@ namespace Isogeo.Network
                     ("_include", "limitations"),
                     ("_include", "keywords"),
                     ("_include", "specifications"),
-                    ("_include", "serviceLayers"),
-                    ("_include", "layers"),
                     ( "_lang", CultureInfo.InstalledUICulture.TwoLetterISOLanguageName )
                 };
 
