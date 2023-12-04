@@ -68,6 +68,15 @@ namespace Isogeo.AddIn.ViewsModels.Search.AdvancedSearch
             _filterManager.SetListCombo(Filters, _filterName);
         }
 
+        private static bool CheckEqualityBox(string box1, string box2, double precision)
+        {
+            if (string.IsNullOrWhiteSpace(box1) && string.IsNullOrWhiteSpace(box2))
+                return true;
+            if (string.IsNullOrWhiteSpace(box1) || string.IsNullOrWhiteSpace(box2))
+                return false;
+            return BoxUtils.BoxAreEquals(box1, box2, precision);
+        }
+
         private void ChangeBoxEvent(object box)
         {
             if ((string) box != null && (string) box == "")
@@ -75,7 +84,10 @@ namespace Isogeo.AddIn.ViewsModels.Search.AdvancedSearch
             else
             {
                 Filters.SelectItem(Language.Resources.Map_canvas);
-                if (!BoxUtils.BoxAreEquals((string)box, _mapManager.GetMapExtent(), 0.01))
+
+                var mapExtent = _mapManager.GetMapExtent();
+                if (!string.IsNullOrEmpty((string)box) && !string.IsNullOrEmpty(mapExtent) && 
+                    !CheckEqualityBox((string)box, mapExtent, 0.01))
                 {
                     QueuedTask.Run(() =>
                     {
