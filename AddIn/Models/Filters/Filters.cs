@@ -37,7 +37,7 @@ namespace Isogeo.Models.Filters
             List.PropertyChanged += List_PropertyChanged;
             var item = new FilterItem("-1", "-");
             List.Items.Add(item);
-            List.Selected = item;
+            List.SetSelected(item);
         }
 
         public virtual FilterItem SelectedItem
@@ -51,7 +51,7 @@ namespace Isogeo.Models.Filters
                 var query = FilterManager.GetQueryCombos();
                 var box = FilterManager.GetBoxRequest();
                 RestFunctions.SaveSearch(box, query);
-                List.Selected = value;
+                List.SetSelected(value);
                 SelectionChanged();
             }
         }
@@ -97,7 +97,7 @@ namespace Isogeo.Models.Filters
         {
             List.Items.Clear();
             AddItem(new FilterItem("", "-"));
-            List.Selected = null;
+            List.SetSelected(null);
 
             for (var i = 0; i < items.Count; i += 1)
             {
@@ -106,7 +106,7 @@ namespace Isogeo.Models.Filters
 
             if (List.Items.Count > 0)
             {
-                List.Selected = List.Items[0];
+                List.SetSelected(List.Items[0]);
                 OnPropertyChanged(nameof(SelectedItem));
             }
         }

@@ -14,7 +14,7 @@ namespace Isogeo.Models.Filters
 
         protected override void SelectionChanged()
         {
-            // Method intentionally left empty.
+            // Method intentionally left empty. Give possibility to override it on inherit class
         }
 
         public override void AddItem(FilterItem item)
@@ -37,7 +37,7 @@ namespace Isogeo.Models.Filters
                 OnPropertyChanged(nameof(SelectedItem));
                 if (value == null || (List.Selected != null && value.Name == List.Selected.Name))
                     return;
-                List.Selected = value;
+                List.SetSelected(value);
                 SelectionChanged();
             }
         }

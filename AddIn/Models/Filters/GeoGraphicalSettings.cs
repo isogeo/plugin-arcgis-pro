@@ -24,7 +24,7 @@ namespace Isogeo.Models.Filters
             if (Items.Count > 1)
             {
                 Items.Remove(Items[0]);
-                List.Selected = Items[0];
+                List.SetSelected(Items[0]);
             }
         }
 
@@ -36,7 +36,7 @@ namespace Isogeo.Models.Filters
                 OnPropertyChanged(nameof(SelectedItem));
                 if (value == null || (List.Selected != null && value.Name == List.Selected.Name))
                     return;
-                List.Selected = value;
+                List.SetSelected(value);
                 SelectionChanged();
             }
         }

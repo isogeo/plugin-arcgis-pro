@@ -30,7 +30,7 @@ namespace Isogeo.Models.Filters
             {
                 if (item.Name == name && item.Id == id && item.GeographicalOperator == box)
                 {
-                    List.Selected = item;
+                    List.SetSelected(item);
                 }
             }
             OnPropertyChanged(nameof(SelectedItem));
