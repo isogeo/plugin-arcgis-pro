@@ -127,7 +127,8 @@ namespace Isogeo.AddIn.Models.FilterManager
                     filter += cmb.SelectedItem.Id;
                 }
             }
-            filter += " " + _searchTextFilter.CurrentSearchText;
+            if (_searchTextFilter != null)
+                filter += " " + _searchTextFilter.CurrentSearchText;
 
             Log.Logger.Debug("END Get query from UI - Query : " + filter);
             return filter;

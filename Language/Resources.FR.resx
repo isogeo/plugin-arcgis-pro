@@ -321,6 +321,9 @@
   <data name="Line" xml:space="preserve">
     <value>Ligne</value>
   </data>
+  <data name="Loading_in_progress" xml:space="preserve">
+    <value>Chargement en cours...</value>
+  </data>
   <data name="Log" xml:space="preserve">
     <value>Log</value>
   </data>

@@ -682,6 +682,15 @@ namespace Isogeo.Language {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Loading in progress....
+        /// </summary>
+        public static string Loading_in_progress {
+            get {
+                return ResourceManager.GetString("Loading_in_progress", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Log.
         /// </summary>
         public static string Log {

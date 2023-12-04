@@ -153,6 +153,31 @@ namespace Isogeo.Network
                 Application.Current.Dispatcher.Invoke(OpenAuthenticationPopUp);
         }
 
+        public async Task<Search?> GetDataWithoutMediatorEventRaised(string query, int offset, string box, string od, string ob,
+            CancellationToken token = default)
+        {
+            var nbResult = _configurationManager.GlobalSoftwareSettings.NbResult;
+            try
+            {
+                var newToken = await SetConnection(_configurationManager.Config.UserAuthentication.Id,
+                    RijndaelManagedEncryption.DecryptRijndael(
+                        _configurationManager.Config.UserAuthentication.Secret,
+                        _configurationManager.GlobalSoftwareSettings.EncryptCode));
+                if (!(string.IsNullOrEmpty(newToken?.AccessToken) || newToken.StatusResult != "OK"))
+                {
+                    return await
+                        SearchRequest(new ApiParameters(newToken, query, offset: offset, ob: ob,
+                            od: od, box: box, rel: GetRelRequest()), nbResult, true, token);
+                }
+                return null;
+            }
+            catch (Exception ex)
+            {
+                Log.Logger.Error("Error Authentication : " + ex.Message);
+                return null;
+            }
+        }
+
         public async Task ChangeOffset(string query, int offset, string box, string od, string ob)
         {
             Log.Logger.Debug("Execute ChangeOffset network");
@@ -225,7 +250,8 @@ namespace Isogeo.Network
         /// Get Metadata details from API, Window is locked during the process. If token is invalid, authentication pop-up is opened
         /// </summary>
         /// <param name="mdId">Metadata id from API</param>
-        public async Task<Result> GetDetails(string mdId)
+        /// <param name="cancellationToken"></param>
+        public async Task<Result> GetDetails(string mdId, CancellationToken cancellationToken = default)
         {
             Log.Logger.Info("GetDetails - md_id : " + mdId);
 
@@ -233,12 +259,12 @@ namespace Isogeo.Network
             Result result = null;
             try
             {
-                var newToken = await SetConnection(_configurationManager.Config.UserAuthentication.Id,
+                var newApiToken = await SetConnection(_configurationManager.Config.UserAuthentication.Id,
                     RijndaelManagedEncryption.DecryptRijndael(
                         _configurationManager.Config.UserAuthentication.Secret, _configurationManager.GlobalSoftwareSettings.EncryptCode));
-                if (!(string.IsNullOrEmpty(newToken?.AccessToken) || newToken.StatusResult != "OK"))
+                if (!(string.IsNullOrEmpty(newApiToken?.AccessToken) || newApiToken.StatusResult != "OK"))
                 { 
-                    result = await ApiDetailsResourceRequest(mdId, new ApiParameters(newToken));
+                    result = await ApiDetailsResourceRequest(mdId, new ApiParameters(newApiToken), cancellationToken);
                 }
             }
             catch (Exception ex)
@@ -299,7 +325,7 @@ namespace Isogeo.Network
         /// </summary>
         /// <param name="mdId">Id of one Isogeo API's metadata</param>
         /// <param name="parameters">Token</param>
-        private async Task<Result> ApiDetailsResourceRequest(string mdId, ApiParameters parameters)
+        private async Task<Result?> ApiDetailsResourceRequest(string mdId, ApiParameters parameters, CancellationToken token = default)
         {
             Log.Logger.Info("Execution DetailsResourceRequest - ID : " + mdId);
             try
@@ -325,8 +351,11 @@ namespace Isogeo.Network
                         element) => current + $"&{element.Item1}={element.Item2}");
 
                     _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", parameters.token.AccessToken);
-                var response = await _client.GetAsync(url);
-                var content = await response.Content.ReadAsStringAsync();
+                var response = await _client.GetAsync(url, token);
+                if (!response.IsSuccessStatusCode)
+                    return null;
+
+                var content = await response.Content.ReadAsStringAsync(token);
                 var result = JsonSerializer.Deserialize<Result>(content);
 
                 result.TagsLists = new Tags(result);
@@ -351,7 +380,8 @@ namespace Isogeo.Network
             return result;
         }
 
-        private async Task<Search> SearchRequest(ApiParameters apiParameters, int nbResult)
+        private async Task<Search?> SearchRequest(ApiParameters apiParameters, int nbResult,
+            bool includeLayers = false, CancellationToken token = default)
         {
             Log.Logger.Info("Execution SearchRequest - query : " + '"' + apiParameters.query + '"' + ", offset : " + apiParameters.offset);
             try
@@ -376,13 +406,16 @@ namespace Isogeo.Network
                 if (!string.IsNullOrWhiteSpace(apiParameters.box))
                     dictionary.Add("rel", apiParameters.rel);
 
-                url += dictionary.Aggregate("?", (current, 
+                url += dictionary.Aggregate(
+                    includeLayers ? "?_include=serviceLayers&_include=layers" : "?", (current, 
                     element) => current + $"&{element.Key}={element.Value}");
 
                 _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", apiParameters.token.AccessToken);
-                var response = await _client.GetAsync(url);
+                var response = await _client.GetAsync(url, token);
+                if (!response.IsSuccessStatusCode)
+                    return null;
 
-                var content = await response.Content.ReadAsStringAsync();
+                var content = await response.Content.ReadAsStringAsync(token);
                 return JsonSerializer.Deserialize<Search>(content);
             }
             catch (Exception ex)

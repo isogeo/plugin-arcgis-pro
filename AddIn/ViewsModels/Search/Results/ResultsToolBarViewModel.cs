@@ -221,6 +221,7 @@ namespace Isogeo.AddIn.ViewsModels.Search.Results
             DefineBtnResultsContent(); // todo
             await _networkManager.LoadData(query, 0, box, od, ob);
             _filterManager.SetSearchList(query);
+            OnPropertyChanged(nameof(BtnResultsContent));
         }
 
         public void SetSortingDefault()

@@ -5,6 +5,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:extensions="clr-namespace:ArcGIS.Desktop.Extensions;assembly=ArcGIS.Desktop.Extensions"
              xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+             xmlns:controls="clr-namespace:ArcGIS.Desktop.Framework.Controls;assembly=ArcGIS.Desktop.Framework"
+             xmlns:language="clr-namespace:Isogeo.Language;assembly=Isogeo.Language"
              mc:Ignorable="d">
     <UserControl.Resources>
         <ResourceDictionary>
@@ -48,8 +50,10 @@
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
                     <Label Foreground="{DynamicResource ItalicFontColorBrush}" FontSize="11" VerticalAlignment="Bottom" HorizontalAlignment="Left"  Margin="3,3,3,3" Grid.Column="0" Grid.Row="0" x:Name="ImgType" Content="{Binding ImgType}" ToolTip="{Binding ItemToolTip}"/>
+                    <!--<controls:WaitingCursorControl HorizontalAlignment="Right" Visibility="{Binding WaitingCmbLayerVisibility}" Margin="0,0,1,0" Grid.Column="1" Grid.Row="0" ></controls:WaitingCursorControl>-->
+                    <Label Content="{x:Static language:Resources.Loading_in_progress}" HorizontalAlignment="Right" Visibility="{Binding WaitingCmbLayerVisibility}" Margin="0,0, 3,0" Grid.Column="1" Grid.Row="0" ></Label>
                     <ComboBox VerticalAlignment="Bottom" SelectedIndex="{Binding CmbLayer.SelectedIndex}" ItemsSource="{Binding CmbLayer.Items}" IsEnabled="{Binding CmbLayer.IsEnabled}" Visibility="{Binding CmbLayer.Visibility}"  Grid.Column="1" Grid.Row="0" x:Name="CmbLayer"/>
-                    <Button Style="{DynamicResource MainButton}" HorizontalAlignment="Right" VerticalAlignment="Bottom" Height="22" Width="20" Grid.Column="2" Grid.Row="0"  x:Name="BtnMenu" Content="+" Command="{Binding BtnMenuOnClick}"/>
+                    <Button Style="{DynamicResource MainButton}" HorizontalAlignment="Right" VerticalAlignment="Bottom" Height="22" Width="20" Grid.Column="2" Grid.Row="0"  x:Name="BtnMenu" Content="+" Visibility="{Binding CmbLayer.Visibility}" Command="{Binding BtnMenuOnClick}"/>
                 </Grid>
             </Grid>
         </Border>

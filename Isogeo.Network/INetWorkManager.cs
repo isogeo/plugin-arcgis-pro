@@ -10,6 +10,8 @@ namespace Isogeo.Network
 
         public Task LoadData(string query, int offset, string box, string od, string ob);
 
+        public Task<Search?> GetDataWithoutMediatorEventRaised(string query, int offset, string box, string od, string ob, CancellationToken token = default);
+
         /// <summary>
         /// Change only offset (no change box or change query)
         /// </summary>
@@ -19,7 +21,8 @@ namespace Isogeo.Network
         /// Get Metadata details from API (including Url (layers / serviceLayers)), Window is locked during the process. If token is invalid, authentication pop-up is opened
         /// </summary>
         /// <param name="mdId">Metadata id from API</param>
-        public Task<Result> GetDetails(string mdId);
+        /// <param name="token"></param>
+        public Task<Result> GetDetails(string mdId, CancellationToken token = default);
 
         /// <summary>
         /// Save the last search request realized inside configurationManager

@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
@@ -27,6 +29,9 @@ namespace Isogeo.AddIn.ViewsModels.Search.Results
         private readonly INetworkManager _networkManager;
         private readonly IFilterManager _filterManager;
         private readonly IConfigurationManager _configurationManager;
+
+        private CancellationTokenSource _loadDetailResultsCancellationToken = new();
+        private Task? _loadDetailResultsTask;
 
         public ObservableCollection<ResultItemViewModel> ResultsList { get; set; }
 
@@ -65,6 +70,8 @@ namespace Isogeo.AddIn.ViewsModels.Search.Results
                     return;
                 _listNumberPage.Selected = value;
                 OnPropertyChanged(nameof(CurrentPage));
+                OnPropertyChanged(nameof(PreviousCommand));
+                OnPropertyChanged(nameof(NextCommand));
                 Task.Run(() => Application.Current.Dispatcher.Invoke(async () => 
                 await SelectionChanged((int.Parse(value.Name) - 1) * _configurationManager.GlobalSoftwareSettings.NbResult)));
             }
@@ -144,6 +151,8 @@ namespace Isogeo.AddIn.ViewsModels.Search.Results
             OnPropertyChanged(nameof(ListNumberPage));
             OnPropertyChanged(nameof(LblNbPage));
             OnPropertyChanged(nameof(CurrentPage));
+            OnPropertyChanged(nameof(PreviousCommand));
+            OnPropertyChanged(nameof(NextCommand));
         }
 
         private void ClearResultsEvent(object obj)
@@ -151,8 +160,44 @@ namespace Isogeo.AddIn.ViewsModels.Search.Results
             ClearResults();
         }
 
-        public void Refresh(int offset)
+        private async Task LoadResultItemsViewModelResultsLinks()
         {
+            var ob = _filterManager.GetOb();
+            var od = _filterManager.GetOd();
+            var query = _filterManager.GetQueryCombos();
+            var box = _filterManager.GetBoxRequest();
+
+            _loadDetailResultsTask = Task.Run(async () => {
+                var search = await _networkManager.GetDataWithoutMediatorEventRaised(query,
+                    (int.Parse(CurrentPage.Name) - 1) * _configurationManager.GlobalSoftwareSettings.NbResult, box, od, ob,
+                    _loadDetailResultsCancellationToken.Token);
+                if (search?.Results == null)
+                    return;
+                foreach (var result in search.Results)
+                {
+                    var item = ResultsList.FirstOrDefault(x => x.Result.Id == result.Id);
+                    if (item == null)
+                        continue;
+                    item.Result = result;
+                    await Application.Current.Dispatcher.Invoke(async () =>
+                    {
+                        await item.LoadComboBox();
+                    });
+                }
+            });
+        }
+
+        public async Task CancelDetailResultsLoading()
+        {
+            _loadDetailResultsCancellationToken.Cancel();
+            if (_loadDetailResultsTask != null)
+                await _loadDetailResultsTask;
+            _loadDetailResultsCancellationToken = new CancellationTokenSource();
+        }
+
+        public async Task Refresh(int offset)
+        {
+            await CancelDetailResultsLoading();
             var temporaryItems = new List<ResultItemViewModel>();
 
             LstResultIsEnabled = false;
@@ -172,6 +217,7 @@ namespace Isogeo.AddIn.ViewsModels.Search.Results
             LstResultIsEnabled = true;
             if (ResultsList.Count > 0)
                 SelectedItem = ResultsList[0];
+            await LoadResultItemsViewModelResultsLinks();
         }
 
         private void SetCurrentPageWithoutTriggerReloadApi(int offset)
@@ -182,6 +228,8 @@ namespace Isogeo.AddIn.ViewsModels.Search.Results
             else
                 ListNumberPage.Selected = ListNumberPage.Items[index];
             OnPropertyChanged(nameof(CurrentPage));
+            OnPropertyChanged(nameof(PreviousCommand));
+            OnPropertyChanged(nameof(NextCommand));
         }
 
         private void SetPages(int offset)
