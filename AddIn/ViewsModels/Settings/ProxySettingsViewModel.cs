@@ -82,7 +82,8 @@ namespace Isogeo.AddIn.ViewsModels.Settings
             {
                 if (password != "")
                 {
-                    var encryptedString = RijndaelManagedEncryption.EncryptRijndael(password, Variables.EncryptCode);
+                    var encryptedString = RijndaelManagedEncryption.EncryptRijndael(password, 
+                        _configurationManager.GlobalSoftwareSettings.EncryptCode);
                     _configurationManager.Config.Proxy.ProxyPassword = encryptedString;
                 }
                 _configurationManager.Save();

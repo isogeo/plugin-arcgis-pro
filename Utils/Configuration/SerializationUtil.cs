@@ -1,7 +1,7 @@
 ﻿using System.Xml.Linq;
 using System.Xml.Serialization;
 
-namespace Isogeo.Models.Configuration
+namespace Isogeo.Utils.Configuration
 {
     public static class SerializationUtil
     {

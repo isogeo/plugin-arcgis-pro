@@ -64,7 +64,8 @@ namespace Isogeo.AddIn.ViewsModels.Search.Results
                     return;
                 _listNumberPage.Selected = value;
                 OnPropertyChanged(nameof(CurrentPage));
-                Task.Run(() => Application.Current.Dispatcher.Invoke(async () => await SelectionChanged((int.Parse(value.Name) - 1) * Variables.NbResult)));
+                Task.Run(() => Application.Current.Dispatcher.Invoke(async () => 
+                await SelectionChanged((int.Parse(value.Name) - 1) * _configurationManager.GlobalSoftwareSettings.NbResult)));
             }
         }
 
@@ -113,11 +114,12 @@ namespace Isogeo.AddIn.ViewsModels.Search.Results
             }
         }
 
-        private static int GetNbPage()
+        private int GetNbPage()
         {
             var nbPage = 1;
             if (Variables.search != null && !Variables.search.Total.Equals(0))
-                nbPage = Convert.ToInt32(Math.Ceiling(Variables.search.Total / Variables.NbResult));
+                nbPage = Convert.ToInt32(Math.Ceiling(Variables.search.Total /
+                                                      _configurationManager.GlobalSoftwareSettings.NbResult));
             return nbPage;
         }
 
@@ -171,8 +173,8 @@ namespace Isogeo.AddIn.ViewsModels.Search.Results
 
         private void SetCurrentPageWithoutTriggerReloadApi(int offset)
         {
-            var index = (offset / Variables.NbResult + 1) - 1;
-            if (offset < 0 || Variables.NbResult <= 0 && ListNumberPage.Items.Count <= index) 
+            var index = (offset / _configurationManager.GlobalSoftwareSettings.NbResult + 1) - 1;
+            if (offset < 0 || _configurationManager.GlobalSoftwareSettings.NbResult <= 0 && ListNumberPage.Items.Count <= index) 
                 ListNumberPage.Selected = ListNumberPage.Items[0];
             else
                 ListNumberPage.Selected = ListNumberPage.Items[index];

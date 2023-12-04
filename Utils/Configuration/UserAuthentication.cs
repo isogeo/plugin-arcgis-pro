@@ -1,7 +1,7 @@
 ﻿
 using System.Text.Json.Serialization;
 
-namespace Isogeo.Models.Configuration
+namespace Isogeo.Utils.Configuration
 {
     public class UserAuthentication
     {

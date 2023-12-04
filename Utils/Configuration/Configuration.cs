@@ -1,7 +1,6 @@
-﻿
-using System.Text.Json.Serialization;
+﻿using System.Text.Json.Serialization;
 
-namespace Isogeo.Models.Configuration
+namespace Isogeo.Utils.Configuration
 {
     public class Configuration
     {

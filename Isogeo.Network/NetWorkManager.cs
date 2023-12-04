@@ -7,7 +7,7 @@ using System.Text.Json;
 using System.Windows;
 using Isogeo.Models;
 using Isogeo.Models.API;
-using Isogeo.Models.Configuration;
+using Isogeo.Utils.Configuration;
 using Isogeo.Utils.ConfigurationManager;
 using Isogeo.Utils.LogManager;
 using Isogeo.Utils.ManageEncrypt;
@@ -164,12 +164,12 @@ namespace Isogeo.Network
             {
                 _isFirstUserRequest = false;
                 query = _configurationManager.Config.DefaultSearch;
-                var state = await TokenThenSearchRequest(query, offset, Variables.NbResult, box,  od, ob);
+                var state = await TokenThenSearchRequest(query, offset, _configurationManager.GlobalSoftwareSettings.NbResult, box,  od, ob);
                 if (!state)
                     _isFirstUserRequest = true;
                 return (state, query);
             }
-            return ((await TokenThenSearchRequest(query, offset, Variables.NbResult, box, od, ob)), query);
+            return ((await TokenThenSearchRequest(query, offset, _configurationManager.GlobalSoftwareSettings.NbResult, box, od, ob)), query);
         }
 
         public async Task ResetData(string od, string ob)
@@ -213,7 +213,8 @@ namespace Isogeo.Network
             {
                 var newToken = await SetConnection(_configurationManager.Config.UserAuthentication.Id,
                     RijndaelManagedEncryption.DecryptRijndael(
-                        _configurationManager.Config.UserAuthentication.Secret, Variables.EncryptCode));
+                        _configurationManager.Config.UserAuthentication.Secret, 
+                        _configurationManager.GlobalSoftwareSettings.EncryptCode));
                 if (!(string.IsNullOrEmpty(newToken?.AccessToken) || newToken.StatusResult != "OK"))
                 {
                     Variables.search = await
@@ -250,7 +251,7 @@ namespace Isogeo.Network
             {
                 var newToken = await SetConnection(_configurationManager.Config.UserAuthentication.Id,
                     RijndaelManagedEncryption.DecryptRijndael(
-                        _configurationManager.Config.UserAuthentication.Secret, Variables.EncryptCode));
+                        _configurationManager.Config.UserAuthentication.Secret, _configurationManager.GlobalSoftwareSettings.EncryptCode));
                 if (!(string.IsNullOrEmpty(newToken?.AccessToken) || newToken.StatusResult != "OK"))
                 { 
                     result = await ApiDetailsResourceRequest(mdId, new ApiParameters(newToken));
@@ -405,7 +406,7 @@ namespace Isogeo.Network
             if (!string.IsNullOrEmpty(_configurationManager.Config.Proxy.ProxyUser) && !string.IsNullOrEmpty(_configurationManager.Config.Proxy.ProxyPassword))
             {
                 proxy.Credentials = new NetworkCredential(_configurationManager.Config.Proxy.ProxyUser, RijndaelManagedEncryption.DecryptRijndael(
-                    _configurationManager.Config.Proxy.ProxyPassword, Variables.EncryptCode));
+                    _configurationManager.Config.Proxy.ProxyPassword, _configurationManager.GlobalSoftwareSettings.EncryptCode));
             }
 
             Log.Logger.Debug("END Initializing Proxy");
@@ -418,7 +419,7 @@ namespace Isogeo.Network
         public void SaveSearch(string box, string query)
         {
             Log.Logger.Info("Save Last search");
-            Models.Configuration.Search currentSearch = null;
+            Utils.Configuration.Search currentSearch = null;
             if (_configurationManager?.Config?.Searchs?.SearchDetails == null)
                 return;
             foreach (var search in _configurationManager.Config.Searchs.SearchDetails)
@@ -430,7 +431,7 @@ namespace Isogeo.Network
                 }
             }
             if (currentSearch == null) {
-                currentSearch = new Models.Configuration.Search {Name = Resource.Previous_search};
+                currentSearch = new Utils.Configuration.Search {Name = Resource.Previous_search};
 
                 _configurationManager.Config.Searchs.SearchDetails.Add(currentSearch);
             }

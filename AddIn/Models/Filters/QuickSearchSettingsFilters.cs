@@ -2,8 +2,8 @@
 using Isogeo.AddIn.Models.FilterManager;
 using Isogeo.AddIn.Models.Filters.Components;
 using Isogeo.Map;
-using Isogeo.Models.Configuration;
 using Isogeo.Network;
+using Isogeo.Utils.Configuration;
 
 namespace Isogeo.AddIn.Models.Filters
 {

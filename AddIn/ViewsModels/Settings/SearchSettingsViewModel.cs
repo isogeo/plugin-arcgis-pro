@@ -209,8 +209,8 @@ namespace Isogeo.AddIn.ViewsModels.Settings
 
         private void AddNewQuickSearchEvent(object newSearch)
         {
-            QuickSearchSettingsFilters.AddItem((Isogeo.Models.Configuration.Search)newSearch);
-            QuickSearchSettingsFilters.SelectItem(((Isogeo.Models.Configuration.Search)newSearch).Name);
+            QuickSearchSettingsFilters.AddItem((Utils.Configuration.Search)newSearch);
+            QuickSearchSettingsFilters.SelectItem(((Utils.Configuration.Search)newSearch).Name);
         }
 
         private void InitQuickSearch()

@@ -2,14 +2,18 @@ using System;
 using System.IO;
 using System.Text.Json;
 using System.Xml.Linq;
-using Isogeo.Models.Configuration;
+using Isogeo.Utils.Configuration;
 using Isogeo.Utils.LogManager;
 
 namespace Isogeo.Utils.ConfigurationManager
 {
     public class ConfigurationManager : IConfigurationManager
     {
-        public Configuration Config { get; private set; }
+        public Configuration.Configuration Config { get; private set; }
+        public GlobalSoftwareSettings GlobalSoftwareSettings { get; init; }
+
+        private const int NbResults = 10;
+        private const string EncyptCode = "alo(-'oàkd:jdthe";
 
         private string _configPath;
         private string _filePath;
@@ -17,6 +21,7 @@ namespace Isogeo.Utils.ConfigurationManager
         public ConfigurationManager()
         {
             InitConfigurationOnDesktop();
+            GlobalSoftwareSettings = new GlobalSoftwareSettings(NbResults, EncyptCode);
         }
 
         private void InitConfigurationOnDesktop()
@@ -36,7 +41,7 @@ namespace Isogeo.Utils.ConfigurationManager
                 else
                 {
                     var json = File.ReadAllText(_filePath);
-                    Config = JsonSerializer.Deserialize<Configuration>(json);
+                    Config = JsonSerializer.Deserialize<Configuration.Configuration>(json);
                 }
             }
             catch (Exception ex)
@@ -55,7 +60,7 @@ namespace Isogeo.Utils.ConfigurationManager
                           "App.config";
             var doc = XDocument.Load(_configPath);
 
-            Config = SerializationUtil.Deserialize<Configuration>(doc);
+            Config = SerializationUtil.Deserialize<Configuration.Configuration>(doc);
             Config.Proxy ??= new Proxy();
             Config.FileSde ??= "";
             Config.Owner ??= "";

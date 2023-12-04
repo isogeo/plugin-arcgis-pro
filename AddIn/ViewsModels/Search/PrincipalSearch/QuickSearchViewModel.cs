@@ -4,9 +4,9 @@ using Isogeo.AddIn.Models.FilterManager;
 using Isogeo.AddIn.Models.Filters;
 using Isogeo.AddIn.Models.Filters.Components;
 using Isogeo.Map;
-using Isogeo.Models.Configuration;
 using Isogeo.Network;
 using Isogeo.Utils.Box;
+using Isogeo.Utils.Configuration;
 using Isogeo.Utils.ConfigurationManager;
 using MVVMPattern;
 using MVVMPattern.MediatorPattern;
@@ -39,8 +39,8 @@ namespace Isogeo.AddIn.ViewsModels.Search.PrincipalSearch
 
         private void AddQuickSearchEvent(object newSearch)
         {
-            Filters.AddItem((Isogeo.Models.Configuration.Search)newSearch);
-            Filters.SelectItem(((Isogeo.Models.Configuration.Search)newSearch).Name);
+            Filters.AddItem((Utils.Configuration.Search)newSearch);
+            Filters.SelectItem(((Utils.Configuration.Search)newSearch).Name);
         }
 
         private void InitializeQuickSearch()

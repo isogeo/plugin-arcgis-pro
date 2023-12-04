@@ -6,10 +6,10 @@ using MVVMPattern.MediatorPattern;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Isogeo.Models.Configuration;
 using Isogeo.Network;
 using Isogeo.AddIn.Models.FilterManager;
 using Isogeo.AddIn.Models.Filters.Components;
+using Isogeo.Utils.Configuration;
 
 namespace Isogeo.AddIn.ViewsModels.Search.PrincipalSearch
 {

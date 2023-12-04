@@ -198,7 +198,7 @@ namespace Isogeo.AddIn.ViewsModels.Search.Results
             if (!NewQuickSearchNameIsValid(frm.TxtQuickSearchName.Text))
                 return;
 
-            var newSearch = new Isogeo.Models.Configuration.Search
+            var newSearch = new Utils.Configuration.Search
             {
                 Name = frm.TxtQuickSearchName.Text,
                 Query = _filterManager.GetQueryCombos(),

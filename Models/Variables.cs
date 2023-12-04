@@ -7,10 +7,6 @@ namespace Isogeo.Models
     /// </summary>
     public static class Variables
     {
-        public static readonly string EncryptCode = "alo(-'oàkd:jdthe";
-
         public static Search search = new();
-
-        public static readonly int NbResult = 10;
     }
 }
