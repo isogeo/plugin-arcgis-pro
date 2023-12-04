@@ -6,6 +6,7 @@
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:language="clr-namespace:Isogeo.Language;assembly=Isogeo.Language"
              xmlns:results="clr-namespace:Isogeo.AddIn.ViewsModels.Search.Results"
+             xmlns:resultsView="clr-namespace:Isogeo.AddIn.Views.Search.Results"
              mc:Ignorable="d" 
              d:DesignHeight="237" d:DesignWidth="489">
     <Grid>
@@ -18,6 +19,11 @@
         </Grid.RowDefinitions>
         <ListBox ScrollViewer.CanContentScroll="False" results:ListBoxBehavior.ScrollSelectedIntoView="True" SelectedItem="{Binding Path=SelectedItem, Mode=TwoWay}"
                  SelectionMode="Single" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Grid.Row="0" Grid.Column="0" ItemsSource="{Binding ResultsList}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <resultsView:ResultItem/>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
             <ListBox.ItemContainerStyle>
                 <Style TargetType="ListBoxItem">
                     <Setter Property="HorizontalContentAlignment" Value="Stretch"/>

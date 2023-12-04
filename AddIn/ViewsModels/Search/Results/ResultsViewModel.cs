@@ -6,7 +6,6 @@ using System.Windows;
 using System.Windows.Input;
 using Isogeo.AddIn.Models.FilterManager;
 using Isogeo.AddIn.Models.Filters.Components;
-using Isogeo.AddIn.Views.Search.Results;
 using Isogeo.Map;
 using Isogeo.Models;
 using Isogeo.Network;
@@ -27,7 +26,9 @@ namespace Isogeo.AddIn.ViewsModels.Search.Results
         private readonly IFilterManager _filterManager;
         private readonly IConfigurationManager _configurationManager;
 
-        public ObservableCollection<ResultItem> ResultsList { get; set; }
+        public ObservableCollection<ResultItemViewModel> ResultsList { get; set; }
+
+
 
         public ResultsViewModel(IMapManager mapManager, INetworkManager networkManager, IFilterManager filterManager,
             IConfigurationManager configurationManager)
@@ -36,7 +37,7 @@ namespace Isogeo.AddIn.ViewsModels.Search.Results
             _mapManager = mapManager;
             _networkManager = networkManager;
             _filterManager = filterManager;
-            ResultsList = new ObservableCollection<ResultItem>();
+            ResultsList = new ObservableCollection<ResultItemViewModel>();
             ListNumberPage = new FilterItemList();
             ListNumberPage.PropertyChanged += Filter_PropertyChanged;
             Refresh(0);
@@ -44,8 +45,8 @@ namespace Isogeo.AddIn.ViewsModels.Search.Results
             Mediator.Register("ClearResults", ClearResultsEvent);
         }
 
-        private ResultItem _selectedItem;
-        public ResultItem SelectedItem
+        private ResultItemViewModel _selectedItem;
+        public ResultItemViewModel SelectedItem
         {
             get => _selectedItem;
             set
@@ -160,7 +161,7 @@ namespace Isogeo.AddIn.ViewsModels.Search.Results
                 for (var i = Variables.search.Results.Count - 1; i >= 0; i--)
                 {
                     var result = Variables.search.Results[i];
-                    var resultItem = new ResultItem(_mapManager, _networkManager, _configurationManager);
+                    var resultItem = new ResultItemViewModel(_mapManager, _networkManager, _configurationManager);
                     resultItem.Init(result);
                     ResultsList.Insert(0, resultItem);
                 }
