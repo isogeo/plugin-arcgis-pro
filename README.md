@@ -24,8 +24,8 @@ It's based on Isogeo API:
 
 It's fully integrated with ArcGis Pro/ESRI ecosystem:
 
-* ArcGis Pro 2.5
-* .NET Framework 4.8
+* ArcGis Pro 3.0
+* .NET 6
 
 ### Features
 
@@ -62,11 +62,11 @@ See the documentation:
 ## Old versions
 Some old versions can be find inside [this folder](https://github.com/VianneyDoleans/ArcGisPro/tree/master/Old%20Versions)
   - You will find Screenshots, installer files and dedicated installation documentation for each version
-  - Contains the 0.0.0.1 version (early version created before total rework of Isogeo ArcGis Pro Add-In)
+  - Contains the 0.0.0.1 version (early version created before the first complete rework of Isogeo ArcGis Pro Add-In)
   
 ## Contributors
 
-- This Isogeo ArcGis Pro Add-In was developed by freelance developer [Vianney DOLEANS](https://github.com/VianneyDoleans) in 2020 as part of an order from Isogeo company, under GPL3 license.
+- This Isogeo ArcGis Pro Add-In was developed by freelance developer [Vianney DOLEANS](https://github.com/VianneyDoleans) in 2020 (1.0.0) & 2023 (2.0.0) as part of an order from Isogeo company, under GPL3 license.
   - [GitHub](https://github.com/VianneyDoleans)
   - [LinkedIn](https://www.linkedin.com/in/vianneydoleans/)
 - For the development of this Isogeo ArcGis Pro Add-In, Isogeo ArcMap Add-In made by company [GEOFIT](https://geofit.fr/), under GPL3 license, has been used.
