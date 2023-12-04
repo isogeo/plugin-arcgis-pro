@@ -2,7 +2,7 @@
 using System.Linq;
 using MVVMPattern;
 
-namespace Isogeo.Models.Filters
+namespace Isogeo.AddIn.Models.Filters.Components
 {
     public class FilterItemList : ViewModelBase
     {
@@ -36,7 +36,6 @@ namespace Isogeo.Models.Filters
         /// <summary>
         /// Select Item by checking Id without spaces and upper cases
         /// </summary>
-        /// <param name="id"></param>
         internal void SelectById(string id)
         {
             Selected = Items.FirstOrDefault(s => s?.Id != null && id != null && s.Name != Language.Resources.Previous_search &&

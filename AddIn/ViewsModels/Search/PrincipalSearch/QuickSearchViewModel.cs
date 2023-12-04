@@ -1,10 +1,11 @@
 ﻿using System.ComponentModel;
 using System.Linq;
 using Isogeo.AddIn.Models;
+using Isogeo.AddIn.Models.Filters;
+using Isogeo.AddIn.Models.Filters.Components;
 using Isogeo.Map.MapFunctions;
 using Isogeo.Models;
 using Isogeo.Models.Configuration;
-using Isogeo.Models.Filters;
 using Isogeo.Models.Network;
 using Isogeo.Utils.Box;
 using MVVMPattern;
@@ -18,13 +19,13 @@ namespace Isogeo.AddIn.ViewsModels.Search.PrincipalSearch
 
         private readonly FilterManager _filterManager;
 
-        private QuickSearch _quickSearch;
-        public QuickSearch Filters
+        private QuickSearchFilters _quickSearchFilter;
+        public QuickSearchFilters Filters
         {
-            get => _quickSearch;
+            get => _quickSearchFilter;
             set
             {
-                _quickSearch = value;
+                _quickSearchFilter = value;
                 OnPropertyChanged(nameof(Filters));
             }
         }
@@ -102,7 +103,7 @@ namespace Isogeo.AddIn.ViewsModels.Search.PrincipalSearch
         public QuickSearchViewModel(RestFunctions restFunctions, FilterManager filterManager, IMapFunctions mapFunctions)
         {
             _filterManager = filterManager;
-            Filters = new QuickSearch("QuickSearch", restFunctions, filterManager, mapFunctions);
+            Filters = new QuickSearchFilters("QuickSearch", restFunctions, filterManager, mapFunctions);
             Filters.PropertyChanged += QuickSearch_PropertyChanged;
             Filters.SetItems(Variables.configurationManager.config.searchs.searchs);
             Mediator.Register("AddNewQuickSearch", AddQuickSearchEvent);

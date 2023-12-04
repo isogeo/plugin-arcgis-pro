@@ -1,16 +1,15 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using Isogeo.AddIn.Models;
+﻿using System.Collections.Generic;
+using Isogeo.AddIn.Models.Filters.Components;
 using Isogeo.Map.MapFunctions;
+using Isogeo.Models;
 using Isogeo.Models.Configuration;
 using Isogeo.Models.Network;
 
-namespace Isogeo.Models.Filters
+namespace Isogeo.AddIn.Models.Filters
 {
-    public class QuickSearch : Filters
+    public class QuickSearchFilters : Components.Filters
     {
-        public QuickSearch(string name, RestFunctions restFunctions, FilterManager filterManager, IMapFunctions mapFunctions) : base(name, restFunctions, filterManager, mapFunctions)
+        public QuickSearchFilters(string name, RestFunctions restFunctions, FilterManager filterManager, IMapFunctions mapFunctions) : base(name, restFunctions, filterManager, mapFunctions)
         {
         }
 

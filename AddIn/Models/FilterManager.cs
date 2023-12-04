@@ -1,19 +1,18 @@
-﻿using Isogeo.Models.Filters;
-using Isogeo.Models;
+﻿using Isogeo.Models;
 using Isogeo.Utils.LogManager;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Isogeo.Models.API;
 using Isogeo.Map.MapFunctions;
+using Isogeo.AddIn.Models.Filters.Components;
 
 namespace Isogeo.AddIn.Models
 {
     public class FilterManager
     {
         private SearchLists _searchLists;
-        private readonly List<Filters> _listComboFilter = new();
-        private Filters _geographicFilter;
+        private readonly List<Filters.Components.Filters> _listComboFilter = new();
+        private Filters.Components.Filters _geographicFilter;
         private readonly IMapFunctions _mapFunctions;
 
         private FilterItem _cmbSortingMethodSelectedItem;
@@ -25,12 +24,12 @@ namespace Isogeo.AddIn.Models
             _mapFunctions = mapFunctions;
         }
 
-        public void AddFilters(Filters filters)
+        public void AddFilters(Filters.Components.Filters filters)
         {
             _listComboFilter.Add(filters);
         }
 
-        public void SetGeographicFilter(Filters filters)
+        public void SetGeographicFilter(Filters.Components.Filters filters)
         {
             _geographicFilter = filters;
         }
@@ -68,7 +67,7 @@ namespace Isogeo.AddIn.Models
         /// </summary>
         /// <param name="cmb"></param>
         /// <param name="listName"></param>
-        public void SetListCombo(Filters cmb, string listName)
+        public void SetListCombo(Filters.Components.Filters cmb, string listName)
         {
             Log.Logger.Debug("Set UI Filter " + listName);
             foreach (var lst in _searchLists.list)

@@ -27,7 +27,7 @@ namespace Isogeo.Utils.ManageEncrypt
         public static string EncryptRijndael(string text, string salt)
         {
             if (string.IsNullOrEmpty(text))
-                throw new ArgumentNullException("text");
+                throw new ArgumentNullException(nameof(text));
 
             var aesAlg = NewRijndaelManaged(salt);
 
@@ -96,7 +96,6 @@ namespace Isogeo.Utils.ManageEncrypt
         /// Create a new RijndaelManaged class and initialize it
         /// </summary>
         /// <param name="salt">The pasword salt</param>
-        /// <returns></returns>
         private static RijndaelManaged NewRijndaelManaged(string salt)
         {
             if (salt == null) throw new ArgumentNullException("salt");

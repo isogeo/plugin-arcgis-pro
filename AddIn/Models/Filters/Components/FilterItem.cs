@@ -1,6 +1,6 @@
 ﻿using MVVMPattern;
 
-namespace Isogeo.Models.Filters
+namespace Isogeo.AddIn.Models.Filters.Components
 {
     public class FilterItem : ViewModelBase
     {

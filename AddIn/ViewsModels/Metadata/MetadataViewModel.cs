@@ -6,7 +6,6 @@ using Isogeo.Models.API;
 using Isogeo.Utils;
 using MVVMPattern;
 using MVVMPattern.MediatorPattern;
-using System.Text.RegularExpressions;
 using System.Globalization;
 using System;
 

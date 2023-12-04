@@ -5,7 +5,6 @@ using System.Net.Http.Headers;
 using System.Text;
 using System.Text.Json;
 using System.Windows;
-using System.Windows.Threading;
 using Isogeo.Models.API;
 using Isogeo.Models.Configuration;
 using Isogeo.Utils.LogManager;
@@ -205,9 +204,6 @@ namespace Isogeo.Models.Network
         ///  Make request to API with request inside Query.
         ///  If query parameter is empty, query will be chosen from UI combobox.
         /// </summary>
-        /// <param name="query"></param>
-        /// <param name="offset"></param>
-        /// <param name="nbResult"></param>
         private async Task<bool> TokenThenSearchRequest(string query, int offset, int nbResult, string box, string od, string ob)
         {
             var state = true;
@@ -245,7 +241,6 @@ namespace Isogeo.Models.Network
         /// Get Metadata details from API, Window is locked during the process. If token is invalid, authentication pop-up is opened
         /// </summary>
         /// <param name="mdId">Metadata id from API</param>
-        /// <returns></returns>
         public async Task<Result> GetDetails(string mdId)
         {
             Log.Logger.Info("GetDetails - md_id : " + mdId);
@@ -279,7 +274,6 @@ namespace Isogeo.Models.Network
         /// </summary>
         /// <param name="clientId">client_id API</param>
         /// <param name="clientSecret">client_secret API</param>
-        /// <returns></returns>
         private async Task<Token> GetAccessToken(string clientId, string clientSecret)
         {
             Log.Logger.Debug("Ask for Token - cliendId : " + clientId);
@@ -321,7 +315,6 @@ namespace Isogeo.Models.Network
         /// </summary>
         /// <param name="mdId">Id of one Isogeo API's metadata</param>
         /// <param name="parameters">Token</param>
-        /// <returns></returns>
         private async Task<Result> ApiDetailsResourceRequest(string mdId, ApiParameters parameters)
         {
             Log.Logger.Info("Execution DetailsResourceRequest - ID : " + mdId);
@@ -443,8 +436,8 @@ namespace Isogeo.Models.Network
 
                 Variables.configurationManager.config.searchs.searchs.Add(currentSearch);
             }
-            currentSearch.query = query; //GetQueryCombos();
-            currentSearch.box = box;//GetBoxRequest();
+            currentSearch.query = query;
+            currentSearch.box = box;
             Variables.configurationManager.Save();
             Mediator.NotifyColleagues("ChangeQuickSearch", null);
             Log.Logger.Info("END Save Last search - Query saved : " + '"' + currentSearch.query + '"');

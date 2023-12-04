@@ -4,10 +4,11 @@ using System.ComponentModel;
 using System.Linq;
 using Isogeo.AddIn.Models;
 using Isogeo.Map.MapFunctions;
+using Isogeo.Models;
 using Isogeo.Models.Network;
 using MVVMPattern;
 
-namespace Isogeo.Models.Filters
+namespace Isogeo.AddIn.Models.Filters.Components
 {
     public class Filters : ViewModelBase
     {
@@ -46,7 +47,7 @@ namespace Isogeo.Models.Filters
             set
             {
                 OnPropertyChanged(nameof(SelectedItem));
-                if (value == null || (List.Selected != null && value.Name == List.Selected.Name))
+                if (value == null || List.Selected != null && value.Name == List.Selected.Name)
                     return;
                 var query = FilterManager.GetQueryCombos();
                 var box = FilterManager.GetBoxRequest();
