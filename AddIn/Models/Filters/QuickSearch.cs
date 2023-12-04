@@ -1,6 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using ArcGIS.Desktop.Framework.Threading.Tasks;
+using System.Threading.Tasks;
 using Isogeo.AddIn.Models;
 using Isogeo.Map.MapFunctions;
 using Isogeo.Models.Configuration;
@@ -14,18 +14,15 @@ namespace Isogeo.Models.Filters
         {
         }
 
-        protected override void SelectionChanged()
+        protected override async void SelectionChanged()
         {
-            if (Variables.listLoading || SelectedItem == null || SelectedItem.Name == "-") 
+            if (Variables.listLoading || SelectedItem == null || SelectedItem.Name == "-")
                 return;
-            QueuedTask.Run(() =>
-            {
-                var ob = FilterManager.GetOb();
-                var od = FilterManager.GetOd();
-                var query = FilterManager.GetQueryCombos();
-                FilterManager.SetSearchList(query);
-                RestFunctions.LoadData(SelectedItem.Id, 0, SelectedItem.GeographicalOperator, od, ob);
-            });
+            var ob = FilterManager.GetOb();
+            var od = FilterManager.GetOd();
+            var query = FilterManager.GetQueryCombos();
+            await RestFunctions.LoadData(SelectedItem.Id, 0, SelectedItem.GeographicalOperator, od, ob);
+            FilterManager.SetSearchList(query);
         }
 
         public void SelectItem(string name, string id, string box)

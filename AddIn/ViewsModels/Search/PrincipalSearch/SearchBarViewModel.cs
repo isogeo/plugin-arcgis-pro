@@ -73,16 +73,14 @@ namespace Isogeo.AddIn.ViewsModels.Search.PrincipalSearch
         //    return !Variables.listLoading;
         //}
 
-        public void Search()
+        public async void Search()
         {
-            QueuedTask.Run(() =>
-            {
-                var ob = _filterManager.GetOb();
-                var od = _filterManager.GetOd();
-                var query = _filterManager.GetQueryCombos();
-                var box = _filterManager.GetBoxRequest();
-                _restFunctions.ReloadData(0, query, box, od, ob);
-            });
+            var ob = _filterManager.GetOb();
+            var od = _filterManager.GetOd();
+            var query = _filterManager.GetQueryCombos();
+            var box = _filterManager.GetBoxRequest();
+            await _restFunctions.ReloadData(0, query, box, od, ob);
+            _filterManager.SetSearchList(query);
         }
     }
 }

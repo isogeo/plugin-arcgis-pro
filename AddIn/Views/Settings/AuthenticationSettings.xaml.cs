@@ -10,5 +10,10 @@ namespace Isogeo.AddIn.Views.Settings
         {
             InitializeComponent();
         }
+
+        private void BtnAuthentication_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

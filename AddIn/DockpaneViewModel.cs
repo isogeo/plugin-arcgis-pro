@@ -46,7 +46,8 @@ namespace Isogeo.AddIn
         {
             Log.Logger.Info("Initializing Rest Functions");
             //Variables.restFunctions = new RestFunctions(); // todo
-            if (Variables.configurationManager.config.query == "-") Variables.configurationManager.config.query = " ";
+            if (Variables.configurationManager.config.query == "-") 
+                Variables.configurationManager.config.query = " ";
         }
 
         private static void InitConfigurationManager()

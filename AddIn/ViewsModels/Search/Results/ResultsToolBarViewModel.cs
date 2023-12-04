@@ -1,8 +1,8 @@
 ﻿using System.Collections.ObjectModel;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using ArcGIS.Desktop.Framework.Dialogs;
-using ArcGIS.Desktop.Framework.Threading.Tasks;
 using Isogeo.AddIn.Models;
 using Isogeo.AddIn.Views.Search.AskNameWindow;
 using Isogeo.Map.MapFunctions;
@@ -204,7 +204,7 @@ namespace Isogeo.AddIn.ViewsModels.Search.Results
             Mediator.NotifyColleagues("AddNewQuickSearch", newSearch);
         }
 
-        private void Refresh()
+        private async void Refresh()
         {
             var ob = _filterManager.GetOb();
             var od = _filterManager.GetOd();
@@ -212,10 +212,8 @@ namespace Isogeo.AddIn.ViewsModels.Search.Results
             var query = _filterManager.GetQueryCombos();
             if (_isUpdateCombo) return;
             DefineBtnResultsContent();
-            QueuedTask.Run(() =>
-            {
-                _restFunctions.ReloadData(0, query, box, od, ob);
-            });
+            await _restFunctions.ReloadData(0, query, box, od, ob);
+            _filterManager.SetSearchList(query);
         }
 
         public void SetSortingDefault()
@@ -308,7 +306,7 @@ namespace Isogeo.AddIn.ViewsModels.Search.Results
             }
         }
 
-        private void RunReset()
+        private async void RunReset()
         {
             var ob = _filterManager.GetOb();
             var od = _filterManager.GetOd();
@@ -316,10 +314,8 @@ namespace Isogeo.AddIn.ViewsModels.Search.Results
             var query = _filterManager.GetQueryCombos();
             _restFunctions.SaveSearch(box, query);
             Mediator.NotifyColleagues("setSortingDefault", null);
-            QueuedTask.Run(() =>
-            {
-                _restFunctions.ResetData(box, od, ob);
-            });
+            await _restFunctions.ResetData(box, od, ob);
+            _filterManager.SetSearchList(query);
         }
 
         private static bool CanRunReset()

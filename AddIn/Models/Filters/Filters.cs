@@ -2,7 +2,7 @@
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
-using ArcGIS.Desktop.Framework.Threading.Tasks;
+using System.Threading.Tasks;
 using Isogeo.AddIn.Models;
 using Isogeo.Map.MapFunctions;
 using Isogeo.Models.Network;
@@ -66,20 +66,17 @@ namespace Isogeo.Models.Filters
             }
         }
 
-        protected virtual void SelectionChanged()
+        protected virtual async void SelectionChanged()
         {
-            if (Variables.listLoading) 
+            if (Variables.listLoading)
                 return;
-            QueuedTask.Run(() =>
-            {
-                var query = FilterManager.GetQueryCombos();
-                var box = FilterManager.GetBoxRequest();
+            var query = FilterManager.GetQueryCombos();
+            var box = FilterManager.GetBoxRequest();
 
-                var ob = FilterManager.GetOb();
-                var od = FilterManager.GetOd();
-                FilterManager.SetSearchList(query);
-                RestFunctions.ReloadData(0, query, box, od, ob);
-            });
+            var ob = FilterManager.GetOb();
+            var od = FilterManager.GetOd();
+            await RestFunctions.ReloadData(0, query, box, od, ob);
+            FilterManager.SetSearchList(query);
         }
 
         public virtual void SelectItem(string name = null, string id = null)

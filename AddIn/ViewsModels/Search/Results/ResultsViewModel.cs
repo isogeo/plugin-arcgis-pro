@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
+using System.Windows.Threading;
 using ArcGIS.Desktop.Framework.Threading.Tasks;
 using Isogeo.AddIn.Models;
 using Isogeo.AddIn.Views.Search.Results;
@@ -50,16 +53,15 @@ namespace Isogeo.AddIn.ViewsModels.Search.Results
             }
         }
 
-        private void SelectionChanged(int offset)
+        private async void SelectionChanged(int offset)
         {
-            QueuedTask.Run(() =>
-            {
-                var ob = _filterManager.GetOb();
-                var od = _filterManager.GetOd();
-                var query = _filterManager.GetQueryCombos();
-                var box = _filterManager.GetBoxRequest();
-                _restFunctions.ReloadData(offset, query, box, od, ob);
-            });
+            var ob = _filterManager.GetOb();
+            var od = _filterManager.GetOd();
+            var query = _filterManager.GetQueryCombos();
+            var box = _filterManager.GetBoxRequest();
+
+            await _restFunctions.ReloadData(offset, query, box, od, ob);
+            _filterManager.SetSearchList(query);
         }
 
         private string _lblPage;
@@ -148,7 +150,7 @@ namespace Isogeo.AddIn.ViewsModels.Search.Results
         public void Refresh(int offset)
         {
             LstResultIsEnabled = false;
-            ResultsList.Clear();
+            Application.Current.Dispatcher.Invoke(() => ResultsList.Clear());
             if (Variables.search != null && Variables.search.results != null)
             {
                 for (var i = Variables.search.results.Count - 1; i >= 0; i--)
