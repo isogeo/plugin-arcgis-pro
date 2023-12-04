@@ -29,6 +29,6 @@ namespace Isogeo.Network
         /// </summary>
         public void SaveSearch(string box, string query);
 
-        internal Task<Token> SetConnection(string clientId, string clientSecret);
+        public Task<Token> SetConnection(string clientId, string clientSecret);
     }
 }

@@ -1,7 +1,5 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Configuration;
 using System.Reflection;
 using System.Runtime.ExceptionServices;
 using System.Threading.Tasks;
@@ -13,7 +11,6 @@ using Isogeo.AddIn.ViewsModels.TabControls;
 using Isogeo.Map;
 using Isogeo.Models;
 using Isogeo.Network;
-using Isogeo.Utils.ConfigurationManager;
 using Isogeo.Utils.LogManager;
 using MVVMPattern.MediatorPattern;
 using Button = ArcGIS.Desktop.Framework.Contracts.Button;
