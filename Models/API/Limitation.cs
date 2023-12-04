@@ -1,43 +1,43 @@
-﻿using System;
+﻿using System.Text.Json.Serialization;
 
 namespace Isogeo.Models.API
 {
     public class Limitation
     {
 
+        [JsonPropertyName("_id")]
         public string _id
         {
             get;
             set;
         }
 
-
-        public String type
+        [JsonPropertyName("type")]
+        public string type
         {
             get;
             set;
         }
 
-
-
-        public String description
+        [JsonPropertyName("description")]
+        public string description
         {
             get;
             set;
         }
 
+        [JsonPropertyName("restriction")]
         public string restriction
         {
             get;
             set;
         }
 
+        [JsonPropertyName("directive")]
         public Directive directive
         {
             get;
             set;
         }
-
-        
     }
 }

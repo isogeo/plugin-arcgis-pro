@@ -1,8 +1,9 @@
-﻿namespace Isogeo.Models.API
+﻿using System.Text.Json.Serialization;
+
+namespace Isogeo.Models.API
 {
     public class Condition
     {
-
         public string _id
         {
             get;
@@ -10,14 +11,14 @@
         }
 
 
+        [JsonPropertyName("description")]
         public string description
         {
             get;
             set;
         }
 
-        
-
+        [JsonPropertyName("license")]
         public License license
         {
             get;

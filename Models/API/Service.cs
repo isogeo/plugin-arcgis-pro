@@ -1,32 +1,21 @@
 ﻿using System;
+using System.Text.Json.Serialization;
 
 namespace Isogeo.Models.API
 {
     public class Service
     {
-        public string _id
-        {
-            get;
-            set;
-        }
+        [JsonPropertyName("_id")]
+        public string _id { get; set; }
 
-        public string title
-        {
-            get;
-            set;
-        }
+        [JsonPropertyName("title")]
+        public string title { get; set; }
 
-        public String path
-        {
-            get;
-            set;
-        }
+        [JsonPropertyName("path")]
+        public string path { get; set; }
 
-        public String format
-        {
-            get;
-            set;
-        }
-        
+        [JsonPropertyName("format")]
+        public string format { get; set; }
+
     }
 }

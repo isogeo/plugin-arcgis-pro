@@ -2,25 +2,29 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace Isogeo.Models.API
 {
     public class Directive
     {
-        public String _id
+        [JsonPropertyName("_id")]
+        public string _id
         {
             get;
             set;
         }
 
-        public String name
+        [JsonPropertyName("name")]
+        public string name
         {
             get;
             set;
         }
 
-        public String description
+        [JsonPropertyName("description")]
+        public string description
         {
             get;
             set;

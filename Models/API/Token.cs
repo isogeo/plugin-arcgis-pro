@@ -1,12 +1,19 @@
 ﻿using System;
+using System.Text.Json.Serialization;
 
 namespace Isogeo.Models.API
 {
     public class Token
     {
-        public String access_token;
-        public String token_type;
-        public int expires_in;
-        public String StatusResult;
+        [JsonPropertyName("access_token")]
+        public String access_token { get; init; }
+
+        [JsonPropertyName("token_type")]
+        public String token_type { get; init; }
+
+        [JsonPropertyName("expires_in")]
+        public int expires_in { get; init; }
+
+        public String StatusResult { get; set; }
     }
 }

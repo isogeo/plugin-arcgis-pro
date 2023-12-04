@@ -1,14 +1,9 @@
-using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Text.Json;
-using System.Threading;
-using System.Threading.Tasks;
 using ArcGIS.Desktop.Framework.Dialogs;
 using Isogeo.Models.API;
 using Isogeo.Models.Configuration;
@@ -302,8 +297,12 @@ namespace Isogeo.Models.Network
                 _client.DefaultRequestHeaders.Authorization = authenticationHeader;
                 var response = await _client.PostAsync(url, new FormUrlEncodedContent(form));
 
+                
                 if (response.IsSuccessStatusCode)
-                    newToken = JsonSerializer.Deserialize<Token>(await response.Content.ReadAsStringAsync());
+                {
+                    var content = await response.Content.ReadAsStringAsync();
+                    newToken = JsonSerializer.Deserialize<Token>(content);
+                }
 
                 if (newToken == null)
                     newToken = new Token();
@@ -344,6 +343,7 @@ namespace Isogeo.Models.Network
                 url = "?_include=conditions" + dictionary.Aggregate(url, (current,
                         element) => current + $"&{element.Key}={element.Value}");
 
+                    _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", parameters.token.access_token);
                 var response = await _client.GetAsync(url);
                 var result = JsonSerializer.Deserialize<Result>(await response.Content.ReadAsStringAsync());
 
@@ -392,12 +392,14 @@ namespace Isogeo.Models.Network
                     { "box", apiParameters.box },
                 };
 
-                url = "?_include=layers" + dictionary.Aggregate(url, (current, 
+                url += dictionary.Aggregate("?_include=layers", (current, 
                     element) => current + $"&{element.Key}={element.Value}");
 
+                _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", apiParameters.token.access_token);
                 var response = await _client.GetAsync(url);
-                
-                return JsonSerializer.Deserialize<Search>(await response.Content.ReadAsStringAsync());
+
+                var content = await response.Content.ReadAsStringAsync();
+                return JsonSerializer.Deserialize<Search>(content);
             }
             catch (Exception ex)
             {

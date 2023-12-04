@@ -1,39 +1,45 @@
 ﻿using System;
+using System.Text.Json.Serialization;
 
 namespace Isogeo.Models.API
 {
     public class Event
     {
+        [JsonPropertyName("_id")]
         public string _id
         {
             get;
             set;
         }
 
+        [JsonPropertyName("kind")]
         public string kind
         {
             get;
             set;
         }
 
-        public String date
+        [JsonPropertyName("date")]
+        public string date
         {
             get;
             set;
         }
 
-        public String format
+        [JsonPropertyName("format")]
+        public string format
         {
             get;
             set;
         }
 
-        public String description
+        [JsonPropertyName("description")]
+        public string description
         {
             get;
             set;
         }
 
-        
+
     }
 }

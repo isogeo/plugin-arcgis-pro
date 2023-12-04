@@ -1,21 +1,25 @@
 ﻿using System;
+using System.Text.Json.Serialization;
 
 namespace Isogeo.Models.API
 {
     public class ContactParent
     {
 
+        [JsonPropertyName("contact")]
         public Contact contact
         {
             get;
             set;
         }
-        public String role
+
+        [JsonPropertyName("role")]
+        public string role
         {
             get;
             set;
         }
-        
-        
+
+
     }
 }

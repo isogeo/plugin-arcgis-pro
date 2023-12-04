@@ -1,18 +1,14 @@
-﻿namespace Isogeo.Models.API
+﻿using System.Text.Json.Serialization;
+
+namespace Isogeo.Models.API
 {
     public class SpecificationDetail
     {
 
-        public string name
-        {
-            get;
-            set;
-        }
+        [JsonPropertyName("name")]
+        public string name { get; set; }
 
-        public string published
-        {
-            get;
-            set;
-        }        
+        [JsonPropertyName("published")]
+        public string published { get; set; }
     }
 }
