@@ -2,7 +2,7 @@
 using ArcGIS.Desktop.Framework.Threading.Tasks;
 using Isogeo.AddIn.Models;
 using Isogeo.AddIn.Models.Filters.Components;
-using Isogeo.Map.MapFunctions;
+using Isogeo.Map;
 using Isogeo.Models;
 using Isogeo.Network;
 using MVVMPattern;
@@ -15,7 +15,7 @@ namespace Isogeo.AddIn.ViewsModels.Search.AdvancedSearch
         public string DisplayName { get; set; }
         public string ImgPath { get; set; }
         private string _filterName;
-        private readonly IMapFunctions _mapFunctions;
+        private readonly IMapManager _mapManager;
 
         private readonly FilterManager _filterManager;
 
@@ -38,13 +38,13 @@ namespace Isogeo.AddIn.ViewsModels.Search.AdvancedSearch
         }
 
         public AdvancedSearchItemViewModel(string displayName, string imageSearchPath, string apiFilterName, INetworkManager networkManager,
-            IMapFunctions mapFunctions, FilterManager filterManager)
+            IMapManager mapManager, FilterManager filterManager)
         {
             DisplayName = displayName;
             ImgPath = imageSearchPath;
-            _mapFunctions = mapFunctions;
+            _mapManager = mapManager;
             _filterManager = filterManager;
-            Filters = new Filters(apiFilterName, networkManager, filterManager, mapFunctions);
+            Filters = new Filters(apiFilterName, networkManager, filterManager, mapManager);
             Filters.PropertyChanged += Filter_PropertyChanged;
             Mediator.Register("isCustomQuery", IsCustomQueryEvent);
             Init(apiFilterName);
@@ -84,7 +84,7 @@ namespace Isogeo.AddIn.ViewsModels.Search.AdvancedSearch
                 Filters.SelectItem(Language.Resources.Map_canvas);
                 QueuedTask.Run(() =>
                 {
-                    _mapFunctions.SetMapExtent((string)box);
+                    _mapManager.SetMapExtent((string)box);
                 });
             }
         }

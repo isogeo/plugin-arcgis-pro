@@ -1,8 +1,8 @@
 ﻿using System.Threading.Tasks;
 
-namespace Isogeo.Map.MapFunctions
+namespace Isogeo.Map
 {
-    public interface IMapFunctions
+    public interface IMapManager
     {
         public Task SetMapExtent(string envelope);
 

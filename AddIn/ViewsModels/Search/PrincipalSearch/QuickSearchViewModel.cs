@@ -3,7 +3,7 @@ using System.Linq;
 using Isogeo.AddIn.Models;
 using Isogeo.AddIn.Models.Filters;
 using Isogeo.AddIn.Models.Filters.Components;
-using Isogeo.Map.MapFunctions;
+using Isogeo.Map;
 using Isogeo.Models;
 using Isogeo.Models.Configuration;
 using Isogeo.Network;
@@ -100,10 +100,10 @@ namespace Isogeo.AddIn.ViewsModels.Search.PrincipalSearch
             Filters.SelectItem("-");
         }
 
-        public QuickSearchViewModel(INetworkManager networkManager, FilterManager filterManager, IMapFunctions mapFunctions)
+        public QuickSearchViewModel(INetworkManager networkManager, FilterManager filterManager, IMapManager mapManager)
         {
             _filterManager = filterManager;
-            Filters = new QuickSearchFilters("QuickSearch", networkManager, filterManager, mapFunctions);
+            Filters = new QuickSearchFilters("QuickSearch", networkManager, filterManager, mapManager);
             Filters.PropertyChanged += QuickSearch_PropertyChanged;
             Filters.SetItems(Variables.configurationManager.config.Searchs.SearchDetails);
             Mediator.Register("AddNewQuickSearch", AddQuickSearchEvent);

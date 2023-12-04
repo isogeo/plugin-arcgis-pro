@@ -3,7 +3,7 @@ using Isogeo.AddIn.Models;
 using Isogeo.AddIn.ViewsModels.Search.AdvancedSearch;
 using Isogeo.AddIn.ViewsModels.Search.PrincipalSearch;
 using Isogeo.AddIn.ViewsModels.Search.Results;
-using Isogeo.Map.MapFunctions;
+using Isogeo.Map;
 using Isogeo.Network;
 
 namespace Isogeo.AddIn.ViewsModels.TabControls
@@ -15,22 +15,22 @@ namespace Isogeo.AddIn.ViewsModels.TabControls
         public ResultsToolBarViewModel ResultsToolBarViewModel { get; set; }
         public PrincipalSearchViewModel PrincipalSearchViewModel { get; set; }
 
-        private readonly IMapFunctions _mapFunctions;
+        private readonly IMapManager _mapManager;
         private readonly INetworkManager _networkManager;
         private readonly FilterManager _filterManager;
 
         private void InitViewModel()
         {
-            AdvancedSearchViewModel = new AdvancedSearchViewModel(_mapFunctions, _filterManager, _networkManager);
-            ResultsViewModel = new ResultsViewModel(_mapFunctions, _networkManager, _filterManager);
+            AdvancedSearchViewModel = new AdvancedSearchViewModel(_mapManager, _filterManager, _networkManager);
+            ResultsViewModel = new ResultsViewModel(_mapManager, _networkManager, _filterManager);
             ResultsToolBarViewModel = new ResultsToolBarViewModel(_networkManager, _filterManager);
-            PrincipalSearchViewModel = new PrincipalSearchViewModel(_filterManager, _networkManager, _mapFunctions);
+            PrincipalSearchViewModel = new PrincipalSearchViewModel(_filterManager, _networkManager, _mapManager);
         }
 
-        public SearchViewModel(INetworkManager networkManager, FilterManager filterManager, IMapFunctions mapFunctions)
+        public SearchViewModel(INetworkManager networkManager, FilterManager filterManager, IMapManager mapManager)
         {
             _filterManager = filterManager;
-            _mapFunctions = mapFunctions;
+            _mapManager = mapManager;
             _networkManager = networkManager;
             InitViewModel();
         }

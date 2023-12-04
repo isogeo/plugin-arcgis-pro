@@ -7,7 +7,7 @@ using Isogeo.AddIn.Models;
 using Isogeo.AddIn.Models.Filters;
 using Isogeo.AddIn.Models.Filters.Components;
 using Isogeo.AddIn.Views.Search.AskNameWindow;
-using Isogeo.Map.MapFunctions;
+using Isogeo.Map;
 using Isogeo.Models;
 using Isogeo.Network;
 using Isogeo.Utils.LogManager;
@@ -26,7 +26,7 @@ namespace Isogeo.AddIn.ViewsModels.Settings
 
         private readonly FilterManager _filterManager;
 
-        private readonly IMapFunctions _mapFunctions;
+        private readonly IMapManager _mapManager;
 
         private GeoGraphicalSettingsFilters _geoGraphicalSettingsFilters;
         public GeoGraphicalSettingsFilters GeoGraphicalSettingsFilters
@@ -178,7 +178,7 @@ namespace Isogeo.AddIn.ViewsModels.Settings
 
         private void InitGeographicalOperator()
         {// todo
-            GeoGraphicalSettingsFilters = new GeoGraphicalSettingsFilters("GeoGraphicalSettings", _networkManager, _filterManager, _mapFunctions);
+            GeoGraphicalSettingsFilters = new GeoGraphicalSettingsFilters("GeoGraphicalSettings", _networkManager, _filterManager, _mapManager);
             if (Variables.configurationManager.config.GeographicalOperator == "contains" ||  
                 Variables.configurationManager.config.GeographicalOperator == "within" ||
                 Variables.configurationManager.config.GeographicalOperator == "intersects") 
@@ -200,7 +200,7 @@ namespace Isogeo.AddIn.ViewsModels.Settings
 
         private void InitQuickSearch()
         {
-            QuickSearchSettingsFilters = new QuickSearchSettingsFilters("QuickSearchSettings", _networkManager, _filterManager, _mapFunctions);
+            QuickSearchSettingsFilters = new QuickSearchSettingsFilters("QuickSearchSettings", _networkManager, _filterManager, _mapManager);
             QuickSearchSettingsFilters.PropertyChanged += QuickSearchSettings_PropertyChanged;
             QuickSearchSettingsFilters.SetItems(Variables.configurationManager.config.Searchs.SearchDetails);
         }
@@ -236,11 +236,11 @@ namespace Isogeo.AddIn.ViewsModels.Settings
             }
         }
 
-        public SearchSettingsViewModel(INetworkManager networkManager, FilterManager filterManager, IMapFunctions mapFunctions)
+        public SearchSettingsViewModel(INetworkManager networkManager, FilterManager filterManager, IMapManager mapManager)
         {
             _networkManager = networkManager;
             _filterManager = filterManager;
-            _mapFunctions = mapFunctions;
+            _mapManager = mapManager;
             InitGeographicalOperator();
             InitQuickSearch();
             Mediator.Register("AddNewQuickSearch", AddNewQuickSearchEvent);

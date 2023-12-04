@@ -9,8 +9,8 @@ using System.Windows.Input;
 using ArcGIS.Desktop.Framework;
 using ArcGIS.Desktop.Framework.Threading.Tasks;
 using Isogeo.AddIn.ViewsModels.Metadata;
+using Isogeo.Map;
 using Isogeo.Map.DataType;
-using Isogeo.Map.MapFunctions;
 using Isogeo.Models;
 using Isogeo.Models.API;
 using Isogeo.Network;
@@ -39,7 +39,7 @@ namespace Isogeo.AddIn.Views.Search.Results
         private Metadata.Metadata _metadataInstance;
         private MetadataViewModel _metadataViewModel;
 
-        private readonly IMapFunctions _mapFunctions;
+        private readonly IMapManager _mapManager;
         private readonly INetworkManager _networkManager;
 
         private void InitResources()
@@ -71,10 +71,10 @@ namespace Isogeo.AddIn.Views.Search.Results
             (bool)DependencyPropertyDescriptor.FromProperty(
                 DesignerProperties.IsInDesignModeProperty, typeof(DependencyObject)).Metadata.DefaultValue;
 
-        public ResultItem(IMapFunctions mapFunctions, INetworkManager networkManager)
+        public ResultItem(IMapManager mapManager, INetworkManager networkManager)
         {
             InitializeComponent();
-            _mapFunctions = mapFunctions;
+            _mapManager = mapManager;
             _networkManager = networkManager;
             DataContext = this;
             if (!IsInDesignMode)
@@ -421,7 +421,7 @@ namespace Isogeo.AddIn.Views.Search.Results
                     currentService.Name, currentService.Creator, currentService.Id);
             QueuedTask.Run(() =>
             {
-                _mapFunctions.AddLayer(currentService);
+                _mapManager.AddLayer(currentService);
             });
         }
     }

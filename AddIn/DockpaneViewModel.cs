@@ -8,7 +8,7 @@ using ArcGIS.Desktop.Framework;
 using ArcGIS.Desktop.Framework.Contracts;
 using Isogeo.AddIn.Models;
 using Isogeo.AddIn.ViewsModels.TabControls;
-using Isogeo.Map.MapFunctions;
+using Isogeo.Map;
 using Isogeo.Models;
 using Isogeo.Network;
 using Isogeo.Utils.LogManager;
@@ -105,12 +105,12 @@ namespace Isogeo.AddIn
             PrimaryMenuList.Add(new TabControl { Text = Language.Resources.Search_word });
             PrimaryMenuList.Add(new TabControl { Text = Language.Resources.Settings });
 
-            IMapFunctions mapFunctions = new MapFunctions();
+            IMapManager mapManager = new MapManager();
             _networkManager = new NetworkManager();
-            _filterManager = new FilterManager(mapFunctions);
+            _filterManager = new FilterManager(mapManager);
 
-            _paneH1Vm = new SearchViewModel(_networkManager, _filterManager, mapFunctions);
-            _paneH2Vm = new SettingsViewModel(_networkManager, _filterManager, mapFunctions);
+            _paneH1Vm = new SearchViewModel(_networkManager, _filterManager, mapManager);
+            _paneH2Vm = new SettingsViewModel(_networkManager, _filterManager, mapManager);
             _selectedPanelHeaderIndex = 0;
             CurrentPage = _paneH1Vm;
 

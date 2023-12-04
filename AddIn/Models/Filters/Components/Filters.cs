@@ -3,7 +3,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using ActiproSoftware.Windows.Extensions;
-using Isogeo.Map.MapFunctions;
+using Isogeo.Map;
 using Isogeo.Models;
 using Isogeo.Network;
 using MVVMPattern;
@@ -19,7 +19,7 @@ namespace Isogeo.AddIn.Models.Filters.Components
 
         protected FilterManager FilterManager { get; }
 
-        protected IMapFunctions MapFunctions { get; }
+        protected IMapManager MapManager { get; }
 
         public ObservableCollection<FilterItem> Items => List.Items;
 
@@ -28,11 +28,11 @@ namespace Isogeo.AddIn.Models.Filters.Components
             OnPropertyChanged(nameof(Items));
         }
 
-        public Filters(string name, INetworkManager networkManager, FilterManager filterManager, IMapFunctions mapFunctions)
+        public Filters(string name, INetworkManager networkManager, FilterManager filterManager, IMapManager mapManager)
         {
             NetworkManager = networkManager;
             FilterManager = filterManager;
-            MapFunctions = mapFunctions;
+            MapManager = mapManager;
             Name = name;
             List = new FilterItemList();
             List.PropertyChanged += List_PropertyChanged;

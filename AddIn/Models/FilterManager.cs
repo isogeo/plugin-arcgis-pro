@@ -3,8 +3,8 @@ using Isogeo.Utils.LogManager;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Isogeo.Map.MapFunctions;
 using Isogeo.AddIn.Models.Filters.Components;
+using Isogeo.Map;
 
 namespace Isogeo.AddIn.Models
 {
@@ -13,15 +13,15 @@ namespace Isogeo.AddIn.Models
         private SearchLists _searchLists;
         private readonly List<Filters.Components.Filters> _listComboFilter = new();
         private Filters.Components.Filters _geographicFilter;
-        private readonly IMapFunctions _mapFunctions;
+        private readonly IMapManager _mapManager;
 
         private FilterItem _cmbSortingMethodSelectedItem;
         private FilterItem _cmbSortingDirectionSelectedItem;
 
 
-        public FilterManager(IMapFunctions mapFunctions)
+        public FilterManager(IMapManager mapManager)
         {
-            _mapFunctions = mapFunctions;
+            _mapManager = mapManager;
         }
 
         public void AddFilters(Filters.Components.Filters filters)
@@ -58,7 +58,7 @@ namespace Isogeo.AddIn.Models
         {
             var box = "";
             if (_geographicFilter.SelectedItem.Name != "-")
-                box = _mapFunctions.GetMapExtent();
+                box = _mapManager.GetMapExtent();
             return box;
         }
 

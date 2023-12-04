@@ -13,9 +13,9 @@ using ArcGIS.Desktop.Mapping;
 using Isogeo.Utils.LogManager;
 using ServiceType = Isogeo.Map.DataType.ServiceType;
 
-namespace Isogeo.Map.MapFunctions
+namespace Isogeo.Map
 {
-    public class MapFunctions : IMapFunctions
+    public class MapManager : IMapManager
     {
 
         private static void DisplayMessage(string message)
@@ -38,10 +38,10 @@ namespace Isogeo.Map.MapFunctions
             var ptMax = MapPointBuilder.CreateMapPoint(envelope.XMax, MapView.Active.Extent.YMax, envelope.SpatialReference);
             var geometryMin = GeometryEngine.Instance.Project(ptMin, SpatialReferences.WGS84);
             var geometryMax = GeometryEngine.Instance.Project(ptMax, SpatialReferences.WGS84);
-            return (geometryMin.Extent.XMin.ToString(CultureInfo.InvariantCulture) + "," +
+            return geometryMin.Extent.XMin.ToString(CultureInfo.InvariantCulture) + "," +
                     geometryMin.Extent.YMin.ToString(CultureInfo.InvariantCulture) + "," +
                     geometryMax.Extent.XMin.ToString(CultureInfo.InvariantCulture) + "," +
-                    geometryMax.Extent.YMin.ToString(CultureInfo.InvariantCulture));
+                    geometryMax.Extent.YMin.ToString(CultureInfo.InvariantCulture);
         }
 
         private static async Task<Envelope> StringToEnvelope(string envelope)
