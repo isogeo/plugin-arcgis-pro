@@ -2,6 +2,9 @@
 using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
+using System.Text.Json;
+using System.Text.Json.Serialization;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Navigation;
 using ArcGIS.Desktop.Framework;
@@ -9,7 +12,6 @@ using Isogeo.Resources;
 using Isogeo.Utils.LogManager;
 using Isogeo.Utils.ManageEncrypt;
 using Microsoft.Win32;
-using Newtonsoft.Json.Linq;
 using MessageBox = ArcGIS.Desktop.Framework.Dialogs.MessageBox;
 
 namespace Isogeo.Models.Network.Authentication
@@ -44,14 +46,9 @@ namespace Isogeo.Models.Network.Authentication
             resources.EndInit();
         }
 
-        internal bool IsInDesignMode
-        {
-            get
-            {
-                return (bool)DependencyPropertyDescriptor.FromProperty(
-                    DesignerProperties.IsInDesignModeProperty, typeof(DependencyObject)).Metadata.DefaultValue;
-            }
-        }
+        internal bool IsInDesignMode =>
+            (bool)DependencyPropertyDescriptor.FromProperty(
+                DesignerProperties.IsInDesignModeProperty, typeof(DependencyObject)).Metadata.DefaultValue;
 
         public Authentication()
         {
@@ -113,15 +110,15 @@ namespace Isogeo.Models.Network.Authentication
             return true;
         }
 
-        private void BtnSave_Click(object sender, RoutedEventArgs e)
+        private async void BtnSave_Click(object sender, RoutedEventArgs e)
         {
             if (CheckValidInputsFormatAuthentication(TxtId.Text, TxtSecret.Password)) 
-                Authenticate(TxtId.Text, TxtSecret.Password);
+                await Authenticate(TxtId.Text, TxtSecret.Password);
         }
 
-        private void Authenticate(string username, string password)
+        private async Task Authenticate(string username, string password)
         {
-            var token = Variables.restFunctions.SetConnection(username, password);
+            var token = await Variables.restFunctions.SetConnection(username, password);
 
             if (token?.StatusResult == "OK")
             {
@@ -147,7 +144,22 @@ namespace Isogeo.Models.Network.Authentication
             Close();
         }
 
-        private void BtnSave_Click_From_File(object sender, RoutedEventArgs e)
+        public class Web
+        {
+            [JsonPropertyName("client_id")]
+            public string ClientId { get; set; }
+
+            [JsonPropertyName("client_secret")]
+            public string ClientSecret { get; set; }
+        }
+
+        public class Response
+        {
+            [JsonPropertyName("web")]
+            public Web Web { get; set; }
+        }
+
+        private async void BtnSave_Click_From_File(object sender, RoutedEventArgs e)
         {
             if (string.IsNullOrEmpty(TxtPathFile.Text))
             {
@@ -157,9 +169,9 @@ namespace Isogeo.Models.Network.Authentication
             try
             {
                 var jsonText = File.ReadAllText(TxtPathFile.Text);
-                dynamic jsonFile = JObject.Parse(jsonText);
-                if (CheckValidInputsFormatAuthentication((string)jsonFile.web.client_id, (string)jsonFile.web.client_secret)) 
-                    Authenticate((string)jsonFile.web.client_id, (string)jsonFile.web.client_secret);
+                var response = JsonSerializer.Deserialize<Response>(jsonText);
+                if (CheckValidInputsFormatAuthentication(response.Web.ClientId, response.Web.ClientSecret)) 
+                    await Authenticate(response.Web.ClientId, response.Web.ClientSecret);
             }
             catch (Exception ex)
             {

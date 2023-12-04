@@ -1,151 +1,42 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
-  <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{015C74FF-38B3-4FD5-A53F-FC0726CE270F}</ProjectGuid>
-    <OutputType>library</OutputType>
-    <RootNamespace>Isogeo.Models</RootNamespace>
-    <AssemblyName>Isogeo.Models</AssemblyName>
-    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
-    <WarningLevel>4</WarningLevel>
-    <Deterministic>true</Deterministic>
-    <NuGetPackageImportStamp>
-    </NuGetPackageImportStamp>
-    <TargetFrameworkProfile />
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <ItemGroup>
-    <Reference Include="ArcGIS.Desktop.Extensions">
-      <HintPath>C:\Program Files\ArcGIS\Pro\bin\Extensions\DesktopExtensions\ArcGIS.Desktop.Extensions.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="ArcGIS.Desktop.Framework">
-      <HintPath>C:\Program Files\ArcGIS\Pro\bin\ArcGIS.Desktop.Framework.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="log4net, Version=2.0.12.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
-      <HintPath>..\packages\log4net.2.0.12\lib\net45\log4net.dll</HintPath>
-    </Reference>
-    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="RestSharp, Version=106.11.4.0, Culture=neutral, PublicKeyToken=598062e77f915f75, processorArchitecture=MSIL">
-      <HintPath>..\packages\RestSharp.106.11.4\lib\net452\RestSharp.dll</HintPath>
-    </Reference>
-    <Reference Include="System" />
-    <Reference Include="System.Configuration" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Web" />
-    <Reference Include="System.Xml" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Xaml">
-      <RequiredTargetFramework>4.0</RequiredTargetFramework>
-    </Reference>
-    <Reference Include="WindowsBase" />
-    <Reference Include="PresentationCore" />
-    <Reference Include="PresentationFramework" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="API\Directive.cs" />
-    <Compile Include="API\Condition.cs" />
-    <Compile Include="API\Contact.cs" />
-    <Compile Include="API\ContactParent.cs" />
-    <Compile Include="API\Coordinate_system.cs" />
-    <Compile Include="API\Creator.cs" />
-    <Compile Include="API\Envelope.cs" />
-    <Compile Include="API\Event.cs" />
-    <Compile Include="API\Keyword.cs" />
-    <Compile Include="API\Layer.cs" />
-    <Compile Include="API\License.cs" />
-    <Compile Include="API\Limitation.cs" />
-    <Compile Include="API\Link.cs" />
-    <Compile Include="API\Result.cs" />
-    <Compile Include="API\Search.cs" />
-    <Compile Include="API\SearchList.cs" />
-    <Compile Include="API\SearchLists.cs" />
-    <Compile Include="API\Service.cs" />
-    <Compile Include="API\ServiceLayer.cs" />
-    <Compile Include="API\Specification.cs" />
-    <Compile Include="API\SpecificationDetail.cs" />
-    <Compile Include="API\Title.cs" />
-    <Compile Include="API\Token.cs" />
-    <Compile Include="Configuration\configuration.cs" />
-    <Compile Include="Configuration\ConfigurationManager.cs" />
-    <Compile Include="Configuration\Proxy.cs" />
-    <Compile Include="Configuration\QueryItem.cs" />
-    <Compile Include="Configuration\Search.cs" />
-    <Compile Include="Configuration\Searchs.cs" />
-    <Compile Include="Configuration\SerializationUtil.cs" />
-    <Compile Include="Configuration\UserAuthentication.cs" />
-    <Compile Include="Filters\FilterItem.cs" />
-    <Compile Include="Filters\FilterItemList.cs" />
-    <Compile Include="Filters\Filters.cs" />
-    <Compile Include="Filters\GeoGraphicalSettings.cs" />
-    <Compile Include="Filters\QuickSearch.cs" />
-    <Compile Include="Filters\QuickSearchSettings.cs" />
-    <Compile Include="Network\Authentication\Authentication.xaml.cs">
-      <DependentUpon>Authentication.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Network\Authentication\HintConverter.cs" />
-    <Compile Include="Network\Authentication\PasswordBoxExtensions.cs" />
-    <Compile Include="Network\RestFunctions.cs" />
-    <Compile Include="API\Tags.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Variables.cs" />
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Language\Isogeo.Language.csproj">
-      <Project>{edbe1371-7309-4e33-abb5-a4bd9390364c}</Project>
-      <Name>Isogeo.Language</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Map\Isogeo.Map.csproj">
-      <Project>{7d38e123-f808-4313-b069-d23bda25e256}</Project>
-      <Name>Isogeo.Map</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Resources\Isogeo.Resources.csproj">
-      <Project>{67b40db1-5093-4d0a-98c4-942d71765649}</Project>
-      <Name>Isogeo.Resources</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\MVVMPattern\MVVMPattern.csproj">
-      <Project>{56d3f8e9-8476-4413-819e-ccd79480aadb}</Project>
-      <Name>MVVMPattern</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Utils\Isogeo.Utils.csproj">
-      <Project>{cba2a1a2-9374-4eb5-b812-74cccd427d25}</Project>
-      <Name>Isogeo.Utils</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Page Include="Network\Authentication\Authentication.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-  </ItemGroup>
-  <ItemGroup />
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+	<PropertyGroup>
+		<TargetFramework>net6.0-windows</TargetFramework>
+		<OutputType>library</OutputType>
+	</PropertyGroup>
+	<PropertyGroup>
+		<UseWPF>true</UseWPF>
+		<GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+	</PropertyGroup>
+	<ItemGroup>
+	  <PackageReference Include="log4net" Version="2.0.15" />
+	</ItemGroup>
+	<ItemGroup>
+	  <ProjectReference Include="..\Language\Isogeo.Language.csproj" />
+	  <ProjectReference Include="..\MVVMPattern\MVVMPattern.csproj" />
+	  <ProjectReference Include="..\Resources\Isogeo.Resources.csproj" />
+	  <ProjectReference Include="..\Utils\Isogeo.Utils.csproj" />
+	</ItemGroup>
+	<ItemGroup>
+		<Reference Include="ArcGIS.Desktop.Framework">
+			<HintPath>C:\Program Files\ArcGIS\Pro\bin\ArcGIS.Desktop.Framework.dll</HintPath>
+		</Reference>
+		<Reference Include="ArcGIS.Core">
+			<HintPath>C:\Program Files\ArcGIS\Pro\bin\ArcGIS.Core.dll</HintPath>
+		</Reference>
+		<Reference Include="ArcGIS.Desktop.Editing">
+			<HintPath>C:\Program Files\ArcGIS\Pro\bin\Extensions\Editing\ArcGIS.Desktop.Editing.dll</HintPath>
+		</Reference>
+		<Reference Include="ArcGIS.Desktop.Extensions">
+			<HintPath>C:\Program Files\ArcGIS\Pro\bin\Extensions\DesktopExtensions\ArcGIS.Desktop.Extensions.dll</HintPath>
+		</Reference>
+		<Reference Include="ArcGIS.Desktop.Mapping">
+			<HintPath>C:\Program Files\ArcGIS\Pro\bin\Extensions\Mapping\ArcGIS.Desktop.Mapping.dll</HintPath>
+		</Reference>
+		<Reference Include="ArcGIS.Desktop.Ribbon.Wpf">
+			<HintPath>C:\Program Files\ArcGIS\Pro\bin\ArcGIS.Desktop.Ribbon.Wpf.dll</HintPath>
+		</Reference>
+		<Reference Include="ArcGIS.Desktop.Shared.Wpf">
+			<HintPath>C:\Program Files\ArcGIS\Pro\bin\ArcGIS.Desktop.Shared.Wpf.dll</HintPath>
+		</Reference>
+	</ItemGroup>
 </Project>

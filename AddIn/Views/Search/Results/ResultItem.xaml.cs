@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -399,9 +400,9 @@ namespace Isogeo.AddIn.Views.Search.Results
         /// Metadata details will be asked from API before load the pop-up.
         /// </summary>
         /// <param name="item">API Metadata result</param>
-        public bool OpenMetadata(Result item)
+        public async Task<bool> OpenMetadata(Result item)
         {
-            var resultDetails = Variables.restFunctions.GetDetails(item._id);
+            var resultDetails = await Variables.restFunctions.GetDetails(item._id);
             if (resultDetails == null)
                 return false;
             item = resultDetails;
@@ -425,39 +426,19 @@ namespace Isogeo.AddIn.Views.Search.Results
             return true;
         }
 
-        private void OpenMetadata(object sender, MouseButtonEventArgs e)
+        private async void OpenMetadata(object sender, MouseButtonEventArgs e)
         {
-            if (!OpenMetadata(result))
+            if (!await OpenMetadata(result))
                 Variables.restFunctions.OpenAuthenticationPopUp();
         }
 
-        private void BtnMenu_OnClickEvent()
+        private async Task BtnMenu_OnClickEvent()
         {
-            var resultDetails = Variables.restFunctions.GetDetails(result._id);
+            var resultDetails = await Variables.restFunctions.GetDetails(result._id);
             if (resultDetails != null)
                 result = resultDetails;
             MniLoadData_OnClick();
         }
-
-/*        private void MniOpenCatalog_OnClick(object sender, RoutedEventArgs e)
-        {
-            IsogeoLibrary.DataType.ServiceType currentService;
-            if (_dataList.Count == 1)
-            {
-                currentService = _dataList[0];
-            }
-            else
-            {
-                currentService = _dataList[CmbLayer.SelectedIndex];
-            }
-
-            string clientId = Variables.configurationManager.config.userAuthentication.id;
-            var clientSecret = RijndaelManagedEncryption.DecryptRijndael(Variables.configurationManager.config.userAuthentication.secret, Variables.encryptCode);
-
-
-            var url = "https://app.isogeo.com/groups/" + currentService.creator + "/resources/" + currentService.id + "/identification";
-            System.Diagnostics.Process.Start(url);
-        }*/
 
         private void MniLoadData_OnClick()
         {

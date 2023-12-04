@@ -1,7 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 using System.Linq;
-using System.Windows.Forms;
 using System.Windows.Input;
+using ArcGIS.Desktop.Framework.Dialogs;
 using Isogeo.AddIn.Views.Search.AskNameWindow;
 using Isogeo.Models;
 using Isogeo.Models.Filters;

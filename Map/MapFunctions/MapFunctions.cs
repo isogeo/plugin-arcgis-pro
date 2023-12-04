@@ -5,6 +5,7 @@ using System.Linq;
 using ArcGIS.Core.CIM;
 using ArcGIS.Core.Data;
 using ArcGIS.Core.Geometry;
+using ArcGIS.Core.Internal.Geometry;
 using ArcGIS.Desktop.Framework.Dialogs;
 using ArcGIS.Desktop.Framework.Threading.Tasks;
 using ArcGIS.Desktop.Mapping;
@@ -135,7 +136,11 @@ namespace Isogeo.Map.MapFunctions
                         using (var featureClass = geoDb.OpenDataset<FeatureClass>(defName))
                         {
                             Log.Logger.Debug($"Add Layer From GeoDatabase - {featureClass.GetName()}");
-                            LayerFactory.Instance.CreateFeatureLayer(featureClass, MapView.Active.Map);
+                            var layerParams = new FeatureLayerCreationParams(featureClass)
+                            {
+                                MapMemberPosition = MapMemberPosition.AddToBottom
+                            };
+                            LayerFactory.Instance.CreateLayer<FeatureLayer>(layerParams, MapView.Active.Map);
                             return true;
                         }
                     }

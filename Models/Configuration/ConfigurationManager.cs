@@ -1,9 +1,10 @@
 ﻿using System;
 using System.IO;
+using System.Text.Json;
 using System.Windows;
+using System.Xml;
 using System.Xml.Linq;
 using Isogeo.Utils.LogManager;
-using Newtonsoft.Json;
 
 namespace Isogeo.Models.Configuration
 {
@@ -29,12 +30,12 @@ namespace Isogeo.Models.Configuration
                 if (!File.Exists(_filePath))
                 {
                     ReadAppConfig();
-                    File.WriteAllText(_filePath, JsonConvert.SerializeObject(config, Formatting.Indented));
+                    File.WriteAllText(_filePath, JsonSerializer.Serialize(config));
                 }
                 else
                 {
                     var json = File.ReadAllText(_filePath);
-                    config = JsonConvert.DeserializeObject<configuration>(json);
+                    config = JsonSerializer.Deserialize<configuration>(json);
                 }
             }
             catch (Exception ex)
@@ -73,7 +74,7 @@ namespace Isogeo.Models.Configuration
             }
             else
             {
-                File.WriteAllText(_filePath, JsonConvert.SerializeObject(config, Formatting.Indented));
+                File.WriteAllText(_filePath, JsonSerializer.Serialize(config));
             }
         }
     }
