@@ -1,4 +1,4 @@
-﻿namespace Isogeo.Models
+namespace Isogeo.Models
 {
     public class MediatorEvent
     {
@@ -15,7 +15,6 @@
         public static MediatorEvent CurrentResult => new("CurrentResult");
         public static MediatorEvent AddNewQuickSearch => new("AddNewQuickSearch");
         public static MediatorEvent SetSortingDefault => new("SetSortingDefault");
-        public static MediatorEvent IsCustomQuery => new("IsCustomQuery");
         public static MediatorEvent UserAuthentication => new("UserAuthentication");
         
 

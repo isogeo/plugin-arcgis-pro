@@ -47,13 +47,7 @@ namespace Isogeo.AddIn.ViewsModels.Search.AdvancedSearch
             _filterManager = filterManager;
             Filters = new Filters(apiFilterName, networkManager, filterManager, mapManager);
             Filters.PropertyChanged += Filter_PropertyChanged;
-            Mediator.Register(MediatorEvent.IsCustomQuery, IsCustomQueryEvent);
             Init(apiFilterName);
-        }
-
-        public void IsCustomQueryEvent(object obj)
-        {
-            IsCustomQuery = (bool)obj;
         }
 
         private void Init(string listName)
