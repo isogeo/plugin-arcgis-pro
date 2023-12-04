@@ -4,70 +4,70 @@ namespace Isogeo.Models.API
 {
     public class Contact
     {
-        [JsonPropertyName("Name")]
+        [JsonPropertyName("name")]
         public string Name
         {
             get;
             set;
         }
 
-        [JsonPropertyName("Organization")]
+        [JsonPropertyName("organization")]
         public string Organization
         {
             get;
             set;
         }
 
-        [JsonPropertyName("Email")]
+        [JsonPropertyName("email")]
         public string Email
         {
             get;
             set;
         }
 
-        [JsonPropertyName("Phone")]
+        [JsonPropertyName("phone")]
         public string Phone
         {
             get;
             set;
         }
 
-        [JsonPropertyName("AddressLine1")]
+        [JsonPropertyName("addressLine1")]
         public string AddressLine1
         {
             get;
             set;
         }
 
-        [JsonPropertyName("AddressLine2")]
+        [JsonPropertyName("addressLine2")]
         public string AddressLine2
         {
             get;
             set;
         }
 
-        [JsonPropertyName("AddressLine3")]
+        [JsonPropertyName("addressLine3")]
         public string AddressLine3
         {
             get;
             set;
         }
 
-        [JsonPropertyName("ZipCode")]
+        [JsonPropertyName("zipCode")]
         public string ZipCode
         {
             get;
             set;
         }
 
-        [JsonPropertyName("City")]
+        [JsonPropertyName("city")]
         public string City
         {
             get;
             set;
         }
 
-        [JsonPropertyName("CountryCode")]
+        [JsonPropertyName("countryCode")]
         public string CountryCode
         {
             get;

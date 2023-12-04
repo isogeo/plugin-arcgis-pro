@@ -68,7 +68,7 @@ namespace Isogeo.Models.API
         [JsonPropertyName("title")]
         public string title { get; set; }
 
-        [JsonPropertyName("@abstract")]
+        [JsonPropertyName("abstract")]
         public string @abstract { get; set; }
 
         [JsonPropertyName("format")]

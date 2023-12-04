@@ -328,24 +328,26 @@ namespace Isogeo.Models.Network
             {
                 var url = Variables.configurationManager.config.apiUrl + "resources/" + mdId;
 
-                var dictionary = new Dictionary<string, string>
+                var includes = new List<(string, string)>()
                 {
-                    { "_include", "contacts" },
-                    { "_include", "coordinate-system" },
-                    { "_include", "events"},  
-                    { "_include", "feature-attributes"},
-                    { "_include", "limitations"},
-                    { "_include", "keywords"},
-                    { "_include", "specifications"},
-                    { "_lang", CultureInfo.InstalledUICulture.TwoLetterISOLanguageName}
+                    ("_include", "conditions"),
+                    ("_include", "contacts"),
+                    ("_include", "coordinate-system"),
+                    ("_include", "events"),  
+                    ("_include", "feature-attributes"),
+                    ("_include", "limitations"),
+                    ("_include", "keywords"),
+                    ("_include", "specifications"),
+                    ( "_lang", CultureInfo.InstalledUICulture.TwoLetterISOLanguageName )
                 };
 
-                url = "?_include=conditions" + dictionary.Aggregate(url, (current,
-                        element) => current + $"&{element.Key}={element.Value}");
+                url += includes.Aggregate("?", (current,
+                        element) => current + $"&{element.Item1}={element.Item2}");
 
                     _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", parameters.token.access_token);
                 var response = await _client.GetAsync(url);
-                var result = JsonSerializer.Deserialize<Result>(await response.Content.ReadAsStringAsync());
+                var content = await response.Content.ReadAsStringAsync();
+                var result = JsonSerializer.Deserialize<Result>(content);
 
                 result.tagsLists = new Tags(result);
                 return result;
