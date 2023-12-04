@@ -8,6 +8,7 @@ using Isogeo.AddIn.Models.Filters;
 using Isogeo.AddIn.Models.Filters.Components;
 using Isogeo.AddIn.Views.Search.AskNameWindow;
 using Isogeo.Map;
+using Isogeo.Models;
 using Isogeo.Network;
 using Isogeo.Utils.ConfigurationManager;
 using Isogeo.Utils.LogManager;
@@ -39,7 +40,7 @@ namespace Isogeo.AddIn.ViewsModels.Settings
             _mapManager = mapManager;
             InitGeographicalOperator();
             InitQuickSearch();
-            Mediator.Register("AddNewQuickSearch", AddNewQuickSearchEvent);
+            Mediator.Register(MediatorEvent.AddNewQuickSearch, AddNewQuickSearchEvent);
         }
 
         private GeoGraphicalSettingsFilters _geoGraphicalSettingsFilters;
@@ -142,7 +143,7 @@ namespace Isogeo.AddIn.ViewsModels.Settings
                 QuickSearchSettingsFilters.AddItem(newItem);
                 QuickSearchSettingsFilters.SelectItem(newItem.Name);
                 _configurationManager.Save();
-                Mediator.NotifyColleagues("ChangeQuickSearch", null);
+                Mediator.NotifyColleagues(MediatorEvent.ChangeQuickSearch, null);
                 break;
             }
         }
@@ -167,7 +168,7 @@ namespace Isogeo.AddIn.ViewsModels.Settings
             {
                 _configurationManager.Config.Searchs.SearchDetails.Remove(search);
                 QuickSearchSettingsFilters.Items.Remove(QuickSearchSettingsFilters.SelectedItem);
-                Mediator.NotifyColleagues("ChangeQuickSearch", null);
+                Mediator.NotifyColleagues(MediatorEvent.ChangeQuickSearch, null);
                 _configurationManager.Save();
                 break; // todo find
             }

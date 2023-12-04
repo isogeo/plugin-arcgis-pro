@@ -3,6 +3,7 @@ using ArcGIS.Desktop.Framework.Threading.Tasks;
 using Isogeo.AddIn.Models.FilterManager;
 using Isogeo.AddIn.Models.Filters.Components;
 using Isogeo.Map;
+using Isogeo.Models;
 using Isogeo.Network;
 using Isogeo.Utils.Box;
 using MVVMPattern;
@@ -46,7 +47,7 @@ namespace Isogeo.AddIn.ViewsModels.Search.AdvancedSearch
             _filterManager = filterManager;
             Filters = new Filters(apiFilterName, networkManager, filterManager, mapManager);
             Filters.PropertyChanged += Filter_PropertyChanged;
-            Mediator.Register("isCustomQuery", IsCustomQueryEvent);
+            Mediator.Register(MediatorEvent.IsCustomQuery, IsCustomQueryEvent);
             Init(apiFilterName);
         }
 
@@ -96,7 +97,7 @@ namespace Isogeo.AddIn.ViewsModels.Search.AdvancedSearch
         {
             var mapCanvas = new FilterItem("-1", Language.Resources.Map_canvas);
             Filters.Items.Add(mapCanvas);
-            Mediator.Register("ChangeBox", ChangeBoxEvent);
+            Mediator.Register(MediatorEvent.ChangeBox, ChangeBoxEvent);
         }
     }
 }

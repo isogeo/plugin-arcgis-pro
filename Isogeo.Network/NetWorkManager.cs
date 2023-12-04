@@ -176,10 +176,10 @@ namespace Isogeo.Network
         {
             Log.Logger.Debug("Execute Reset Data");
             const string query = "";
-            Mediator.NotifyColleagues("ChangeBox", "");
+            Mediator.NotifyColleagues(MediatorEvent.ChangeBox, "");
             var response = await CheckFirstRequestThenTokenThenSearchRequest(query, 0, "", od, ob);
-            Mediator.NotifyColleagues("ChangeQuery", new QueryItem { Query = response.Item2 });
-            Mediator.NotifyColleagues("ClearResults", null);
+            Mediator.NotifyColleagues(MediatorEvent.ChangeQuery, new QueryItem { Query = response.Item2 });
+            Mediator.NotifyColleagues(MediatorEvent.ClearResults, null);
             if (!response.Item1)
                 Application.Current.Dispatcher.Invoke(OpenAuthenticationPopUp); // todo
         }
@@ -188,14 +188,14 @@ namespace Isogeo.Network
         {
             Log.Logger.Debug("Execute Load Data");
             if (!string.IsNullOrWhiteSpace(box))
-                Mediator.NotifyColleagues("ChangeBox", box);
+                Mediator.NotifyColleagues(MediatorEvent.ChangeBox, box);
             var response = await CheckFirstRequestThenTokenThenSearchRequest(query, offset, box, od, ob);
-            Mediator.NotifyColleagues("ChangeQuery", new QueryItem { Query = response.Item2 });
+            Mediator.NotifyColleagues(MediatorEvent.ChangeQuery, new QueryItem { Query = response.Item2 });
             if (response.Item1)
-                Mediator.NotifyColleagues("ChangeOffset", offset);
+                Mediator.NotifyColleagues(MediatorEvent.ChangeOffset, offset);
             else
             {
-                Mediator.NotifyColleagues("ClearResults", offset);
+                Mediator.NotifyColleagues(MediatorEvent.ClearResults, offset);
                 Application.Current.Dispatcher.Invoke(OpenAuthenticationPopUp); // todo
             }
         }
@@ -208,7 +208,7 @@ namespace Isogeo.Network
         {
             var state = true;
 
-            Mediator.NotifyColleagues("EnableDockableWindowIsogeo", false);
+            Mediator.NotifyColleagues(MediatorEvent.EnableDockableWindowIsogeo, false);
             try
             {
                 var newToken = await SetConnection(_configurationManager.Config.UserAuthentication.Id,
@@ -231,7 +231,7 @@ namespace Isogeo.Network
             }
             finally
             {
-                Mediator.NotifyColleagues("EnableDockableWindowIsogeo", true);
+                Mediator.NotifyColleagues(MediatorEvent.EnableDockableWindowIsogeo, true);
             }
 
             return state;
@@ -245,7 +245,7 @@ namespace Isogeo.Network
         {
             Log.Logger.Info("GetDetails - md_id : " + mdId);
 
-            Mediator.NotifyColleagues("EnableDockableWindowIsogeo", false);
+            Mediator.NotifyColleagues(MediatorEvent.EnableDockableWindowIsogeo, false);
             Result result = null;
             try
             {
@@ -263,7 +263,7 @@ namespace Isogeo.Network
             }
             finally
             {
-                Mediator.NotifyColleagues("EnableDockableWindowIsogeo", true);
+                Mediator.NotifyColleagues(MediatorEvent.EnableDockableWindowIsogeo, true);
             }
             Log.Logger.Debug("END GetDetails");
             return result;
@@ -438,7 +438,7 @@ namespace Isogeo.Network
             currentSearch.Query = query;
             currentSearch.Box = box;
             _configurationManager.Save();
-            Mediator.NotifyColleagues("ChangeQuickSearch", null);
+            Mediator.NotifyColleagues(MediatorEvent.ChangeQuickSearch, null);
             Log.Logger.Info("END Save Last search - Query saved : " + '"' + currentSearch.Query + '"');
         }
     }

@@ -4,6 +4,7 @@ using Isogeo.AddIn.Models.FilterManager;
 using Isogeo.AddIn.Models.Filters;
 using Isogeo.AddIn.Models.Filters.Components;
 using Isogeo.Map;
+using Isogeo.Models;
 using Isogeo.Network;
 using Isogeo.Utils.Box;
 using Isogeo.Utils.Configuration;
@@ -110,9 +111,9 @@ namespace Isogeo.AddIn.ViewsModels.Search.PrincipalSearch
             Filters = new QuickSearchFilters("QuickSearch", networkManager, filterManager, mapManager);
             Filters.PropertyChanged += QuickSearch_PropertyChanged;
             Filters.SetItems(_configurationManager.Config.Searchs.SearchDetails);
-            Mediator.Register("AddNewQuickSearch", AddQuickSearchEvent);
-            Mediator.Register("ChangeQuickSearch", ChangeQuickSearchEvent);
-            Mediator.Register("ChangeQuery", ChangeSelectedQuickSearchItemEvent);
+            Mediator.Register(MediatorEvent.AddNewQuickSearch, AddQuickSearchEvent);
+            Mediator.Register(MediatorEvent.ChangeQuickSearch, ChangeQuickSearchEvent);
+            Mediator.Register(MediatorEvent.ChangeQuery, ChangeSelectedQuickSearchItemEvent);
         }
     }
 }

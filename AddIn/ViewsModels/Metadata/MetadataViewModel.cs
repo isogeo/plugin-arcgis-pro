@@ -8,6 +8,7 @@ using MVVMPattern;
 using MVVMPattern.MediatorPattern;
 using System.Globalization;
 using System;
+using Isogeo.Models;
 
 namespace Isogeo.AddIn.ViewsModels.Metadata
 {
@@ -41,7 +42,7 @@ namespace Isogeo.AddIn.ViewsModels.Metadata
         {
             if (IsSubscribe)
             {
-                Mediator.UnRegister("CurrentResult", CurrentResult);
+                Mediator.UnRegister(MediatorEvent.CurrentResult, CurrentResult);
                 IsSubscribe = false;
             }
         }
@@ -50,7 +51,7 @@ namespace Isogeo.AddIn.ViewsModels.Metadata
         {
             if (!IsSubscribe)
             {
-                Mediator.Register("CurrentResult", CurrentResult);
+                Mediator.Register(MediatorEvent.CurrentResult, CurrentResult);
                 IsSubscribe = true;
             }
         }

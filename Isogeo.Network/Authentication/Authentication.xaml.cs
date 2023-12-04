@@ -136,7 +136,7 @@ namespace Isogeo.Models.Network.Authentication
                         _configurationManager.GlobalSoftwareSettings.EncryptCode);
                     _configurationManager.Config.UserAuthentication.Secret = encryptedstring;
                     _configurationManager.Save();
-                    Mediator.NotifyColleagues("UserAuthentication", null);
+                    Mediator.NotifyColleagues(MediatorEvent.UserAuthentication, null);
                     Close();
                 }
                 catch (Exception ex)

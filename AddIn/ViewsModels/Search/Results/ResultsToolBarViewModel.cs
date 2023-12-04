@@ -31,8 +31,8 @@ namespace Isogeo.AddIn.ViewsModels.Search.Results
             _networkManager = networkManager;
             _filterManager = filterManager;
             _configurationManager = configurationManager;
-            Mediator.Register("ChangeQuery", TotalResultsEvent);
-            Mediator.Register("setSortingDefault", SetSortingDefaultEvent);
+            Mediator.Register(MediatorEvent.ChangeQuery, TotalResultsEvent);
+            Mediator.Register(MediatorEvent.SetSortingDefault, SetSortingDefaultEvent);
             BtnResultsContent = Language.Resources.Results;
             InitCmbs();
             SetSortingDefault();
@@ -208,7 +208,7 @@ namespace Isogeo.AddIn.ViewsModels.Search.Results
             _configurationManager.Config.Searchs.SearchDetails.Add(newSearch);
             _configurationManager.Save();
 
-            Mediator.NotifyColleagues("AddNewQuickSearch", newSearch);
+            Mediator.NotifyColleagues(MediatorEvent.AddNewQuickSearch, newSearch);
         }
 
         private async Task Refresh()
@@ -320,7 +320,7 @@ namespace Isogeo.AddIn.ViewsModels.Search.Results
             var box = _filterManager.GetBoxRequest();
             var query = _filterManager.GetQueryCombos();
             _networkManager.SaveSearch(box, query);
-            Mediator.NotifyColleagues("setSortingDefault", null);
+            Mediator.NotifyColleagues(MediatorEvent.SetSortingDefault, null);
             await _networkManager.ResetData(od, ob);
             _filterManager.SetSearchList("");
         }

@@ -88,7 +88,7 @@ namespace Isogeo.AddIn.ViewsModels.Search.PrincipalSearch
             _filterManager = filterManager;
             _searchTextFilter = new SearchTextFilter();
             _filterManager.SetTextSearchFilter(_searchTextFilter);
-            Mediator.Register("ChangeQuery", ChangeSearchTextEvent);
+            Mediator.Register(MediatorEvent.ChangeQuery, ChangeSearchTextEvent);
         }
 
         public async Task Search()

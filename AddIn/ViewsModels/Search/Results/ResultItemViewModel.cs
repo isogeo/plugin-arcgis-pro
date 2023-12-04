@@ -10,6 +10,7 @@ using Isogeo.AddIn.Models;
 using Isogeo.AddIn.ViewsModels.Metadata;
 using Isogeo.Map;
 using Isogeo.Map.DataType;
+using Isogeo.Models;
 using Isogeo.Models.API;
 using Isogeo.Network;
 using Isogeo.Utils.ConfigurationManager;
@@ -384,7 +385,7 @@ namespace Isogeo.AddIn.ViewsModels.Search.Results
             {
                 _metadataInstance = new Views.Metadata.Metadata();
                 DefineViewModelMetadata();
-                Mediator.NotifyColleagues("CurrentResult", item);
+                Mediator.NotifyColleagues(MediatorEvent.CurrentResult, item);
 
                 _metadataInstance.MinWidth = 550;
                 _metadataInstance.MinHeight = 400;

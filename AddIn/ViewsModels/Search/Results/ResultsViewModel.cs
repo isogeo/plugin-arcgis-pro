@@ -43,8 +43,8 @@ namespace Isogeo.AddIn.ViewsModels.Search.Results
             ListNumberPage = new FilterItemList();
             ListNumberPage.PropertyChanged += Filter_PropertyChanged;
             Refresh(0);
-            Mediator.Register("ChangeOffset", ChangePageEvent);
-            Mediator.Register("ClearResults", ClearResultsEvent);
+            Mediator.Register(MediatorEvent.ChangeOffset, ChangePageEvent);
+            Mediator.Register(MediatorEvent.ClearResults, ClearResultsEvent);
         }
 
         private ResultItemViewModel _selectedItem;

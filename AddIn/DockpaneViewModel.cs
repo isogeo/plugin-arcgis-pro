@@ -9,7 +9,9 @@ using ArcGIS.Desktop.Framework.Contracts;
 using Isogeo.AddIn.Models.FilterManager;
 using Isogeo.AddIn.ViewsModels.TabControls;
 using Isogeo.Map;
+using Isogeo.Models;
 using Isogeo.Network;
+using Isogeo.Utils.Configuration;
 using Isogeo.Utils.ConfigurationManager;
 using Isogeo.Utils.LogManager;
 using MVVMPattern.MediatorPattern;
@@ -91,7 +93,7 @@ namespace Isogeo.AddIn
             InitLog();
             Log.Logger.Info("Isogeo ArcGisPro Add-In is opening...");
             Log.Logger.Info("Initializing DockPaneViewModel ...");
-            Mediator.Register("EnableDockableWindowIsogeo", EnableDockableWindowIsogeo);
+            Mediator.Register(MediatorEvent.EnableDockableWindowIsogeo, EnableDockableWindowIsogeo);
 
             Log.Logger.Info("Initializing Configuration Manager");
 
@@ -120,7 +122,7 @@ namespace Isogeo.AddIn
             _selectedPanelHeaderIndex = 0;
             CurrentPage = _paneH1Vm;
 
-            Mediator.Register("UserAuthentication", ResetResearch);
+            Mediator.Register(MediatorEvent.UserAuthentication, ResetResearch);
 
             var ob = _filterManager.GetOb();
             var od = _filterManager.GetOd();
