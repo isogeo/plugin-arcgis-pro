@@ -30,8 +30,6 @@ namespace Isogeo.AddIn.ViewsModels.Search.Results
 
         public ObservableCollection<ResultItemViewModel> ResultsList { get; set; }
 
-
-
         public ResultsViewModel(IMapManager mapManager, INetworkManager networkManager, IFilterManager filterManager,
             IConfigurationManager configurationManager)
         {
