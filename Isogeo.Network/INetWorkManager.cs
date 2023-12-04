@@ -11,7 +11,12 @@ namespace Isogeo.Network
         public Task LoadData(string query, int offset, string box, string od, string ob);
 
         /// <summary>
-        /// Get Metadata details from API, Window is locked during the process. If token is invalid, authentication pop-up is opened
+        /// Change only offset (no change box or change query)
+        /// </summary>
+        public Task ChangeOffset(string query, int offset, string box, string od, string ob);
+
+        /// <summary>
+        /// Get Metadata details from API (including Url (layers / serviceLayers)), Window is locked during the process. If token is invalid, authentication pop-up is opened
         /// </summary>
         /// <param name="mdId">Metadata id from API</param>
         public Task<Result> GetDetails(string mdId);

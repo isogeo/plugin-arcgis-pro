@@ -61,7 +61,7 @@ namespace Isogeo.AddIn.ViewsModels.Search.Results
         {
             _result = item;
             SetComponent();
-            GetLinks();
+            //await GetLinks();
             SetCombo();
         }
 
@@ -256,8 +256,15 @@ namespace Isogeo.AddIn.ViewsModels.Search.Results
             return new ServiceType(type, title, url, name, creator, id);
         }
 
-        private void GetLinks()
+        private async Task GetDetailResourceIncludingUrl()
         {
+
+        }
+
+        private async Task GetLink(Result result)
+        {
+            if ((_result.Type == "vectorDataset" || _result.Type == "rasterDataset" || _result.Type == "service") && _result.Id != null)
+                _result = await _networkManager.GetDetails(_result.Id); // get Layer & ServiceLayer, they are nulls by default
 
             if (_vectorFormatList.Contains(_result.Format))
             {
@@ -280,25 +287,21 @@ namespace Isogeo.AddIn.ViewsModels.Search.Results
             // associated with a vector or raster data.
 
 
-            if (_result.Type == "vectorDataset" || _result.Type == "rasterDataset")
+            if ((_result.Type == "vectorDataset" || _result.Type == "rasterDataset") && _result.ServiceLayers != null)
             {
                 foreach (var serviceLayer in _result.ServiceLayers)
                 {
                     _dataList.Add(CreateServiceType(_result, serviceLayer));
                 }
-
             }
 
             // New association mode. For services metadata sheet, the layers
             // are stored in the purposely named include: "layers".
-            if (_result.Type == "service")
+            if (_result.Type == "service" && _result.Layers != null)
             {
-                if (_result.Layers != null)
+                foreach (var layer in _result.Layers)
                 {
-                    foreach (var layer in _result.Layers)
-                    {
-                        _dataList.Add(CreateServiceType(_result, layer));
-                    }
+                    _dataList.Add(CreateServiceType(_result, layer));
                 }
             }
         }
@@ -407,6 +410,7 @@ namespace Isogeo.AddIn.ViewsModels.Search.Results
             if (_dataList == null || _dataList.Count == 0)
                 return;
             var currentService = _dataList.Count == 1 ? _dataList[0] : _dataList[CmbLayer.SelectedIndex];
+            currentService = 
 
             if (currentService != null && currentService.Type?.ToUpper() == "ARCSDE")
                 currentService = new ServiceType(currentService.Type, currentService.Title, _configurationManager?.Config?.FileSde, 

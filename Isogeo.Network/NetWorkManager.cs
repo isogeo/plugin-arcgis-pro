@@ -150,7 +150,22 @@ namespace Isogeo.Network
             Mediator.NotifyColleagues(MediatorEvent.ChangeQuery, new QueryItem { Query = response.Item2 });
             Mediator.NotifyColleagues(MediatorEvent.ClearResults, null);
             if (!response.Item1)
-                Application.Current.Dispatcher.Invoke(OpenAuthenticationPopUp); // todo
+                Application.Current.Dispatcher.Invoke(OpenAuthenticationPopUp);
+        }
+
+        public async Task ChangeOffset(string query, int offset, string box, string od, string ob)
+        {
+            Log.Logger.Debug("Execute ChangeOffset network");
+            if (!string.IsNullOrWhiteSpace(box))
+                Mediator.NotifyColleagues(MediatorEvent.ChangeBox, box);
+            var response = await CheckFirstRequestThenTokenThenSearchRequest(query, offset, box, od, ob);
+            if (response.Item1)
+                Mediator.NotifyColleagues(MediatorEvent.ChangeOffset, offset);
+            else
+            {
+                Mediator.NotifyColleagues(MediatorEvent.ClearResults, offset);
+                Application.Current.Dispatcher.Invoke(OpenAuthenticationPopUp);
+            }
         }
 
         public async Task LoadData(string query, int offset, string box, string od, string ob)
@@ -296,11 +311,13 @@ namespace Isogeo.Network
                     ("_include", "conditions"),
                     ("_include", "contacts"),
                     ("_include", "coordinate-system"),
-                    ("_include", "events"),  
+                    ("_include", "events"),
                     ("_include", "feature-attributes"),
                     ("_include", "limitations"),
                     ("_include", "keywords"),
                     ("_include", "specifications"),
+                    ("_include", "serviceLayers"),
+                    ("_include", "layers"),
                     ( "_lang", CultureInfo.InstalledUICulture.TwoLetterISOLanguageName )
                 };
 
@@ -327,6 +344,13 @@ namespace Isogeo.Network
             return !string.IsNullOrWhiteSpace(_configurationManager.Config.GeographicalOperator) ? _configurationManager.Config.GeographicalOperator : "";
         }
 
+        private static Dictionary<string, string> RemoveUnusedParameters(Dictionary<string, string> dictionary)
+        {
+            var result = dictionary.Where(x => !(string.IsNullOrWhiteSpace(x.Value) || x.Value == "0"))
+                .ToDictionary(x => x.Key, x => x.Value);
+            return result;
+        }
+
         private async Task<Search> SearchRequest(ApiParameters apiParameters, int nbResult)
         {
             Log.Logger.Info("Execution SearchRequest - query : " + '"' + apiParameters.query + '"' + ", offset : " + apiParameters.offset);
@@ -338,18 +362,21 @@ namespace Isogeo.Network
 
                 var dictionary = new Dictionary<string, string>
                 {
-                    { "_include", "serviceLayers" },
                     { "_lang", apiParameters.lang },
                     { "_limit", nbResult.ToString() },
                     { "ob", apiParameters.ob },
                     { "od", apiParameters.od },
                     { "_offset", apiParameters.offset.ToString() },
-                    { "rel", apiParameters.rel },
                     { "q", apiParameters.query },
                     { "box", apiParameters.box },
                 };
 
-                url += dictionary.Aggregate("?_include=layers", (current, 
+                // perf optimization : Isogeo API
+                dictionary = RemoveUnusedParameters(dictionary);
+                if (!string.IsNullOrWhiteSpace(apiParameters.box))
+                    dictionary.Add("rel", apiParameters.rel);
+
+                url += dictionary.Aggregate("?", (current, 
                     element) => current + $"&{element.Key}={element.Value}");
 
                 _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", apiParameters.token.AccessToken);

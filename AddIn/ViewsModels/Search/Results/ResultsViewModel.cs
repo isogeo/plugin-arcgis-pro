@@ -77,8 +77,7 @@ namespace Isogeo.AddIn.ViewsModels.Search.Results
             var query = _filterManager.GetQueryCombos();
             var box = _filterManager.GetBoxRequest();
 
-            await _networkManager.LoadData(query, offset, box, od, ob);
-            _filterManager.SetSearchList(query);
+            await _networkManager.ChangeOffset(query, offset, box, od, ob);
         }
 
         private string _lblPage;
@@ -171,7 +170,7 @@ namespace Isogeo.AddIn.ViewsModels.Search.Results
             ResultsList.AddRange(temporaryItems);
             SetPages(offset);
             LstResultIsEnabled = true;
-            if (ResultsList.Count > 0) 
+            if (ResultsList.Count > 0)
                 SelectedItem = ResultsList[0];
         }
 
