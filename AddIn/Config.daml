@@ -1,53 +1,97 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<ArcGIS xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" defaultAssembly="Isogeo.AddIn.dll" defaultNamespace="Isogeo.AddIn" xmlns="http://schemas.esri.com/DADF/Registry" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://schemas.esri.com/DADF/Registry file:///C:/Program%20Files/ArcGIS/Pro/bin/ArcGIS.Desktop.Framework.xsd">
-	<AddInInfo id="{d3cd9cd7-2008-4a27-be55-da1aeb26239f}" version="1.0" desktopVersion="3.0.34047">
-    <Name>Isogeo Add-In</Name>
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ArcGIS defaultAssembly="Isogeo.AddIn.dll"
+        defaultNamespace="Isogeo.AddIn"
+        xmlns="http://schemas.esri.com/DADF/Registry"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://schemas.esri.com/DADF/Registry file:///C:/Program%20Files/ArcGIS/Pro/bin/ArcGIS.Desktop.Framework.xsd">
+
+  <AddInInfo id="{cf0631fa-debd-4232-af25-97390a6c9f52}" version="1.0" desktopVersion="3.1.41833">
+    <Name>Isogeo Add-In</Name>   
     <Description>ArcGis Pro Isogeo Add-In</Description>
     <Image>Icon\icon_isogeo.png</Image>
-    <Author>Isogeo</Author>
+    <Author>Isogeon</Author>
     <Company>Isogeo</Company>
-    <Date>08/02/2020 09:00:00, 2021</Date>
+    <Date>10/5/2023 06:00:00 PM</Date>
     <Subject>Framework</Subject>
     <!-- Note subject can be one or more of these topics:
                     Content, Framework, Editing, Geodatabase, Geometry, Geoprocessing, Layouts, Map Authoring, Map Exploration -->
   </AddInInfo>
-  <modules>
-    <insertModule id="Arcgis_Pro_Isogeo_Module" className="Module1" autoLoad="true" caption="Module1">
-      <!-- uncomment to have the control hosted on a separate tab-->
-      <tabs>
-        <!--<tab id="Arcgis_Pro_Isogeo_Tab1" caption="New Tab">
+
+	<modules>
+		<insertModule id="Arcgis_Pro_Isogeo_Module" className="Module1" autoLoad="true" caption="Module1">
+			<!-- uncomment to have the control hosted on a separate tab-->
+			<tabs>
+				<!--<tab id="Arcgis_Pro_Isogeo_Tab1" caption="New Tab">
           <group refID="Arcgis_Pro_Isogeo_Group1"/>
         </tab>-->
-      </tabs>
-      <groups>
-        <!-- comment this out if you have no controls on the Addin tab to avoid
+			</tabs>
+			<groups>
+				<!-- comment this out if you have no controls on the Addin tab to avoid
               an empty group-->
-        <group id="Arcgis_Pro_Isogeo_Group1" caption="Isogeo" appearsOnAddInTab="true">
-          <!-- host controls within groups -->
-          <button refID="Arcgis_Pro_Isogeo_Dockpane_ShowButton" size="large" />
-        </group>
-      </groups>
-      <controls>
-        <!-- add your controls here -->
-        <button id="Arcgis_Pro_Isogeo_Dockpane_ShowButton" caption="Isogeo" className="DockPaneShowButton" loadOnClick="true" smallImage="pack://application:,,,/Isogeo.AddIn;component/Icon/icon_isogeo16.png" largeImage="pack://application:,,,/Isogeo.AddIn;component/Icon/icon_isogeo32.png">
-          <tooltip heading="ArcGis Pro Isogeo Add-In">Isogeo<disabledText /></tooltip>
-        </button>
-        <!--<button id="CustomCatalog_PanelIndicatorStatic_MenuButton" caption="Burger Menu Button" className="PanelIndicatorStatic_MenuButton" loadOnClick="true" smallImage="Images\GenericButtonPurple16.png" largeImage="Images\GenericButtonPurple32.png">
+				<group id="Arcgis_Pro_Isogeo_Group1" caption="Isogeo" appearsOnAddInTab="true">
+					<!-- host controls within groups -->
+					<button refID="Arcgis_Pro_Isogeo_Dockpane_ShowButton" size="large" />
+				</group>
+			</groups>
+			<controls>
+				<!-- add your controls here -->
+				<button id="Arcgis_Pro_Isogeo_Dockpane_ShowButton" caption="Isogeo" className="DockPaneShowButton" loadOnClick="true" smallImage="pack://application:,,,/Isogeo.AddIn;component/Icon/icon_isogeo16.png" largeImage="pack://application:,,,/Isogeo.AddIn;component/Icon/icon_isogeo32.png">
+					<tooltip heading="ArcGis Pro Isogeo Add-In">
+						Isogeo<disabledText />
+					</tooltip>
+				</button>
+				<!--<button id="CustomCatalog_PanelIndicatorStatic_MenuButton" caption="Burger Menu Button" className="PanelIndicatorStatic_MenuButton" loadOnClick="true" smallImage="Images\GenericButtonPurple16.png" largeImage="Images\GenericButtonPurple32.png">
           <tooltip heading="Burger Menu Button">
             ToolTip<disabledText />
           </tooltip>
         </button>-->
+			</controls>
+			<dockPanes>
+				<dockPane id="Arcgis_Pro_Isogeo_Dockpane" caption="Isogeo" className="DockpaneViewModel" dock="group" dockWith="esri_core_contentsDockPane">
+					<content className="DockpaneView" />
+				</dockPane>
+			</dockPanes>
+			<menus>
+				<menu id="CustomCatalog_PanelIndicatorStatic_Menu" caption="Options" contextMenu="true">
+					<button refID="CustomCatalog_PanelIndicatorStatic_MenuButton" />
+				</menu>
+			</menus>
+		</insertModule>
+	</modules>
+
+	<!--<modules>
+    <insertModule id="Isogeo.Addin_Module" className="Module1" autoLoad="false" caption="Module1">
+      --><!-- uncomment to have the control hosted on a separate tab--><!--
+      <tabs>
+        --><!--<tab id="Isogeo.Addin_Tab1" caption="New Tab">
+          <group refID="Isogeo.Addin_Group1"/>
+        </tab>--><!--
+      </tabs>
+              
+      <groups>
+        --><!-- comment this out if you have no controls on the Addin tab to avoid
+              an empty group--><!--
+        <group id="Isogeo.Addin_Group1" caption="Group 1" appearsOnAddInTab="true">
+          --><!-- host controls within groups --><!--
+          <button refID="Arcgis_Pro_Isogeo_Dockpane_ShowButton" size="large" />
+        </group>
+      </groups>
+      
+      <controls>
+        --><!-- add your controls here --><!--
+        --><!-- add your controls here --><!--
+        <button id="Arcgis_Pro_Isogeo_Dockpane_ShowButton" caption="Isogeo" className="DockPaneShowButton" loadOnClick="true" smallImage="pack://application:,,,/Isogeo.AddIn;component/Icon/icon_isogeo16.png" largeImage="pack://application:,,,/Isogeo.AddIn;component/Icon/icon_isogeo32.png">
+	        <tooltip heading="ArcGis Pro Isogeo Add-In">
+		        Isogeo<disabledText />
+	        </tooltip>
+        </button>
       </controls>
-      <dockPanes>
-        <dockPane id="Arcgis_Pro_Isogeo_Dockpane" caption="Isogeo" className="DockpaneViewModel" dock="group" dockWith="esri_core_contentsDockPane">
-          <content className="DockpaneView" />
-        </dockPane>
-      </dockPanes>
-      <menus>
-        <menu id="CustomCatalog_PanelIndicatorStatic_Menu" caption="Options" contextMenu="true">
-          <button refID="CustomCatalog_PanelIndicatorStatic_MenuButton" />
-        </menu>
-      </menus>
+		<dockPanes>
+			<dockPane id="Arcgis_Pro_Isogeo_Dockpane" caption="Isogeo" className="DockpaneViewModel" dock="group" dockWith="esri_core_contentsDockPane">
+				<content className="DockpaneView" />
+			</dockPane>
+		</dockPanes>
+      
     </insertModule>
-  </modules>
+  </modules>-->
 </ArcGIS>

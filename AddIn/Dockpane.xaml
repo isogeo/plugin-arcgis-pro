@@ -4,8 +4,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:extensions="clr-namespace:ArcGIS.Desktop.Extensions;assembly=ArcGIS.Desktop.Extensions"
              xmlns:controls="clr-namespace:ArcGIS.Desktop.Framework.Controls;assembly=ArcGIS.Desktop.Framework"
-             xmlns:viewTabControls="clr-namespace:Isogeo.AddIn.Views.TabControls"
              xmlns:viewModelTabControls="clr-namespace:Isogeo.AddIn.ViewsModels.TabControls"
+             xmlns:tabControls="clr-namespace:Isogeo.AddIn.Views.TabControls"
              x:Class="Isogeo.AddIn.DockpaneView"
              mc:Ignorable="d"
              d:DesignHeight="600" d:DesignWidth="594"
@@ -17,10 +17,10 @@
                 <extensions:DesignOnlyResourceDictionary Source="pack://application:,,,/ArcGIS.Desktop.Framework;component\Themes\Default.xaml"/>
             </ResourceDictionary.MergedDictionaries>
             <DataTemplate DataType="{x:Type viewModelTabControls:SearchViewModel}">
-                <viewTabControls:Search />
+                <tabControls:Search />
             </DataTemplate>
             <DataTemplate DataType="{x:Type viewModelTabControls:SettingsViewModel}">
-                <viewTabControls:Settings />
+                <tabControls:Settings />
             </DataTemplate>
         </ResourceDictionary>
     </UserControl.Resources>
