@@ -1,22 +1,19 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
 		<TargetFramework>net6.0-windows</TargetFramework>
-		<OutputType>library</OutputType>
-	</PropertyGroup>
-	<PropertyGroup>
 		<UseWPF>true</UseWPF>
-		<GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+		<RuntimeIdentifier>win10-x64</RuntimeIdentifier>
 	</PropertyGroup>
 	<ItemGroup>
-	  <PackageReference Include="log4net" Version="2.0.15" />
+		<PackageReference Include="log4net" Version="2.0.15" />
 	</ItemGroup>
 	<ItemGroup>
-	  <ProjectReference Include="..\Language\Isogeo.Language.csproj" />
-	  <ProjectReference Include="..\Utils\Isogeo.Utils.csproj" />
+		<ProjectReference Include="..\Language\Isogeo.Language.csproj" />
+		<ProjectReference Include="..\Utils\Isogeo.Utils.csproj" />
 	</ItemGroup>
 	<ItemGroup>
 		<Reference Include="ArcGIS.Desktop.Core">
-		  <HintPath>C:\Program Files\ArcGIS\Pro\bin\Extensions\Core\ArcGIS.Desktop.Core.dll</HintPath>
+			<HintPath>C:\Program Files\ArcGIS\Pro\bin\Extensions\Core\ArcGIS.Desktop.Core.dll</HintPath>
 		</Reference>
 		<Reference Include="ArcGIS.Desktop.Framework">
 			<HintPath>C:\Program Files\ArcGIS\Pro\bin\ArcGIS.Desktop.Framework.dll</HintPath>
