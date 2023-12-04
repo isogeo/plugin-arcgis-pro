@@ -6,7 +6,7 @@
                     xmlns:controls="clr-namespace:ArcGIS.Desktop.Framework.Controls;assembly=ArcGIS.Desktop.Framework"
                     xmlns:extensions="clr-namespace:ArcGIS.Desktop.Extensions;assembly=ArcGIS.Desktop.Extensions"
                     xmlns:lang="clr-namespace:Isogeo.Language;assembly=Isogeo.Language"
-                    xmlns:authentication="clr-namespace:Isogeo.Models.Network.Authentication"
+                    xmlns:authentication="clr-namespace:Isogeo.Network.Authentication"
                     mc:Ignorable="d"
                     Title="{x:Static lang:Resources.Authentication_settings}" 
                     Height="380" 
