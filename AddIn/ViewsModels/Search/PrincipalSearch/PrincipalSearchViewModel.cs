@@ -12,11 +12,11 @@ namespace Isogeo.AddIn.ViewsModels.Search.PrincipalSearch
         public QuickSearchViewModel QuickSearchViewModel { get; set; }
         public SearchBarViewModel SearchBarViewModel { get; set; }
 
-        public PrincipalSearchViewModel(FilterManager filterManager, IRestFunctions restFunctions, IMapFunctions mapFunctions)
+        public PrincipalSearchViewModel(FilterManager filterManager, INetworkManager networkManager, IMapFunctions mapFunctions)
         {
-            KeywordsViewModel = new KeywordsViewModel(filterManager, restFunctions, mapFunctions);
-            QuickSearchViewModel = new QuickSearchViewModel(restFunctions, filterManager, mapFunctions);
-            SearchBarViewModel = new SearchBarViewModel(restFunctions, filterManager);
+            KeywordsViewModel = new KeywordsViewModel(filterManager, networkManager, mapFunctions);
+            QuickSearchViewModel = new QuickSearchViewModel(networkManager, filterManager, mapFunctions);
+            SearchBarViewModel = new SearchBarViewModel(networkManager, filterManager);
         }
     }
 }

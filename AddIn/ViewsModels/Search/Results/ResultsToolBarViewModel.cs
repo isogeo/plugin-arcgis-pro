@@ -19,7 +19,7 @@ namespace Isogeo.AddIn.ViewsModels.Search.Results
 {
     public class ResultsToolBarViewModel : ViewModelBase
     {
-        private readonly IRestFunctions _restFunctions;
+        private readonly INetworkManager _networkManager;
 
         private readonly FilterManager _filterManager;
 
@@ -133,9 +133,9 @@ namespace Isogeo.AddIn.ViewsModels.Search.Results
             SetSortingDefault();
         }
 
-        public ResultsToolBarViewModel(IRestFunctions restFunctions, FilterManager filterManager)
+        public ResultsToolBarViewModel(INetworkManager networkManager, FilterManager filterManager)
         {
-            _restFunctions = restFunctions;
+            _networkManager = networkManager;
             _filterManager = filterManager;
             Mediator.Register("ChangeQuery", TotalResultsEvent);
             Mediator.Register("setSortingDefault", SetSortingDefaultEvent);
@@ -218,7 +218,7 @@ namespace Isogeo.AddIn.ViewsModels.Search.Results
             var query = _filterManager.GetQueryCombos();
             if (_isUpdateCombo) return;
             DefineBtnResultsContent(); // todo
-            await _restFunctions.ReloadData(0, query, box, od, ob);
+            await _networkManager.ReloadData(0, query, box, od, ob);
             _filterManager.SetSearchList(query);
         }
 
@@ -318,9 +318,9 @@ namespace Isogeo.AddIn.ViewsModels.Search.Results
             var od = _filterManager.GetOd();
             var box = _filterManager.GetBoxRequest();
             var query = _filterManager.GetQueryCombos();
-            _restFunctions.SaveSearch(box, query);
+            _networkManager.SaveSearch(box, query);
             Mediator.NotifyColleagues("setSortingDefault", null);
-            await _restFunctions.ResetData(box, od, ob);
+            await _networkManager.ResetData(box, od, ob);
             _filterManager.SetSearchList("");
         }
 

@@ -101,10 +101,10 @@ namespace Isogeo.AddIn.ViewsModels.Search.PrincipalSearch
             Filters.SelectItem("-");
         }
 
-        public QuickSearchViewModel(IRestFunctions restFunctions, FilterManager filterManager, IMapFunctions mapFunctions)
+        public QuickSearchViewModel(INetworkManager networkManager, FilterManager filterManager, IMapFunctions mapFunctions)
         {
             _filterManager = filterManager;
-            Filters = new QuickSearchFilters("QuickSearch", restFunctions, filterManager, mapFunctions);
+            Filters = new QuickSearchFilters("QuickSearch", networkManager, filterManager, mapFunctions);
             Filters.PropertyChanged += QuickSearch_PropertyChanged;
             Filters.SetItems(Variables.configurationManager.config.Searchs.SearchDetails);
             Mediator.Register("AddNewQuickSearch", AddQuickSearchEvent);

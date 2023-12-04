@@ -9,7 +9,7 @@ namespace Isogeo.AddIn.Models.Filters
 {
     public class GeoGraphicalSettingsFilters : Components.Filters
     {
-        public GeoGraphicalSettingsFilters(string name, IRestFunctions restFunctions, FilterManager filterManager, IMapFunctions mapFunctions) : base(name, restFunctions, filterManager, mapFunctions)
+        public GeoGraphicalSettingsFilters(string name, INetworkManager networkManager, FilterManager filterManager, IMapFunctions mapFunctions) : base(name, networkManager, filterManager, mapFunctions)
         {
             var items = new List<FilterItem>
             {

@@ -17,7 +17,7 @@ using Search = Isogeo.Models.API.Search;
 
 namespace Isogeo.Network
 {
-    public class RestFunctions : IRestFunctions
+    public class NetworkManager : INetworkManager
     {
         private Models.Network.Authentication.Authentication _frmAuthentication;
 
@@ -30,7 +30,7 @@ namespace Isogeo.Network
 
         private readonly HttpClient _client;
 
-        public RestFunctions()
+        public NetworkManager()
         {
             var proxy = GetProxy();
             var httpClientHandler = new HttpClientHandler()
@@ -196,11 +196,11 @@ namespace Isogeo.Network
             }
         }
 
-        public async Task ReloadData(int offset, string comboQuery, string box, string od, string ob)
+        public async Task ReloadData(int offset, string query, string box, string od, string ob)
         {
             Log.Logger.Debug("Execute Reload Data");
             //var query = GetQueryCombos();
-            var result = await CheckFirstRequestThenTokenThenSearchRequest(comboQuery, offset, box, od, ob);
+            var result = await CheckFirstRequestThenTokenThenSearchRequest(query, offset, box, od, ob);
             Mediator.NotifyColleagues("ChangeQuery", new QueryItem { Query = result.Item2 });
             if (result.Item1)
                 Mediator.NotifyColleagues("ChangeOffset", offset);

@@ -41,7 +41,7 @@ namespace Isogeo.AddIn.Views.Search.Results
         private MetadataViewModel _metadataViewModel;
 
         private readonly IMapFunctions _mapFunctions;
-        private readonly IRestFunctions _restFunctions;
+        private readonly INetworkManager _networkManager;
 
         private void InitResources()
         {
@@ -72,11 +72,11 @@ namespace Isogeo.AddIn.Views.Search.Results
             (bool)DependencyPropertyDescriptor.FromProperty(
                 DesignerProperties.IsInDesignModeProperty, typeof(DependencyObject)).Metadata.DefaultValue;
 
-        public ResultItem(IMapFunctions mapFunctions, IRestFunctions restFunctions)
+        public ResultItem(IMapFunctions mapFunctions, INetworkManager networkManager)
         {
             InitializeComponent();
             _mapFunctions = mapFunctions;
-            _restFunctions = restFunctions;
+            _networkManager = networkManager;
             DataContext = this;
             if (!IsInDesignMode)
                 InitResources();
@@ -103,7 +103,7 @@ namespace Isogeo.AddIn.Views.Search.Results
 
         private async Task BtnMenu_OnClickEvent()
         {
-            var resultDetails = await _restFunctions.GetDetails(_result.Id);
+            var resultDetails = await _networkManager.GetDetails(_result.Id);
             if (resultDetails != null)
                 _result = resultDetails;
             MniLoadData_OnClick();
@@ -381,7 +381,7 @@ namespace Isogeo.AddIn.Views.Search.Results
         /// <param name="item">API Metadata result</param>
         public async Task<bool> OpenMetadata(Result item)
         {
-            var resultDetails = await _restFunctions.GetDetails(item.Id);
+            var resultDetails = await _networkManager.GetDetails(item.Id);
             if (resultDetails == null)
                 return false;
             item = resultDetails;
@@ -408,7 +408,7 @@ namespace Isogeo.AddIn.Views.Search.Results
         private async void OpenMetadata(object sender, MouseButtonEventArgs e)
         {
             if (!await OpenMetadata(_result))
-                _restFunctions.OpenAuthenticationPopUp();
+                _networkManager.OpenAuthenticationPopUp();
         }
 
         private void MniLoadData_OnClick()

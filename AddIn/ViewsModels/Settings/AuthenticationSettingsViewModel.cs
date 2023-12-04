@@ -9,11 +9,11 @@ namespace Isogeo.AddIn.ViewsModels.Settings
 {
     public class AuthenticationSettingsViewModel : ViewModelBase
     {
-        private readonly IRestFunctions _restFunctions;
+        private readonly INetworkManager _networkManager;
 
-        public AuthenticationSettingsViewModel(IRestFunctions restFunctions)
+        public AuthenticationSettingsViewModel(INetworkManager networkManager)
         {
-            _restFunctions = restFunctions;
+            _networkManager = networkManager;
         }
 
         private ICommand _authenticateCommand;
@@ -35,7 +35,7 @@ namespace Isogeo.AddIn.ViewsModels.Settings
 
         private void Authenticate()
         {
-            var frmAuthentication = new Authentication(_restFunctions);
+            var frmAuthentication = new Authentication(_networkManager);
             frmAuthentication.ShowDialog();
         }
     }

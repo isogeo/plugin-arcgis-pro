@@ -9,7 +9,7 @@ namespace Isogeo.AddIn.Models.Filters
 {
     public class QuickSearchSettingsFilters : QuickSearchFilters
     {
-        public QuickSearchSettingsFilters(string name, IRestFunctions restFunctions, FilterManager filterManager, IMapFunctions mapFunctions) : base(name, restFunctions, filterManager, mapFunctions)
+        public QuickSearchSettingsFilters(string name, INetworkManager networkManager, FilterManager filterManager, IMapFunctions mapFunctions) : base(name, networkManager, filterManager, mapFunctions)
         {
         }
 

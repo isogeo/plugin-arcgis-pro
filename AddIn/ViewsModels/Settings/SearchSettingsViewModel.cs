@@ -23,7 +23,7 @@ namespace Isogeo.AddIn.ViewsModels.Settings
     {
         public QuickSearchSettingsFilters QuickSearchSettingsFilters { get; set; }
 
-        private readonly IRestFunctions _restFunctions;
+        private readonly INetworkManager _networkManager;
 
         private readonly FilterManager _filterManager;
 
@@ -179,7 +179,7 @@ namespace Isogeo.AddIn.ViewsModels.Settings
 
         private void InitGeographicalOperator()
         {// todo
-            GeoGraphicalSettingsFilters = new GeoGraphicalSettingsFilters("GeoGraphicalSettings", _restFunctions, _filterManager, _mapFunctions);
+            GeoGraphicalSettingsFilters = new GeoGraphicalSettingsFilters("GeoGraphicalSettings", _networkManager, _filterManager, _mapFunctions);
             if (Variables.configurationManager.config.GeographicalOperator == "contains" ||  
                 Variables.configurationManager.config.GeographicalOperator == "within" ||
                 Variables.configurationManager.config.GeographicalOperator == "intersects") 
@@ -201,7 +201,7 @@ namespace Isogeo.AddIn.ViewsModels.Settings
 
         private void InitQuickSearch()
         {
-            QuickSearchSettingsFilters = new QuickSearchSettingsFilters("QuickSearchSettings", _restFunctions, _filterManager, _mapFunctions);
+            QuickSearchSettingsFilters = new QuickSearchSettingsFilters("QuickSearchSettings", _networkManager, _filterManager, _mapFunctions);
             QuickSearchSettingsFilters.PropertyChanged += QuickSearchSettings_PropertyChanged;
             QuickSearchSettingsFilters.SetItems(Variables.configurationManager.config.Searchs.SearchDetails);
         }
@@ -237,9 +237,9 @@ namespace Isogeo.AddIn.ViewsModels.Settings
             }
         }
 
-        public SearchSettingsViewModel(IRestFunctions restFunctions, FilterManager filterManager, IMapFunctions mapFunctions)
+        public SearchSettingsViewModel(INetworkManager networkManager, FilterManager filterManager, IMapFunctions mapFunctions)
         {
-            _restFunctions = restFunctions;
+            _networkManager = networkManager;
             _filterManager = filterManager;
             _mapFunctions = mapFunctions;
             InitGeographicalOperator();

@@ -17,22 +17,22 @@ namespace Isogeo.AddIn.ViewsModels.TabControls
         public PrincipalSearchViewModel PrincipalSearchViewModel { get; set; }
 
         private readonly IMapFunctions _mapFunctions;
-        private readonly IRestFunctions _restFunctions;
+        private readonly INetworkManager _networkManager;
         private readonly FilterManager _filterManager;
 
         private void InitViewModel()
         {
-            AdvancedSearchViewModel = new AdvancedSearchViewModel(_mapFunctions, _filterManager, _restFunctions);
-            ResultsViewModel = new ResultsViewModel(_mapFunctions, _restFunctions, _filterManager);
-            ResultsToolBarViewModel = new ResultsToolBarViewModel(_restFunctions, _filterManager);
-            PrincipalSearchViewModel = new PrincipalSearchViewModel(_filterManager, _restFunctions, _mapFunctions);
+            AdvancedSearchViewModel = new AdvancedSearchViewModel(_mapFunctions, _filterManager, _networkManager);
+            ResultsViewModel = new ResultsViewModel(_mapFunctions, _networkManager, _filterManager);
+            ResultsToolBarViewModel = new ResultsToolBarViewModel(_networkManager, _filterManager);
+            PrincipalSearchViewModel = new PrincipalSearchViewModel(_filterManager, _networkManager, _mapFunctions);
         }
 
-        public SearchViewModel(IRestFunctions restFunctions, FilterManager filterManager, IMapFunctions mapFunctions)
+        public SearchViewModel(INetworkManager networkManager, FilterManager filterManager, IMapFunctions mapFunctions)
         {
             _filterManager = filterManager;
             _mapFunctions = mapFunctions;
-            _restFunctions = restFunctions;
+            _networkManager = networkManager;
             InitViewModel();
         }
     }

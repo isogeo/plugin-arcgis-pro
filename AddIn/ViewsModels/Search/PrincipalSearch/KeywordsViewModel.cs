@@ -31,10 +31,10 @@ namespace Isogeo.AddIn.ViewsModels.Search.PrincipalSearch
             OnPropertyChanged(nameof(Filters));
         }
 
-        public KeywordsViewModel(FilterManager filterManager, IRestFunctions restFunctions, IMapFunctions mapFunctions)
+        public KeywordsViewModel(FilterManager filterManager, INetworkManager networkManager, IMapFunctions mapFunctions)
         {
             _filterManager = filterManager;
-            Filters = new Filters("keyword:isogeo", restFunctions, filterManager, mapFunctions);
+            Filters = new Filters("keyword:isogeo", networkManager, filterManager, mapFunctions);
             Filters.PropertyChanged += Filter_PropertyChanged;
             Variables.FunctionsSetlist.Add(SetList);
             _filterManager.AddFilters(Filters);

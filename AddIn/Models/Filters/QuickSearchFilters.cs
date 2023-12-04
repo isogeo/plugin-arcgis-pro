@@ -10,7 +10,7 @@ namespace Isogeo.AddIn.Models.Filters
 {
     public class QuickSearchFilters : Components.Filters
     {
-        public QuickSearchFilters(string name, IRestFunctions restFunctions, FilterManager filterManager, IMapFunctions mapFunctions) : base(name, restFunctions, filterManager, mapFunctions)
+        public QuickSearchFilters(string name, INetworkManager networkManager, FilterManager filterManager, IMapFunctions mapFunctions) : base(name, networkManager, filterManager, mapFunctions)
         {
         }
 
@@ -20,7 +20,7 @@ namespace Isogeo.AddIn.Models.Filters
                 return;
             var ob = FilterManager.GetOb();
             var od = FilterManager.GetOd();
-            await RestFunctions.LoadData(SelectedItem.Id, 0, SelectedItem.GeographicalOperator, od, ob);
+            await NetworkManager.LoadData(SelectedItem.Id, 0, SelectedItem.GeographicalOperator, od, ob);
             FilterManager.SetSearchList(SelectedItem.Id);
         }
 

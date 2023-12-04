@@ -28,7 +28,7 @@ namespace Isogeo.AddIn
         private readonly ViewModelBase _paneH2Vm;
         private const string DockPaneId = "Arcgis_Pro_Isogeo_Dockpane";
 
-        private readonly IRestFunctions _restFunctions;
+        private readonly INetworkManager _networkManager;
         private readonly FilterManager _filterManager;
 
         private bool _isEnabled = true;
@@ -47,7 +47,7 @@ namespace Isogeo.AddIn
             var ob = _filterManager.GetOb();
             var od = _filterManager.GetOd();
             var box = _filterManager.GetBoxRequest();
-            await _restFunctions.ResetData(box, od, ob);
+            await _networkManager.ResetData(box, od, ob);
             _filterManager.SetSearchList("");
         }
 
@@ -108,11 +108,11 @@ namespace Isogeo.AddIn
             PrimaryMenuList.Add(new TabControl { Text = Language.Resources.Settings });
 
             IMapFunctions mapFunctions = new MapFunctions();
-            _restFunctions = new RestFunctions();
+            _networkManager = new NetworkManager();
             _filterManager = new FilterManager(mapFunctions);
 
-            _paneH1Vm = new SearchViewModel(_restFunctions, _filterManager, mapFunctions);
-            _paneH2Vm = new SettingsViewModel(_restFunctions, _filterManager, mapFunctions);
+            _paneH1Vm = new SearchViewModel(_networkManager, _filterManager, mapFunctions);
+            _paneH2Vm = new SettingsViewModel(_networkManager, _filterManager, mapFunctions);
             _selectedPanelHeaderIndex = 0;
             CurrentPage = _paneH1Vm;
 
@@ -122,7 +122,7 @@ namespace Isogeo.AddIn
             var od = _filterManager.GetOd();
             var box = _filterManager.GetBoxRequest();
             Task.Run(() => Application.Current.Dispatcher.Invoke(async () => {
-                await _restFunctions.ResetData(box, od, ob);
+                await _networkManager.ResetData(box, od, ob);
                 _filterManager.SetSearchList("");
             }));
             Log.Logger.Info("END Initializing DockPaneViewModel");

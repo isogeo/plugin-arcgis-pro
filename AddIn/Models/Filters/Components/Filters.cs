@@ -17,7 +17,7 @@ namespace Isogeo.AddIn.Models.Filters.Components
         public string Name { get; }
         protected FilterItemList List { get; }
 
-        protected IRestFunctions RestFunctions { get; }
+        protected INetworkManager NetworkManager { get; }
 
         protected FilterManager FilterManager { get; }
 
@@ -30,9 +30,9 @@ namespace Isogeo.AddIn.Models.Filters.Components
             OnPropertyChanged(nameof(Items));
         }
 
-        public Filters(string name, IRestFunctions restFunctions, FilterManager filterManager, IMapFunctions mapFunctions)
+        public Filters(string name, INetworkManager networkManager, FilterManager filterManager, IMapFunctions mapFunctions)
         {
-            RestFunctions = restFunctions;
+            NetworkManager = networkManager;
             FilterManager = filterManager;
             MapFunctions = mapFunctions;
             Name = name;
@@ -53,7 +53,7 @@ namespace Isogeo.AddIn.Models.Filters.Components
                     return;
                 var query = FilterManager.GetQueryCombos();
                 var box = FilterManager.GetBoxRequest();
-                RestFunctions.SaveSearch(box, query);
+                NetworkManager.SaveSearch(box, query);
                 List.Selected = value;
                 SelectionChanged();
             }
@@ -68,7 +68,7 @@ namespace Isogeo.AddIn.Models.Filters.Components
 
             var ob = FilterManager.GetOb();
             var od = FilterManager.GetOd();
-            await RestFunctions.ReloadData(0, query, box, od, ob);
+            await NetworkManager.ReloadData(0, query, box, od, ob);
             FilterManager.SetSearchList(query);
         }
 

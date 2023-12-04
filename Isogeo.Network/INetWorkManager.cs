@@ -2,7 +2,7 @@
 
 namespace Isogeo.Network
 {
-    public interface IRestFunctions
+    public interface INetworkManager
     {
         public void OpenAuthenticationPopUp();
 
@@ -10,6 +10,7 @@ namespace Isogeo.Network
 
         public Task LoadData(string query, int offset, string box, string od, string ob);
 
+        // Doesn't send a signal by mediator to prevent box change (& so no camera change)
         public Task ReloadData(int offset, string comboQuery, string box, string od, string ob);
 
         /// <summary>

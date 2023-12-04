@@ -15,7 +15,7 @@ namespace Isogeo.AddIn.ViewsModels.Search.PrincipalSearch
 {
     public class SearchBarViewModel : ViewModelBase
     {
-        private readonly IRestFunctions _restFunctions;
+        private readonly INetworkManager _networkManager;
         private readonly FilterManager _filterManager;
 
         private readonly IEnumerable<SearchList> _searchLists = new List<SearchList>()
@@ -89,9 +89,9 @@ namespace Isogeo.AddIn.ViewsModels.Search.PrincipalSearch
             //SearchText = Variables.searchText;
         }
 
-        public SearchBarViewModel(IRestFunctions restFunctions, FilterManager filterManager)
+        public SearchBarViewModel(INetworkManager networkManager, FilterManager filterManager)
         {
-            _restFunctions = restFunctions;
+            _networkManager = networkManager;
             _filterManager = filterManager;
             Mediator.Register("ChangeQuery", ChangeSearchTextEvent);
         }
@@ -102,7 +102,7 @@ namespace Isogeo.AddIn.ViewsModels.Search.PrincipalSearch
             var od = _filterManager.GetOd();
             var query = _filterManager.GetQueryCombos();
             var box = _filterManager.GetBoxRequest();
-            await _restFunctions.ReloadData(0, query, box, od, ob);
+            await _networkManager.ReloadData(0, query, box, od, ob);
             _filterManager.SetSearchList(query);
         }
     }

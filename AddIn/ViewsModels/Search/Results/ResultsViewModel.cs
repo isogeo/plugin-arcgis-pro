@@ -23,7 +23,7 @@ namespace Isogeo.AddIn.ViewsModels.Search.Results
         private ICommand _nextCommand;
         private ICommand _previousCommand;
         private readonly IMapFunctions _mapFunctions;
-        private readonly IRestFunctions _restFunctions;
+        private readonly INetworkManager _networkManager;
         private readonly FilterManager _filterManager;
 
         public ObservableCollection<ResultItem> ResultsList { get; set; }
@@ -59,7 +59,7 @@ namespace Isogeo.AddIn.ViewsModels.Search.Results
             var query = _filterManager.GetQueryCombos();
             var box = _filterManager.GetBoxRequest();
 
-            await _restFunctions.ReloadData(offset, query, box, od, ob);
+            await _networkManager.ReloadData(offset, query, box, od, ob);
             _filterManager.SetSearchList(query);
         }
 
@@ -133,10 +133,10 @@ namespace Isogeo.AddIn.ViewsModels.Search.Results
             ClearResults();
         }
 
-        public ResultsViewModel(IMapFunctions mapFunctions, IRestFunctions restFunctions, FilterManager filterManager)
+        public ResultsViewModel(IMapFunctions mapFunctions, INetworkManager networkManager, FilterManager filterManager)
         {
             _mapFunctions = mapFunctions;
-            _restFunctions = restFunctions;
+            _networkManager = networkManager;
             _filterManager = filterManager;
             ResultsList = new ObservableCollection<ResultItem>();
             ListNumberPage = new FilterItemList();
@@ -155,7 +155,7 @@ namespace Isogeo.AddIn.ViewsModels.Search.Results
                 for (var i = Variables.search.Results.Count - 1; i >= 0; i--)
                 {
                     var result = Variables.search.Results[i];
-                    var resultItem = new ResultItem(_mapFunctions, _restFunctions);
+                    var resultItem = new ResultItem(_mapFunctions, _networkManager);
                     resultItem.Init(result);
                     ResultsList.Insert(0, resultItem);
                 }

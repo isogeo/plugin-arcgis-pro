@@ -19,7 +19,7 @@ namespace Isogeo.Models.Network.Authentication
     public partial class Authentication
     {
 
-        private readonly IRestFunctions _restFunctions;
+        private readonly INetworkManager _networkManager;
 
         private void InitResources()
         {
@@ -52,12 +52,12 @@ namespace Isogeo.Models.Network.Authentication
             (bool)DependencyPropertyDescriptor.FromProperty(
                 DesignerProperties.IsInDesignModeProperty, typeof(DependencyObject)).Metadata.DefaultValue;
 
-        public Authentication(IRestFunctions restFunctions)
+        public Authentication(INetworkManager networkManager)
         {
             InitializeComponent();
             if (!IsInDesignMode)
                 InitResources();
-            _restFunctions = restFunctions;
+            _networkManager = networkManager;
             GetAuthentication();
         }
 
@@ -121,7 +121,7 @@ namespace Isogeo.Models.Network.Authentication
 
         private async Task Authenticate(string username, string password)
         {
-            var token = await _restFunctions.SetConnection(username, password);
+            var token = await _networkManager.SetConnection(username, password);
 
             if (token?.StatusResult == "OK")
             {
