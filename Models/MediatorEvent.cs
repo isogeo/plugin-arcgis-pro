@@ -1,4 +1,4 @@
-namespace Isogeo.Models
+﻿namespace Isogeo.Models
 {
     public class MediatorEvent
     {
@@ -8,15 +8,15 @@ namespace Isogeo.Models
 
         public static MediatorEvent ChangeBox => new("ChangeBox");
         public static MediatorEvent ChangeQuery => new("ChangeQuery");
-        public static MediatorEvent ClearResults => new("ClearResults");
-        public static MediatorEvent ChangeOffset => new ("ChangeOffset");
-        public static MediatorEvent EnableDockableWindowIsogeo => new("EnableDockableWindowIsogeo");
+        public static MediatorEvent ChangeOffset => new("ChangeOffset");
         public static MediatorEvent ChangeQuickSearch => new("ChangeQuickSearch");
-        public static MediatorEvent CurrentResult => new("CurrentResult");
-        public static MediatorEvent AddNewQuickSearch => new("AddNewQuickSearch");
         public static MediatorEvent SetSortingDefault => new("SetSortingDefault");
+        public static MediatorEvent ClearResults => new("ClearResults");
+        public static MediatorEvent ResultSelected => new("ResultSelected");
+        public static MediatorEvent AddNewQuickSearch => new("AddNewQuickSearch");
         public static MediatorEvent UserAuthentication => new("UserAuthentication");
-        
+        public static MediatorEvent EnableDockableWindowIsogeo => new("EnableDockableWindowIsogeo");
+
 
         public static implicit operator string(MediatorEvent item) { return item.Value; }
 

@@ -385,7 +385,7 @@ namespace Isogeo.AddIn.ViewsModels.Search.Results
             {
                 _metadataInstance = new Views.Metadata.Metadata();
                 DefineViewModelMetadata();
-                Mediator.NotifyColleagues(MediatorEvent.CurrentResult, item);
+                Mediator.NotifyColleagues(MediatorEvent.ResultSelected, item);
 
                 _metadataInstance.MinWidth = 550;
                 _metadataInstance.MinHeight = 400;

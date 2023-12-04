@@ -42,7 +42,7 @@ namespace Isogeo.AddIn.ViewsModels.Metadata
         {
             if (IsSubscribe)
             {
-                Mediator.UnRegister(MediatorEvent.CurrentResult, CurrentResult);
+                Mediator.UnRegister(MediatorEvent.ResultSelected, CurrentResult);
                 IsSubscribe = false;
             }
         }
@@ -51,7 +51,7 @@ namespace Isogeo.AddIn.ViewsModels.Metadata
         {
             if (!IsSubscribe)
             {
-                Mediator.Register(MediatorEvent.CurrentResult, CurrentResult);
+                Mediator.Register(MediatorEvent.ResultSelected, CurrentResult);
                 IsSubscribe = true;
             }
         }
