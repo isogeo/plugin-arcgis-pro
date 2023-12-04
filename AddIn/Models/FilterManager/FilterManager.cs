@@ -71,6 +71,8 @@ namespace Isogeo.AddIn.Models.FilterManager
         public string GetBoxRequest()
         {
             var box = "";
+            if (_geographicFilter == null)
+                return "";
             if (_geographicFilter.SelectedItem.Name != "-")
                 box = _mapManager.GetMapExtent();
             return box;
