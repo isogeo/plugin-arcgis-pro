@@ -21,6 +21,8 @@ namespace Isogeo.Models.Network
     {
         private Authentication.Authentication _frmAuthentication;
 
+        private ApiBearerToken? _existingApiBearerToken;
+
         private bool AuthenticationPopUpIsOpen => _frmAuthentication != null && _frmAuthentication.IsLoaded;
 
         private static bool _isFirstLoad = true;
@@ -76,7 +78,15 @@ namespace Isogeo.Models.Network
             Log.Logger.Info("Set Connection : " + clientId);
             if (!string.IsNullOrEmpty(clientSecret))
             {
-                newToken = await GetAccessToken(clientId, clientSecret);
+                if (_existingApiBearerToken == null || _existingApiBearerToken.ExpirationDate < DateTimeOffset.UtcNow)
+                {
+                    newToken = await GetAccessToken(clientId, clientSecret);
+                    _existingApiBearerToken = new ApiBearerToken(newToken);
+                }
+                else
+                {
+                    newToken = new Token() { access_token = _existingApiBearerToken.AccessToken, expires_in = 1, StatusResult = "OK", token_type = "Bearer" };
+                }
                 if (newToken == null)
                 {
                     MessageBox.Show(Resource.Message_Query_authentication_ko_invalid + "\n" +
