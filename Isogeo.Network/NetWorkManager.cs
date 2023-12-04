@@ -22,7 +22,7 @@ namespace Isogeo.Network
     {
         private readonly IConfigurationManager _configurationManager;
 
-        private Models.Network.Authentication.Authentication _frmAuthentication;
+        private Authentication.Authentication _frmAuthentication;
 
         private ApiBearerToken? _existingApiBearerToken;
 
@@ -128,7 +128,7 @@ namespace Isogeo.Network
         public void OpenAuthenticationPopUp()
         {
             if (AuthenticationPopUpIsOpen) return;
-            _frmAuthentication = new Models.Network.Authentication.Authentication(this, _configurationManager);
+            _frmAuthentication = new Authentication.Authentication(this, _configurationManager);
             _frmAuthentication.ShowDialog();
         }
 

@@ -6,7 +6,7 @@ using System.Text.Json.Serialization;
 using System.Windows;
 using System.Windows.Navigation;
 using ArcGIS.Desktop.Framework;
-using Isogeo.Network;
+using Isogeo.Models;
 using Isogeo.Resources;
 using Isogeo.Utils.ConfigurationManager;
 using Isogeo.Utils.LogManager;
@@ -15,7 +15,7 @@ using Microsoft.Win32;
 using MVVMPattern.MediatorPattern;
 using MessageBox = ArcGIS.Desktop.Framework.Dialogs.MessageBox;
 
-namespace Isogeo.Models.Network.Authentication
+namespace Isogeo.Network.Authentication
 {
     public partial class Authentication
     {

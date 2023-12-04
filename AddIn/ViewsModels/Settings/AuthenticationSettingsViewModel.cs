@@ -1,7 +1,7 @@
-﻿using Isogeo.Models.Network.Authentication;
-using MVVMPattern;
+﻿using MVVMPattern;
 using System.Windows.Input;
 using Isogeo.Network;
+using Isogeo.Network.Authentication;
 using Isogeo.Utils.ConfigurationManager;
 using MVVMPattern.RelayCommand;
 
