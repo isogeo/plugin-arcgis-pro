@@ -7,6 +7,7 @@ using System.Text.Json;
 using System.Windows;
 using Isogeo.Models.API;
 using Isogeo.Models.Configuration;
+using Isogeo.Network;
 using Isogeo.Utils.LogManager;
 using Isogeo.Utils.ManageEncrypt;
 using MVVMPattern.MediatorPattern;
@@ -16,13 +17,13 @@ using Search = Isogeo.Models.API.Search;
 
 namespace Isogeo.Models.Network
 {
-    public class RestFunctions
+    public class RestFunctions : IRestFunctions
     {
         private Authentication.Authentication _frmAuthentication;
 
         private bool AuthenticationPopUpIsOpen => _frmAuthentication != null && _frmAuthentication.IsLoaded;
 
-        public static bool isFirstLoad = true;
+        private static bool _isFirstLoad = true;
         private static bool _isFirstUserRequest = true;
 
         private readonly HttpClient _client;
@@ -68,7 +69,7 @@ namespace Isogeo.Models.Network
             }
         }
 
-        public async Task<Token> SetConnection(string clientId, string clientSecret)
+        internal async Task<Token> SetConnection(string clientId, string clientSecret)
         {
             Token newToken;
 
@@ -87,14 +88,14 @@ namespace Isogeo.Models.Network
             }
             else
             {
-                if (isFirstLoad == false)
+                if (_isFirstLoad == false)
                 {
                     MessageBox.Show(Resource.Message_Query_authentication_ko_invalid + "\n" +
                                     Resource.Message_contact_support, "Isogeo");
                     Log.Logger.Info(Resource.Message_Query_authentication_ko_invalid + "\n" +
                                     Resource.Message_contact_support);
                 }
-                isFirstLoad = false;
+                _isFirstLoad = false;
                 return null;
             }
             switch (newToken.StatusResult)
@@ -115,7 +116,7 @@ namespace Isogeo.Models.Network
                                     Resource.Message_contact_support);
                     break;
                 case "0":
-                    if (isFirstLoad == false)
+                    if (_isFirstLoad == false)
                     {
                         MessageBox.Show(Resource.Message_Query_authentication_ko_proxy + "\n" +
                                         Resource.Message_contact_support, "Isogeo");
@@ -132,7 +133,7 @@ namespace Isogeo.Models.Network
                     break;
 
             }
-            isFirstLoad = false;
+            _isFirstLoad = false;
             return newToken;
         }
 

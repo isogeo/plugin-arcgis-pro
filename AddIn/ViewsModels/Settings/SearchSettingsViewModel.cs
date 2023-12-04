@@ -20,7 +20,7 @@ namespace Isogeo.AddIn.ViewsModels.Settings
 {
     public class SearchSettingsViewModel : ViewModelBase
     {
-        public QuickSearchSettingsFilters QuickSearchSettingsFilter { get; set; }
+        public QuickSearchSettingsFilters QuickSearchSettingsFilters { get; set; }
 
         private readonly RestFunctions _restFunctions;
 
@@ -28,14 +28,14 @@ namespace Isogeo.AddIn.ViewsModels.Settings
 
         private readonly IMapFunctions _mapFunctions;
 
-        private GeoGraphicalSettingsFilters _geoGraphicalSettings;
-        public GeoGraphicalSettingsFilters GeoGraphicalSettings
+        private GeoGraphicalSettingsFilters _geoGraphicalSettingsFilters;
+        public GeoGraphicalSettingsFilters GeoGraphicalSettingsFilters
         {
-            get => _geoGraphicalSettings;
+            get => _geoGraphicalSettingsFilters;
             set
             {
-                _geoGraphicalSettings = value;
-                OnPropertyChanged(nameof(GeoGraphicalSettings));
+                _geoGraphicalSettingsFilters = value;
+                OnPropertyChanged(nameof(GeoGraphicalSettingsFilters));
             }
         }
 
@@ -109,7 +109,7 @@ namespace Isogeo.AddIn.ViewsModels.Settings
 
         private void Rename()
         {
-            var frm = new AskNameWindow(true, QuickSearchSettingsFilter.Name);
+            var frm = new AskNameWindow(true, QuickSearchSettingsFilters.Name);
             frm.ShowDialog();
 
             if (frm.isSave == false) return;
@@ -120,13 +120,13 @@ namespace Isogeo.AddIn.ViewsModels.Settings
             for (var i = 0; i < Variables.configurationManager.config.searchs.searchs.Count; i += 1) // todo
             {
                 if (Variables.configurationManager.config.searchs.searchs[i].name !=
-                    QuickSearchSettingsFilter.SelectedItem.Name) continue;
+                    QuickSearchSettingsFilters.SelectedItem.Name) continue;
                 Variables.configurationManager.config.searchs.searchs[i].name = frm.TxtQuickSearchName.Text;
-                var item = QuickSearchSettingsFilter.SelectedItem;
-                QuickSearchSettingsFilter.Items.Remove(item);
+                var item = QuickSearchSettingsFilters.SelectedItem;
+                QuickSearchSettingsFilters.Items.Remove(item);
                 var newItem = new FilterItem(item.Id, frm.TxtQuickSearchName.Text);
-                QuickSearchSettingsFilter.AddItem(newItem);
-                QuickSearchSettingsFilter.SelectItem(newItem.Name);
+                QuickSearchSettingsFilters.AddItem(newItem);
+                QuickSearchSettingsFilters.SelectItem(newItem.Name);
                 Variables.configurationManager.Save();
                 Mediator.NotifyColleagues("ChangeQuickSearch", null);
                 break;
@@ -135,24 +135,24 @@ namespace Isogeo.AddIn.ViewsModels.Settings
 
         private bool CanRename()
         {
-            if (QuickSearchSettingsFilter?.SelectedItem != null && QuickSearchSettingsFilter?.Items?.Count > 0) 
+            if (QuickSearchSettingsFilters?.SelectedItem != null && QuickSearchSettingsFilters?.Items?.Count > 0) 
                 return true;
             return false;
         }
 
         private bool CanDelete()
         {
-            if (QuickSearchSettingsFilter?.Items?.Count > 0)
+            if (QuickSearchSettingsFilters?.Items?.Count > 0)
                 return true;
             return false;
         }
 
         private void Delete()
         {
-            foreach (var search in Variables.configurationManager.config.searchs.searchs.Where(search => search.name == QuickSearchSettingsFilter.SelectedItem.Name))
+            foreach (var search in Variables.configurationManager.config.searchs.searchs.Where(search => search.name == QuickSearchSettingsFilters.SelectedItem.Name))
             {
                 Variables.configurationManager.config.searchs.searchs.Remove(search);
-                QuickSearchSettingsFilter.Items.Remove(QuickSearchSettingsFilter.SelectedItem);
+                QuickSearchSettingsFilters.Items.Remove(QuickSearchSettingsFilters.SelectedItem);
                 Mediator.NotifyColleagues("ChangeQuickSearch", null);
                 Variables.configurationManager.Save();
                 break; // todo find
@@ -161,48 +161,48 @@ namespace Isogeo.AddIn.ViewsModels.Settings
 
         private bool CanSave()
         {
-            return QuickSearchSettingsFilter?.Items?.Count > 0 && QuickSearchSettingsFilter?.SelectedItem != null;
+            return QuickSearchSettingsFilters?.Items?.Count > 0 && QuickSearchSettingsFilters?.SelectedItem != null;
         }
 
         private void Save()
         {
-            Variables.configurationManager.config.defaultSearch = QuickSearchSettingsFilter.SelectedItem.Id;
+            Variables.configurationManager.config.defaultSearch = QuickSearchSettingsFilters.SelectedItem.Id;
             Variables.configurationManager.Save();
         }
 
 
         private void GeoGraphicalSettings_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            OnPropertyChanged(nameof(GeoGraphicalSettings));
+            OnPropertyChanged(nameof(GeoGraphicalSettingsFilters));
         }
 
         private void InitGeographicalOperator()
         {// todo
-            GeoGraphicalSettings = new GeoGraphicalSettingsFilters("GeoGraphicalSettings", _restFunctions, _filterManager, _mapFunctions);
+            GeoGraphicalSettingsFilters = new GeoGraphicalSettingsFilters("GeoGraphicalSettings", _restFunctions, _filterManager, _mapFunctions);
             if (Variables.configurationManager.config.geographicalOperator == "contains" ||  
                 Variables.configurationManager.config.geographicalOperator == "within" ||
                 Variables.configurationManager.config.geographicalOperator == "intersects") 
-                GeoGraphicalSettings.SelectItem("", Variables.configurationManager.config.geographicalOperator);
-            GeoGraphicalSettings.PropertyChanged += GeoGraphicalSettings_PropertyChanged;
-            OnPropertyChanged(nameof(GeoGraphicalSettings));
+                GeoGraphicalSettingsFilters.SelectItem("", Variables.configurationManager.config.geographicalOperator);
+            GeoGraphicalSettingsFilters.PropertyChanged += GeoGraphicalSettings_PropertyChanged;
+            OnPropertyChanged(nameof(GeoGraphicalSettingsFilters));
         }
 
         private void QuickSearchSettings_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            OnPropertyChanged(nameof(QuickSearchSettingsFilter));
+            OnPropertyChanged(nameof(QuickSearchSettingsFilters));
         }
 
         private void AddNewQuickSearchEvent(object newSearch)
         {
-            QuickSearchSettingsFilter.AddItem((Isogeo.Models.Configuration.Search)newSearch);
-            QuickSearchSettingsFilter.SelectItem(((Isogeo.Models.Configuration.Search)newSearch).name);
+            QuickSearchSettingsFilters.AddItem((Isogeo.Models.Configuration.Search)newSearch);
+            QuickSearchSettingsFilters.SelectItem(((Isogeo.Models.Configuration.Search)newSearch).name);
         }
 
         private void InitQuickSearch()
         {
-            QuickSearchSettingsFilter = new QuickSearchSettingsFilters("QuickSearchSettings", _restFunctions, _filterManager, _mapFunctions);
-            QuickSearchSettingsFilter.PropertyChanged += QuickSearchSettings_PropertyChanged;
-            QuickSearchSettingsFilter.SetItems(Variables.configurationManager.config.searchs.searchs);
+            QuickSearchSettingsFilters = new QuickSearchSettingsFilters("QuickSearchSettings", _restFunctions, _filterManager, _mapFunctions);
+            QuickSearchSettingsFilters.PropertyChanged += QuickSearchSettings_PropertyChanged;
+            QuickSearchSettingsFilters.SetItems(Variables.configurationManager.config.searchs.searchs);
         }
 
         private ICommand _loadSdeFileCommand;

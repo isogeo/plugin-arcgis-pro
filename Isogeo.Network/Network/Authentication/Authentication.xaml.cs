@@ -1,10 +1,8 @@
-using System;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 using System.Text.Json;
 using System.Text.Json.Serialization;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Navigation;
 using ArcGIS.Desktop.Framework;
@@ -12,6 +10,7 @@ using Isogeo.Resources;
 using Isogeo.Utils.LogManager;
 using Isogeo.Utils.ManageEncrypt;
 using Microsoft.Win32;
+using MVVMPattern.MediatorPattern;
 using MessageBox = ArcGIS.Desktop.Framework.Dialogs.MessageBox;
 
 namespace Isogeo.Models.Network.Authentication
@@ -131,10 +130,7 @@ namespace Isogeo.Models.Network.Authentication
                     var encryptedstring = RijndaelManagedEncryption.EncryptRijndael(password, Variables.encryptCode);
                     Variables.configurationManager.config.userAuthentication.secret = encryptedstring;
                     Variables.configurationManager.Save();
-                    //var ob = _filterManager.GetOb();
-                    //var od = _filterManager.GetOd();
-                    //var query = _filterManager.GetQueryCombos();
-                    //await _restFunctions.ResetData(); // todo event
+                    Mediator.NotifyColleagues("UserAuthentication", null);
                     Close();
                 }
                 catch (Exception ex)

@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Runtime.ExceptionServices;
@@ -26,6 +27,9 @@ namespace Isogeo.AddIn
         private readonly ViewModelBase _paneH2Vm;
         private const string DockPaneId = "Arcgis_Pro_Isogeo_Dockpane";
 
+        private readonly RestFunctions _restFunctions;
+        private readonly FilterManager _filterManager;
+
         private bool _isEnabled = true;
         public bool IsEnabled
         {
@@ -35,6 +39,15 @@ namespace Isogeo.AddIn
                 _isEnabled = value;
                 NotifyPropertyChanged();
             }
+        }
+
+        public async void ResetResearch(object obj)
+        {
+            var ob = _filterManager.GetOb();
+            var od = _filterManager.GetOd();
+            var box = _filterManager.GetBoxRequest();
+            await _restFunctions.ResetData(box, od, ob);
+            _filterManager.SetSearchList("");
         }
 
         public void EnableDockableWindowIsogeo(object obj)
@@ -94,17 +107,23 @@ namespace Isogeo.AddIn
             PrimaryMenuList.Add(new TabControl { Text = Language.Resources.Settings });
 
             IMapFunctions mapFunctions = new MapFunctions();
-            var restFunctions = new RestFunctions();
-            var filterManager = new FilterManager(mapFunctions);
+            _restFunctions = new RestFunctions();
+            _filterManager = new FilterManager(mapFunctions);
 
-            _paneH1Vm = new SearchViewModel(restFunctions, filterManager, mapFunctions);
-            _paneH2Vm = new SettingsViewModel(restFunctions, filterManager, mapFunctions);
+            _paneH1Vm = new SearchViewModel(_restFunctions, _filterManager, mapFunctions);
+            _paneH2Vm = new SettingsViewModel(_restFunctions, _filterManager, mapFunctions);
             _selectedPanelHeaderIndex = 0;
             CurrentPage = _paneH1Vm;
-            var ob = filterManager.GetOb();
-            var od = filterManager.GetOd();
-            var box = filterManager.GetBoxRequest();
-            Task.Run(() => Application.Current.Dispatcher.Invoke(async () => await restFunctions.ResetData(box, od, ob)));
+
+            Mediator.Register("UserAuthentication", ResetResearch);
+
+            var ob = _filterManager.GetOb();
+            var od = _filterManager.GetOd();
+            var box = _filterManager.GetBoxRequest();
+            Task.Run(() => Application.Current.Dispatcher.Invoke(async () => {
+                await _restFunctions.ResetData(box, od, ob);
+                _filterManager.SetSearchList("");
+            }));
             Log.Logger.Info("END Initializing DockPaneViewModel");
         }
 

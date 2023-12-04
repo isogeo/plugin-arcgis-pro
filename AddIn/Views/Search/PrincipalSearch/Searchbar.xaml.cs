@@ -19,7 +19,7 @@ namespace Isogeo.AddIn.Views.Search.PrincipalSearch
             // https://stackoverflow.com/questions/24847062/how-can-i-access-my-viewmodel-from-code-behind
             // why it is not great : "In MVVM you shouldn't be accessing your view model from code behind, the view model and view are ignorant of each other"
             var vm = (SearchBarViewModel)DataContext;
-            await vm.Search(); // todo
+            await vm.Search();
         }
     }
 }
