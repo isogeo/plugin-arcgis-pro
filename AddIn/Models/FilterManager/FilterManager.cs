@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using System.Linq;
 using Isogeo.AddIn.Models.Filters.Components;
 using Isogeo.Map;
+using MVVMPattern.MediatorPattern;
+using Isogeo.Utils.Configuration;
 
 namespace Isogeo.AddIn.Models.FilterManager
 {
@@ -23,9 +25,16 @@ namespace Isogeo.AddIn.Models.FilterManager
 
         public bool FilterListsLoading { get; private set; }
 
+        private void RefreshComboBoxes(object queryItem)
+        {
+            var query = ((QueryItem)queryItem).Query;
+            SetSearchList(query);
+        }
+
         public FilterManager(IMapManager mapManager)
         {
             _mapManager = mapManager;
+            Mediator.Register(MediatorEvent.ChangeQuery, RefreshComboBoxes);
         }
 
         public void SetTextSearchFilter(SearchTextFilter searchTextFilter)

@@ -125,7 +125,6 @@ namespace Isogeo.AddIn
 
             Task.Run(() => Application.Current.Dispatcher.Invoke(async () => {
                 await _networkManager.LoadData(query, 0,  box,  od, ob);
-                _filterManager.SetSearchList(query);
             }));
             Log.Logger.Info("END Initializing DockPaneViewModel");
         }

@@ -1,4 +1,4 @@
-﻿using System.Threading.Tasks;
+using System.Threading.Tasks;
 using Isogeo.AddIn.Models;
 using Isogeo.Models;
 using MVVMPattern;
@@ -98,7 +98,6 @@ namespace Isogeo.AddIn.ViewsModels.Search.PrincipalSearch
             var query = _filterManager.GetQueryCombos();
             var box = _filterManager.GetBoxRequest();
             await _networkManager.LoadData(query, 0, box, od, ob);
-            _filterManager.SetSearchList(query);
         }
     }
 }

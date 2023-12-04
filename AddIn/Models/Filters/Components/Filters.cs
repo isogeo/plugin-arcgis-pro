@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
@@ -67,7 +67,6 @@ namespace Isogeo.AddIn.Models.Filters.Components
             var ob = FilterManager.GetOb();
             var od = FilterManager.GetOd();
             await NetworkManager.LoadData(query, 0, box, od, ob);
-            FilterManager.SetSearchList(query);
         }
 
         public virtual void SelectItem(string name = null, string id = null)

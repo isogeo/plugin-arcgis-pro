@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using Isogeo.AddIn.Models.FilterManager;
 using Isogeo.AddIn.Models.Filters.Components;
 using Isogeo.Map;
@@ -19,7 +19,6 @@ namespace Isogeo.AddIn.Models.Filters
                 return;
             var ob = FilterManager.GetOb();
             var od = FilterManager.GetOd();
-            FilterManager.SetSearchList(SelectedItem.Id);
             await NetworkManager.LoadData(SelectedItem.Id, 0, SelectedItem.GeographicalOperator, od, ob);
         }
 
