@@ -211,7 +211,7 @@ namespace Isogeo.AddIn.ViewsModels.Search.Results
                     var result = Variables.search.Results[i];
                     var resultItem = new ResultItemViewModel(_mapManager, _networkManager, _configurationManager);
                     resultItem.Init(result);
-                    temporaryItems.Add(resultItem);
+                    temporaryItems.Insert(0, resultItem);
                 }
             }
             ResultsList.Clear();
