@@ -44,8 +44,7 @@ namespace Isogeo.AddIn
         {
             var ob = _filterManager.GetOb();
             var od = _filterManager.GetOd();
-            var box = _filterManager.GetBoxRequest();
-            await _networkManager.ResetData(box, od, ob);
+            await _networkManager.ResetData(od, ob);
             _filterManager.SetSearchList("");
         }
 
@@ -118,9 +117,8 @@ namespace Isogeo.AddIn
 
             var ob = _filterManager.GetOb();
             var od = _filterManager.GetOd();
-            var box = _filterManager.GetBoxRequest();
             Task.Run(() => Application.Current.Dispatcher.Invoke(async () => {
-                await _networkManager.ResetData(box, od, ob);
+                await _networkManager.ResetData(od, ob);
                 _filterManager.SetSearchList("");
             }));
             Log.Logger.Info("END Initializing DockPaneViewModel");

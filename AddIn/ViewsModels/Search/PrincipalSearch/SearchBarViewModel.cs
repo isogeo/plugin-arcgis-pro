@@ -100,7 +100,7 @@ namespace Isogeo.AddIn.ViewsModels.Search.PrincipalSearch
             var od = _filterManager.GetOd();
             var query = _filterManager.GetQueryCombos();
             var box = _filterManager.GetBoxRequest();
-            await _networkManager.ReloadData(0, query, box, od, ob);
+            await _networkManager.LoadData(query, 0, box, od, ob);
             _filterManager.SetSearchList(query);
         }
     }

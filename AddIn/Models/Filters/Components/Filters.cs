@@ -66,7 +66,7 @@ namespace Isogeo.AddIn.Models.Filters.Components
 
             var ob = FilterManager.GetOb();
             var od = FilterManager.GetOd();
-            await NetworkManager.ReloadData(0, query, box, od, ob);
+            await NetworkManager.LoadData(query, 0, box, od, ob);
             FilterManager.SetSearchList(query);
         }
 

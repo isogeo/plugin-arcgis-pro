@@ -216,7 +216,7 @@ namespace Isogeo.AddIn.ViewsModels.Search.Results
             var query = _filterManager.GetQueryCombos();
             if (_isUpdateCombo) return;
             DefineBtnResultsContent(); // todo
-            await _networkManager.ReloadData(0, query, box, od, ob);
+            await _networkManager.LoadData(query, 0, box, od, ob);
             _filterManager.SetSearchList(query);
         }
 
@@ -318,7 +318,7 @@ namespace Isogeo.AddIn.ViewsModels.Search.Results
             var query = _filterManager.GetQueryCombos();
             _networkManager.SaveSearch(box, query);
             Mediator.NotifyColleagues("setSortingDefault", null);
-            await _networkManager.ResetData(box, od, ob);
+            await _networkManager.ResetData(od, ob);
             _filterManager.SetSearchList("");
         }
 

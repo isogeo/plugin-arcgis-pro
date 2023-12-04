@@ -168,12 +168,12 @@ namespace Isogeo.Network
             return ((await TokenThenSearchRequest(query, offset, Variables.NbResult, box, od, ob)), query);
         }
 
-        public async Task ResetData(string box, string od, string ob)
+        public async Task ResetData(string od, string ob)
         {
             Log.Logger.Debug("Execute Reset Data");
             const string query = "";
             Mediator.NotifyColleagues("ChangeBox", "");
-            var response = await CheckFirstRequestThenTokenThenSearchRequest(query, 0, box, od, ob);
+            var response = await CheckFirstRequestThenTokenThenSearchRequest(query, 0, "", od, ob);
             Mediator.NotifyColleagues("ChangeQuery", new QueryItem { Query = response.Item2 });
             Mediator.NotifyColleagues("ClearResults", null);
             if (!response.Item1)
@@ -188,21 +188,6 @@ namespace Isogeo.Network
             var response = await CheckFirstRequestThenTokenThenSearchRequest(query, offset, box, od, ob);
             Mediator.NotifyColleagues("ChangeQuery", new QueryItem { Query = response.Item2 });
             if (response.Item1)
-                Mediator.NotifyColleagues("ChangeOffset", offset);
-            else
-            {
-                Mediator.NotifyColleagues("ClearResults", offset);
-                Application.Current.Dispatcher.Invoke(OpenAuthenticationPopUp); // todo
-            }
-        }
-
-        public async Task ReloadData(int offset, string query, string box, string od, string ob)
-        {
-            Log.Logger.Debug("Execute Reload Data");
-            //var query = GetQueryCombos();
-            var result = await CheckFirstRequestThenTokenThenSearchRequest(query, offset, box, od, ob);
-            Mediator.NotifyColleagues("ChangeQuery", new QueryItem { Query = result.Item2 });
-            if (result.Item1)
                 Mediator.NotifyColleagues("ChangeOffset", offset);
             else
             {

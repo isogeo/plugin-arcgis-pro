@@ -58,7 +58,7 @@ namespace Isogeo.AddIn.ViewsModels.Search.Results
             var query = _filterManager.GetQueryCombos();
             var box = _filterManager.GetBoxRequest();
 
-            await _networkManager.ReloadData(offset, query, box, od, ob);
+            await _networkManager.LoadData(query, offset, box, od, ob);
             _filterManager.SetSearchList(query);
         }
 

@@ -5,6 +5,7 @@ using Isogeo.AddIn.Models.Filters.Components;
 using Isogeo.Map;
 using Isogeo.Models;
 using Isogeo.Network;
+using Isogeo.Utils.Box;
 using MVVMPattern;
 using MVVMPattern.MediatorPattern;
 
@@ -82,10 +83,13 @@ namespace Isogeo.AddIn.ViewsModels.Search.AdvancedSearch
             else
             {
                 Filters.SelectItem(Language.Resources.Map_canvas);
-                QueuedTask.Run(() =>
+                if (!BoxUtils.BoxAreEquals((string)box, _mapManager.GetMapExtent(), 0.01))
                 {
-                    _mapManager.SetMapExtent((string)box);
-                });
+                    QueuedTask.Run(() =>
+                    {
+                        _mapManager.SetMapExtent((string)box);
+                    });
+                }
             }
         }
 
