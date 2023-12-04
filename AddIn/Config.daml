@@ -18,7 +18,7 @@
   </AddInInfo>
 
 	<modules>
-		<insertModule id="Arcgis_Pro_Isogeo_Module" className="Module1" autoLoad="true" caption="Module1">
+		<insertModule id="Arcgis_Pro_Isogeo_Module" className="IsogeoModule" autoLoad="true" caption="IsogeoModule">
 			<!-- uncomment to have the control hosted on a separate tab-->
 			<tabs>
 				<!--<tab id="Arcgis_Pro_Isogeo_Tab1" caption="New Tab">

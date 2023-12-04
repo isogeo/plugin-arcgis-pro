@@ -3,20 +3,14 @@ using ArcGIS.Desktop.Framework.Contracts;
 
 namespace Isogeo.AddIn
 {
-    internal class Module1 : Module
+    internal class IsogeoModule : Module
     {
-        private static Module1 _this = null;
+        private static IsogeoModule _this;
 
         /// <summary>
         /// Retrieve the singleton instance to this module here
         /// </summary>
-        public static Module1 Current
-        {
-            get
-            {
-                return _this ?? (_this = (Module1)FrameworkApplication.FindModule("Arcgis_Pro_Isogeo_Module"));
-            }
-        }
+        public static IsogeoModule Current => _this ??= (IsogeoModule)FrameworkApplication.FindModule("Arcgis_Pro_Isogeo_Module");
 
         #region Overrides
         /// <summary>
@@ -25,7 +19,7 @@ namespace Isogeo.AddIn
         /// <returns>False to prevent Pro from closing, otherwise True</returns>
         protected override bool CanUnload()
         {
-            //TODO - add your business logic
+            //add your business logic
             //return false to ~cancel~ Application close
             return true;
         }

@@ -11,7 +11,6 @@ using Isogeo.AddIn.ViewsModels.TabControls;
 using Isogeo.Map;
 using Isogeo.Models;
 using Isogeo.Network;
-using Isogeo.Utils.Configuration;
 using Isogeo.Utils.ConfigurationManager;
 using Isogeo.Utils.LogManager;
 using MVVMPattern.MediatorPattern;
