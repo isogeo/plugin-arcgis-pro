@@ -1,18 +1,38 @@
 ﻿using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace Isogeo.Models.API
 {
     public class Tags
     {
+        [JsonPropertyName("resourcesTypes")]
         public List<string> ResourcesTypes { get; set; }
+
+        [JsonPropertyName("owners")]
         public List<string> Owners { get; set; }
+
+        [JsonPropertyName("keywords")]
         public List<string> Keywords { get; set; }
+
+        [JsonPropertyName("themeInspire")]
         public List<string> ThemeInspire { get; set; }
+
+        [JsonPropertyName("formats")]
         public List<string> Formats { get; set; }
+
+        [JsonPropertyName("srs")]
         public List<string> Srs { get; set; }
+
+        [JsonPropertyName("actions")]
         public List<string> Actions { get; set; }
+
+        [JsonPropertyName("contacts")]
         public List<string> Contacts { get; set; }
+
+        [JsonPropertyName("licenses")]
         public List<string> Licenses { get; set; }
+
+        [JsonPropertyName("conformity")]
         public int conformity;
 
         public Tags(Result result)

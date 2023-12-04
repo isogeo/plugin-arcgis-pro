@@ -1,9 +1,14 @@
 ﻿
+using System.Text.Json.Serialization;
+
 namespace Isogeo.Models.Configuration
 {
     public class QueryItem
     {
-        public string query;
-        public string box;
+        [JsonPropertyName("query")]
+        public string query { get; set; }
+
+        [JsonPropertyName("box")]
+        public string box { get; set; }
     }
 }

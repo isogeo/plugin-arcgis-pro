@@ -1,9 +1,11 @@
 ﻿using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace Isogeo.Models.Configuration
 {
     public class Searchs
     {
-        public List<Search> searchs;
+        [JsonPropertyName("searchs")]
+        public List<Search> searchs { get; set; }
     }
 }

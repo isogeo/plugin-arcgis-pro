@@ -1,10 +1,17 @@
-﻿namespace Isogeo.Models.Configuration
+﻿using System.Text.Json.Serialization;
+
+namespace Isogeo.Models.Configuration
 {
     public class Proxy
     {
-        public string proxyUrl;
-        public string proxyUser;
-        public string proxyPassword;
+        [JsonPropertyName("proxyUrl")]
+        public string proxyUrl { get; set; }
+
+        [JsonPropertyName("proxyUser")]
+        public string proxyUser { get; set; }
+
+        [JsonPropertyName("proxyPassword")]
+        public string proxyPassword { get; set; }
 
         public Proxy()
         {

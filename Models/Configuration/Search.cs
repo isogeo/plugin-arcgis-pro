@@ -1,9 +1,16 @@
-﻿namespace Isogeo.Models.Configuration
+﻿using System.Text.Json.Serialization;
+
+namespace Isogeo.Models.Configuration
 {
     public class Search
     {
-        public string name = "";
-        public string query = "";
-        public string box = "";
+        [JsonPropertyName("name")]
+        public string name { get; set; } = "";
+
+        [JsonPropertyName("query")]
+        public string query { get; set; } = "";
+
+        [JsonPropertyName("box")]
+        public string box { get; set; } = "";
     }
 }
