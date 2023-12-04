@@ -157,7 +157,7 @@ namespace Isogeo.AddIn.ViewsModels.Metadata
 
                 if (contact.contact.AddressLine2 != "")
                     contact.contact.AddressLine1 += ", " + contact.contact.AddressLine2;
-                    if (contact.contact.AddressLine3 != "")
+                if (contact.contact.AddressLine3 != "")
                     contact.contact.AddressLine1 += ", " + contact.contact.AddressLine3;
 
                 FillCity(contact.contact);
@@ -269,7 +269,6 @@ namespace Isogeo.AddIn.ViewsModels.Metadata
 
         public string DataUpdate => _currentResult?.modified == null ? Isogeo.Language.Resources.NotReported : Formats.FormatDate(_currentResult.modified);
 
-        //public string UpdateFrequency => _currentResult?.updateFrequency ?? Isogeo.Language.Resources.NotReported;
         private string _updateFrequency;
         public string UpdateFrequency
         {
@@ -278,27 +277,27 @@ namespace Isogeo.AddIn.ViewsModels.Metadata
                 _updateFrequency = "";
                 if (_currentResult?.updateFrequency == null)
                     return Isogeo.Language.Resources.NotReported;
-                int stringLength = _currentResult.updateFrequency.Length;
-                string alphaPart = _currentResult.updateFrequency.Substring(stringLength - 1);
-                string numberPart = _currentResult.updateFrequency.Substring(1, stringLength - 2);
+                var stringLength = _currentResult.updateFrequency.Length;
+                var alphaPart = _currentResult.updateFrequency.Substring(stringLength - 1);
+                var numberPart = _currentResult.updateFrequency.Substring(1, stringLength - 2);
 
                 _updateFrequency = numberPart;
                 switch (alphaPart.ToUpper())
                 {
                     case "Y":
-                        _updateFrequency += (Int32.Parse(numberPart) > 1) ? (" " + Isogeo.Language.Resources.Years) : (" " + Isogeo.Language.Resources.Year);
+                        _updateFrequency += (int.Parse(numberPart) > 1) ? (" " + Isogeo.Language.Resources.Years) : (" " + Isogeo.Language.Resources.Year);
                         break;
                     case "M":
-                        _updateFrequency += (Int32.Parse(numberPart) > 1) ? (" " + Isogeo.Language.Resources.Months) : (" " + Isogeo.Language.Resources.Month);
+                        _updateFrequency += (int.Parse(numberPart) > 1) ? (" " + Isogeo.Language.Resources.Months) : (" " + Isogeo.Language.Resources.Month);
                         break;
                     case "W":
-                        _updateFrequency += (Int32.Parse(numberPart) > 1) ? (" " + Isogeo.Language.Resources.Weeks) : (" " + Isogeo.Language.Resources.Week);
+                        _updateFrequency += (int.Parse(numberPart) > 1) ? (" " + Isogeo.Language.Resources.Weeks) : (" " + Isogeo.Language.Resources.Week);
                         break;
                     case "D":
-                        _updateFrequency += (Int32.Parse(numberPart) > 1) ? (" " + Isogeo.Language.Resources.Days) : (" " + Isogeo.Language.Resources.Day);
+                        _updateFrequency += (int.Parse(numberPart) > 1) ? (" " + Isogeo.Language.Resources.Days) : (" " + Isogeo.Language.Resources.Day);
                         break;
                     case "H":
-                        _updateFrequency += (Int32.Parse(numberPart) > 1) ? (" " + Isogeo.Language.Resources.Hours) : (" " + Isogeo.Language.Resources.Hour);
+                        _updateFrequency += (int.Parse(numberPart) > 1) ? (" " + Isogeo.Language.Resources.Hours) : (" " + Isogeo.Language.Resources.Hour);
                         break;
                 }
                 return _updateFrequency;

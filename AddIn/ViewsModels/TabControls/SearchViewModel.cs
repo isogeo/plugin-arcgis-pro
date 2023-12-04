@@ -10,8 +10,6 @@ namespace Isogeo.AddIn.ViewsModels.TabControls
 {
     public class SearchViewModel : ViewModelBase
     {
-        //private Database database;
-
         public AdvancedSearchViewModel AdvancedSearchViewModel { get; set; }
         public ResultsViewModel ResultsViewModel { get; set; }
         public ResultsToolBarViewModel ResultsToolBarViewModel { get; set; }

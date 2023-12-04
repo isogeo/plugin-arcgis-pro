@@ -44,32 +44,30 @@ namespace Isogeo.Map.MapFunctions
                     geometryMax.Extent.YMin.ToString(CultureInfo.InvariantCulture));
         }
 
-        private static Envelope StringToEnvelope(string envelope)
+        private static async Task<Envelope> StringToEnvelope(string envelope)
         {
             var list = envelope.Split(',');
             var doubleList = list.Select(item => double.Parse(item, CultureInfo.InvariantCulture)).ToList();
-            return QueuedTask.Run(() =>
+            return await QueuedTask.Run(() =>
                 EnvelopeBuilder.CreateEnvelope(doubleList[0],
                     doubleList[1],
                     doubleList[2],
                     doubleList[3],
-                    SpatialReferences.WGS84)).GetAwaiter().GetResult();
+                    SpatialReferences.WGS84));
         }
 
-        public Task SetMapExtent(string envelope)
+        public async Task SetMapExtent(string envelope)
         {
             try
             {
-                var newEnvelope = StringToEnvelope(envelope);
-                MapView.Active.ZoomToAsync(newEnvelope, TimeSpan.FromSeconds(0.5));
+                var newEnvelope = await StringToEnvelope(envelope);
+                await MapView.Active.ZoomToAsync(newEnvelope, TimeSpan.FromSeconds(0.5));
             }
             catch (Exception e)
             {
                 Log.Logger.Error(e.Message);
                 MessageBox.Show(Language.Resources.Error_extent_map, "Isogeo");
             }
-
-            return Task.CompletedTask;
         }
 
         public string GetMapExtent()

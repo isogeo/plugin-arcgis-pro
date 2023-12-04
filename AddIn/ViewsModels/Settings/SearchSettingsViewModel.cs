@@ -116,7 +116,7 @@ namespace Isogeo.AddIn.ViewsModels.Settings
             if (!NewQuickSearchNameIsValid(frm.TxtQuickSearchName.Text))
                 return;
 
-            for (var i = 0; i < Variables.configurationManager.config.searchs.searchs.Count; i += 1)
+            for (var i = 0; i < Variables.configurationManager.config.searchs.searchs.Count; i += 1) // todo
             {
                 if (Variables.configurationManager.config.searchs.searchs[i].name !=
                     QuickSearchSettings.SelectedItem.Name) continue;
@@ -154,7 +154,7 @@ namespace Isogeo.AddIn.ViewsModels.Settings
                 QuickSearchSettings.Items.Remove(QuickSearchSettings.SelectedItem);
                 Mediator.NotifyColleagues("ChangeQuickSearch", null);
                 Variables.configurationManager.Save();
-                break;
+                break; // todo find
             }
         }
 
@@ -176,7 +176,7 @@ namespace Isogeo.AddIn.ViewsModels.Settings
         }
 
         private void InitGeographicalOperator()
-        {
+        {// todo
             GeoGraphicalSettings = new GeoGraphicalSettings("GeoGraphicalSettings", _restFunctions, _filterManager, _mapFunctions);
             if (Variables.configurationManager.config.geographicalOperator == "contains" ||  
                 Variables.configurationManager.config.geographicalOperator == "within" ||

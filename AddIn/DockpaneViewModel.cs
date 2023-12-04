@@ -2,10 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Runtime.ExceptionServices;
+using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
 using ArcGIS.Desktop.Framework;
 using ArcGIS.Desktop.Framework.Contracts;
-using ArcGIS.Desktop.Framework.Dialogs;
 using Isogeo.AddIn.Models;
 using Isogeo.AddIn.ViewsModels.TabControls;
 using Isogeo.Map.MapFunctions;
@@ -15,6 +16,7 @@ using Isogeo.Utils.LogManager;
 using MVVMPattern.MediatorPattern;
 using Button = ArcGIS.Desktop.Framework.Contracts.Button;
 using ConfigurationManager = Isogeo.Models.Configuration.ConfigurationManager;
+using MessageBox = ArcGIS.Desktop.Framework.Dialogs.MessageBox;
 using TabControl = ArcGIS.Desktop.Framework.Controls.TabControl;
 
 namespace Isogeo.AddIn
@@ -102,7 +104,10 @@ namespace Isogeo.AddIn
             _paneH2Vm = new SettingsViewModel(restFunctions, filterManager, mapFunctions);
             _selectedPanelHeaderIndex = 0;
             CurrentPage = _paneH1Vm;
-            //Variables.restFunctions.ResetData(); todo
+            var ob = filterManager.GetOb();
+            var od = filterManager.GetOd();
+            var box = filterManager.GetBoxRequest();
+            Task.Run(() => Application.Current.Dispatcher.Invoke(async () => await restFunctions.ResetData(box, od, ob)));
             Log.Logger.Info("END Initializing DockPaneViewModel");
         }
 

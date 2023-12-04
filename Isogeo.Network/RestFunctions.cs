@@ -4,12 +4,14 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Text.Json;
-using ArcGIS.Desktop.Framework.Dialogs;
+using System.Windows;
+using System.Windows.Threading;
 using Isogeo.Models.API;
 using Isogeo.Models.Configuration;
 using Isogeo.Utils.LogManager;
 using Isogeo.Utils.ManageEncrypt;
 using MVVMPattern.MediatorPattern;
+using MessageBox = ArcGIS.Desktop.Framework.Dialogs.MessageBox;
 using Resource = Isogeo.Language.Resources;
 using Search = Isogeo.Models.API.Search;
 
@@ -165,7 +167,7 @@ namespace Isogeo.Models.Network
             Mediator.NotifyColleagues("ChangeQuery", new QueryItem { query = response.Item2 });
             Mediator.NotifyColleagues("ClearResults", null);
             if (!response.Item1)
-                OpenAuthenticationPopUp();
+                Application.Current.Dispatcher.Invoke(OpenAuthenticationPopUp); // todo
         }
 
         public async Task LoadData(string query, int offset, string box, string od, string ob)
@@ -180,7 +182,7 @@ namespace Isogeo.Models.Network
             else
             {
                 Mediator.NotifyColleagues("ClearResults", offset);
-                OpenAuthenticationPopUp();
+                Application.Current.Dispatcher.Invoke(OpenAuthenticationPopUp); // todo
             }
         }
 
@@ -195,7 +197,7 @@ namespace Isogeo.Models.Network
             else
             {
                 Mediator.NotifyColleagues("ClearResults", offset);
-                OpenAuthenticationPopUp();
+                Application.Current.Dispatcher.Invoke(OpenAuthenticationPopUp); // todo
             }
         }
 

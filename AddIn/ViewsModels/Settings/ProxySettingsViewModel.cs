@@ -92,7 +92,7 @@ namespace Isogeo.AddIn.ViewsModels.Settings
         }
 
         private void Cancel()
-        {
+        {// todo
             ProxyUrl = Variables.configurationManager.config.proxy.proxyUrl;
             User = Variables.configurationManager.config.proxy.proxyUser;
         }

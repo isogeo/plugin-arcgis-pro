@@ -4,8 +4,6 @@ using System.ComponentModel;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
-using System.Windows.Threading;
-using ArcGIS.Desktop.Framework.Threading.Tasks;
 using Isogeo.AddIn.Models;
 using Isogeo.AddIn.Views.Search.Results;
 using Isogeo.Map.MapFunctions;
@@ -45,15 +43,15 @@ namespace Isogeo.AddIn.ViewsModels.Search.Results
             get => ListNumberPage.Selected;
             set
             {
-                OnPropertyChanged("CurrentPage");
                 if (value == null || (ListNumberPage.Selected != null && value.Name == ListNumberPage.Selected.Name))
                     return;
-                ListNumberPage.Selected = value;
-                SelectionChanged((int.Parse(value.Name) - 1) * Variables.nbResult);
+                _listNumberPage.Selected = value;
+                OnPropertyChanged("CurrentPage");
+                Task.Run(() => Application.Current.Dispatcher.Invoke(async () => await SelectionChanged((int.Parse(value.Name) - 1) * Variables.nbResult)));
             }
         }
 
-        private async void SelectionChanged(int offset)
+        private async Task SelectionChanged(int offset)
         {
             var ob = _filterManager.GetOb();
             var od = _filterManager.GetOd();
@@ -150,7 +148,7 @@ namespace Isogeo.AddIn.ViewsModels.Search.Results
         public void Refresh(int offset)
         {
             LstResultIsEnabled = false;
-            Application.Current.Dispatcher.Invoke(() => ResultsList.Clear());
+            ResultsList.Clear();
             if (Variables.search != null && Variables.search.results != null)
             {
                 for (var i = Variables.search.results.Count - 1; i >= 0; i--)
@@ -191,9 +189,9 @@ namespace Isogeo.AddIn.ViewsModels.Search.Results
         {
             get
             {
-                return _nextCommand ?? (_nextCommand = new RelayCommand(
+                return _nextCommand ??= new RelayCommand(
                     x => GoNext(),
-                    y => CanGoNext()));
+                    y => CanGoNext());
             }
         }
 
@@ -201,9 +199,9 @@ namespace Isogeo.AddIn.ViewsModels.Search.Results
         {
             get
             {
-                return _previousCommand ?? (_previousCommand = new RelayCommand(
+                return _previousCommand ??= new RelayCommand(
                     x => GoPrevious(),
-                    y => CanGoPrevious()));
+                    y => CanGoPrevious());
             }
         }
 
@@ -219,11 +217,15 @@ namespace Isogeo.AddIn.ViewsModels.Search.Results
 
         private bool CanGoNext()
         {
+            if (CurrentPage?.Name == null)
+                return false;
             return ListNumberPage.GetIndex(CurrentPage.Name) < ListNumberPage.Items.Count - 1;
         }
 
         private bool CanGoPrevious()
         {
+            if (CurrentPage?.Name == null)
+                return false;
             return ListNumberPage.GetIndex(CurrentPage.Name) > 0;
         }
     }

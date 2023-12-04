@@ -10,7 +10,7 @@ namespace Isogeo.AddIn.Views.Search.PrincipalSearch
             InitializeComponent();
         }
 
-        private void SearchTextBox_OnSearch(object sender, RoutedEventArgs e)
+        private async void SearchTextBox_OnSearch(object sender, RoutedEventArgs e)
         {
             // todo Not the best way to do it but didn't find a better solution
             // need to call Search() when Search event is triggered (click on loop, Enter key, history click,..., by user) on controls:SearchTextBox
@@ -19,7 +19,7 @@ namespace Isogeo.AddIn.Views.Search.PrincipalSearch
             // https://stackoverflow.com/questions/24847062/how-can-i-access-my-viewmodel-from-code-behind
             // why it is not great : "In MVVM you shouldn't be accessing your view model from code behind, the view model and view are ignorant of each other"
             var vm = (SearchBarViewModel)DataContext;
-            vm.Search();
+            await vm.Search(); // todo
         }
     }
 }

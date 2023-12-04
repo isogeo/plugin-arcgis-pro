@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel;
 using System.Diagnostics;
+using System.Runtime.CompilerServices;
 
 namespace MVVMPattern
 {
@@ -14,12 +15,13 @@ namespace MVVMPattern
         /// Warns the developer if this object does not have a public property with
         /// the specified name. This method does not exist in a Release build.
         /// </summary>
-        [Conditional("DEBUG")]
-        [DebuggerStepThrough]
+        //[Conditional("DEBUG")]
+        //[DebuggerStepThrough]
         public void VerifyPropertyName(string propertyName)
         {
             // verify that the property name matches a real,  
             // public, instance property on this object.
+            var test = TypeDescriptor.GetProperties(this);
             if (TypeDescriptor.GetProperties(this)[propertyName] == null)
             {
                 Debug.Fail("Invalid property name: " + propertyName);

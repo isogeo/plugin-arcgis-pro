@@ -96,7 +96,7 @@ namespace Isogeo.AddIn.ViewsModels.Search.Results
                     return;
                 _cmbSortingDirectionSelectedItem = value;
                 _filterManager.SetCmbSortingDirection(_cmbSortingDirectionSelectedItem);
-                Refresh();
+                //Task.Run(async () => await Refresh());
                 OnPropertyChanged("CmbSortingDirectionSelectedItem");
             }
         }
@@ -111,9 +111,14 @@ namespace Isogeo.AddIn.ViewsModels.Search.Results
                     return;
                 _cmbSortingMethodSelectedItem = value;
                 _filterManager.SetCmbSortingMethod(_cmbSortingMethodSelectedItem);
-                Refresh();
+                //Task.Run(async () => await Refresh());
                 OnPropertyChanged("CmbSortingMethodSelectedItem");
             }
+        }
+
+        private async void Refresh_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            await Refresh();
         }
 
         private ICommand _btnResultsCommand;
@@ -139,6 +144,9 @@ namespace Isogeo.AddIn.ViewsModels.Search.Results
             BtnResultsContent = Language.Resources.Results;
             InitCmbs();
             SetSortingDefault();
+            CmbSortingDirectionSelectedItem.PropertyChanged += Refresh_PropertyChanged;
+            CmbSortingMethodSelectedItem.PropertyChanged += Refresh_PropertyChanged;
+
         }
 
         private ICommand _saveCommand;
@@ -146,9 +154,9 @@ namespace Isogeo.AddIn.ViewsModels.Search.Results
         {
             get
             {
-                return _saveCommand ?? (_saveCommand = new RelayCommand(
+                return _saveCommand ??= new RelayCommand(
                     x => Save(),
-                    y => CanSave()));
+                    y => CanSave());
             }
         }
 
@@ -204,14 +212,14 @@ namespace Isogeo.AddIn.ViewsModels.Search.Results
             Mediator.NotifyColleagues("AddNewQuickSearch", newSearch);
         }
 
-        private async void Refresh()
+        private async Task Refresh()
         {
             var ob = _filterManager.GetOb();
             var od = _filterManager.GetOd();
             var box = _filterManager.GetBoxRequest();
             var query = _filterManager.GetQueryCombos();
             if (_isUpdateCombo) return;
-            DefineBtnResultsContent();
+            DefineBtnResultsContent(); // todo
             await _restFunctions.ReloadData(0, query, box, od, ob);
             _filterManager.SetSearchList(query);
         }
@@ -268,9 +276,9 @@ namespace Isogeo.AddIn.ViewsModels.Search.Results
         {
             get
             {
-                return _btnResultsCommand ?? (_btnResultsCommand = new RelayCommand(
+                return _btnResultsCommand ??= new RelayCommand(
                     x => RunBtnResults(),
-                    y => CanRunBtnResults()));
+                    y => CanRunBtnResults());
             }
         }
 
@@ -291,7 +299,7 @@ namespace Isogeo.AddIn.ViewsModels.Search.Results
             }
         }
 
-        private bool CanRunBtnResults()
+        private static bool CanRunBtnResults()
         {
             return (Variables.search != null && !Variables.search.total.Equals(0));
         }
@@ -300,9 +308,9 @@ namespace Isogeo.AddIn.ViewsModels.Search.Results
         {
             get
             {
-                return _resetCommand ?? (_resetCommand = new RelayCommand(
+                return _resetCommand ??= new RelayCommand(
                     x => RunReset(),
-                    y => CanRunReset()));
+                    y => CanRunReset());
             }
         }
 
@@ -315,7 +323,7 @@ namespace Isogeo.AddIn.ViewsModels.Search.Results
             _restFunctions.SaveSearch(box, query);
             Mediator.NotifyColleagues("setSortingDefault", null);
             await _restFunctions.ResetData(box, od, ob);
-            _filterManager.SetSearchList(query);
+            _filterManager.SetSearchList("");
         }
 
         private static bool CanRunReset()

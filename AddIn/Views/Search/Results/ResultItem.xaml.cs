@@ -105,11 +105,6 @@ namespace Isogeo.AddIn.Views.Search.Results
             return CmbLayer != null && CmbLayer.IsVisible && CmbLayer.IsEnabled && CmbLayer.Items.Count > 0;
         }
 
-        /*private BitmapImage ReturnPicture(string imagePath)
-        {
-            return new BitmapImage(new Uri(imagePath, UriKind.Absolute));
-        }*/
-
         private void SetComponent()
         {
             ImgType.Content = Isogeo.Language.Resources.Unknown_geometry;
@@ -143,11 +138,7 @@ namespace Isogeo.AddIn.Views.Search.Results
 
         private void SetCombo()
         {
-            //LblLayer.Visibility = Visibility.Visible;
             CmbLayer.Visibility = Visibility.Visible;
-            /*MniLoadData.IsEnabled = true;
-            MniShowMetadata.IsEnabled = true;
-            MniOpenCatalog.IsEnabled = true;*/
 
             // get useful metadata
             //added. The "Add" column has to be filled accordingly.
@@ -155,12 +146,9 @@ namespace Isogeo.AddIn.Views.Search.Results
             switch (_dataList.Count)
             {
                 case 0:
-                    //LblLayer.Content = Isogeo.Language.Resources.Cant_be_added;
                     CmbLayer.Items.Add(Isogeo.Language.Resources.Cant_be_added);
                     CmbLayer.SelectedIndex = 0;
                     CmbLayer.IsEnabled = false;
-                    /*MniLoadData.IsEnabled = false;
-                    MniOpenCatalog.IsEnabled = false;*/
                     break;
                 case 1:
                     if (_dataList != null && _dataList.Count > 0)
@@ -172,33 +160,11 @@ namespace Isogeo.AddIn.Views.Search.Results
                         CmbLayer.Visibility = Visibility.Visible;
                         CmbLayer.SelectedIndex = 0;
                     }
-
-                    /*LblLayer.Content = data_list[0].title;
-                    switch (data_list[0].type)
-                    {
-                        case "WMS":
-                            ImgLayer.Content = Isogeo.Language.Resources.WMS; // imageList2.Images[0];
-                            break;
-                        case "WFS":
-                            ImgLayer.Content = Isogeo.Language.Resources.WFS; // imageList2.Images[1];
-                            break;
-                        case "WMTS":
-                            ImgLayer.Content = Isogeo.Language.Resources.WMTS; // imageList2.Images[1];
-                            break;
-                        case "PostGIS table":
-                            ImgLayer.Content = Isogeo.Language.Resources.PostGIS_table; // imageList2.Images[2];
-                            break;
-                        case "Data file":
-                            ImgLayer.Content = Isogeo.Language.Resources.Data_file; // imageList2.Images[3];
-                            break;
-                    }*/
                     break;
                 default:
                     //If there is only one way for the data to be added, insert a label.
                     //Else, add a combobox, storing all possibilities.                    
-                    //LblLayer.Visibility = Visibility.Hidden;
 
-                    //img_layer.Visible=false;
                     CmbLayer.Visibility = Visibility.Visible;
 
                     foreach (var data in _dataList)

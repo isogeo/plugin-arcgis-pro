@@ -20,9 +20,8 @@ namespace Isogeo.Models.Filters
                 return;
             var ob = FilterManager.GetOb();
             var od = FilterManager.GetOd();
-            var query = FilterManager.GetQueryCombos();
             await RestFunctions.LoadData(SelectedItem.Id, 0, SelectedItem.GeographicalOperator, od, ob);
-            FilterManager.SetSearchList(query);
+            FilterManager.SetSearchList(SelectedItem.Id);
         }
 
         public void SelectItem(string name, string id, string box)
