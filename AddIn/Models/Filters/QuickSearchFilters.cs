@@ -37,7 +37,7 @@ namespace Isogeo.AddIn.Models.Filters
 
         public virtual void AddItem(Search item)
         {
-            base.AddItem(new FilterItem(item.Query, item.Name));
+            base.AddItem(new FilterItem(item.Query, item.Name) { GeographicalOperator = item.Box});
         }
 
         public virtual void SetItems(List<Search> items)

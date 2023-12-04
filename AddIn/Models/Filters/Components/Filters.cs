@@ -85,33 +85,37 @@ namespace Isogeo.AddIn.Models.Filters.Components
             OnPropertyChanged(nameof(SelectedItem));
         }
 
-        // performance: List.Items is an ObservableCollection, by filling a temporary simple list then use addRange() at the end,
-        // we dont trigger the UI for each item added (only once triggered at the end of AddRange())
-        private readonly List<FilterItem> _temporaryFilterItemList = new(); 
-
         public virtual void AddItem(FilterItem item)
         {
             var itemNameToAdd = item.Name;
             while (Items.Any(search => search.Name == itemNameToAdd))
                 itemNameToAdd += " - " + Language.Resources.Copy.ToLower();
             if (!string.IsNullOrWhiteSpace(itemNameToAdd))
-                _temporaryFilterItemList.Add(new FilterItem(item.Id, itemNameToAdd) { GeographicalOperator = item.GeographicalOperator});
+                List.Items.Add(new FilterItem(item.Id, itemNameToAdd) { GeographicalOperator = item.GeographicalOperator});
+        }
+
+        private static void AddItem(FilterItem item, ICollection<FilterItem> list)
+        {
+            var itemNameToAdd = item.Name;
+            while (list.Any(search => search.Name == itemNameToAdd))
+                itemNameToAdd += " - " + Language.Resources.Copy.ToLower();
+            if (!string.IsNullOrWhiteSpace(itemNameToAdd))
+                list.Add(new FilterItem(item.Id, itemNameToAdd) { GeographicalOperator = item.GeographicalOperator });
         }
 
         public virtual void SetItems(List<FilterItem> items)
         {
-            _temporaryFilterItemList.Clear();
+            // performance: List.Items is an ObservableCollection, by filling a temporary simple list then use addRange() at the end,
+            // we don't trigger the UI for each item added (only once triggered at the end of AddRange())
+            var temporaryFilterItemList = new List<FilterItem>();
+
             List.Items.Clear();
-            AddItem(new FilterItem("", "-"));
+            AddItem(new FilterItem("", "-"), temporaryFilterItemList);
             List.Selected = null;
 
-
             for (var i = 0; i < items.Count; i += 1)
-            {
-                AddItem(items[i]);
-            }
-            List.Items.AddRange(_temporaryFilterItemList);
-
+                AddItem(items[i], temporaryFilterItemList);
+            List.Items.AddRange(temporaryFilterItemList);
 
             if (List.Items.Count > 0)
             {
