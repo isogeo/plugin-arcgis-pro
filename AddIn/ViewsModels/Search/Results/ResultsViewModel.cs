@@ -1,9 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using ActiproSoftware.Windows.Extensions;
 using Isogeo.AddIn.Models.FilterManager;
 using Isogeo.AddIn.Models.Filters.Components;
 using Isogeo.Map;
@@ -154,8 +156,9 @@ namespace Isogeo.AddIn.ViewsModels.Search.Results
 
         public void Refresh(int offset)
         {
+            var temporaryItems = new List<ResultItemViewModel>();
+
             LstResultIsEnabled = false;
-            ResultsList.Clear();
             if (Variables.search != null && Variables.search.Results != null)
             {
                 for (var i = Variables.search.Results.Count - 1; i >= 0; i--)
@@ -163,9 +166,11 @@ namespace Isogeo.AddIn.ViewsModels.Search.Results
                     var result = Variables.search.Results[i];
                     var resultItem = new ResultItemViewModel(_mapManager, _networkManager, _configurationManager);
                     resultItem.Init(result);
-                    ResultsList.Insert(0, resultItem);
+                    temporaryItems.Add(resultItem);
                 }
             }
+            ResultsList.Clear();
+            ResultsList.AddRange(temporaryItems);
             SetPages(offset);
             LstResultIsEnabled = true;
             if (ResultsList.Count > 0) 
@@ -184,10 +189,13 @@ namespace Isogeo.AddIn.ViewsModels.Search.Results
 
         private void SetPages(int offset)
         {
+            var temporaryList = new List<FilterItem>();
+
             var nbPage = GetNbPage();
+            for (var i = 0; i < nbPage; i++)
+                temporaryList.Add(new FilterItem((i + 1).ToString(), (i + 1).ToString()));
             ListNumberPage.Items.Clear();
-            for (var i = 0; i < nbPage; i++) 
-                ListNumberPage.Items.Add(new FilterItem((i + 1).ToString(), (i + 1).ToString()));
+            ListNumberPage.Items.AddRange(temporaryList);
             LblNbPage = "/ " + nbPage;
             SetCurrentPageWithoutTriggerReloadApi(offset);
         }
