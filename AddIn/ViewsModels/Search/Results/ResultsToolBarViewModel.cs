@@ -111,7 +111,6 @@ namespace Isogeo.AddIn.ViewsModels.Search.Results
                     return;
                 _cmbSortingDirectionSelectedItem = value;
                 _filterManager.SetCmbSortingDirection(_cmbSortingDirectionSelectedItem);
-                //Task.Run(async () => await Refresh());
                 OnPropertyChanged(nameof(CmbSortingDirectionSelectedItem));
             }
         }
@@ -126,7 +125,6 @@ namespace Isogeo.AddIn.ViewsModels.Search.Results
                     return;
                 _cmbSortingMethodSelectedItem = value;
                 _filterManager.SetCmbSortingMethod(_cmbSortingMethodSelectedItem);
-                //Task.Run(async () => await Refresh());
                 OnPropertyChanged(nameof(CmbSortingMethodSelectedItem));
             }
         }

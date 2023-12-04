@@ -37,12 +37,5 @@ namespace Isogeo.AddIn.Models.FilterManager
         /// </summary>
         /// <returns></returns>
         public string GetQueryCombos();
-
-        /// <summary>
-        /// Set current search lists with query parameters
-        /// Set at the end of the method combobox' sourceItems
-        /// </summary>
-        /// <param name="query">query is used to define current search lists</param>
-        public void SetSearchList(string query);
     }
 }
