@@ -39,7 +39,7 @@
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
                 <TextBlock Margin="5,2,5,5" Height="Auto" MinHeight="40" TextWrapping="Wrap"
-                           Grid.Row="0" x:Name="TxtTitle" Text="{Binding ItemTitle}"/>
+                           Grid.Row="0" x:Name="TxtTitle" Text="{Binding ItemTitle}" ToolTip="{Binding ItemToolTip}"/>
                 <Grid Grid.Row="1">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="1*"/>
@@ -49,7 +49,7 @@
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
-                    <Label Foreground="{DynamicResource ItalicFontColorBrush}" FontSize="11" VerticalAlignment="Bottom" HorizontalAlignment="Left"  Margin="3,3,3,3" Grid.Column="0" Grid.Row="0" x:Name="ImgType" Content="{Binding ImgType}" ToolTip="{Binding ItemToolTip}"/>
+                    <Label Foreground="{DynamicResource ItalicFontColorBrush}" FontSize="11" VerticalAlignment="Bottom" HorizontalAlignment="Left"  Margin="3,3,3,3" Grid.Column="0" Grid.Row="0" x:Name="ImgType" Content="{Binding ImgType}"/>
                     <Label Content="{x:Static language:Resources.Loading_in_progress}" VerticalAlignment="Bottom" HorizontalAlignment="Right" Visibility="{Binding WaitingCmbLayerVisibility}" Margin="0,0, 0,0" Grid.Column="1" Grid.Row="0" ></Label>
                     <ComboBox VerticalAlignment="Bottom" SelectedIndex="{Binding CmbLayer.SelectedIndex}" ItemsSource="{Binding CmbLayer.Items}" IsEnabled="{Binding CmbLayer.IsEnabled}" Visibility="{Binding CmbLayer.Visibility}"  Grid.Column="1" Grid.Row="0" x:Name="CmbLayer"/>
                     <Button Style="{DynamicResource MainButton}" HorizontalAlignment="Right" VerticalAlignment="Bottom" Height="22" Width="20" Grid.Column="2" Grid.Row="0"  x:Name="BtnMenu" Content="+" Visibility="{Binding CmbLayer.Visibility}" Command="{Binding BtnMenuOnClick}"/>
