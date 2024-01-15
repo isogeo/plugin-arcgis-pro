@@ -249,6 +249,9 @@
   <data name="Error_logs" xml:space="preserve">
     <value>Error : Can't load log file</value>
   </data>
+  <data name="Error_Open_External_Tool" xml:space="preserve">
+    <value>An error occurred while opening the desired window. We were unable to process your request.</value>
+  </data>
   <data name="Error_proxy" xml:space="preserve">
     <value>Proxy information could not be saved</value>
   </data>
@@ -320,6 +323,9 @@
   </data>
   <data name="Line" xml:space="preserve">
     <value>Line</value>
+  </data>
+  <data name="Loading_in_progress" xml:space="preserve">
+    <value>Loading in progress...</value>
   </data>
   <data name="Log" xml:space="preserve">
     <value>Log</value>

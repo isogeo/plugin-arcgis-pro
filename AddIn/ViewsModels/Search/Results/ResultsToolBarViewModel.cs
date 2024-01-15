@@ -1,10 +1,15 @@
 ﻿using System.Collections.ObjectModel;
 using System.Linq;
-using System.Windows.Forms;
+using System.Threading.Tasks;
 using System.Windows.Input;
+using ArcGIS.Desktop.Framework.Dialogs;
+using Isogeo.AddIn.Models;
+using Isogeo.AddIn.Models.FilterManager;
+using Isogeo.AddIn.Models.Filters.Components;
 using Isogeo.AddIn.Views.Search.AskNameWindow;
 using Isogeo.Models;
-using Isogeo.Models.Filters;
+using Isogeo.Network;
+using Isogeo.Utils.ConfigurationManager;
 using Isogeo.Utils.LogManager;
 using MVVMPattern;
 using MVVMPattern.MediatorPattern;
@@ -14,7 +19,27 @@ namespace Isogeo.AddIn.ViewsModels.Search.Results
 {
     public class ResultsToolBarViewModel : ViewModelBase
     {
+        private readonly INetworkManager _networkManager;
+
+        private readonly IFilterManager _filterManager;
+
+        private readonly IConfigurationManager _configurationManager;
+
         private bool _isUpdateCombo;
+
+        public ResultsToolBarViewModel(INetworkManager networkManager, IFilterManager filterManager, IConfigurationManager configurationManager)
+        {
+            _networkManager = networkManager;
+            _filterManager = filterManager;
+            _configurationManager = configurationManager;
+            Mediator.Register(MediatorEvent.ChangeQuery, TotalResultsEvent);
+            Mediator.Register(MediatorEvent.SetSortingDefault, SetSortingDefaultEvent);
+            BtnResultsContent = Language.Resources.Results;
+            InitCmbs();
+            SetSortingDefault();
+            CmbSortingDirectionSelectedItem.PropertyChanged += Refresh_PropertyChanged;
+            CmbSortingMethodSelectedItem.PropertyChanged += Refresh_PropertyChanged;
+        }
 
         private string _btnResultsContent;
         public string BtnResultsContent
@@ -23,7 +48,7 @@ namespace Isogeo.AddIn.ViewsModels.Search.Results
             set
             {
                 _btnResultsContent = value;
-                OnPropertyChanged("BtnResultsContent");
+                OnPropertyChanged(nameof(BtnResultsContent));
             }
         }
 
@@ -34,7 +59,7 @@ namespace Isogeo.AddIn.ViewsModels.Search.Results
             set
             {
                 _cmbSortingMethod = value;
-                OnPropertyChanged("CmbSortingMethod");
+                OnPropertyChanged(nameof(CmbSortingMethod));
             }
         }
 
@@ -45,7 +70,7 @@ namespace Isogeo.AddIn.ViewsModels.Search.Results
             set
             {
                 _cmbSortingDirection = value;
-                OnPropertyChanged("CmbSortingDirection");
+                OnPropertyChanged(nameof(CmbSortingDirection));
             }
         }
 
@@ -53,27 +78,27 @@ namespace Isogeo.AddIn.ViewsModels.Search.Results
         {
             CmbSortingMethod = new ObservableCollection<FilterItem>
             {
-                new FilterItem {Id = "relevance", Name = Language.Resources.Sorting_method_relevance},
-                new FilterItem {Id = "title", Name = Language.Resources.Sorting_method_title},
-                new FilterItem {Id = "modified", Name = Language.Resources.Sorting_method_modified},
-                new FilterItem {Id = "created", Name = Language.Resources.Sorting_method_created},
-                new FilterItem {Id = "_modified", Name = Language.Resources.Sorting_method_metadata_modified},
-                new FilterItem {Id = "_created", Name = Language.Resources.Sorting_method_metadata_created}
+                new("relevance", Language.Resources.Sorting_method_relevance),
+                new("title", Language.Resources.Sorting_method_title),
+                new("modified", Language.Resources.Sorting_method_modified),
+                new("created", Language.Resources.Sorting_method_created),
+                new("_modified", Language.Resources.Sorting_method_metadata_modified),
+                new("_created", Language.Resources.Sorting_method_metadata_created)
             };
 
             CmbSortingDirection = new ObservableCollection<FilterItem>
             {
-                new FilterItem {Id = "asc", Name = Language.Resources.Sorting_method_ascending},
-                new FilterItem {Id = "desc", Name = Language.Resources.Sorting_method_descending}
+                new("asc", Language.Resources.Sorting_method_ascending),
+                new("desc", Language.Resources.Sorting_method_descending)
             };
 
             _cmbSortingMethodSelectedItem = CmbSortingMethod[0];
-            Variables.cmbSortingMethodSelectedItem = _cmbSortingMethodSelectedItem;
-            OnPropertyChanged("CmbSortingMethodSelectedItem");
+            _filterManager.SetCmbSortingMethod(_cmbSortingMethodSelectedItem);
+            OnPropertyChanged(nameof(CmbSortingMethodSelectedItem));
 
             _cmbSortingDirectionSelectedItem = CmbSortingDirection[1];
-            Variables.cmbSortingDirectionSelectedItem = _cmbSortingDirectionSelectedItem;
-            OnPropertyChanged("CmbSortingDirectionSelectedItem");
+            _filterManager.SetCmbSortingDirection(_cmbSortingDirectionSelectedItem);
+            OnPropertyChanged(nameof(CmbSortingDirectionSelectedItem));
         }
 
         private FilterItem _cmbSortingDirectionSelectedItem;
@@ -85,9 +110,8 @@ namespace Isogeo.AddIn.ViewsModels.Search.Results
                 if (value == null)
                     return;
                 _cmbSortingDirectionSelectedItem = value;
-                Variables.cmbSortingDirectionSelectedItem = value;
-                Refresh();
-                OnPropertyChanged("CmbSortingDirectionSelectedItem");
+                _filterManager.SetCmbSortingDirection(_cmbSortingDirectionSelectedItem);
+                OnPropertyChanged(nameof(CmbSortingDirectionSelectedItem));
             }
         }
 
@@ -100,10 +124,14 @@ namespace Isogeo.AddIn.ViewsModels.Search.Results
                 if (value == null)
                     return;
                 _cmbSortingMethodSelectedItem = value;
-                Variables.cmbSortingMethodSelectedItem = value;
-                Refresh();
-                OnPropertyChanged("CmbSortingMethodSelectedItem");
+                _filterManager.SetCmbSortingMethod(_cmbSortingMethodSelectedItem);
+                OnPropertyChanged(nameof(CmbSortingMethodSelectedItem));
             }
+        }
+
+        private async void Refresh_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            await Refresh();
         }
 
         private ICommand _btnResultsCommand;
@@ -119,23 +147,14 @@ namespace Isogeo.AddIn.ViewsModels.Search.Results
             SetSortingDefault();
         }
 
-        public ResultsToolBarViewModel()
-        {
-            Mediator.Register("ChangeQuery", TotalResultsEvent);
-            Mediator.Register("setSortingDefault", SetSortingDefaultEvent);
-            BtnResultsContent = Language.Resources.Results;
-            InitCmbs();
-            SetSortingDefault();
-        }
-
         private ICommand _saveCommand;
         public ICommand SaveCommand
         {
             get
             {
-                return _saveCommand ?? (_saveCommand = new RelayCommand(
+                return _saveCommand ??= new RelayCommand(
                     x => Save(),
-                    y => CanSave()));
+                    y => CanSave());
             }
         }
 
@@ -144,12 +163,12 @@ namespace Isogeo.AddIn.ViewsModels.Search.Results
             return true;
         }
 
-        private static bool IsDuplicateQuickSearchName(string name)
+        private bool IsDuplicateQuickSearchName(string name)
         {
-            return Variables.configurationManager.config.searchs.searchs.Any(search => search.name == name);
+            return _configurationManager.Config.Searchs.SearchDetails.Any(search => search.Name == name);
         }
 
-        private static bool NewQuickSearchNameIsValid(string name)
+        private bool NewQuickSearchNameIsValid(string name)
         {
             if (string.IsNullOrWhiteSpace(name))
             {
@@ -168,9 +187,9 @@ namespace Isogeo.AddIn.ViewsModels.Search.Results
             return true;
         }
 
-        private static void Save()
+        private void Save()
         {
-            var frm = new AskNameWindow(false, "");
+            var frm = new AskNameWindow(false, "", _configurationManager);
             frm.ShowDialog();
 
             if (frm.isSave == false) return;
@@ -178,30 +197,35 @@ namespace Isogeo.AddIn.ViewsModels.Search.Results
             if (!NewQuickSearchNameIsValid(frm.TxtQuickSearchName.Text))
                 return;
 
-            var newSearch = new Models.Configuration.Search
+            var newSearch = new Utils.Configuration.Search
             {
-                name = frm.TxtQuickSearchName.Text,
-                query = Variables.restFunctions.GetQueryCombos(),
-                box = Variables.restFunctions.GetBoxRequest()
+                Name = frm.TxtQuickSearchName.Text,
+                Query = _filterManager.GetQueryCombos(),
+                Box =  _filterManager.GetBoxRequest()
             };
 
-            Variables.configurationManager.config.searchs.searchs.Add(newSearch);
-            Variables.configurationManager.Save();
+            _configurationManager.Config.Searchs.SearchDetails.Add(newSearch);
+            _configurationManager.Save();
 
-            Mediator.NotifyColleagues("AddNewQuickSearch", newSearch);
+            Mediator.NotifyColleagues(MediatorEvent.AddNewQuickSearch, newSearch);
         }
 
-        private void Refresh()
+        private async Task Refresh()
         {
+            var ob = _filterManager.GetOb();
+            var od = _filterManager.GetOd();
+            var box = _filterManager.GetBoxRequest();
+            var query = _filterManager.GetQueryCombos();
             if (_isUpdateCombo) return;
             DefineBtnResultsContent();
-            Variables.restFunctions.ReloadData(0);
+            await _networkManager.LoadData(query, 0, box, od, ob);
+            OnPropertyChanged(nameof(BtnResultsContent));
         }
 
         public void SetSortingDefault()
         {
             _isUpdateCombo = true;
-            switch (Variables.configurationManager.config.sortMethode)
+            switch (_configurationManager.Config.SortMethode)
             {
                 case "relevance":
                     _cmbSortingMethodSelectedItem = CmbSortingMethod.First(x => x.Id == "relevance");
@@ -226,10 +250,10 @@ namespace Isogeo.AddIn.ViewsModels.Search.Results
                     break;
             }
 
-            Variables.cmbSortingMethodSelectedItem = _cmbSortingMethodSelectedItem;
-            OnPropertyChanged("CmbSortingMethodSelectedItem");
+            _filterManager.SetCmbSortingMethod(_cmbSortingMethodSelectedItem);
+            OnPropertyChanged(nameof(CmbSortingMethodSelectedItem));
 
-            switch (Variables.configurationManager.config.sortDirection)
+            switch (_configurationManager.Config.SortDirection)
             {
                 case "asc":
                     _cmbSortingDirectionSelectedItem = CmbSortingDirection.First(x => x.Id == "asc");
@@ -241,8 +265,8 @@ namespace Isogeo.AddIn.ViewsModels.Search.Results
                     _cmbSortingDirectionSelectedItem = CmbSortingDirection[1];
                     break;
             }
-            Variables.cmbSortingDirectionSelectedItem = _cmbSortingDirectionSelectedItem;
-            OnPropertyChanged("CmbSortingDirectionSelectedItem");
+            _filterManager.SetCmbSortingDirection(_cmbSortingDirectionSelectedItem);
+            OnPropertyChanged(nameof(CmbSortingDirectionSelectedItem));
             _isUpdateCombo = false;
         }
 
@@ -250,9 +274,9 @@ namespace Isogeo.AddIn.ViewsModels.Search.Results
         {
             get
             {
-                return _btnResultsCommand ?? (_btnResultsCommand = new RelayCommand(
+                return _btnResultsCommand ??= new RelayCommand(
                     x => RunBtnResults(),
-                    y => CanRunBtnResults()));
+                    y => CanRunBtnResults());
             }
         }
 
@@ -263,36 +287,41 @@ namespace Isogeo.AddIn.ViewsModels.Search.Results
 
         private void DefineBtnResultsContent()
         {
-            if (Variables.search == null || Variables.search.total.Equals(0))
+            if (Variables.search == null || Variables.search.Total.Equals(0))
             {
                 BtnResultsContent = "0 " + Language.Resources.Result;
             }
             else
             {
-                BtnResultsContent = Variables.search.total + " " + Language.Resources.Results;
+                BtnResultsContent = Variables.search.Total + " " + Language.Resources.Results;
             }
+            WpfHelper.ForceFrontToCheckCommands();
         }
 
-        private bool CanRunBtnResults()
+        private static bool CanRunBtnResults()
         {
-            return (Variables.search != null && !Variables.search.total.Equals(0));
+            return (Variables.search != null && !Variables.search.Total.Equals(0));
         }
 
         public ICommand ResetCommand
         {
             get
             {
-                return _resetCommand ?? (_resetCommand = new RelayCommand(
+                return _resetCommand ??= new RelayCommand(
                     x => RunReset(),
-                    y => CanRunReset()));
+                    y => CanRunReset());
             }
         }
 
-        private static void RunReset()
+        private async void RunReset()
         {
-            Variables.restFunctions.SaveSearch();
-            Mediator.NotifyColleagues("setSortingDefault", null);
-            Variables.restFunctions.ResetData();
+            var ob = _filterManager.GetOb();
+            var od = _filterManager.GetOd();
+            var box = _filterManager.GetBoxRequest();
+            var query = _filterManager.GetQueryCombos();
+            _networkManager.SaveSearch(box, query);
+            Mediator.NotifyColleagues(MediatorEvent.SetSortingDefault, null);
+            await _networkManager.ResetData(od, ob);
         }
 
         private static bool CanRunReset()

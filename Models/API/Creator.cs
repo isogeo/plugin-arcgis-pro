@@ -1,20 +1,13 @@
-﻿namespace Isogeo.Models.API
+﻿using System.Text.Json.Serialization;
+
+namespace Isogeo.Models.API
 {
     public class Creator
     {
-        public string _id
-        {
-            get;
-            set;
-        }
+        [JsonPropertyName("_id")]
+        public string? Id { get; set; }
 
-        public Contact contact
-        {
-            get;
-            set;
-        }
-
-        
-        
+        [JsonPropertyName("contact")]
+        public Contact? Contact { get; set; }
     }
 }

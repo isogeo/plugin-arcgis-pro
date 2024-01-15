@@ -11,8 +11,7 @@ namespace Isogeo.AddIn.Views.Settings
 
         private void BtnAuthentication_Click(object sender, RoutedEventArgs e)
         {
-            var frmAuthentication = new Models.Network.Authentication.Authentication();
-            frmAuthentication.ShowDialog();
+
         }
     }
 }

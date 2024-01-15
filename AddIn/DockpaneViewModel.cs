@@ -2,27 +2,32 @@ using System;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Runtime.ExceptionServices;
-using System.Windows.Controls;
+using System.Threading.Tasks;
+using System.Windows;
 using ArcGIS.Desktop.Framework;
 using ArcGIS.Desktop.Framework.Contracts;
-using ArcGIS.Desktop.Framework.Dialogs;
+using Isogeo.AddIn.Models.FilterManager;
 using Isogeo.AddIn.ViewsModels.TabControls;
+using Isogeo.Map;
 using Isogeo.Models;
-using Isogeo.Models.Network;
+using Isogeo.Network;
 using Isogeo.Utils.LogManager;
 using MVVMPattern.MediatorPattern;
 using Button = ArcGIS.Desktop.Framework.Contracts.Button;
-using ConfigurationManager = Isogeo.Models.Configuration.ConfigurationManager;
+using ConfigurationManager = Isogeo.Utils.ConfigurationManager.ConfigurationManager;
+using MessageBox = ArcGIS.Desktop.Framework.Dialogs.MessageBox;
 using TabControl = ArcGIS.Desktop.Framework.Controls.TabControl;
 
 namespace Isogeo.AddIn
 {
     public class DockpaneViewModel : DockPane
     {
-        private const string MenuId = "Isogeo_plugin_Menu";
         private readonly ViewModelBase _paneH1Vm;
         private readonly ViewModelBase _paneH2Vm;
         private const string DockPaneId = "Arcgis_Pro_Isogeo_Dockpane";
+
+        private readonly INetworkManager _networkManager;
+        private readonly IFilterManager _filterManager;
 
         private bool _isEnabled = true;
         public bool IsEnabled
@@ -35,22 +40,16 @@ namespace Isogeo.AddIn
             }
         }
 
+        public async void ResetResearch(object obj)
+        {
+            var ob = _filterManager.GetOb();
+            var od = _filterManager.GetOd();
+            await _networkManager.ResetData(od, ob);
+        }
+
         public void EnableDockableWindowIsogeo(object obj)
         {
             IsEnabled = (bool) obj;
-        }
-
-        private static void InitRestFunctions()
-        {
-            Log.Logger.Info("Initializing Rest Functions");
-            Variables.restFunctions = new RestFunctions();
-            if (Variables.configurationManager.config.query == "-") Variables.configurationManager.config.query = " ";
-        }
-
-        private static void InitConfigurationManager()
-        {
-            Log.Logger.Info("Initializing Configuration Manager");
-            Variables.configurationManager = new ConfigurationManager();
         }
 
         public void Exception(object sender, FirstChanceExceptionEventArgs e)
@@ -67,7 +66,7 @@ namespace Isogeo.AddIn
             {
                 var dllPAth = GetType().Assembly.Location;
 
-                var configPath = dllPAth.Substring(0, dllPAth.LastIndexOf("\\", StringComparison.Ordinal)) + "\\";
+                var configPath = dllPAth[..dllPAth.LastIndexOf("\\", StringComparison.Ordinal)] + "\\";
                 Log.InitializeLogManager(configPath + "log4net.config");
                 Log.InitializeLogPath(configPath);
             }
@@ -84,17 +83,45 @@ namespace Isogeo.AddIn
             InitLog();
             Log.Logger.Info("Isogeo ArcGisPro Add-In is opening...");
             Log.Logger.Info("Initializing DockPaneViewModel ...");
-            Mediator.Register("EnableDockableWindowIsogeo", EnableDockableWindowIsogeo);
-            InitConfigurationManager();
-            InitRestFunctions();
+            Mediator.Register(MediatorEvent.EnableDockableWindowIsogeo, EnableDockableWindowIsogeo);
+
+            Log.Logger.Info("Initializing Configuration Manager");
+
+            ConfigurationManager configurationManager = null;
+
+            try
+            {
+                configurationManager = new ConfigurationManager();
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Error configuration : missing or wrong App.config file", "Isogeo");
+                throw;
+            }
 
             PrimaryMenuList.Add(new TabControl { Text = Language.Resources.Search_word });
             PrimaryMenuList.Add(new TabControl { Text = Language.Resources.Settings });
-            _paneH1Vm = new SearchViewModel();
-            _paneH2Vm = new SettingsViewModel();
+
+           
+            IMapManager mapManager = new MapManager();
+            _networkManager = new NetworkManager(configurationManager);
+            _filterManager = new FilterManager(mapManager);
+
+            _paneH1Vm = new SearchViewModel(_networkManager, _filterManager, mapManager, configurationManager);
+            _paneH2Vm = new SettingsViewModel(_networkManager, _filterManager, mapManager, configurationManager);
             _selectedPanelHeaderIndex = 0;
             CurrentPage = _paneH1Vm;
-            Variables.restFunctions.ResetData();
+
+            Mediator.Register(MediatorEvent.UserAuthentication, ResetResearch);
+
+            var query = configurationManager.Config.DefaultSearch;
+            var box = configurationManager.Config.GeographicalOperator;
+            var od = configurationManager.Config.SortDirection;
+            var ob = configurationManager.Config.SortMethode;
+
+            Task.Run(() => Application.Current.Dispatcher.Invoke(async () => {
+                await _networkManager.LoadData(query, 0,  box,  od, ob);
+            }));
             Log.Logger.Info("END Initializing DockPaneViewModel");
         }
 
@@ -104,13 +131,9 @@ namespace Isogeo.AddIn
         internal static void Show()
         {
             var pane = FrameworkApplication.DockPaneManager.Find(DockPaneId);
-            if (pane == null)
-                return;
 
-            pane.Activate();
+            pane?.Activate();
         }
-
-        #region properties
 
         /// <summary>
         /// Text shown near the top of the DockPane.
@@ -118,22 +141,19 @@ namespace Isogeo.AddIn
         private string _heading = "Isogeo";
         public string Heading
         {
-            get { return _heading; }
+            get => _heading;
             set
             {
                 SetProperty(ref _heading, value, () => Heading);
             }
         }
 
-        private readonly List<TabControl> _primaryMenuList = new List<TabControl>();
-        public List<TabControl> PrimaryMenuList
-        {
-            get { return _primaryMenuList; }
-        }
+        public List<TabControl> PrimaryMenuList { get; } = new();
+
         private int _selectedPanelHeaderIndex;
         public int SelectedPanelHeaderIndex
         {
-            get { return _selectedPanelHeaderIndex; }
+            get => _selectedPanelHeaderIndex;
             set
             {
                 SetProperty(ref _selectedPanelHeaderIndex, value, () => SelectedPanelHeaderIndex);
@@ -143,35 +163,16 @@ namespace Isogeo.AddIn
                     CurrentPage = _paneH2Vm;
             }
         }
+
         private PropertyChangedBase _currentPage;
         public PropertyChangedBase CurrentPage
         {
-            get { return _currentPage; }
+            get => _currentPage;
             set
             {
                 SetProperty(ref _currentPage, value, () => CurrentPage);
             }
         }
-
-        #endregion
-        #region Burger Button
-
-        /// <summary>
-        /// Tooltip shown when hovering over the burger button.
-        /// </summary>
-        public string BurgerButtonTooltip
-        {
-            get { return "Options"; }
-        }
-
-        /// <summary>
-        /// Menu shown when burger button is clicked.
-        /// </summary>
-        public ContextMenu BurgerButtonMenu
-        {
-            get { return FrameworkApplication.CreateContextMenu(MenuId); }
-        }
-        #endregion
     }
 
     /// <summary>
@@ -184,6 +185,7 @@ namespace Isogeo.AddIn
             DockpaneViewModel.Show();
         }
     }
+
     internal class PanelIndicatorStaticMenuButton : Button
     {
         protected override void OnClick()

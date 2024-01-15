@@ -1,49 +1,28 @@
-﻿using System.Collections.Generic;
+﻿using System.Text.Json.Serialization;
 
 namespace Isogeo.Models.API
 {
     public class Link
     {
-        public string _id
-        {
-            get;
-            set;
-        }
+        [JsonPropertyName("_id")]
+        public string? Id { get; set; }
 
-        public Link link
-        {
-            get;
-            set;
-        }
+        [JsonPropertyName("link")]
+        public Link? OneLink { get; set; }
 
-        public string type
-        {
-            get;
-            set;
-        }
+        [JsonPropertyName("type")]
+        public string? Type { get; set; }
 
-        public string title
-        {
-            get;
-            set;
-        }
+        [JsonPropertyName("title")]
+        public string? Title { get; set; }
 
-        public string url
-        {
-            get;
-            set;
-        }
+        [JsonPropertyName("url")]
+        public string? Url { get; set; }
 
-        public string kind
-        {
-            get;
-            set;
-        }
+        [JsonPropertyName("kind")]
+        public string? Kind { get; set; }
 
-        public List<string> actions
-        {
-            get;
-            set;
-        }
+        [JsonPropertyName("actions")]
+        public List<string>? Actions { get; set; }
     }
 }

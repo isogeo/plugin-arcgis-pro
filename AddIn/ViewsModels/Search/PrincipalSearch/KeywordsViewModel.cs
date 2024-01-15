@@ -1,6 +1,8 @@
 ﻿using System.ComponentModel;
-using Isogeo.Models;
-using Isogeo.Models.Filters;
+using Isogeo.AddIn.Models.FilterManager;
+using Isogeo.AddIn.Models.Filters.Components;
+using Isogeo.Map;
+using Isogeo.Network;
 using MVVMPattern;
 
 namespace Isogeo.AddIn.ViewsModels.Search.PrincipalSearch
@@ -9,6 +11,8 @@ namespace Isogeo.AddIn.ViewsModels.Search.PrincipalSearch
     {
         public string ComponentName => Language.Resources.Keywords;
 
+        private readonly IFilterManager _filterManager;
+
         private Filters _filters;
         public Filters Filters
         {
@@ -16,26 +20,27 @@ namespace Isogeo.AddIn.ViewsModels.Search.PrincipalSearch
             set
             {
                 _filters = value;
-                OnPropertyChanged("Filters");
+                OnPropertyChanged(nameof(Filters));
             }
         }
 
         private void Filter_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            OnPropertyChanged("Filters");
+            OnPropertyChanged(nameof(Filters));
         }
 
-        public KeywordsViewModel()
+        public KeywordsViewModel(IFilterManager filterManager, INetworkManager networkManager, IMapManager mapManager)
         {
-            Filters = new Filters("keyword:isogeo");
+            _filterManager = filterManager;
+            Filters = new Filters("keyword:isogeo", networkManager, filterManager, mapManager);
             Filters.PropertyChanged += Filter_PropertyChanged;
-            Variables.functionsSetlist.Add(SetList);
-            Variables.listComboFilter.Add(Filters);
+            _filterManager.AddFunctionToSetFilterList(SetList);
+            _filterManager.AddFilters(Filters);
         }
 
         private void SetList()
         {
-            Variables.restFunctions.SetListCombo(Filters, "keyword:isogeo");
+            _filterManager.SetListCombo(Filters, "keyword:isogeo");
         }
     }
 }

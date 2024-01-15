@@ -40,10 +40,6 @@ namespace Isogeo.Utils.Box
         /// <summary>
         /// Compare two box. A degree of precision is taken in argument
         /// </summary>
-        /// <param name="box1"></param>
-        /// <param name="box2"></param>
-        /// <param name="precision"></param>
-        /// <returns></returns>
         public static bool BoxAreEquals(string box1, string box2, double precision)
         {
             try

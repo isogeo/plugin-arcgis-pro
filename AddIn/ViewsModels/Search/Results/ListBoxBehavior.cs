@@ -1,62 +1,46 @@
-﻿using System;
-using System.Windows;
+﻿using Microsoft.Xaml.Behaviors;
 using System.Windows.Controls;
-using System.Windows.Controls.Primitives;
+using System.Windows.Threading;
 
 namespace Isogeo.AddIn.ViewsModels.Search.Results
 {
     /// <summary>
     /// Enables to set ListBox's scroll while respecting MVVM Pattern by setting listBox's selectedItem
+    /// https://stackoverflow.com/a/54345445/12319802
     /// </summary>
-    public static class ListBoxBehavior
+    public class ScrollIntoViewBehavior : Behavior<ListBox>
     {
-        public static bool GetScrollSelectedIntoView(ListBox listBox)
+        protected override void OnAttached()
         {
-            return (bool)listBox.GetValue(ScrollSelectedIntoViewProperty);
+            base.OnAttached();
+            AssociatedObject.SelectionChanged += AssociatedObject_SelectionChanged;
         }
 
-        public static void SetScrollSelectedIntoView(ListBox listBox, bool value)
+        protected override void OnDetaching()
         {
-            listBox.SetValue(ScrollSelectedIntoViewProperty, value);
+            AssociatedObject.SelectionChanged -= AssociatedObject_SelectionChanged;
+            base.OnDetaching();
         }
 
-        public static readonly DependencyProperty ScrollSelectedIntoViewProperty =
-            DependencyProperty.RegisterAttached("ScrollSelectedIntoView", typeof(bool), typeof(ListBoxBehavior),
-                new UIPropertyMetadata(false, OnScrollSelectedIntoViewChanged));
-
-        private static void OnScrollSelectedIntoViewChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
-        {
-            if (!(d is Selector selector)) return;
-
-            if (e.NewValue is bool == false)
-                return;
-
-            if ((bool)e.NewValue)
-            {
-                selector.AddHandler(Selector.SelectionChangedEvent, new RoutedEventHandler(ListBoxSelectionChangedHandler));
-            }
-            else
-            {
-                selector.RemoveHandler(Selector.SelectionChangedEvent, new RoutedEventHandler(ListBoxSelectionChangedHandler));
-            }
-        }
-
-        private static void ListBoxSelectionChangedHandler(object sender, RoutedEventArgs e)
+        private static void AssociatedObject_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             var listBox = sender as ListBox;
-            if (listBox?.SelectedItem != null)
+
+            if (listBox?.SelectedItem == null)
+                return;
+
+            var action = () =>
             {
-                listBox.Dispatcher.BeginInvoke(
-                    (Action)(() =>
-                    {
-                        listBox.UpdateLayout();
-                        if (listBox.SelectedItem != null)
-                        {
-                            listBox.ScrollIntoView(listBox.SelectedItem);
-                            listBox.SelectedItem = null; // By setting selectedItem to null, don't show a selection on listbox
-                        }
-                    }));
-            }
+                listBox.UpdateLayout();
+
+                if (listBox.SelectedItem != null)
+                {
+                    listBox.ScrollIntoView(listBox.SelectedItem);
+                    listBox.SelectedItem = null; // By setting selectedItem to null, don't show a selection on listbox
+                }
+            };
+
+            listBox.Dispatcher.BeginInvoke(action, DispatcherPriority.ContextIdle);
         }
     }
 }

@@ -1,11 +1,10 @@
-﻿namespace Isogeo.Models.API
+﻿using System.Text.Json.Serialization;
+
+namespace Isogeo.Models.API
 {
     public class Title
     {
-        public string value
-        {
-            get;
-            set;
-        }
+        [JsonPropertyName("value")]
+        public string? Value { get; set; }
     }
 }

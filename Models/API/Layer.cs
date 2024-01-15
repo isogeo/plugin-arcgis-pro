@@ -1,25 +1,16 @@
-﻿using System.Collections.Generic;
+﻿using System.Text.Json.Serialization;
 
 namespace Isogeo.Models.API
 {
     public class Layer
     {
-        public string _id
-        {
-            get;
-            set;
-        }
+        [JsonPropertyName("_id")]
+        public string? AnotherId { get; set; }
 
-        public string id
-        {
-            get;
-            set;
-        }
+        [JsonPropertyName("id")]
+        public string? Id { get; set; }
 
-        public List<Title> titles
-        {
-            get;
-            set;
-        }
+        [JsonPropertyName("titles")]
+        public List<Title>? Titles { get; set; }
     }
 }

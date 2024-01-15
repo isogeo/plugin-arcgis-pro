@@ -1,37 +1,22 @@
-﻿namespace Isogeo.Models.API
+﻿using System.Text.Json.Serialization;
+
+namespace Isogeo.Models.API
 {
     public class License
     {
+        [JsonPropertyName("_id")]
+        public string? Id { get; set; }
 
-        public string _id
-        {
-            get;
-            set;
-        }
+        [JsonPropertyName("_tag")]
+        public string? Tag { get; set; }
 
-        public string _tag
-        {
-            get;
-            set;
-        }
+        [JsonPropertyName("name")]
+        public string? Name { get; set; }
 
-        public string name
-        {
-            get;
-            set;
-        }
+        [JsonPropertyName("link")]
+        public string? Link { get; set; }
 
-        public string link
-        {
-            get;
-            set;
-        }
-        public string content
-        {
-            get;
-            set;
-        }
-        
-
+        [JsonPropertyName("content")]
+        public string? Content { get; set; }
     }
 }

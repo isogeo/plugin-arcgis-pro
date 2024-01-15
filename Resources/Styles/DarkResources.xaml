@@ -8,12 +8,12 @@
     <SolidColorBrush x:Key="MainBorderColorBrush">#0079c0</SolidColorBrush>
     <SolidColorBrush x:Key="SecondaryBorderColorBrush">LightGray</SolidColorBrush>
     <SolidColorBrush x:Key="IsPressedBackgroundButtonBrush">#63a8d6</SolidColorBrush>
-    <SolidColorBrush x:Key="IsPressedFontButtonBrush">White</SolidColorBrush>
+    <SolidColorBrush x:Key="IsPressedFontButtonBrush">#D8DEE9</SolidColorBrush>
     <SolidColorBrush x:Key="HighlightBackgroundButtonBrush">#005e95</SolidColorBrush>
-    <SolidColorBrush x:Key="HighlightFontButtonBrush">White</SolidColorBrush>
-    <SolidColorBrush x:Key="MainFontColorBrush">White</SolidColorBrush>
+    <SolidColorBrush x:Key="HighlightFontButtonBrush">#D8DEE9</SolidColorBrush>
+    <SolidColorBrush x:Key="MainFontColorBrush">#D8DEE9</SolidColorBrush>
     <SolidColorBrush x:Key="SecondaryFontColorBrush">#0079c0</SolidColorBrush>
-    <SolidColorBrush x:Key="NormalFontColorBrush">White</SolidColorBrush>
+    <SolidColorBrush x:Key="NormalFontColorBrush">#D8DEE9</SolidColorBrush>
     <SolidColorBrush x:Key="HyperLinkColorBrush">#0079c0</SolidColorBrush>
     <SolidColorBrush x:Key="ItalicFontColorBrush">Gray</SolidColorBrush>
     <SolidColorBrush x:Key="MainBorderComponentColorBrush">#3d3d40</SolidColorBrush> <!--  expander's border, classic button's border, etc -->

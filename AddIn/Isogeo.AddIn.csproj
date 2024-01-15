@@ -1,419 +1,109 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>8.0.30703</ProductVersion>
-    <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{D3CD9CD7-2008-4A27-BE55-DA1AEB26239F}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Isogeo.AddIn</RootNamespace>
-    <AssemblyName>Isogeo.AddIn</AssemblyName>
-    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
-    <NuGetPackageImportStamp>
-    </NuGetPackageImportStamp>
-    <TargetFrameworkProfile />
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <StartAction>Program</StartAction>
-    <StartProgram>C:\Program Files\ArcGIS\Pro\bin\ArcGISPro.exe</StartProgram>
-    <PlatformTarget>AnyCPU</PlatformTarget>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <StartAction>Program</StartAction>
-    <StartProgram>C:\Program Files\ArcGIS\Pro\bin\ArcGISPro.exe</StartProgram>
-    <PlatformTarget>AnyCPU</PlatformTarget>
-  </PropertyGroup>
-  <PropertyGroup>
-    <ArcGISFolder>$([MSBuild]::GetRegistryValueFromView('HKEY_LOCAL_MACHINE\SOFTWARE\ESRI\ArcGISPro', 'InstallDir', null, RegistryView.Registry64))</ArcGISFolder>
-    <ArcGISFolder Condition="'$(ArcGISFolder)' == ''">$(registry:HKEY_CURRENT_USER\SOFTWARE\ESRI\ArcGISPro@InstallDir)</ArcGISFolder>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <RuntimeIdentifier>win10-x64</RuntimeIdentifier>
+    <AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
+    <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+    <NoWarn>CA1416</NoWarn>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="log4net, Version=2.0.12.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
-      <HintPath>..\packages\log4net.2.0.12\lib\net45\log4net.dll</HintPath>
-    </Reference>
-    <Reference Include="System" />
-    <Reference Include="System.Configuration" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Drawing" />
-    <Reference Include="System.Web" />
-    <Reference Include="System.Windows.Forms" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
-    <Reference Include="PresentationCore" />
-    <Reference Include="PresentationFramework" />
-    <Reference Include="WindowsBase" />
-    <Reference Include="System.Xaml" />
+      <Content Include="Config.daml" />
+      <Resource Include="Icon\icon.png" />
+      <Resource Include="Icon\icon_isogeo.png" />
+      <Resource Include="Icon\icon_isogeo16.png" />
+      <Resource Include="Icon\icon_isogeo32.png" />
+    <Content Include="log4net.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="log4net" Version="2.0.15" />
+    <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.77" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Isogeo.Network\Isogeo.Network.csproj" />
+    <ProjectReference Include="..\Language\Isogeo.Language.csproj" />
+    <ProjectReference Include="..\Map\Isogeo.Map.csproj" />
+    <ProjectReference Include="..\Models\Isogeo.Models.csproj" />
+    <ProjectReference Include="..\MVVMPattern\MVVMPattern.csproj" />
+    <ProjectReference Include="..\Resources\Isogeo.Resources.csproj" />
+    <ProjectReference Include="..\Utils\Isogeo.Utils.csproj" />
+  </ItemGroup>
+  <ItemGroup>
     <Reference Include="ArcGIS.Desktop.Framework">
       <HintPath>C:\Program Files\ArcGIS\Pro\bin\ArcGIS.Desktop.Framework.dll</HintPath>
+      <CopyLocal>False</CopyLocal>
       <Private>False</Private>
     </Reference>
     <Reference Include="ArcGIS.Core">
       <HintPath>C:\Program Files\ArcGIS\Pro\bin\ArcGIS.Core.dll</HintPath>
+      <CopyLocal>False</CopyLocal>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="ArcGIS.Desktop.Core">
+      <HintPath>C:\Program Files\ArcGIS\Pro\bin\Extensions\Core\ArcGIS.Desktop.Core.dll</HintPath>
+      <CopyLocal>False</CopyLocal>
       <Private>False</Private>
     </Reference>
     <Reference Include="ArcGIS.Desktop.Mapping">
       <HintPath>C:\Program Files\ArcGIS\Pro\bin\Extensions\Mapping\ArcGIS.Desktop.Mapping.dll</HintPath>
+      <CopyLocal>False</CopyLocal>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="ArcGIS.Desktop.Catalog">
+      <HintPath>C:\Program Files\ArcGIS\Pro\bin\Extensions\Catalog\ArcGIS.Desktop.Catalog.dll</HintPath>
+      <CopyLocal>False</CopyLocal>
       <Private>False</Private>
     </Reference>
     <Reference Include="ArcGIS.Desktop.Editing">
       <HintPath>C:\Program Files\ArcGIS\Pro\bin\Extensions\Editing\ArcGIS.Desktop.Editing.dll</HintPath>
+      <CopyLocal>False</CopyLocal>
       <Private>False</Private>
     </Reference>
     <Reference Include="ArcGIS.Desktop.Extensions">
       <HintPath>C:\Program Files\ArcGIS\Pro\bin\Extensions\DesktopExtensions\ArcGIS.Desktop.Extensions.dll</HintPath>
+      <CopyLocal>False</CopyLocal>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="ArcGIS.Desktop.GeoProcessing">
+      <HintPath>C:\Program Files\ArcGIS\Pro\bin\Extensions\GeoProcessing\ArcGIS.Desktop.GeoProcessing.dll</HintPath>
+      <CopyLocal>False</CopyLocal>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="ArcGIS.Desktop.Layouts">
+      <HintPath>C:\Program Files\ArcGIS\Pro\bin\Extensions\Layout\ArcGIS.Desktop.Layouts.dll</HintPath>
+      <CopyLocal>False</CopyLocal>
       <Private>False</Private>
     </Reference>
     <Reference Include="ArcGIS.Desktop.Shared.Wpf">
       <HintPath>C:\Program Files\ArcGIS\Pro\bin\ArcGIS.Desktop.Shared.Wpf.dll</HintPath>
+      <CopyLocal>False</CopyLocal>
       <Private>False</Private>
     </Reference>
     <Reference Include="ArcGIS.Desktop.Ribbon.Wpf">
       <HintPath>C:\Program Files\ArcGIS\Pro\bin\ArcGIS.Desktop.Ribbon.Wpf.dll</HintPath>
+      <CopyLocal>False</CopyLocal>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="ArcGIS.Desktop.DataGrid.Contrib.Wpf">
+      <HintPath>C:\Program Files\ArcGIS\Pro\bin\ArcGIS.Desktop.DataGrid.Contrib.Wpf.dll</HintPath>
+      <CopyLocal>False</CopyLocal>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="ArcGIS.Desktop.Resources">
+      <HintPath>C:\Program Files\ArcGIS\Pro\bin\ArcGIS.Desktop.Resources.dll</HintPath>
+      <CopyLocal>False</CopyLocal>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="ESRI.ArcGIS.ItemIndex">
+      <HintPath>C:\Program Files\ArcGIS\Pro\bin\ESRI.ArcGIS.ItemIndex.dll</HintPath>
+      <CopyLocal>False</CopyLocal>
       <Private>False</Private>
     </Reference>
   </ItemGroup>
-  <ItemGroup>
-    <AddInContent Include="Config.daml" />
-    <Resource Include="Icon\icon_isogeo16.png" />
-    <AddInContent Include="Icon\icon_isogeo.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Dockpane.xaml.cs">
-      <DependentUpon>Dockpane.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="DockpaneViewModel.cs" />
-    <Compile Include="Module1.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Properties\Settings.Designer.cs">
-      <DependentUpon>Settings.settings</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTimeSharedInput>True</DesignTimeSharedInput>
-    </Compile>
-    <Compile Include="ViewsModels\Metadata\MetadataViewModel.cs" />
-    <Compile Include="ViewsModels\Search\Results\ListBoxBehavior.cs" />
-    <Compile Include="ViewsModels\TabControls\SearchViewModel.cs" />
-    <Compile Include="ViewsModels\TabControls\SettingsViewModel.cs" />
-    <Compile Include="Views\TabControls\Search.xaml.cs">
-      <DependentUpon>Search.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\TabControls\Settings.xaml.cs">
-      <DependentUpon>Settings.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Metadata\ContactItem.xaml.cs">
-      <DependentUpon>ContactItem.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Metadata\HistoryDataItem.xaml.cs">
-      <DependentUpon>HistoryDataItem.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Metadata\LastModificationMetaDataItem.xaml.cs">
-      <DependentUpon>LastModificationMetaDataItem.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Metadata\LicenseItem.xaml.cs">
-      <DependentUpon>LicenseItem.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Metadata\LimitationItem.xaml.cs">
-      <DependentUpon>LimitationItem.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Metadata\Metadata.xaml.cs">
-      <DependentUpon>Metadata.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Metadata\MetadataAdvanced.xaml.cs">
-      <DependentUpon>MetadataAdvanced.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Metadata\MetadataContacts.xaml.cs">
-      <DependentUpon>MetadataContacts.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Metadata\MetadataDetails.xaml.cs">
-      <DependentUpon>MetadataDetails.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Metadata\MetadataGeneral.xaml.cs">
-      <DependentUpon>MetadataGeneral.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Metadata\MetadataGeography.xaml.cs">
-      <DependentUpon>MetadataGeography.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Metadata\MetadataHistory.xaml.cs">
-      <DependentUpon>MetadataHistory.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Metadata\MetadataLicences.xaml.cs">
-      <DependentUpon>MetadataLicences.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Metadata\TabsMetadata.xaml.cs">
-      <DependentUpon>TabsMetadata.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Metadata\TechnicalInformationItem.xaml.cs">
-      <DependentUpon>TechnicalInformationItem.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Search\AdvancedSearch\AdvancedSearch.xaml.cs">
-      <DependentUpon>AdvancedSearch.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Search\AdvancedSearch\AdvancedSearchItem.xaml.cs">
-      <DependentUpon>AdvancedSearchItem.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="ViewsModels\Search\AdvancedSearch\AdvancedSearchItemViewModel.cs" />
-    <Compile Include="ViewsModels\Search\AdvancedSearch\AdvancedSearchViewModel.cs" />
-    <Compile Include="Views\Search\PrincipalSearch\SearchItems.xaml.cs">
-      <DependentUpon>SearchItems.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="ViewsModels\Search\PrincipalSearch\KeywordsViewModel.cs" />
-    <Compile Include="Views\Search\PrincipalSearch\PrincipalSearch.xaml.cs">
-      <DependentUpon>PrincipalSearch.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="ViewsModels\Search\PrincipalSearch\PrincipalSearchViewModel.cs" />
-    <Compile Include="ViewsModels\Search\PrincipalSearch\QuickSearchViewModel.cs" />
-    <Compile Include="Views\Search\PrincipalSearch\Searchbar.xaml.cs">
-      <DependentUpon>Searchbar.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Search\Results\ResultItem.xaml.cs">
-      <DependentUpon>ResultItem.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Search\Results\Results.xaml.cs">
-      <DependentUpon>Results.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Search\Results\ResultsToolBar.xaml.cs">
-      <DependentUpon>ResultsToolBar.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="ViewsModels\Search\Results\ResultsToolBarViewModel.cs" />
-    <Compile Include="ViewsModels\Search\Results\ResultsViewModel.cs" />
-    <Compile Include="Views\Search\AskNameWindow\AskNameWindow.xaml.cs">
-      <DependentUpon>AskNameWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="ViewsModels\Settings\ProxySettingsViewModel.cs" />
-    <Compile Include="Views\Settings\SearchSettings.xaml.cs">
-      <DependentUpon>SearchSettings.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="ViewsModels\Settings\SearchSettingsViewModel.cs" />
-    <Compile Include="Views\Settings\AuthenticationSettings.xaml.cs">
-      <DependentUpon>AuthenticationSettings.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Settings\Credits.xaml.cs">
-      <DependentUpon>Credits.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Settings\ProxySettings.xaml.cs">
-      <DependentUpon>ProxySettings.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Settings\ResourcesSettings.xaml.cs">
-      <DependentUpon>ResourcesSettings.xaml</DependentUpon>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <Page Include="Dockpane.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\TabControls\Search.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\TabControls\Settings.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\Metadata\ContactItem.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\Metadata\HistoryDataItem.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\Metadata\LastModificationMetaDataItem.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\Metadata\LicenseItem.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\Metadata\LimitationItem.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\Metadata\Metadata.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\Metadata\MetadataAdvanced.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\Metadata\MetadataContacts.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\Metadata\MetadataDetails.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\Metadata\MetadataGeneral.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\Metadata\MetadataGeography.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\Metadata\MetadataHistory.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\Metadata\MetadataLicences.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\Metadata\TabsMetadata.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\Metadata\TechnicalInformationItem.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\Search\AdvancedSearch\AdvancedSearch.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\Search\AdvancedSearch\AdvancedSearchItem.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\Search\PrincipalSearch\SearchItems.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\Search\PrincipalSearch\PrincipalSearch.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\Search\PrincipalSearch\Searchbar.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\Search\Results\ResultItem.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\Search\Results\Results.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\Search\Results\ResultsToolBar.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\Search\AskNameWindow\AskNameWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\Settings\SearchSettings.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\Settings\AuthenticationSettings.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\Settings\Credits.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\Settings\ProxySettings.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\Settings\ResourcesSettings.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.config">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <Resource Include="Icon\icon_isogeo32.png" />
-    <Resource Include="Icon\icon.png" />
-    <Content Include="log4net.config">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <None Include="packages.config" />
-    <None Include="Properties\Settings.settings">
-      <Generator>SettingsSingleFileGenerator</Generator>
-      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Map\Isogeo.Map.csproj">
-      <Project>{7d38e123-f808-4313-b069-d23bda25e256}</Project>
-      <Name>Isogeo.Map</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Models\Isogeo.Models.csproj">
-      <Project>{015c74ff-38b3-4fd5-a53f-fc0726ce270f}</Project>
-      <Name>Isogeo.Models</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\MVVMPattern\MVVMPattern.csproj">
-      <Project>{56d3f8e9-8476-4413-819e-ccd79480aadb}</Project>
-      <Name>MVVMPattern</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Resources\Isogeo.Resources.csproj">
-      <Project>{67b40db1-5093-4d0a-98c4-942d71765649}</Project>
-      <Name>Isogeo.Resources</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Utils\Isogeo.Utils.csproj">
-      <Project>{cba2a1a2-9374-4eb5-b812-74cccd427d25}</Project>
-      <Name>Isogeo.Utils</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Language\Isogeo.Language.csproj">
-      <Project>{edbe1371-7309-4e33-abb5-a4bd9390364c}</Project>
-      <Name>Isogeo.Language</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup />
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <!--
-  PackageAction can be:
-  BuildDefault: ArcGIS Pro is required. An esriAddinX package is created and copied to ArcGIS Pro add-in folder.
-  BuildZipPostProcess: ArcGIS Pro install is NOT required to build the add-in.  An esriAddinX package is created in your output folder.
-  BuildNoPostProcess:  ArcGIS Pro install is NOT required to build the add-in.  An esriAddinX package is NOT created.
-  -->
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PackageAction>BuildDefault</PackageAction>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PackageAction>BuildDefault</PackageAction>
-  </PropertyGroup>
-  <UsingTask AssemblyFile="C:\Program Files\ArcGIS\Pro\bin\proapp-sdk-MSBuild.dll" TaskName="proapp_sdk_MSBuild.PackageAddIn" />
-  <UsingTask AssemblyFile="C:\Program Files\ArcGIS\Pro\bin\proapp-sdk-MSBuild.dll" TaskName="proapp_sdk_MSBuild.CleanAddIn" />
-  <UsingTask AssemblyFile="C:\Program Files\ArcGIS\Pro\bin\proapp-sdk-MSBuild.dll" TaskName="proapp_sdk_MSBuild.ConvertToRelativePath" />
-  <!--<Import Project="Esri.ArcGISPro.Extensions.targets" Condition="Exists('Esri.ArcGISPro.Extensions.targets')" />-->
   <Import Project="C:\Program Files\ArcGIS\Pro\bin\Esri.ProApp.SDK.Desktop.targets" Condition="Exists('C:\Program Files\ArcGIS\Pro\bin\Esri.ProApp.SDK.Desktop.targets') AND !Exists('Esri.ArcGISPro.Extensions.targets')" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
-  <!--<Target Name="BeforeBuild">
-    <Error Text="C:\Program Files\ArcGIS\Pro\bin\Esri.ProApp.SDK.Desktop.targets not found." Condition="!Exists('C:\Program Files\ArcGIS\Pro\bin\Esri.ProApp.SDK.Desktop.targets') AND !Exists('Esri.ArcGISPro.Extensions.targets')" />
-  </Target>-->
 </Project>

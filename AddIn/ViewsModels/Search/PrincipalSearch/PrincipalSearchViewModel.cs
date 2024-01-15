@@ -1,40 +1,23 @@
-﻿using Isogeo.Models;
+﻿using Isogeo.AddIn.Models.FilterManager;
+using Isogeo.Map;
+using Isogeo.Network;
+using Isogeo.Utils.ConfigurationManager;
 using MVVMPattern;
-using MVVMPattern.MediatorPattern;
 
 namespace Isogeo.AddIn.ViewsModels.Search.PrincipalSearch
 {
     public class PrincipalSearchViewModel : ViewModelBase
     {
-
-        public string SearchText
-        {
-            get => Variables.searchText;
-            set
-            {
-                Variables.searchText = value; 
-                OnPropertyChanged("SearchText");
-            }
-        }
-
         public KeywordsViewModel KeywordsViewModel { get; set; }
         public QuickSearchViewModel QuickSearchViewModel { get; set; }
+        public SearchBarViewModel SearchBarViewModel { get; set; }
 
-        private void ChangeSearchTextEvent(object obj)
+        public PrincipalSearchViewModel(IFilterManager filterManager, INetworkManager networkManager, IMapManager mapManager,
+            IConfigurationManager configurationManager)
         {
-            SearchText = Variables.searchText;
-        }
-
-        public PrincipalSearchViewModel()
-        {
-            KeywordsViewModel = new KeywordsViewModel();
-            QuickSearchViewModel = new QuickSearchViewModel();
-            Mediator.Register("ChangeQuery", ChangeSearchTextEvent);
-        }
-
-        public void Search()
-        {
-            Variables.restFunctions.ReloadData(0);
+            KeywordsViewModel = new KeywordsViewModel(filterManager, networkManager, mapManager);
+            QuickSearchViewModel = new QuickSearchViewModel(networkManager, filterManager, mapManager, configurationManager);
+            SearchBarViewModel = new SearchBarViewModel(networkManager, filterManager);
         }
     }
 }

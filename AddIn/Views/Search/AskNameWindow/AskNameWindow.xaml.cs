@@ -1,19 +1,22 @@
 ﻿using System.Windows;
 using System.Windows.Input;
-using Isogeo.Models;
+using Isogeo.Utils.ConfigurationManager;
 using MessageBox = ArcGIS.Desktop.Framework.Dialogs.MessageBox;
 
 namespace Isogeo.AddIn.Views.Search.AskNameWindow
 {
     public partial class AskNameWindow
     {
+        private readonly IConfigurationManager _configurationManager;
+
         public bool isRename;
         public bool isSave;
         public string oldName;
 
-        public AskNameWindow(bool isRename, string oldName)
+        public AskNameWindow(bool isRename, string oldName, IConfigurationManager configurationManager)
         {
             InitializeComponent();
+            _configurationManager = configurationManager;
             this.isRename = isRename;
             this.oldName = oldName;
         }
@@ -38,9 +41,9 @@ namespace Isogeo.AddIn.Views.Search.AskNameWindow
                 return;
             }
 
-            foreach (var search in Variables.configurationManager.config.searchs.searchs)
+            foreach (var search in _configurationManager.Config.Searchs.SearchDetails)
             {
-                if (search.name == TxtQuickSearchName.Text && search.name != oldName)
+                if (search.Name == TxtQuickSearchName.Text && search.Name != oldName)
                 {
                     MessageBox.Show(this,
                         Isogeo.Language.Resources.Quicksearch_already_exist, Title);

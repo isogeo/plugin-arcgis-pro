@@ -1,19 +1,38 @@
-﻿using System.Collections.Generic;
+﻿using System.Text.Json.Serialization;
 
 namespace Isogeo.Models.API
 {
     public class Tags
     {
-        public List<string> ResourcesTypes { get; set; }
-        public List<string> Owners { get; set; }
-        public List<string> Keywords { get; set; }
-        public List<string> ThemeInspire { get; set; }
-        public List<string> Formats { get; set; }
-        public List<string> Srs { get; set; }
-        public List<string> Actions { get; set; }
-        public List<string> Contacts { get; set; }
-        public List<string> Licenses { get; set; }
-        public int conformity;
+        [JsonPropertyName("resourcesTypes")]
+        public List<string>? ResourcesTypes { get; set; }
+
+        [JsonPropertyName("owners")]
+        public List<string>? Owners { get; set; }
+
+        [JsonPropertyName("keywords")]
+        public List<string>? Keywords { get; set; }
+
+        [JsonPropertyName("themeInspire")]
+        public List<string>? ThemeInspire { get; set; }
+
+        [JsonPropertyName("formats")]
+        public List<string>? Formats { get; set; }
+
+        [JsonPropertyName("srs")]
+        public List<string>? Srs { get; set; }
+
+        [JsonPropertyName("actions")]
+        public List<string>? Actions { get; set; }
+
+        [JsonPropertyName("contacts")]
+        public List<string>? Contacts { get; set; }
+
+        [JsonPropertyName("licenses")]
+        public List<string>? Licenses { get; set; }
+
+        [JsonPropertyName("conformity")]
+        public int? Conformity { get; set; }
 
         public Tags(Result result)
         {
@@ -27,12 +46,9 @@ namespace Isogeo.Models.API
             Contacts = new List<string>();
             Licenses = new List<string>();
 
-            if (result.tags == null) return;
-            foreach (var item in result.tags)
+            if (result.Tags == null) return;
+            foreach (var (key, val) in result.Tags)
             {
-                var key = item.Key;
-                var val = item.Value;
-
                 if (key.StartsWith("owner"))
                 {
                     Owners.Add(val);
@@ -71,7 +87,7 @@ namespace Isogeo.Models.API
                 }
                 else if (key.StartsWith("conformity"))
                 {
-                    conformity = 1;
+                    Conformity = 1;
                 }
             }
         }

@@ -1,10 +1,21 @@
-﻿using System;
+using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
-using Isogeo.AddIn.Views.Search.Results;
+using System.Windows.Threading;
+using ActiproSoftware.Windows.Extensions;
+using Isogeo.AddIn.Models;
+using Isogeo.AddIn.Models.FilterManager;
+using Isogeo.AddIn.Models.Filters.Components;
+using Isogeo.Map;
 using Isogeo.Models;
-using Isogeo.Models.Filters;
+using Isogeo.Network;
+using Isogeo.Utils.ConfigurationManager;
 using MVVMPattern;
 using MVVMPattern.MediatorPattern;
 using MVVMPattern.RelayCommand;
@@ -16,17 +27,39 @@ namespace Isogeo.AddIn.ViewsModels.Search.Results
 
         private ICommand _nextCommand;
         private ICommand _previousCommand;
+        private readonly IMapManager _mapManager;
+        private readonly INetworkManager _networkManager;
+        private readonly IFilterManager _filterManager;
+        private readonly IConfigurationManager _configurationManager;
 
-        public ObservableCollection<ResultItem> ResultsList { get; set; }
+        private CancellationTokenSource _loadDetailResultsCancellationToken = new();
+        private Task? _loadDetailResultsTask;
 
-        private ResultItem _selectedItem;
-        public ResultItem SelectedItem
+        public ObservableCollection<ResultItemViewModel> ResultsList { get; set; }
+
+        public ResultsViewModel(IMapManager mapManager, INetworkManager networkManager, IFilterManager filterManager,
+            IConfigurationManager configurationManager)
+        {
+            _configurationManager = configurationManager;
+            _mapManager = mapManager;
+            _networkManager = networkManager;
+            _filterManager = filterManager;
+            ResultsList = new ObservableCollection<ResultItemViewModel>();
+            ListNumberPage = new FilterItemList();
+            ListNumberPage.PropertyChanged += Filter_PropertyChanged;
+            Refresh(0);
+            Mediator.Register(MediatorEvent.ChangeOffset, ChangePageEvent);
+            Mediator.Register(MediatorEvent.ClearResults, ClearResultsEvent);
+        }
+
+        private ResultItemViewModel _selectedItem;
+        public ResultItemViewModel SelectedItem
         {
             get => _selectedItem;
             set
             {
                 _selectedItem = value;
-                OnPropertyChanged("SelectedItem");
+                OnPropertyChanged(nameof(SelectedItem));
             }
         }
 
@@ -35,18 +68,25 @@ namespace Isogeo.AddIn.ViewsModels.Search.Results
             get => ListNumberPage.Selected;
             set
             {
-                OnPropertyChanged("CurrentPage");
                 if (value == null || (ListNumberPage.Selected != null && value.Name == ListNumberPage.Selected.Name))
                     return;
-                ListNumberPage.Selected = value;
-                SelectionChanged((int.Parse(value.Name) - 1) * Variables.nbResult);
+                _listNumberPage.Selected = value;
+                OnPropertyChanged(nameof(CurrentPage));
+                OnPropertyChanged(nameof(PreviousCommand));
+                OnPropertyChanged(nameof(NextCommand));
+                Task.Run(() => Application.Current.Dispatcher.Invoke(async () => 
+                await SelectionChanged((int.Parse(value.Name) - 1) * _configurationManager.GlobalSoftwareSettings.NbResult)));
             }
         }
 
-        private static void SelectionChanged(int offset)
+        private async Task SelectionChanged(int offset)
         {
-            if (Variables.restFunctions != null) 
-                Variables.restFunctions.ReloadData(offset);
+            var ob = _filterManager.GetOb();
+            var od = _filterManager.GetOd();
+            var query = _filterManager.GetQueryCombos();
+            var box = _filterManager.GetBoxRequest();
+
+            await _networkManager.ChangeOffset(query, offset, box, od, ob);
         }
 
         private string _lblPage;
@@ -56,7 +96,7 @@ namespace Isogeo.AddIn.ViewsModels.Search.Results
             set
             {
                 _lblPage = value;
-                OnPropertyChanged("LblNbPage");
+                OnPropertyChanged(nameof(LblNbPage));
             }
         }
 
@@ -67,7 +107,7 @@ namespace Isogeo.AddIn.ViewsModels.Search.Results
             set
             {
                 _lstResultIsEnabled = value;
-                OnPropertyChanged("LstResultIsEnabled");
+                OnPropertyChanged(nameof(LstResultIsEnabled));
             }
 
         }
@@ -79,15 +119,16 @@ namespace Isogeo.AddIn.ViewsModels.Search.Results
             set
             {
                 _listNumberPage = value;
-                OnPropertyChanged("ListNumberPage");
+                OnPropertyChanged(nameof(ListNumberPage));
             }
         }
 
-        private static int GetNbPage()
+        private int GetNbPage()
         {
             var nbPage = 1;
-            if (Variables.search != null && !Variables.search.total.Equals(0))
-                nbPage = Convert.ToInt32(Math.Ceiling(Variables.search.total / Variables.nbResult));
+            if (Variables.search != null && !Variables.search.Total.Equals(0))
+                nbPage = Convert.ToInt32(Math.Ceiling(Variables.search.Total /
+                                                      _configurationManager.GlobalSoftwareSettings.NbResult));
             return nbPage;
         }
 
@@ -98,20 +139,22 @@ namespace Isogeo.AddIn.ViewsModels.Search.Results
 
         private void Filter_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            OnPropertyChanged("ListNumberPage");
+            OnPropertyChanged(nameof(ListNumberPage));
         }
 
         private void ClearResults()
         {
             ResultsList.Clear();
             ListNumberPage.Items.Clear();
-            ListNumberPage.Items.Add(new FilterItem { Name = "1" });
+            ListNumberPage.Items.Add(new FilterItem("1", "1" ));
             LblNbPage = "/ 1";
             ListNumberPage.Selected = ListNumberPage.Items[0];
-            OnPropertyChanged("CurrentPage");
-            OnPropertyChanged("ListNumberPage");
-            OnPropertyChanged("LblNbPage");
-            OnPropertyChanged("CurrentPage");
+            OnPropertyChanged(nameof(CurrentPage));
+            OnPropertyChanged(nameof(ListNumberPage));
+            OnPropertyChanged(nameof(LblNbPage));
+            OnPropertyChanged(nameof(CurrentPage));
+            OnPropertyChanged(nameof(PreviousCommand));
+            OnPropertyChanged(nameof(NextCommand));
         }
 
         private void ClearResultsEvent(object obj)
@@ -119,52 +162,89 @@ namespace Isogeo.AddIn.ViewsModels.Search.Results
             ClearResults();
         }
 
-        public ResultsViewModel()
+        private void LoadResultItemsViewModelResultsLinks()
         {
-            ResultsList = new ObservableCollection<ResultItem>();
-            ListNumberPage = new FilterItemList();
-            ListNumberPage.PropertyChanged += Filter_PropertyChanged;
-            Refresh(0);
-            Mediator.Register("ChangeOffset", ChangePageEvent);
-            Mediator.Register("ClearResults", ClearResultsEvent);
+            var token = _loadDetailResultsCancellationToken.Token;
+            _loadDetailResultsTask = Task.Run(async () =>
+            {
+                var ob = _filterManager.GetOb();
+                var od = _filterManager.GetOd();
+                var query = _filterManager.GetQueryCombos();
+                var box = _filterManager.GetBoxRequest();
+
+                var search = await _networkManager.GetDataWithoutMediatorEventRaised(query,
+                    (int.Parse(CurrentPage.Name) - 1) * _configurationManager.GlobalSoftwareSettings.NbResult, box, od, ob,
+                    token);
+
+                if (search?.Results == null)
+                    return;
+                foreach (var result in search.Results)
+                {
+                    var item = ResultsList.FirstOrDefault(x => x.Result.Id == result.Id);
+                    if (item == null)
+                        continue;
+                    item.Result = result;
+                    Application.Current.Dispatcher.Invoke(item.LoadComboBox);
+                }
+                Application.Current.Dispatcher.Invoke(WpfHelper.ForceFrontToCheckCommands);
+            }, token);
         }
 
-        public void Refresh(int offset)
+        public async Task CancelDetailResultsLoading()
         {
+            _loadDetailResultsCancellationToken.Cancel();
+            if (_loadDetailResultsTask != null)
+                await _loadDetailResultsTask;
+            _loadDetailResultsCancellationToken = new CancellationTokenSource();
+        }
+
+        public async Task Refresh(int offset)
+        {
+            await CancelDetailResultsLoading();
+            var temporaryItems = new List<ResultItemViewModel>();
+
             LstResultIsEnabled = false;
-            ResultsList.Clear();
-            if (Variables.search != null && Variables.search.results != null)
+            if (Variables.search != null && Variables.search.Results != null)
             {
-                for (var i = Variables.search.results.Count - 1; i >= 0; i--)
+                for (var i = Variables.search.Results.Count - 1; i >= 0; i--)
                 {
-                    var result = Variables.search.results[i];
-                    var resultItem = new ResultItem();
+                    var result = Variables.search.Results[i];
+                    var resultItem = new ResultItemViewModel(_mapManager, _networkManager, _configurationManager);
                     resultItem.Init(result);
-                    ResultsList.Insert(0, resultItem);
+                    temporaryItems.Insert(0, resultItem);
                 }
             }
+            ResultsList.Clear();
+            ResultsList.AddRange(temporaryItems);
             SetPages(offset);
             LstResultIsEnabled = true;
-            if (ResultsList.Count > 0) 
+            if (ResultsList.Count > 0)
                 SelectedItem = ResultsList[0];
+            LoadResultItemsViewModelResultsLinks();
+            WpfHelper.ForceFrontToCheckCommands();
         }
 
         private void SetCurrentPageWithoutTriggerReloadApi(int offset)
         {
-            var index = (offset / Variables.nbResult + 1) - 1;
-            if (offset < 0 || Variables.nbResult <= 0 && ListNumberPage.Items.Count <= index) 
+            var index = (offset / _configurationManager.GlobalSoftwareSettings.NbResult + 1) - 1;
+            if (offset < 0 || _configurationManager.GlobalSoftwareSettings.NbResult <= 0 && ListNumberPage.Items.Count <= index) 
                 ListNumberPage.Selected = ListNumberPage.Items[0];
             else
                 ListNumberPage.Selected = ListNumberPage.Items[index];
-            OnPropertyChanged("CurrentPage");
+            OnPropertyChanged(nameof(CurrentPage));
+            OnPropertyChanged(nameof(PreviousCommand));
+            OnPropertyChanged(nameof(NextCommand));
         }
 
         private void SetPages(int offset)
         {
+            var temporaryList = new List<FilterItem>();
+
             var nbPage = GetNbPage();
+            for (var i = 0; i < nbPage; i++)
+                temporaryList.Add(new FilterItem((i + 1).ToString(), (i + 1).ToString()));
             ListNumberPage.Items.Clear();
-            for (var i = 0; i < nbPage; i++) 
-                ListNumberPage.Items.Add(new FilterItem { Name = (i + 1).ToString()});
+            ListNumberPage.Items.AddRange(temporaryList);
             LblNbPage = "/ " + nbPage;
             SetCurrentPageWithoutTriggerReloadApi(offset);
         }
@@ -173,9 +253,9 @@ namespace Isogeo.AddIn.ViewsModels.Search.Results
         {
             get
             {
-                return _nextCommand ?? (_nextCommand = new RelayCommand(
+                return _nextCommand ??= new RelayCommand(
                     x => GoNext(),
-                    y => CanGoNext()));
+                    y => CanGoNext());
             }
         }
 
@@ -183,9 +263,9 @@ namespace Isogeo.AddIn.ViewsModels.Search.Results
         {
             get
             {
-                return _previousCommand ?? (_previousCommand = new RelayCommand(
+                return _previousCommand ??= new RelayCommand(
                     x => GoPrevious(),
-                    y => CanGoPrevious()));
+                    y => CanGoPrevious());
             }
         }
 
@@ -201,11 +281,15 @@ namespace Isogeo.AddIn.ViewsModels.Search.Results
 
         private bool CanGoNext()
         {
+            if (CurrentPage?.Name == null)
+                return false;
             return ListNumberPage.GetIndex(CurrentPage.Name) < ListNumberPage.Items.Count - 1;
         }
 
         private bool CanGoPrevious()
         {
+            if (CurrentPage?.Name == null)
+                return false;
             return ListNumberPage.GetIndex(CurrentPage.Name) > 0;
         }
     }

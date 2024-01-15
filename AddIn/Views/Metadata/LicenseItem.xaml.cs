@@ -4,8 +4,6 @@ namespace Isogeo.AddIn.Views.Metadata
 {
     public partial class LicenseItem
     {
-        private Condition condition;
-
         public LicenseItem()
         {
             InitializeComponent();
@@ -16,17 +14,12 @@ namespace Isogeo.AddIn.Views.Metadata
             LblLicense.Text = "";
             LblContent.Text = "";
 
-            condition = conditionInput;
-            if (conditionInput.license != null)
+            if (conditionInput.License != null)
             {
-                LblLicense.Text = conditionInput.license.name;
-                LblContent.Text = conditionInput.license.link;
+                LblLicense.Text = conditionInput.License.Name;
+                LblContent.Text = conditionInput.License.Link;
             }
-            /*else
-            {
-                LblLicense.Text = Isogeo.Language.Resources.No_licence;
-            }*/
-            LblDescription.Text = conditionInput.description;
+            LblDescription.Text = conditionInput.Description;
         }
     }
 }

@@ -24,7 +24,8 @@ namespace Isogeo.Utils.LogManager
             {
                 //set the path to your logDirectory using the original file name defined
                 //in configuration
-                if (!(appender is FileAppender fileAppender)) continue;
+                if (appender is not FileAppender fileAppender) 
+                    continue;
                 fileAppender.File = Path.Combine(logDirectory, Path.GetFileName(fileAppender.File));
                 //make sure to call fileAppender.ActivateOptions() to notify the logging
                 //sub system that the configuration for this appender has changed.
@@ -34,10 +35,8 @@ namespace Isogeo.Utils.LogManager
 
         public static void InitializeLogManager(string configFile)
         {
-            using (var fs = new FileStream(configFile, FileMode.Open))
-            {
-                XmlConfigurator.Configure(fs);
-            }
+            using var fs = new FileStream(configFile, FileMode.Open);
+            XmlConfigurator.Configure(fs);
         }
 
         public static string GetLogFilePath()

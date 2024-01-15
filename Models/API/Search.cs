@@ -1,22 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Text.Json.Serialization;
 
 namespace Isogeo.Models.API
 {
     public class Search
     {
-        //public IEnumerable<IDictionary<string, string>> tags { get; set; }
-        public IDictionary<string, string> tags;
-        //public String envelope { get; set; }
-        //query
-        //results
-        public Double offset { get; set; }
-        public Double limit { get; set; }
-        public Double total { get; set; }
-        public List<Result> results
-        {
-            get;
-            set;
-        }
+        [JsonPropertyName("tags")]
+        public IDictionary<string, string>? Tags { get; set; }
+
+        [JsonPropertyName("offset")]
+        public double Offset { get; set; }
+
+        [JsonPropertyName("limit")]
+        public double Limit { get; set; }
+
+        [JsonPropertyName("total")]
+        public double Total { get; set; }
+
+        [JsonPropertyName("results")]
+        public List<Result>? Results { get; set; }
     }
 }

@@ -246,6 +246,9 @@
   <data name="Error_logs" xml:space="preserve">
     <value>Erreur : Impossible de charger le fichier des logs</value>
   </data>
+  <data name="Error_Open_External_Tool" xml:space="preserve">
+    <value>Une erreur s'est produite lors de l'ouverture de la fenêtre désirée. Nous n'avons pas pu accéder à votre demande.</value>
+  </data>
   <data name="Error_proxy" xml:space="preserve">
     <value>Les informations proxy n'ont pas pu être sauvegardé</value>
   </data>
@@ -317,6 +320,9 @@
   </data>
   <data name="Line" xml:space="preserve">
     <value>Ligne</value>
+  </data>
+  <data name="Loading_in_progress" xml:space="preserve">
+    <value>Chargement en cours...</value>
   </data>
   <data name="Log" xml:space="preserve">
     <value>Log</value>

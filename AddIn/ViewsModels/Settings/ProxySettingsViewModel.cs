@@ -2,7 +2,7 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using Isogeo.Models;
+using Isogeo.Utils.ConfigurationManager;
 using Isogeo.Utils.LogManager;
 using Isogeo.Utils.ManageEncrypt;
 using MVVMPattern;
@@ -13,6 +13,13 @@ namespace Isogeo.AddIn.ViewsModels.Settings
     public class ProxySettingsViewModel : ViewModelBase
     {
 
+        private readonly IConfigurationManager _configurationManager;
+
+        public ProxySettingsViewModel(IConfigurationManager configurationManager)
+        {
+            _configurationManager = configurationManager;
+        }
+
         private string _proxyUrl;
         public string ProxyUrl
         {
@@ -20,7 +27,7 @@ namespace Isogeo.AddIn.ViewsModels.Settings
             set
             {
                 _proxyUrl = value;
-                OnPropertyChanged("ProxyUrl");
+                OnPropertyChanged(nameof(ProxyUrl));
             }
         }
 
@@ -31,7 +38,7 @@ namespace Isogeo.AddIn.ViewsModels.Settings
             set
             {
                 _user = value;
-                OnPropertyChanged("User");
+                OnPropertyChanged(nameof(User));
             }
         }
 
@@ -42,9 +49,9 @@ namespace Isogeo.AddIn.ViewsModels.Settings
         {
             get
             {
-                return _cancelCommand ?? (_cancelCommand = new RelayCommand(
+                return _cancelCommand ??= new RelayCommand(
                     x => Cancel(),
-                    y => CanCancel()));
+                    y => CanCancel());
             }
         }
 
@@ -52,9 +59,9 @@ namespace Isogeo.AddIn.ViewsModels.Settings
         {
             get
             {
-                return _saveCommand ?? (_saveCommand = new RelayCommand(
+                return _saveCommand ??= new RelayCommand(
                     x => Save(x),
-                    y => CanSave()));
+                    y => CanSave());
             }
         }
 
@@ -65,19 +72,20 @@ namespace Isogeo.AddIn.ViewsModels.Settings
 
         private void Save(object parameter)
         {
-            Variables.configurationManager.config.proxy.proxyUrl = ProxyUrl;
-            Variables.configurationManager.config.proxy.proxyUser = User;
-            Variables.configurationManager.config.proxy.proxyPassword = "";
+            _configurationManager.Config.Proxy.ProxyUrl = ProxyUrl;
+            _configurationManager.Config.Proxy.ProxyUser = User;
+            _configurationManager.Config.Proxy.ProxyPassword = "";
 
             var password = ((PasswordBox) parameter).Password;
             try
             {
                 if (password != "")
                 {
-                    var encryptedString = RijndaelManagedEncryption.EncryptRijndael(password, Variables.encryptCode);
-                    Variables.configurationManager.config.proxy.proxyPassword = encryptedString;
+                    var encryptedString = RijndaelManagedEncryption.EncryptRijndael(password, 
+                        _configurationManager.GlobalSoftwareSettings.EncryptCode);
+                    _configurationManager.Config.Proxy.ProxyPassword = encryptedString;
                 }
-                Variables.configurationManager.Save();
+                _configurationManager.Save();
                 MessageBox.Show(Language.Resources.Proxy_saved);
             }
             catch (Exception ex)
@@ -93,8 +101,8 @@ namespace Isogeo.AddIn.ViewsModels.Settings
 
         private void Cancel()
         {
-            ProxyUrl = Variables.configurationManager.config.proxy.proxyUrl;
-            User = Variables.configurationManager.config.proxy.proxyUser;
+            ProxyUrl = _configurationManager.Config.Proxy.ProxyUrl;
+            User = _configurationManager.Config.Proxy.ProxyUser;
         }
 
         private bool CanCancel()
