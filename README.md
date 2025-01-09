@@ -7,7 +7,7 @@
 ArcGis Pro Add-In for [Isogeo](https://www.isogeo.com/), a SaaS software to give an easier access to geodata.
 Equivalent of [plugins for ArcMap/QGIS](https://www.isogeo.com/nos-produits/Plugins-Widgets).
 
-[Online documentation is available here](http://help.isogeo.com/arcgispro/fr/).
+[Online documentation is available here](https://help.isogeo.com/doc-plugin-arcgispro/en/).
 
 ## Purpose
 
