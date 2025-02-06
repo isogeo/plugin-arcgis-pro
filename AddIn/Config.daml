@@ -5,13 +5,13 @@
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://schemas.esri.com/DADF/Registry file:///C:/Program%20Files/ArcGIS/Pro/bin/ArcGIS.Desktop.Framework.xsd">
 
-  <AddInInfo id="{d3cd9cd7-2008-4a27-be55-da1aeb26239f}" version="2.1.0-beta1" desktopVersion="3.0">
+  <AddInInfo id="{d3cd9cd7-2008-4a27-be55-da1aeb26239f}" version="2.1.0-beta2" desktopVersion="3.0">
     <Name>Isogeo Add-In</Name>   
     <Description>ArcGis Pro Isogeo Add-In</Description>
     <Image>Icon\icon_isogeo.png</Image>
     <Author>Isogeo</Author>
     <Company>Isogeo</Company>
-    <Date>30/12/2024 02:00:00 PM</Date>
+    <Date>07/01/2025 02:00:00 PM</Date>
     <Subject>Framework</Subject>
     <!-- Note subject can be one or more of these topics:
                     Content, Framework, Editing, Geodatabase, Geometry, Geoprocessing, Layouts, Map Authoring, Map Exploration -->
