@@ -51,7 +51,7 @@ namespace Isogeo.AddIn.ViewsModels.Search.AdvancedSearch
         private void Init(string listName)
         {
             _filterName = listName;
-            if (listName != "keyword:isogeo")
+            if (listName != "map")
             {
                 _filterManager.AddFunctionToSetFilterList(SetList);
                 _filterManager.AddFilters(Filters);

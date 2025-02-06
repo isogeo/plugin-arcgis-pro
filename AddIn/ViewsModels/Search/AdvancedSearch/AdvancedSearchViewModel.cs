@@ -7,6 +7,7 @@ namespace Isogeo.AddIn.ViewsModels.Search.AdvancedSearch
     public class AdvancedSearchViewModel : MVVMPattern.ViewModelBase
     {
         public AdvancedSearchItemViewModel ThematicFilter { get; set; }
+        public AdvancedSearchItemViewModel KeywordFilter { get; set; }
         public AdvancedSearchItemViewModel ContactFilter { get; set; }
         public AdvancedSearchItemViewModel InspireFilter { get; set; }
         public AdvancedSearchItemViewModel FormatFilter { get; set; }
@@ -34,6 +35,10 @@ namespace Isogeo.AddIn.ViewsModels.Search.AdvancedSearch
                 Language.Resources.Group_theme,
                 "pack://application:,,,/Isogeo.Resources;component/Resources/users.png",
                 "keyword:group-theme", _networkManager, _mapManager, _filterManager);
+            KeywordFilter = new AdvancedSearchItemViewModel(
+                Language.Resources.Keywords,
+                "pack://application:,,,/Isogeo.Resources;component/Resources/users.png",
+                "keyword:isogeo", _networkManager, _mapManager, _filterManager);
             ContactFilter = new AdvancedSearchItemViewModel(
                 Language.Resources.Contact,
                 "pack://application:,,,/Isogeo.Resources;component/Resources/phone_orange.png",
@@ -52,7 +57,7 @@ namespace Isogeo.AddIn.ViewsModels.Search.AdvancedSearch
             GeographyFilter = new AdvancedSearchItemViewModel(
                 Language.Resources.Geographic_filter,
                 "pack://application:,,,/Isogeo.Resources;component/Resources/map.png",
-                "keyword:isogeo", _networkManager, _mapManager, _filterManager);
+                "map", _networkManager, _mapManager, _filterManager);
 
             LicenseFilter = new AdvancedSearchItemViewModel(
                 Language.Resources.Licence,
