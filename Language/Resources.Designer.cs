@@ -610,11 +610,11 @@ namespace Isogeo.Language {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to INSPIRE keywords.
+        ///   Looks up a localized string similar to INSPIRE keyword.
         /// </summary>
-        public static string INSPIRE_keywords {
+        public static string INSPIRE_keyword {
             get {
-                return ResourceManager.GetString("INSPIRE_keywords", resourceCulture);
+                return ResourceManager.GetString("INSPIRE_keyword", resourceCulture);
             }
         }
         

@@ -300,8 +300,8 @@
   <data name="Import_File" xml:space="preserve">
     <value>Importar fichero</value>
   </data>
-  <data name="INSPIRE_keywords" xml:space="preserve">
-    <value>Palabras clave INSPIRE</value>
+  <data name="INSPIRE_keyword" xml:space="preserve">
+    <value>Palabra clave INSPIRE</value>
   </data>
   <data name="Isogeo_authentication_settings" xml:space="preserve">
     <value>Configuración de la autenticación de Isogeo</value>
@@ -703,7 +703,7 @@
     <value>Metadatos creados</value>
   </data>
   <data name="Sorting_method_metadata_modified" xml:space="preserve">
-    <value>Metadata modified</value>
+    <value>Metadatos modificados</value>
   </data>
   <data name="Sorting_method_modified" xml:space="preserve">
     <value>Datos modificados</value>

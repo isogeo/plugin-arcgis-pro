@@ -300,8 +300,8 @@
   <data name="Import_File" xml:space="preserve">
     <value>Import file</value>
   </data>
-  <data name="INSPIRE_keywords" xml:space="preserve">
-    <value>INSPIRE keywords</value>
+  <data name="INSPIRE_keyword" xml:space="preserve">
+    <value>INSPIRE keyword</value>
   </data>
   <data name="Isogeo_authentication_settings" xml:space="preserve">
     <value>Isogeo authentication settings</value>

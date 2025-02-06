@@ -297,7 +297,7 @@
   <data name="Import_File" xml:space="preserve">
     <value>Importer un fichier</value>
   </data>
-  <data name="INSPIRE_keywords" xml:space="preserve">
+  <data name="INSPIRE_keyword" xml:space="preserve">
     <value>Thématique INSPIRE</value>
   </data>
   <data name="Isogeo_authentication_settings" xml:space="preserve">

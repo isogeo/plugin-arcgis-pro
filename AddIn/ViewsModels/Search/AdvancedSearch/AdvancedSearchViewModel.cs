@@ -45,7 +45,7 @@ namespace Isogeo.AddIn.ViewsModels.Search.AdvancedSearch
                 "contact", _networkManager, _mapManager, _filterManager);
 
             InspireFilter = new AdvancedSearchItemViewModel(
-                Language.Resources.INSPIRE_keywords,
+                Language.Resources.INSPIRE_keyword,
                 "pack://application:,,,/Isogeo.Resources;component/Resources/leaf.png",
                 "keyword:inspire-theme", _networkManager, _mapManager, _filterManager);
 

@@ -336,6 +336,8 @@ namespace Isogeo.AddIn.ViewsModels.Metadata
             }
         }
 
+        public bool MetadataAttributesIsVisible => _currentResult.Type is not ("service" or "rasterDataset" or "resource");
+
         public List<MetadataAttribute> MetadataAttributes => _currentResult?.FeatureAttributes?
             .Where(x => x != null).Select(y => new MetadataAttribute(y.Name, y.Alias, y.Comment, y.DataType, y.Description)).ToList() 
             ?? new List<MetadataAttribute>();
