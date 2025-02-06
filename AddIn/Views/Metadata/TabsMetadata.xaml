@@ -65,6 +65,9 @@
                 <TabItem x:Name="TabiGeneral" Header="{x:Static lang:Resources.Message_Metadata_General}">
                     <metadata:MetadataGeneral x:Name="MetadataGeneral" />
                 </TabItem>
+                <TabItem x:Name="TabiAttributes" Header="{x:Static lang:Resources.Message_Metadata_Attributes}">
+                    <metadata:MetadataAttributes x:Name="MetadataAttributes" />
+                </TabItem>
                 <TabItem x:Name="TabiContacts" Header="{x:Static lang:Resources.Message_Metadata_Contacts}">
                     <metadata:MetadataContacts x:Name="MetadataContacts" />
                 </TabItem>

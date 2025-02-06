@@ -372,6 +372,9 @@
   <data name="Message_Metadata_Advanced" xml:space="preserve">
     <value>Avancé</value>
   </data>
+  <data name="Message_Metadata_Attributes" xml:space="preserve">
+    <value>Attributs</value>
+  </data>
   <data name="Message_Metadata_Contacts" xml:space="preserve">
     <value>Contacts</value>
   </data>
@@ -425,6 +428,18 @@
   </data>
   <data name="Metadata_Advanced_owner" xml:space="preserve">
     <value>Propriétaire</value>
+  </data>
+  <data name="Metadata_Attributes_Alias" xml:space="preserve">
+    <value>Alias</value>
+  </data>
+  <data name="Metadata_Attributes_Description" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="Metadata_Attributes_Name" xml:space="preserve">
+    <value>Nom</value>
+  </data>
+  <data name="Metadata_Attributes_Type" xml:space="preserve">
+    <value>Type</value>
   </data>
   <data name="Metadata_Contacts_others_contacts" xml:space="preserve">
     <value>Autres contacts</value>

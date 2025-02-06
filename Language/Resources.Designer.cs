@@ -835,6 +835,15 @@ namespace Isogeo.Language {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Attributes.
+        /// </summary>
+        public static string Message_Metadata_Attributes {
+            get {
+                return ResourceManager.GetString("Message_Metadata_Attributes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Contacts.
         /// </summary>
         public static string Message_Metadata_Contacts {
@@ -993,6 +1002,42 @@ namespace Isogeo.Language {
         public static string Metadata_Advanced_owner {
             get {
                 return ResourceManager.GetString("Metadata_Advanced_owner", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Alias.
+        /// </summary>
+        public static string Metadata_Attributes_Alias {
+            get {
+                return ResourceManager.GetString("Metadata_Attributes_Alias", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Description.
+        /// </summary>
+        public static string Metadata_Attributes_Description {
+            get {
+                return ResourceManager.GetString("Metadata_Attributes_Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Name.
+        /// </summary>
+        public static string Metadata_Attributes_Name {
+            get {
+                return ResourceManager.GetString("Metadata_Attributes_Name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Type.
+        /// </summary>
+        public static string Metadata_Attributes_Type {
+            get {
+                return ResourceManager.GetString("Metadata_Attributes_Type", resourceCulture);
             }
         }
         
