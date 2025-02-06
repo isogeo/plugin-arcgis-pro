@@ -547,6 +547,15 @@ namespace Isogeo.Language {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Thematic.
+        /// </summary>
+        public static string Group_theme {
+            get {
+                return ResourceManager.GetString("Group_theme", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Help.
         /// </summary>
         public static string Help {

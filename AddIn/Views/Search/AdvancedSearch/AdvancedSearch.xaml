@@ -20,15 +20,17 @@
                         <RowDefinition Height="1*"/>
                         <RowDefinition Height="1*"/>
                         <RowDefinition Height="1*"/>
+                        <RowDefinition Height="1*"/>
                     </Grid.RowDefinitions>
-                    <advancedSearch:AdvancedSearchItem DataContext="{Binding GeographyFilter}" x:Name="GeographyFilter" Grid.Row="0" Grid.Column="0" />
-                    <advancedSearch:AdvancedSearchItem DataContext="{Binding FormatFilter}" x:Name="FormatFilter" Grid.Row="1" Grid.Column="0" />
-                    <advancedSearch:AdvancedSearchItem DataContext="{Binding InspireFilter}" x:Name="InspireFilter" Grid.Row="2" Grid.Column="0" />
-                    <advancedSearch:AdvancedSearchItem DataContext="{Binding ContactFilter}" x:Name="ContactFilter" Grid.Row="3" Grid.Column="0" />
-                    <advancedSearch:AdvancedSearchItem DataContext="{Binding ResourceTypeFilter}" x:Name="ResourceTypeFilter" Grid.Row="0" Grid.Column="1" />
-                    <advancedSearch:AdvancedSearchItem DataContext="{Binding OwnerMetadataFilter}" x:Name="OwnerMetadataFilter" Grid.Row="1" Grid.Column="1" />
-                    <advancedSearch:AdvancedSearchItem DataContext="{Binding CoordinateSystemFilter}" x:Name="CoordinateSystemFilter" Grid.Row="2" Grid.Column="1" />
-                    <advancedSearch:AdvancedSearchItem DataContext="{Binding LicenseFilter}" x:Name="LicenseFilter" Grid.Row="3" Grid.Column="1" />
+                    <advancedSearch:AdvancedSearchItem DataContext="{Binding ThematicFilter}" x:Name="ThematicFilter" Grid.Row="0" Grid.Column="0" />
+                    <advancedSearch:AdvancedSearchItem DataContext="{Binding GeographyFilter}" x:Name="GeographyFilter" Grid.Row="1" Grid.Column="0" />
+                    <advancedSearch:AdvancedSearchItem DataContext="{Binding FormatFilter}" x:Name="FormatFilter" Grid.Row="2" Grid.Column="0" />
+                    <advancedSearch:AdvancedSearchItem DataContext="{Binding InspireFilter}" x:Name="InspireFilter" Grid.Row="3" Grid.Column="0" />
+                    <advancedSearch:AdvancedSearchItem DataContext="{Binding ContactFilter}" x:Name="ContactFilter" Grid.Row="4" Grid.Column="0" />
+                    <advancedSearch:AdvancedSearchItem DataContext="{Binding ResourceTypeFilter}" x:Name="ResourceTypeFilter" Grid.Row="1" Grid.Column="1" />
+                    <advancedSearch:AdvancedSearchItem DataContext="{Binding OwnerMetadataFilter}" x:Name="OwnerMetadataFilter" Grid.Row="2" Grid.Column="1" />
+                    <advancedSearch:AdvancedSearchItem DataContext="{Binding CoordinateSystemFilter}" x:Name="CoordinateSystemFilter" Grid.Row="3" Grid.Column="1" />
+                    <advancedSearch:AdvancedSearchItem DataContext="{Binding LicenseFilter}" x:Name="LicenseFilter" Grid.Row="4" Grid.Column="1" />
                 </Grid>
             </Expander>
         </GroupBox>

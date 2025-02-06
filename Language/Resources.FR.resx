@@ -276,6 +276,9 @@
   <data name="Geographic_type_within" xml:space="preserve">
     <value>Est contenu</value>
   </data>
+  <data name="Group_theme" xml:space="preserve">
+    <value>Thématique</value>
+  </data>
   <data name="Help" xml:space="preserve">
     <value>Aide</value>
   </data>

@@ -6,6 +6,7 @@ namespace Isogeo.AddIn.ViewsModels.Search.AdvancedSearch
 {
     public class AdvancedSearchViewModel : MVVMPattern.ViewModelBase
     {
+        public AdvancedSearchItemViewModel ThematicFilter { get; set; }
         public AdvancedSearchItemViewModel ContactFilter { get; set; }
         public AdvancedSearchItemViewModel InspireFilter { get; set; }
         public AdvancedSearchItemViewModel FormatFilter { get; set; }
@@ -29,6 +30,10 @@ namespace Isogeo.AddIn.ViewsModels.Search.AdvancedSearch
 
         public void InitAdvancedSearchItems()
         {
+            ThematicFilter = new AdvancedSearchItemViewModel(
+                Language.Resources.Group_theme,
+                "pack://application:,,,/Isogeo.Resources;component/Resources/users.png",
+                "keyword:group-theme", _networkManager, _mapManager, _filterManager);
             ContactFilter = new AdvancedSearchItemViewModel(
                 Language.Resources.Contact,
                 "pack://application:,,,/Isogeo.Resources;component/Resources/phone_orange.png",
