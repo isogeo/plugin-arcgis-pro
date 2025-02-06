@@ -255,6 +255,9 @@
   <data name="Error_proxy" xml:space="preserve">
     <value>Proxy information could not be saved</value>
   </data>
+  <data name="Error_Read_Data_SDE" xml:space="preserve">
+    <value>Data not reachable from parameterized SDE file</value>
+  </data>
   <data name="FileSDE" xml:space="preserve">
     <value>SDE connection file</value>
   </data>
@@ -313,7 +316,7 @@
     <value>Key</value>
   </data>
   <data name="Keywords" xml:space="preserve">
-    <value>Keywords</value>
+    <value>Keyword</value>
   </data>
   <data name="Lang" xml:space="preserve">
     <value>Language</value>
@@ -400,7 +403,7 @@
     <value>Connexion failed.</value>
   </data>
   <data name="Message_Query_authentication_ko_internet" xml:space="preserve">
-    <value>Connection failed. Please check your internet connection and try again.</value>
+    <value>Unable to connect. Check your internet connection and proxy settings.</value>
   </data>
   <data name="Message_Query_authentication_ko_invalid" xml:space="preserve">
     <value>Invalid ID or SECRET</value>

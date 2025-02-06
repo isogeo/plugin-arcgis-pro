@@ -252,6 +252,9 @@
   <data name="Error_proxy" xml:space="preserve">
     <value>Les informations proxy n'ont pas pu être sauvegardé</value>
   </data>
+  <data name="Error_Read_Data_SDE" xml:space="preserve">
+    <value>La donnée n'est pas accessible depuis le fichier SDE paramétré</value>
+  </data>
   <data name="FileSDE" xml:space="preserve">
     <value>Fichier de connexion SDE</value>
   </data>
@@ -310,7 +313,7 @@
     <value>Clé</value>
   </data>
   <data name="Keywords" xml:space="preserve">
-    <value>Mots clés</value>
+    <value>Mots clé</value>
   </data>
   <data name="Lang" xml:space="preserve">
     <value>Langue</value>

@@ -24,6 +24,12 @@ namespace Isogeo.Utils.ConfigurationManager
             GlobalSoftwareSettings = new GlobalSoftwareSettings(NbResults, EncyptCode);
         }
 
+        private void UpdateExistingOldConfigsOnProduction()
+        {
+            if (Config.UrlHelp == "http://help.isogeo.com/arcgispro/fr/") // Suppress old help url on existing config for existing users
+                Config.UrlHelp = (GetAppConfig(GetType().Assembly.Location)).UrlHelp;
+        }
+
         private void InitConfigurationOnDesktop()
         {
             try
@@ -35,13 +41,14 @@ namespace Isogeo.Utils.ConfigurationManager
 
                 if (!File.Exists(_filePath))
                 {
-                    ReadAppConfig();
+                    SetConfigWithDefaultAppConfig();
                     File.WriteAllText(_filePath, JsonSerializer.Serialize(Config));
                 }
                 else
                 {
                     var json = File.ReadAllText(_filePath);
                     Config = JsonSerializer.Deserialize<Configuration.Configuration>(json);
+                    UpdateExistingOldConfigsOnProduction();
                 }
             }
             catch (Exception ex)
@@ -52,17 +59,22 @@ namespace Isogeo.Utils.ConfigurationManager
             }
         }
 
-        private void ReadAppConfig()
+        private static Configuration.Configuration GetAppConfig(string assemblyLocation)
+        {
+            var configPath = assemblyLocation[..assemblyLocation.LastIndexOf("\\", StringComparison.Ordinal)] + "\\" +
+                          "App.config";
+            var doc = XDocument.Load(configPath);
+
+            var config = SerializationUtil.Deserialize<Configuration.Configuration>(doc);
+            config.Proxy ??= new Proxy();
+            config.FileSde ??= "";
+            return config;
+        }
+
+        private void SetConfigWithDefaultAppConfig()
         {
             var dllPAth = GetType().Assembly.Location;
-
-            _configPath = dllPAth[..dllPAth.LastIndexOf("\\", StringComparison.Ordinal)] + "\\" +
-                          "App.config";
-            var doc = XDocument.Load(_configPath);
-
-            Config = SerializationUtil.Deserialize<Configuration.Configuration>(doc);
-            Config.Proxy ??= new Proxy();
-            Config.FileSde ??= "";
+            Config = GetAppConfig(dllPAth);
         }
 
         public void Save()

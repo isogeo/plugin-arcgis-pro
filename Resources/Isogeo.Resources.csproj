@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
     <PropertyGroup>
         <TargetFramework>net6.0-windows</TargetFramework>
         <UseWPF>true</UseWPF>
@@ -23,11 +23,13 @@
         <Resource Include="Resources\info.png" />
         <Resource Include="Resources\isogeo_blanc.png" />
         <Resource Include="Resources\key.png" />
+        <Resource Include="Resources\keyword.png" />
         <Resource Include="Resources\leaf.png" />
         <Resource Include="Resources\lgpl-logo.png" />
         <Resource Include="Resources\Linkedin-logo.png" />
-        <Resource Include="Resources\logo-isogeo.png"/>
+        <Resource Include="Resources\logo-isogeo.png" />
         <Resource Include="Resources\map.png" />
+        <Resource Include="Resources\paperclip.png" />
         <Resource Include="Resources\phone_orange.png" />
         <Resource Include="Resources\previousSearch.png" />
         <Resource Include="Resources\rename.png" />

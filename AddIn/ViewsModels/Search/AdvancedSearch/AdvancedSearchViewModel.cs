@@ -33,11 +33,11 @@ namespace Isogeo.AddIn.ViewsModels.Search.AdvancedSearch
         {
             ThematicFilter = new AdvancedSearchItemViewModel(
                 Language.Resources.Group_theme,
-                "pack://application:,,,/Isogeo.Resources;component/Resources/users.png",
+                "pack://application:,,,/Isogeo.Resources;component/Resources/paperclip.png",
                 "keyword:group-theme", _networkManager, _mapManager, _filterManager);
             KeywordFilter = new AdvancedSearchItemViewModel(
                 Language.Resources.Keywords,
-                "pack://application:,,,/Isogeo.Resources;component/Resources/users.png",
+                "pack://application:,,,/Isogeo.Resources;component/Resources/keyword.png",
                 "keyword:isogeo", _networkManager, _mapManager, _filterManager);
             ContactFilter = new AdvancedSearchItemViewModel(
                 Language.Resources.Contact,

@@ -213,9 +213,29 @@ namespace Isogeo.Map
                         Log.Logger.Info("END - Add Layer");
                         return Task.CompletedTask;
                     case ("ARCSDE" or "FILEGDB" or "POSTGIS"):
-                        Log.Logger.Debug($"Add GeoDatabase Layer - {serviceTypeType}");
-                        AddGeoDatabaseLayer(serviceType);
-                        Log.Logger.Info("END - Add Layer");
+                        try
+                        {
+                            Log.Logger.Debug($"Add GeoDatabase Layer - {serviceTypeType}");
+                            AddGeoDatabaseLayer(serviceType);
+                            Log.Logger.Info("END - Add Layer");
+                            return Task.CompletedTask;
+                        }
+                        catch (FileNotFoundException)
+                        {
+                            Log.Logger.Error("Error Add Layer - File not found");
+                        }
+                        catch (Exception ex)
+                        {
+                            DisplayMessage(Language.Resources.Error_Read_Data_SDE);
+                            Log.Logger.Error("Error Add Layer - " +
+                                             ex.Message + " " +
+                                             serviceType?.Url + " " +
+                                             serviceType?.Id + " " +
+                                             serviceType?.Name + " " +
+                                             serviceType?.Title + " " +
+                                             serviceType?.Type + " " +
+                                             serviceType?.Creator);
+                        }
                         return Task.CompletedTask;
                 }
 

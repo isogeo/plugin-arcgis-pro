@@ -475,6 +475,15 @@ namespace Isogeo.Language {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Data not reachable from parameterized SDE file.
+        /// </summary>
+        public static string Error_Read_Data_SDE {
+            get {
+                return ResourceManager.GetString("Error_Read_Data_SDE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to SDE connection file.
         /// </summary>
         public static string FileSDE {
@@ -646,7 +655,7 @@ namespace Isogeo.Language {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Keywords.
+        ///   Looks up a localized string similar to Keyword.
         /// </summary>
         public static string Keywords {
             get {
@@ -907,7 +916,7 @@ namespace Isogeo.Language {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Connection failed. Please check your internet connection and try again..
+        ///   Looks up a localized string similar to Unable to connect. Check your internet connection and proxy settings..
         /// </summary>
         public static string Message_Query_authentication_ko_internet {
             get {
