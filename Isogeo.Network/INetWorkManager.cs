@@ -22,7 +22,7 @@ namespace Isogeo.Network
         /// </summary>
         /// <param name="mdId">Metadata id from API</param>
         /// <param name="token"></param>
-        public Task<Result> GetDetails(string mdId, CancellationToken token = default);
+        public Task<Result?> GetDetails(string mdId, CancellationToken token = default);
 
         /// <summary>
         /// Save the last search request realized inside configurationManager

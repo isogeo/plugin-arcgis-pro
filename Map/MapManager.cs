@@ -88,126 +88,60 @@ namespace Isogeo.Map
         private static Geodatabase LoadGeoDatabase(ServiceType serviceType)
         {
             var suffix = Path.GetExtension(serviceType.Url)?.ToLower();
-            dynamic database;
-            if (suffix == ".sde")
-                database = new DatabaseConnectionFile(new Uri(serviceType.Url));
-            else if (suffix == ".gdb")
-                database = new FileGeodatabaseConnectionPath(new Uri(serviceType.Url));
-            else
-                database = new ServiceConnectionProperties(new Uri(serviceType.Url));
+            dynamic database = suffix switch
+            {
+                ".sde" => new DatabaseConnectionFile(new Uri(serviceType.Url)),
+                ".gdb" => new FileGeodatabaseConnectionPath(new Uri(serviceType.Url)),
+                _ => new ServiceConnectionProperties(new Uri(serviceType.Url))
+            };
             return new Geodatabase(database);
         }
 
-        private static bool AddLayerFromGeoDatabase(ServiceType serviceType)
+        private static void AddLayerFromGeoDatabase(ServiceType serviceType)
         {
             using (var geoDb = LoadGeoDatabase(serviceType))
             {
-                var defNames = geoDb.GetDefinitions<FeatureClassDefinition>()
-                    .Select(def => def.GetName()).ToArray();
-                foreach (var defName in defNames)
+                var fc = geoDb.OpenDataset<FeatureClass>(serviceType.Name);
+                var layerParams = new FeatureLayerCreationParams(fc)
                 {
-                    if (defName.Equals(serviceType.Name))
-                    {
-                        using (var featureClass = geoDb.OpenDataset<FeatureClass>(defName))
-                        {
-                            Log.Logger.Debug($"Add Layer From GeoDatabase - {featureClass.GetName()}");
-                            var layerParams = new FeatureLayerCreationParams(featureClass)
-                            {
-                                MapMemberPosition = MapMemberPosition.AddToBottom
-                            };
-                            LayerFactory.Instance.CreateLayer<FeatureLayer>(layerParams, MapView.Active.Map);
-                            return true;
-                        }
-                    }
-                }
+                    MapMemberPosition = MapMemberPosition.AddToTop
+                };
+                LayerFactory.Instance.CreateLayer<FeatureLayer>(layerParams, MapView.Active.Map);
             }
-            return false;
         }
 
-        private static void CheckErrorFile(ServiceType serviceType)
+        private static void EnsureFileExists(string path)
         {
-            if (!(Directory.Exists(serviceType.Url) ||
-                  File.Exists(serviceType.Url)))
+            if (!(Directory.Exists(path) || File.Exists(path)))
             {
-                DisplayMessage(Language.Resources.Message_Data_file_not_found + ": " + '"' + serviceType.Url + '"');
+                DisplayMessage(Language.Resources.Message_Data_file_not_found + ": " + '"' + path + '"');
                 throw new FileNotFoundException();
             }
         }
 
-        private bool AddGeoDatabaseLayer(ServiceType serviceType)
+        private static void AddGeoDatabaseLayer(ServiceType serviceType)
         {
-            bool find;
-            switch (serviceType?.Type.ToUpper())
-            {
-                case "ARCSDE":
-                    Log.Logger.Debug("Add GeoDatabase Layer - ARCSDE");
-                    CheckErrorFile(serviceType);
-                    AddLayerFromGeoDatabase(serviceType);
-                    find = true;
-                    break;
-                case "FILEGDB":
-                    Log.Logger.Debug("Add GeoDatabase Layer - FILEGDB");
-                    CheckErrorFile(serviceType);
-                    AddLayerFromGeoDatabase(serviceType);
-                    find = true;
-                    break;
-                default:
-                    find = false;
-                    break;
-            }
-            return find;
+            EnsureFileExists(serviceType.Url);
+            AddLayerFromGeoDatabase(serviceType);
         }
 
-        private bool AddFileLayer(ServiceType serviceType)
+        private static void AddFileLayer(ServiceType serviceType)
         {
-            bool find;
-            switch (serviceType?.Type.ToUpper())
-            {
-                case "SHP":
-                    Log.Logger.Debug("Add File Layer - SHP");
-                    find = true;
-                    break;
-                case "RASTER":
-                    Log.Logger.Debug("Add File Layer - RASTER");
-                    find = true;
-                    break;
-                default:
-                    find = false;
-                    break;
-            }
-
-            if (find)
-            {
-                CheckErrorFile(serviceType);
-                Log.Logger.Debug($"Add File Layer - Uri: {serviceType.Url} | Title: {serviceType.Title}");
-                LayerFactory.Instance.CreateLayer(new Uri(serviceType.Url), MapView.Active.Map, 0, serviceType.Title);
-            }
-            return find;
+            EnsureFileExists(serviceType.Url);
+            LayerFactory.Instance.CreateLayer(new Uri(serviceType.Url), MapView.Active.Map, 0, serviceType.Title);
         }
 
-        private bool AddCimServiceLayer(ServiceType serviceType)
+        private bool TryAddServiceLayer(ServiceType serviceType)
         {
             var serverConnection = new CIMInternetServerConnection { URL = serviceType?.Url };
-            dynamic connection = null;
-            switch (serviceType?.Type.ToUpper())
+            dynamic connection = serviceType?.Type?.ToUpper() switch
             {
-                case "WMS":
-                    Log.Logger.Debug("Add Cim Service Layer - WMS");
-                    connection = new CIMWMSServiceConnection { ServerConnection = serverConnection };
-                    break;
-                case "WMTS":
-                    Log.Logger.Debug("Add Cim Service Layer - WMTS");
-                    connection = new CIMWMTSServiceConnection { ServerConnection = serverConnection };
-                    break;
-                case "WCS":
-                    Log.Logger.Debug("Add Cim Service Layer - WCS");
-                    connection = new CIMWCSServiceConnection { ServerConnection = serverConnection };
-                    break;
-                case "WFS":
-                    Log.Logger.Debug("Add Cim Service Layer - WFS");
-                    connection = new CIMWFSServiceConnection { ServerConnection = serverConnection };
-                    break;
-            }
+                "WMS" => new CIMWMSServiceConnection { ServerConnection = serverConnection },
+                "WMTS" => new CIMWMTSServiceConnection { ServerConnection = serverConnection },
+                "WCS" => new CIMWCSServiceConnection { ServerConnection = serverConnection },
+                "WFS" => new CIMWFSServiceConnection { ServerConnection = serverConnection },
+                _ => null
+            };
 
             dynamic layer;
             if (connection == null)
@@ -218,32 +152,41 @@ namespace Isogeo.Map
                     return false;
                 }
 
-                Log.Logger.Debug($"Add Cim Service Layer - Try with {serviceType.Url + '/' + serviceType.Name}");
-                layer = LayerFactory.Instance.CreateLayer(new Uri(serviceType.Url + '/' + serviceType.Name),
-                    MapView.Active.Map);
-                if (layer != null) return true;
+                var urls = new[]
+                {
+                    $"{serviceType.Url}/{serviceType.Name}",
+                    $"{serviceType.Url}/{serviceType.Title}",
+                    serviceType.Url
+                };
 
-                Log.Logger.Debug($"Add Cim Service Layer - Try with {serviceType.Url + '/' + serviceType.Title}");
-                layer = LayerFactory.Instance.CreateLayer(new Uri(serviceType.Url + '/' + serviceType.Title),
-                    MapView.Active.Map);
-                if (layer != null) return true;
-
-                Log.Logger.Debug($"Add Cim Service Layer - Try with {serviceType.Url}");
-                layer = LayerFactory.Instance.CreateLayer(new Uri(serviceType.Url),
-                    MapView.Active.Map);
-
-                return layer != null;
+                foreach (var url in urls)
+                {
+                    Log.Logger.Debug($"Add Cim Service Layer - Try with {url}");
+                    layer = LayerFactory.Instance.CreateLayer(new Uri(url), MapView.Active.Map);
+                    if (layer != null)
+                        return true;
+                }
+                return false;
             }
+            Log.Logger.Debug($"Add Cim Service Layer - {serviceType.Type.ToUpper()}");
             Log.Logger.Debug("Add Cim Service Layer - Connection already existing");
             layer = LayerFactory.Instance.CreateLayer(connection, MapView.Active.Map);
             return layer != null;
         }
 
-        private static bool CheckErrorServiceType(ServiceType serviceType)
+        private static bool CheckServiceTypeValidity(ServiceType serviceType)
         {
             Log.Logger.Info("Sheet - name: " + serviceType?.Name + " url: " + serviceType?.Url + " id: "
                             + serviceType?.Id + " creator: " + serviceType?.Creator + "type: " + serviceType?.Type +
                             " title: " + serviceType?.Title);
+
+            if ((serviceType.Type?.ToUpper() == "ARCSDE" || serviceType.Type?.ToUpper() == "POSTGIS")
+                && string.IsNullOrWhiteSpace(serviceType.Url))
+            {
+                DisplayMessage(Language.Resources.Message_Data_sde_not_configured);
+                return false;
+            }
+
             if (serviceType?.Url == null || string.IsNullOrWhiteSpace(serviceType.Url))
             {
                 DisplayMessage(Language.Resources.Error_bad_metadata);
@@ -252,45 +195,31 @@ namespace Isogeo.Map
             return true;
         }
 
-        private static bool CheckSdeConnection(ServiceType serviceType)
-        {
-            if (serviceType.Type?.ToUpper() == "ARCSDE")
-            {
-                if (serviceType.Url.Length == 0)
-                {
-                    DisplayMessage(Language.Resources.Message_Data_sde_not_configured);
-                    return false;
-                }
-            }
-
-            return true;
-        }
-
         public Task AddLayer(ServiceType serviceType)
         {
             Log.Logger.Info($"START - Add Layer {serviceType?.Title}");
 
-            if (!CheckSdeConnection(serviceType))
-                return Task.CompletedTask;
-
-            if (!CheckErrorServiceType(serviceType))
+            if (!CheckServiceTypeValidity(serviceType))
                 return Task.CompletedTask;
 
             try
             {
-                if (AddFileLayer(serviceType))
+                var serviceTypeType = serviceType?.Type?.ToUpper();
+                switch (serviceTypeType)
                 {
-                    Log.Logger.Info("END - Add Layer");
-                    return Task.CompletedTask;
+                    case ("SHP" or "RASTER"):
+                        Log.Logger.Debug($"Add File Layer - {serviceTypeType}");
+                        AddFileLayer(serviceType);
+                        Log.Logger.Info("END - Add Layer");
+                        return Task.CompletedTask;
+                    case ("ARCSDE" or "FILEGDB" or "POSTGIS"):
+                        Log.Logger.Debug($"Add GeoDatabase Layer - {serviceTypeType}");
+                        AddGeoDatabaseLayer(serviceType);
+                        Log.Logger.Info("END - Add Layer");
+                        return Task.CompletedTask;
                 }
 
-                if (AddGeoDatabaseLayer(serviceType))
-                {
-                    Log.Logger.Info("END - Add Layer");
-                    return Task.CompletedTask;
-                }
-
-                if (!AddCimServiceLayer(serviceType))
+                if (!TryAddServiceLayer(serviceType))
                     DisplayMessage(Language.Resources.Message_Data_Error);
                 Log.Logger.Info("END - Add Layer");
             }

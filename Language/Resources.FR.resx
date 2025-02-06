@@ -397,7 +397,7 @@
     <value>La connexion à échouée.</value>
   </data>
   <data name="Message_Query_authentication_ko_internet" xml:space="preserve">
-    <value>Connexion impossible. Verifiez votre connecion internet.</value>
+    <value>Connexion impossible. Vérifiez votre connexion internet et vos paramètres de proxy.</value>
   </data>
   <data name="Message_Query_authentication_ko_invalid" xml:space="preserve">
     <value>ID ou SECRET invalide</value>

@@ -22,7 +22,7 @@ namespace Isogeo.Network
     {
         private readonly IConfigurationManager _configurationManager;
 
-        private Authentication.Authentication _frmAuthentication;
+        private Authentication.Authentication? _frmAuthentication;
 
         private ApiBearerToken? _existingApiBearerToken;
 
@@ -51,9 +51,9 @@ namespace Isogeo.Network
 
         private async Task<Token> GetExistingAccessTokenAndRefreshItIfNeeded(string clientId, string clientSecret)
         {
-            Token newToken;
+            Token? newToken;
 
-            Log.Logger.Info("Set Connection : " + clientId);
+            Log.Logger.Info($"Set Connection : {clientId}");
             if (!string.IsNullOrEmpty(clientSecret))
             {
                 if (_existingApiBearerToken == null || _existingApiBearerToken.ExpirationDate < DateTimeOffset.UtcNow)
@@ -169,7 +169,7 @@ namespace Isogeo.Network
             }
             catch (Exception ex)
             {
-                Log.Logger.Error("Error Authentication : " + ex.Message);
+                Log.Logger.Error($"Error Authentication : {ex.Message}");
                 return null;
             }
         }
@@ -231,7 +231,7 @@ namespace Isogeo.Network
             }
             catch (Exception ex)
             {
-                Log.Logger.Error("Error Authentication : " + ex.Message);
+                Log.Logger.Error($"Error Authentication : {ex.Message}");
                 state = false;
             }
             finally
@@ -247,12 +247,12 @@ namespace Isogeo.Network
         /// </summary>
         /// <param name="mdId">Metadata id from API</param>
         /// <param name="cancellationToken"></param>
-        public async Task<Result> GetDetails(string mdId, CancellationToken cancellationToken = default)
+        public async Task<Result?> GetDetails(string mdId, CancellationToken cancellationToken = default)
         {
-            Log.Logger.Info("GetDetails - md_id : " + mdId);
+            Log.Logger.Info($"GetDetails - md_id : {mdId}");
 
             Mediator.NotifyColleagues(MediatorEvent.EnableDockableWindowIsogeo, false);
-            Result result = null;
+            Result? result = null;
             try
             {
                 var newApiToken = await GetExistingAccessTokenAndRefreshItIfNeeded(_configurationManager.Config.UserAuthentication.Id,
@@ -265,7 +265,7 @@ namespace Isogeo.Network
             }
             catch (Exception ex)
             {
-                Log.Logger.Error("Error Authentication : " + ex.Message);
+                Log.Logger.Error($"Error Authentication : {ex.Message}");
             }
             finally
             {
@@ -282,9 +282,9 @@ namespace Isogeo.Network
         /// <param name="clientSecret">API client_secret</param>
         private async Task<Token> GetAccessToken(string clientId, string clientSecret)
         {
-            Log.Logger.Debug("Ask for Token - cliendId : " + clientId);
+            Log.Logger.Debug($"Ask for Token - cliendId : {clientId}");
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
-            Token newToken = null;
+            Token? newToken = null;
             var form = new Dictionary<string, string>
             {
                 {"grant_type", "client_credentials"}
@@ -311,7 +311,7 @@ namespace Isogeo.Network
             }
             catch (Exception ex)
             {
-                Log.Logger.Error("Error - " + ex.Message);
+                Log.Logger.Error($"Error - {ex.Message}");
             }
             return newToken;
         }
@@ -324,7 +324,7 @@ namespace Isogeo.Network
         /// <param name="token"></param>
         private async Task<Result?> GetDetailedResource(string mdId, ApiParameters parameters, CancellationToken token = default)
         {
-            Log.Logger.Info("Execution DetailsResourceRequest - ID : " + mdId);
+            Log.Logger.Info($"Execution DetailsResourceRequest - ID : {mdId}");
             try
             {
                 var url = _configurationManager.Config.ApiUrl + "resources/" + mdId;
@@ -358,7 +358,7 @@ namespace Isogeo.Network
             }
             catch (Exception ex)
             {
-                Log.Logger.Error("Error - " + ex.Message);
+                Log.Logger.Error($"Error - {ex.Message}");
             }
             return null;
         }
@@ -378,7 +378,7 @@ namespace Isogeo.Network
         private async Task<Search?> GetSearch(ApiParameters apiParameters, int nbResult,
             bool includeLayers = false, CancellationToken token = default)
         {
-            Log.Logger.Info("Execution SearchRequest - query : " + '"' + apiParameters.query + '"' + ", offset : " + apiParameters.offset);
+            Log.Logger.Info($"Execution SearchRequest - query : \"{apiParameters.query}\", offset : {apiParameters.offset}");
             try
             {
                 var url = _configurationManager.Config.ApiUrl + "resources/search";
@@ -413,7 +413,7 @@ namespace Isogeo.Network
             }
             catch (Exception ex)
             {
-                Log.Logger.Error("Error - " + ex.Message);
+                Log.Logger.Error($"Error - {ex.Message}");
                 return null;
             }
         }
@@ -461,7 +461,7 @@ namespace Isogeo.Network
             currentSearch.Box = box;
             _configurationManager.Save();
             Mediator.NotifyColleagues(MediatorEvent.ChangeQuickSearch, null);
-            Log.Logger.Info("END Save Last search - Query saved : " + '"' + currentSearch.Query + '"');
+            Log.Logger.Info($"END Save Last search - Query saved : \"{currentSearch.Query}\"");
         }
     }
 }
