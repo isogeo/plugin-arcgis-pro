@@ -129,6 +129,36 @@
                 </Trigger>
                 </Style.Triggers>
             </Style>
+            <Style TargetType="Button" x:Key="SaveButton">
+                <Setter Property="Background" Value="{DynamicResource MainButtonsColorBrush}" />
+                <Setter Property="ContentTemplate">
+                    <Setter.Value>
+                        <DataTemplate>
+                            <Image Source="pack://application:,,,/Isogeo.Resources;component/Resources/save.png" Margin="6" />
+                        </DataTemplate>
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type Button}">
+                            <Border BorderThickness="0" Background="{TemplateBinding Background}">
+                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+                <Style.Triggers>
+                    <Trigger Property="IsMouseOver" Value="True">
+                        <Setter Property="Background" Value="{DynamicResource HighlightBackgroundButtonBrush}"/>
+                    </Trigger>
+                    <Trigger Property="IsPressed" Value="True">
+                        <Setter Property="Background" Value="{DynamicResource IsPressedBackgroundButtonBrush}"/>
+                    </Trigger>
+                    <Trigger Property="IsEnabled" Value="false">
+                        <Setter Property="Background" Value="{DynamicResource DisableBackgroundColorBrush}"/>
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
         </ResourceDictionary>
     </UserControl.Resources>
     <Grid>
@@ -146,7 +176,6 @@
         <Button Width="20" ToolTip="{x:Static language:Resources.Reset_search}" Padding="2" Style="{DynamicResource ResetButton}" x:Name="BtnLastSearch" Grid.Row="0" Grid.Column="1" Margin="5,5,5,5" Command="{Binding ResetCommand}"/>
         <ComboBox FontSize="10" ToolTip="{x:Static language:Resources.Sorting_method}" x:Name="CmbSortingMethod" Grid.Row="0" Grid.Column="2" Margin="3,0,3,0" ItemsSource="{Binding CmbSortingMethod}" DisplayMemberPath="Name" SelectedItem="{Binding CmbSortingMethodSelectedItem}"/>
         <ComboBox FontSize="10" ToolTip="{x:Static language:Resources.Sorting_direction}" x:Name="CmbSortingDirection" Grid.Row="0" Grid.Column="3" Margin="3,0,3,0" ItemsSource="{Binding CmbSortingDirection}" DisplayMemberPath="Name" SelectedItem="{Binding CmbSortingDirectionSelectedItem}"/>
-        <Button FontSize="12" Width="40" Style="{DynamicResource MainButton}" Grid.Row="0" Grid.Column="4" Content="Save" Margin="5,5,5,5" Command="{Binding SaveCommand}"/>
-        
+        <Button Style="{DynamicResource SaveButton}" Height="27" Width="40" Grid.Row="0" Grid.Column="4" Margin="5,5,5,5" Command="{Binding SaveCommand}"/>
     </Grid>
 </UserControl>

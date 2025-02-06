@@ -6,6 +6,8 @@ namespace Isogeo.AddIn.ViewsModels.Search.AdvancedSearch
 {
     public class AdvancedSearchViewModel : MVVMPattern.ViewModelBase
     {
+        public AdvancedSearchItemViewModel ThematicFilter { get; set; }
+        public AdvancedSearchItemViewModel KeywordFilter { get; set; }
         public AdvancedSearchItemViewModel ContactFilter { get; set; }
         public AdvancedSearchItemViewModel InspireFilter { get; set; }
         public AdvancedSearchItemViewModel FormatFilter { get; set; }
@@ -29,13 +31,21 @@ namespace Isogeo.AddIn.ViewsModels.Search.AdvancedSearch
 
         public void InitAdvancedSearchItems()
         {
+            ThematicFilter = new AdvancedSearchItemViewModel(
+                Language.Resources.Group_theme,
+                "pack://application:,,,/Isogeo.Resources;component/Resources/paperclip.png",
+                "keyword:group-theme", _networkManager, _mapManager, _filterManager);
+            KeywordFilter = new AdvancedSearchItemViewModel(
+                Language.Resources.Keywords,
+                "pack://application:,,,/Isogeo.Resources;component/Resources/keyword.png",
+                "keyword:isogeo", _networkManager, _mapManager, _filterManager);
             ContactFilter = new AdvancedSearchItemViewModel(
                 Language.Resources.Contact,
                 "pack://application:,,,/Isogeo.Resources;component/Resources/phone_orange.png",
                 "contact", _networkManager, _mapManager, _filterManager);
 
             InspireFilter = new AdvancedSearchItemViewModel(
-                Language.Resources.INSPIRE_keywords,
+                Language.Resources.INSPIRE_keyword,
                 "pack://application:,,,/Isogeo.Resources;component/Resources/leaf.png",
                 "keyword:inspire-theme", _networkManager, _mapManager, _filterManager);
 
@@ -47,7 +57,7 @@ namespace Isogeo.AddIn.ViewsModels.Search.AdvancedSearch
             GeographyFilter = new AdvancedSearchItemViewModel(
                 Language.Resources.Geographic_filter,
                 "pack://application:,,,/Isogeo.Resources;component/Resources/map.png",
-                "keyword:isogeo", _networkManager, _mapManager, _filterManager);
+                "map", _networkManager, _mapManager, _filterManager);
 
             LicenseFilter = new AdvancedSearchItemViewModel(
                 Language.Resources.Licence,

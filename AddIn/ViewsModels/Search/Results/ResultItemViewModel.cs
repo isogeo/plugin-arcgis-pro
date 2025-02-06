@@ -33,7 +33,7 @@ namespace Isogeo.AddIn.ViewsModels.Search.Results
         private readonly List<string> _multiList = new(new[] { "Geometry", "GeometryCollection" });
 
         //Isogeo formats
-        private readonly List<string> _vectorFormatList = new(new[] { "shp", "dxf", "dgn", "filegdb", "tab", "arcsde" });
+        private readonly List<string> _vectorFormatList = new(new[] { "shp", "dxf", "dgn", "filegdb", "tab", "arcsde", "postgis" });
         private readonly List<string> _rasterFormatList = new(new[] { "esriasciigrid", "geotiff", "intergraphgdb", "jpeg", "png", "xyz", "ecw" });
 
         private readonly List<ServiceType> _dataList = new();
@@ -121,24 +121,18 @@ namespace Isogeo.AddIn.ViewsModels.Search.Results
             if (Result.Geometry != null)
             {
                 if (_polygonList.Contains(Result.Geometry)) ImgType = Language.Resources.Polygon;
-                    if (_pointList.Contains(Result.Geometry)) ImgType = Language.Resources.Point;
-                    if (_lineList.Contains(Result.Geometry)) ImgType = Language.Resources.Line;
-                    if (_multiList.Contains(Result.Geometry)) ImgType = Language.Resources.MultiPolygon;
+                if (_pointList.Contains(Result.Geometry)) ImgType = Language.Resources.Point;
+                if (_lineList.Contains(Result.Geometry)) ImgType = Language.Resources.Line;
+                if (_multiList.Contains(Result.Geometry)) ImgType = Language.Resources.MultiPolygon;
             }
             else
             {
                 if (Result.Type == "rasterDataset")
-                {
                     ImgType = Language.Resources.Raster;
-                }
                 else if (Result.Type == "service")
-                {
                     ImgType = Language.Resources.Service;
-                }
                 else
-                {
                     ImgType = Language.Resources.Unknown_geometry;
-                }
             }
             ItemTitle = Result.Title;
             var toolTip = new ToolTip {Content = Result.Abstract};
@@ -160,23 +154,7 @@ namespace Isogeo.AddIn.ViewsModels.Search.Results
                     CmbLayer.SelectedIndex = 0;
                     CmbLayer.IsEnabled = false;
                     break;
-                case 1:
-                    if (_dataList != null && _dataList.Count > 0)
-                        CmbLayer?.Items.Add(_dataList[0].Title);
-                    else
-                        CmbLayer?.Items.Add(Language.Resources.Empty);
-                    if (CmbLayer != null)
-                    {
-                        CmbLayer.Visibility = Visibility.Visible;
-                        CmbLayer.SelectedIndex = 0;
-                    }
-                    break;
-                default:
-                    //If there is only one way for the data to be added, insert a label.
-                    //Else, add a combobox, storing all possibilities.                    
-
-                    CmbLayer.Visibility = Visibility.Visible;
-
+                default:                
                     foreach (var data in _dataList)
                     {
                         var type = Language.Resources.Empty;
@@ -254,7 +232,7 @@ namespace Isogeo.AddIn.ViewsModels.Search.Results
 
             if (itemResult?.Format != null)
                 type = itemResult.Format.ToUpper();
-            if (itemResult?.Format != null && layer?.Id != null && layer.Titles != null)
+            if (itemResult?.Format != null && layer?.Id != null)
                 title = GetTitle(itemResult.Format.ToUpper(), layer.Id, layer.Titles);
             if (itemResult?.Path != null)
                 url = itemResult.Path;
@@ -280,16 +258,9 @@ namespace Isogeo.AddIn.ViewsModels.Search.Results
                 _dataList.Add(new ServiceType("raster", item.Title, item.Url, item.Name, item.Creator, item.Id));
             }
 
-            if (Result.Format == "postgis")
-            {
-
-            }
-
             // This is the new association mode. The layer and service
             //information are stored in the "serviceLayers" include, when
             // associated with a vector or raster data.
-
-
             if ((Result.Type == "vectorDataset" || Result.Type == "rasterDataset") && Result.ServiceLayers != null)
             {
                 foreach (var serviceLayer in Result.ServiceLayers)
@@ -319,30 +290,17 @@ namespace Isogeo.AddIn.ViewsModels.Search.Results
             return newId;
         }
 
-        private static string GetTitle(string type, string id, List<Title> titles)
+        private static string GetTitle(string type, string id, List<Title>? titles)
         {
             var layerTitle = id;
             if (type == "WFS")
-            {
-                layerTitle = Regex.Replace(id, "\\{.*?}", String.Empty);
-            }
+                layerTitle = Regex.Replace(id, "\\{.*?}", string.Empty);
 
-            try
-            {
-                if (titles.Count > 0)
-                {
-                    layerTitle = titles[0].Value;
-                }
-            }
-            catch (Exception ex)
-            {
-                Log.Logger.Debug(string.Concat(new object[]
-                {
-                    "Error - getTitle - ResultItem",
-                    ex.Message
-                }));
-            }
-            if (layerTitle == "") layerTitle = type + " Layer";
+            if (titles is { Count: > 0 })
+                layerTitle = titles[0].Value;
+           
+            if (string.IsNullOrWhiteSpace(layerTitle))
+                layerTitle = type + " Layer";
             return layerTitle;
         }
 
@@ -382,10 +340,9 @@ namespace Isogeo.AddIn.ViewsModels.Search.Results
             if (resultDetails == null)
                 return false;
             item = resultDetails;
-            if (_metadataViewModel == null)
-            {
-                _metadataViewModel = new MetadataViewModel();
-            }
+
+            _metadataViewModel ??= new MetadataViewModel();
+
             _metadataViewModel.RegisterMediator();
             if (_metadataInstance == null || !_metadataInstance.IsLoaded)
             {
@@ -415,7 +372,7 @@ namespace Isogeo.AddIn.ViewsModels.Search.Results
             GetLinks();
             var currentService = _dataList.Count == 1 ? _dataList[0] : _dataList[CmbLayer.SelectedIndex];
 
-            if (currentService != null && currentService.Type?.ToUpper() == "ARCSDE")
+            if (currentService != null && (currentService.Type?.ToUpper() == "ARCSDE" || currentService.Type?.ToUpper() == "POSTGIS"))
                 currentService = new ServiceType(currentService.Type, currentService.Title, _configurationManager?.Config?.FileSde, 
                     currentService.Name, currentService.Creator, currentService.Id);
             QueuedTask.Run(() =>

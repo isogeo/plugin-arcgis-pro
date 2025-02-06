@@ -88,6 +88,9 @@ namespace Isogeo.Models.API
         [JsonPropertyName("features")]
         public int? Features { get; set; }
 
+        [JsonPropertyName("feature-attributes")]
+        public List<FeatureAttributes>? FeatureAttributes { get; set; }
+
         [JsonPropertyName("name")]
         public string? Name { get; set; }
 

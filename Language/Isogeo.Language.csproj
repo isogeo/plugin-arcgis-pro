@@ -13,13 +13,35 @@
       <AutoGen>True</AutoGen>
 	    <DependentUpon>Resources.FR.resx</DependentUpon>
     </Compile>
+	  <Compile Update="Resources.ES.Designer.cs">
+		  <DesignTime>True</DesignTime>
+		  <AutoGen>True</AutoGen>
+		  <DependentUpon>Resources.ES.resx</DependentUpon>
+	  </Compile>
+	  <Compile Update="Resources.PT-BR.Designer.cs">
+		  <DesignTime>True</DesignTime>
+		  <AutoGen>True</AutoGen>
+		  <DependentUpon>Resources.PT-BR.resx</DependentUpon>
+	  </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Update="Resources.ES.resx">
+	  <SubType>Designer</SubType>
+	  <LastGenOutput>Resources.ES.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>Isogeo.Language</CustomToolNamespace>
+      <Generator>PublicResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
     <EmbeddedResource Update="Resources.FR.resx">
       <SubType>Designer</SubType>
-        <CustomToolNamespace>Isogeo.Language</CustomToolNamespace>
+      <CustomToolNamespace>Isogeo.Language</CustomToolNamespace>
       <LastGenOutput>Resources.FR.Designer.cs</LastGenOutput>
       <Generator>PublicResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources.PT-BR.resx">
+	  <SubType>Designer</SubType>
+	  <LastGenOutput>Resources.PT-BR.Designer.cs</LastGenOutput>
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <CustomToolNamespace>Isogeo.Language</CustomToolNamespace>
     </EmbeddedResource>
     <EmbeddedResource Update="Resources.resx">
       <SubType>Designer</SubType>

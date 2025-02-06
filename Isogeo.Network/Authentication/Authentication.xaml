@@ -85,14 +85,15 @@
                     <Grid Grid.Column="1" Grid.Row="3">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
-                        <Label FontWeight="Regular" VerticalAlignment="Center" HorizontalAlignment="Right" Grid.Column="0" Content="{x:Static lang:Resources.Dont_have_an_access}"></Label>
-                        <TextBlock FontWeight="Regular" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="1" >
-                            <Hyperlink NavigateUri="https://www.isogeo.com/contactez-nous" RequestNavigate="Hyperlink_RequestNavigate"  CommandParameter="{Binding}">
-                                <TextBlock TextDecorations="Underline" Text="{x:Static lang:Resources.Contact_Us}" Foreground="{DynamicResource HyperLinkColorBrush}"/>
-                            </Hyperlink>
-                        </TextBlock>
+                        <StackPanel Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <Label FontWeight="Regular" VerticalAlignment="Center" Content="{x:Static lang:Resources.Dont_have_an_access}"></Label>
+                            <TextBlock FontWeight="Regular" VerticalAlignment="Center">
+                                <Hyperlink NavigateUri="https://www.isogeo.com/contactez-nous" RequestNavigate="Hyperlink_RequestNavigate"  CommandParameter="{Binding}">
+                                    <TextBlock TextDecorations="Underline" Text="{x:Static lang:Resources.Contact_Us}" Foreground="{DynamicResource HyperLinkColorBrush}"/>
+                                </Hyperlink>
+                            </TextBlock>
+                        </StackPanel>
                     </Grid>
                 </Grid>
             </Grid>

@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using Isogeo.AddIn.Views.Metadata;
@@ -9,6 +9,7 @@ using MVVMPattern.MediatorPattern;
 using System.Globalization;
 using System;
 using Isogeo.Models;
+using Isogeo.AddIn.Models.Metadata;
 
 namespace Isogeo.AddIn.ViewsModels.Metadata
 {
@@ -334,6 +335,12 @@ namespace Isogeo.AddIn.ViewsModels.Metadata
                 return _events;
             }
         }
+
+        public bool MetadataAttributesIsVisible => _currentResult.Type is not ("service" or "rasterDataset" or "resource");
+
+        public List<MetadataAttribute> MetadataAttributes => _currentResult?.FeatureAttributes?
+            .Where(x => x != null).Select(y => new MetadataAttribute(y.Name, y.Alias, y.Comment, y.DataType, y.Description)).ToList() 
+            ?? new List<MetadataAttribute>();
 
         public ObservableCollection<LicenseItem> LicenseItemsList { get; } = new();
         public ObservableCollection<LimitationItem> LimitationItemsList { get; } = new();

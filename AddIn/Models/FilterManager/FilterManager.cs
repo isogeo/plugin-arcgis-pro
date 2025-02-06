@@ -163,6 +163,7 @@ namespace Isogeo.AddIn.Models.FilterManager
             _searchLists.list.Add(new SearchList("action", true));
             _searchLists.list.Add(new SearchList("contact", true));
             _searchLists.list.Add(new SearchList("license", true));
+            _searchLists.list.Add(new SearchList("keyword:group-theme", true));
 
             if (Variables.search?.Tags == null) return;
             foreach (var item in Variables.search.Tags)

@@ -8,14 +8,12 @@ namespace Isogeo.AddIn.ViewsModels.Search.PrincipalSearch
 {
     public class PrincipalSearchViewModel : ViewModelBase
     {
-        public KeywordsViewModel KeywordsViewModel { get; set; }
         public QuickSearchViewModel QuickSearchViewModel { get; set; }
         public SearchBarViewModel SearchBarViewModel { get; set; }
 
         public PrincipalSearchViewModel(IFilterManager filterManager, INetworkManager networkManager, IMapManager mapManager,
             IConfigurationManager configurationManager)
         {
-            KeywordsViewModel = new KeywordsViewModel(filterManager, networkManager, mapManager);
             QuickSearchViewModel = new QuickSearchViewModel(networkManager, filterManager, mapManager, configurationManager);
             SearchBarViewModel = new SearchBarViewModel(networkManager, filterManager);
         }

@@ -23,6 +23,7 @@ namespace Isogeo.AddIn.ViewsModels.Search.PrincipalSearch
         {
             new("type", true),
             new("keyword:inspire-theme", true),
+            new("keyword:group-theme", true),
             new("keyword:isogeo", true),
             new("format", true),
             new("coordinate-system", true),

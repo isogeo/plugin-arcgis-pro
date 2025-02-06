@@ -255,6 +255,9 @@
   <data name="Error_proxy" xml:space="preserve">
     <value>Proxy information could not be saved</value>
   </data>
+  <data name="Error_Read_Data_SDE" xml:space="preserve">
+    <value>Data not reachable from parameterized SDE file</value>
+  </data>
   <data name="FileSDE" xml:space="preserve">
     <value>SDE connection file</value>
   </data>
@@ -279,6 +282,9 @@
   <data name="Geographic_type_within" xml:space="preserve">
     <value>Whithin</value>
   </data>
+  <data name="Group_theme" xml:space="preserve">
+    <value>Thematic</value>
+  </data>
   <data name="Help" xml:space="preserve">
     <value>Help</value>
   </data>
@@ -294,8 +300,8 @@
   <data name="Import_File" xml:space="preserve">
     <value>Import file</value>
   </data>
-  <data name="INSPIRE_keywords" xml:space="preserve">
-    <value>INSPIRE keywords</value>
+  <data name="INSPIRE_keyword" xml:space="preserve">
+    <value>INSPIRE keyword</value>
   </data>
   <data name="Isogeo_authentication_settings" xml:space="preserve">
     <value>Isogeo authentication settings</value>
@@ -310,7 +316,7 @@
     <value>Key</value>
   </data>
   <data name="Keywords" xml:space="preserve">
-    <value>Keywords</value>
+    <value>Keyword</value>
   </data>
   <data name="Lang" xml:space="preserve">
     <value>Language</value>
@@ -372,6 +378,9 @@
   <data name="Message_Metadata_Advanced" xml:space="preserve">
     <value>Advanced</value>
   </data>
+  <data name="Message_Metadata_Attributes" xml:space="preserve">
+    <value>Attributes</value>
+  </data>
   <data name="Message_Metadata_Contacts" xml:space="preserve">
     <value>Contacts</value>
   </data>
@@ -394,7 +403,7 @@
     <value>Connexion failed.</value>
   </data>
   <data name="Message_Query_authentication_ko_internet" xml:space="preserve">
-    <value>Connection failed. Please check your internet connection and try again.</value>
+    <value>Unable to connect. Check your internet connection and proxy settings.</value>
   </data>
   <data name="Message_Query_authentication_ko_invalid" xml:space="preserve">
     <value>Invalid ID or SECRET</value>
@@ -425,6 +434,18 @@
   </data>
   <data name="Metadata_Advanced_owner" xml:space="preserve">
     <value>Owner</value>
+  </data>
+  <data name="Metadata_Attributes_Alias" xml:space="preserve">
+    <value>Alias</value>
+  </data>
+  <data name="Metadata_Attributes_Description" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="Metadata_Attributes_Name" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="Metadata_Attributes_Type" xml:space="preserve">
+    <value>Type</value>
   </data>
   <data name="Metadata_Contacts_others_contacts" xml:space="preserve">
     <value>Other contacts</value>

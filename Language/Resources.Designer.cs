@@ -475,6 +475,15 @@ namespace Isogeo.Language {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Data not reachable from parameterized SDE file.
+        /// </summary>
+        public static string Error_Read_Data_SDE {
+            get {
+                return ResourceManager.GetString("Error_Read_Data_SDE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to SDE connection file.
         /// </summary>
         public static string FileSDE {
@@ -547,6 +556,15 @@ namespace Isogeo.Language {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Thematic.
+        /// </summary>
+        public static string Group_theme {
+            get {
+                return ResourceManager.GetString("Group_theme", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Help.
         /// </summary>
         public static string Help {
@@ -592,11 +610,11 @@ namespace Isogeo.Language {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to INSPIRE keywords.
+        ///   Looks up a localized string similar to INSPIRE keyword.
         /// </summary>
-        public static string INSPIRE_keywords {
+        public static string INSPIRE_keyword {
             get {
-                return ResourceManager.GetString("INSPIRE_keywords", resourceCulture);
+                return ResourceManager.GetString("INSPIRE_keyword", resourceCulture);
             }
         }
         
@@ -637,7 +655,7 @@ namespace Isogeo.Language {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Keywords.
+        ///   Looks up a localized string similar to Keyword.
         /// </summary>
         public static string Keywords {
             get {
@@ -826,6 +844,15 @@ namespace Isogeo.Language {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Attributes.
+        /// </summary>
+        public static string Message_Metadata_Attributes {
+            get {
+                return ResourceManager.GetString("Message_Metadata_Attributes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Contacts.
         /// </summary>
         public static string Message_Metadata_Contacts {
@@ -889,7 +916,7 @@ namespace Isogeo.Language {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Connection failed. Please check your internet connection and try again..
+        ///   Looks up a localized string similar to Unable to connect. Check your internet connection and proxy settings..
         /// </summary>
         public static string Message_Query_authentication_ko_internet {
             get {
@@ -984,6 +1011,42 @@ namespace Isogeo.Language {
         public static string Metadata_Advanced_owner {
             get {
                 return ResourceManager.GetString("Metadata_Advanced_owner", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Alias.
+        /// </summary>
+        public static string Metadata_Attributes_Alias {
+            get {
+                return ResourceManager.GetString("Metadata_Attributes_Alias", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Description.
+        /// </summary>
+        public static string Metadata_Attributes_Description {
+            get {
+                return ResourceManager.GetString("Metadata_Attributes_Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Name.
+        /// </summary>
+        public static string Metadata_Attributes_Name {
+            get {
+                return ResourceManager.GetString("Metadata_Attributes_Name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Type.
+        /// </summary>
+        public static string Metadata_Attributes_Type {
+            get {
+                return ResourceManager.GetString("Metadata_Attributes_Type", resourceCulture);
             }
         }
         
