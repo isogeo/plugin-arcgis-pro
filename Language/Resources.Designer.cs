@@ -394,6 +394,15 @@ namespace Isogeo.Language {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Edit in Isogeo.
+        /// </summary>
+        public static string Edit_metadata_online {
+            get {
+                return ResourceManager.GetString("Edit_metadata_online", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Empty.
         /// </summary>
         public static string Empty {
@@ -894,6 +903,15 @@ namespace Isogeo.Language {
         public static string Message_Metadata_Licenses {
             get {
                 return ResourceManager.GetString("Message_Metadata_Licenses", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add a new map first to add new dataset..
+        /// </summary>
+        public static string Message_Missing_Map {
+            get {
+                return ResourceManager.GetString("Message_Missing_Map", resourceCulture);
             }
         }
         

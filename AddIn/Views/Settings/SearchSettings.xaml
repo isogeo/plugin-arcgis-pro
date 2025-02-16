@@ -15,7 +15,7 @@
     </UserControl.Resources>
     <Grid>
         <GroupBox Header="{x:Static language:Resources.Search_settings}">
-            <Expander IsExpanded="False">
+            <Expander IsExpanded="True">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="1*"/>

@@ -225,6 +225,9 @@
   <data name="Dont_have_an_access" xml:space="preserve">
     <value>Vous n'avez pas d'accès?</value>
   </data>
+  <data name="Edit_metadata_online" xml:space="preserve">
+    <value>Editer sur Isogeo</value>
+  </data>
   <data name="Empty" xml:space="preserve">
     <value>Vide</value>
   </data>
@@ -392,6 +395,9 @@
   </data>
   <data name="Message_Metadata_Licenses" xml:space="preserve">
     <value>Licence</value>
+  </data>
+  <data name="Message_Missing_Map" xml:space="preserve">
+    <value>Ajoutez une carte afin de pouvoir y ajouter une nouvelle donnée.</value>
   </data>
   <data name="Message_Query_authentication_id_mandatory" xml:space="preserve">
     <value>Le champ ID est obligatoire</value>

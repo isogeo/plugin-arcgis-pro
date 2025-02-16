@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using Isogeo.Map.Models;
 
 namespace Isogeo.Map
 {
@@ -8,6 +9,6 @@ namespace Isogeo.Map
 
         public string GetMapExtent();
 
-        public Task AddLayer(DataType.ServiceType serviceType);
+        public Task AddLayer(IsogeoData isogeoData);
     }
 }
