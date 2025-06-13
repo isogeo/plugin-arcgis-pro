@@ -28,7 +28,7 @@ namespace Isogeo.Network
             this.od = od;
             this.rel = rel;
             this.offset = offset;
-            lang = Thread.CurrentThread.CurrentCulture.Name;
+            lang = System.Threading.Thread.CurrentThread.CurrentUICulture.TwoLetterISOLanguageName;
             this.box = box;
         }
     }

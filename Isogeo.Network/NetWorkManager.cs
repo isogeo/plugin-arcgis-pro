@@ -339,7 +339,7 @@ namespace Isogeo.Network
                     ("_include", "limitations"),
                     ("_include", "keywords"),
                     ("_include", "specifications"),
-                    ( "_lang", CultureInfo.InstalledUICulture.TwoLetterISOLanguageName )
+                    ( "_lang", System.Threading.Thread.CurrentThread.CurrentUICulture.TwoLetterISOLanguageName )
                 };
 
                 url += includes.Aggregate("?", (current,
