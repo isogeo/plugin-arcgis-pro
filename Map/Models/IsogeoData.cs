@@ -1,6 +1,6 @@
-﻿namespace Isogeo.Map.DataType
+﻿namespace Isogeo.Map.Models
 {
-    public class ServiceType
+    public class IsogeoData
     {
         public string Type { get; }
         public string Title { get; }
@@ -9,7 +9,7 @@
         public string Creator { get; }
         public string Id { get; }
 
-        public ServiceType(string type, string title, string url, string name, string creator, string id)
+        public IsogeoData(string type, string title, string url, string name, string creator, string id)
         {
             Type = type;
             Title = title;

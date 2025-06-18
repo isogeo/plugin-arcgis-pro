@@ -28,6 +28,8 @@ namespace Isogeo.Utils.ConfigurationManager
         {
             if (Config.UrlHelp == "http://help.isogeo.com/arcgispro/fr/") // Suppress old help url on existing config for existing users
                 Config.UrlHelp = (GetAppConfig(GetType().Assembly.Location)).UrlHelp;
+            if (string.IsNullOrEmpty(Config.AppUrl)) // Fill empty app url with  default config
+                Config.AppUrl = (GetAppConfig(GetType().Assembly.Location)).AppUrl;
         }
 
         private void InitConfigurationOnDesktop()

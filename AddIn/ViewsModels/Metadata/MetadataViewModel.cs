@@ -10,11 +10,20 @@ using System.Globalization;
 using System;
 using Isogeo.Models;
 using Isogeo.AddIn.Models.Metadata;
+using System.Windows.Input;
+using MVVMPattern.RelayCommand;
+using Isogeo.AddIn.Views.Search.AskNameWindow;
+using Isogeo.Utils.LogManager;
+using System.Diagnostics;
+using ArcGIS.Desktop.Framework.Dialogs;
+using Isogeo.Utils.ConfigurationManager;
 
 namespace Isogeo.AddIn.ViewsModels.Metadata
 {
     class MetadataViewModel : ViewModelBase
     {
+        private readonly IConfigurationManager _configurationManager;
+
         public void NotifyProperties(List<string> properties)
         {
             foreach (var property in properties)
@@ -57,8 +66,9 @@ namespace Isogeo.AddIn.ViewsModels.Metadata
             }
         }
 
-        public MetadataViewModel()
+        public MetadataViewModel(IConfigurationManager configurationManager)
         {
+            _configurationManager = configurationManager;
             IsSubscribe = false;
             ContactItemsList = new ObservableCollection<Contact>();
             OtherContactItemsList = new ObservableCollection<Contact>();
@@ -366,6 +376,42 @@ namespace Isogeo.AddIn.ViewsModels.Metadata
                 var limitationItem = new LimitationItem();
                 limitationItem.Init(limitation);
                 LimitationItemsList.Add(limitationItem);
+            }
+        }
+
+        private ICommand _editMetadataOnlineCommand;
+        public ICommand EditMetadataOnlineCommand
+        {
+            get
+            {
+                return _editMetadataOnlineCommand ??= new RelayCommand(
+                    x => OpenMetadataEditionOnline(),
+                    y => CanEditMetadataOnline());
+            }
+        }
+
+        private static bool CanEditMetadataOnline()
+        {
+            return true;
+        }
+
+        private void OpenMetadataEditionOnline()
+        {
+            string metadataEditionUrl = null;
+            try
+            {
+                if (_currentResult.Creator?.Id == null || _currentResult.Id == null)
+                    throw new Exception($"missing metadata Id(s) (creator Id: '{_currentResult.Creator?.Id}', " +
+                        $"metadata Id: '{_currentResult.Id}')");
+                
+                metadataEditionUrl += $"{_configurationManager.Config.AppUrl}groups/{_currentResult.Creator.Id}" +
+                                      $"/resources/{_currentResult.Id}/identification";
+                Process.Start(new ProcessStartInfo(metadataEditionUrl) { UseShellExecute = true });
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(Isogeo.Language.Resources.Error_Open_External_Tool, "Isogeo");
+                Log.Logger.Error(ex.Message);
             }
         }
     }

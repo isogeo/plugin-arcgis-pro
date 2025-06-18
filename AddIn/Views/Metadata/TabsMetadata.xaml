@@ -58,6 +58,63 @@
                     </Setter.Value>
                 </Setter>
             </Style>
+            <Style TargetType="Button" x:Key="EditMetadataOnlineButton">
+                <Setter Property="FontSize" Value="14"/>
+                <Setter Property="Background" Value="{DynamicResource MainButtonsColorBrush}" />
+                <Setter Property="Foreground" Value="{DynamicResource MainFontColorBrush}"/>
+                <Setter Property="FontWeight" Value="DemiBold" />
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type Button}">
+                            <Border BorderThickness="0" Background="{TemplateBinding Background}">
+                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+                <Style.Triggers>
+                    <Trigger Property="IsMouseOver" Value="True">
+                        <Setter Property="Background" Value="{DynamicResource HighlightBackgroundButtonBrush}"/>
+                        <Setter Property="Foreground" Value="{DynamicResource HighlightFontButtonBrush}"/>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type Button}">
+                                    <Border BorderThickness="0" Background="{TemplateBinding Background}">
+                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Trigger>
+                    <Trigger Property="IsEnabled" Value="false">
+                        <Setter Property="Background" Value="{DynamicResource DisableBackgroundColorBrush}"/>
+                        <Setter Property="TextElement.Foreground" Value="{DynamicResource DisableFontColorBrush}"/>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type Button}">
+                                    <Border BorderThickness="0" Background="{TemplateBinding Background}">
+                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+            <Style TargetType="TextBlock" x:Key="EditMetadataOnlineTextBlock">
+                <Setter Property="FontSize" Value="12"/>
+                <Setter Property="Foreground" Value="{DynamicResource MainFontColorBrush}"/>
+                <Setter Property="TextWrapping" Value="Wrap"/>
+                <Setter Property="TextAlignment" Value="Center"/>
+                <Style.Triggers>
+                    <DataTrigger Binding="{Binding RelativeSource={RelativeSource AncestorType=Button}, Path=IsMouseOver}" Value="True">
+                        <Setter Property="Foreground" Value="{DynamicResource HighlightFontButtonBrush}"/>
+                    </DataTrigger>
+                    <DataTrigger Binding="{Binding RelativeSource={RelativeSource AncestorType=Button}, Path=IsEnabled}" Value="False">
+                        <Setter Property="Foreground" Value="{DynamicResource DisableFontColorBrush}"/>
+                    </DataTrigger>
+                </Style.Triggers>
+            </Style>
         </ResourceDictionary>
     </UserControl.Resources>
     <Grid>
@@ -86,5 +143,19 @@
                 </TabItem>
             </TabControl>
         </DockPanel>
-        </Grid>
+        <Button x:Name="EditMetadataOnlineButton" 
+                HorizontalAlignment="Left" 
+                VerticalAlignment="Bottom"
+                Margin="10,0,0,15"
+                Padding="15,0,15,0"
+                Style="{DynamicResource EditMetadataOnlineButton}"
+                BorderThickness="0"
+                Height="50"
+                Width="80"
+                Command="{Binding EditMetadataOnlineCommand}">
+            <Border BorderBrush="{x:Null}" Height="Auto">
+                <TextBlock Padding="5,0,5,0" Text="{x:Static lang:Resources.Edit_metadata_online}"  Style="{DynamicResource EditMetadataOnlineTextBlock}"/>
+            </Border>
+        </Button>
+    </Grid>
 </UserControl>

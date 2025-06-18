@@ -61,5 +61,9 @@ namespace Isogeo.Utils.Configuration
         [XmlElement("apiUrl")]
         [JsonPropertyName("apiUrl")]
         public string? ApiUrl { get; set; }
+
+        [XmlElement("appUrl")]
+        [JsonPropertyName("appUrl")]
+        public string? AppUrl { get; set; }
     }
 }

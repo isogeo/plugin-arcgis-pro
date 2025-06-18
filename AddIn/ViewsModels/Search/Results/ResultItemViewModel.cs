@@ -9,7 +9,7 @@ using ArcGIS.Desktop.Framework.Threading.Tasks;
 using Isogeo.AddIn.Models;
 using Isogeo.AddIn.ViewsModels.Metadata;
 using Isogeo.Map;
-using Isogeo.Map.DataType;
+using Isogeo.Map.Models;
 using Isogeo.Models;
 using Isogeo.Models.API;
 using Isogeo.Network;
@@ -36,7 +36,7 @@ namespace Isogeo.AddIn.ViewsModels.Search.Results
         private readonly List<string> _vectorFormatList = new(new[] { "shp", "dxf", "dgn", "filegdb", "tab", "arcsde", "postgis" });
         private readonly List<string> _rasterFormatList = new(new[] { "esriasciigrid", "geotiff", "intergraphgdb", "jpeg", "png", "xyz", "ecw" });
 
-        private readonly List<ServiceType> _dataList = new();
+        private readonly List<IsogeoData> _dataList = new();
 
         private Views.Metadata.Metadata _metadataInstance;
         private MetadataViewModel _metadataViewModel;
@@ -171,7 +171,7 @@ namespace Isogeo.AddIn.ViewsModels.Search.Results
 
         }
 
-        private static ServiceType CreateServiceType(Result item)
+        private static IsogeoData CreateServiceType(Result item)
         {
             var type = " ";
             var title = " ";
@@ -193,10 +193,10 @@ namespace Isogeo.AddIn.ViewsModels.Search.Results
             if (item?.Id != null)
                 id = item.Id;
 
-            return new ServiceType(type, title, url, name, creator, id);
+            return new IsogeoData(type, title, url, name, creator, id);
         }
 
-        private static ServiceType CreateServiceType(Result itemResult, ServiceLayer item)
+        private static IsogeoData CreateServiceType(Result itemResult, ServiceLayer item)
         {
             var type = " ";
             var title = " ";
@@ -218,10 +218,10 @@ namespace Isogeo.AddIn.ViewsModels.Search.Results
             if (itemResult?.Id != null && item != null)
                 id = item.Id;
 
-            return new ServiceType(type, title, url, name, creator, id);
+            return new IsogeoData(type, title, url, name, creator, id);
         }
 
-        private static ServiceType CreateServiceType(Result itemResult, Layer layer)
+        private static IsogeoData CreateServiceType(Result itemResult, Layer layer)
         {
             var type = " ";
             var title = " ";
@@ -242,7 +242,7 @@ namespace Isogeo.AddIn.ViewsModels.Search.Results
                 creator = itemResult.Creator.Id;
             if (itemResult?.Id != null)
                 id = itemResult.Id;
-            return new ServiceType(type, title, url, name, creator, id);
+            return new IsogeoData(type, title, url, name, creator, id);
         }
 
         private void GetLinks()
@@ -255,7 +255,7 @@ namespace Isogeo.AddIn.ViewsModels.Search.Results
             if (_rasterFormatList.Contains(Result.Format))
             {
                 var item = CreateServiceType(Result);
-                _dataList.Add(new ServiceType("raster", item.Title, item.Url, item.Name, item.Creator, item.Id));
+                _dataList.Add(new IsogeoData("raster", item.Title, item.Url, item.Name, item.Creator, item.Id));
             }
 
             // This is the new association mode. The layer and service
@@ -341,7 +341,7 @@ namespace Isogeo.AddIn.ViewsModels.Search.Results
                 return false;
             item = resultDetails;
 
-            _metadataViewModel ??= new MetadataViewModel();
+            _metadataViewModel ??= new MetadataViewModel(_configurationManager);
 
             _metadataViewModel.RegisterMediator();
             if (_metadataInstance == null || !_metadataInstance.IsLoaded)
@@ -351,7 +351,7 @@ namespace Isogeo.AddIn.ViewsModels.Search.Results
                 Mediator.NotifyColleagues(MediatorEvent.ResultSelected, item);
 
                 _metadataInstance.MinWidth = 550;
-                _metadataInstance.MinHeight = 400;
+                _metadataInstance.MinHeight = 500;
             }
             Log.Logger.Info("Open Metadata");
             _metadataInstance.ShowDialog(); 
@@ -373,7 +373,7 @@ namespace Isogeo.AddIn.ViewsModels.Search.Results
             var currentService = _dataList.Count == 1 ? _dataList[0] : _dataList[CmbLayer.SelectedIndex];
 
             if (currentService != null && (currentService.Type?.ToUpper() == "ARCSDE" || currentService.Type?.ToUpper() == "POSTGIS"))
-                currentService = new ServiceType(currentService.Type, currentService.Title, _configurationManager?.Config?.FileSde, 
+                currentService = new IsogeoData(currentService.Type, currentService.Title, _configurationManager?.Config?.FileSde, 
                     currentService.Name, currentService.Creator, currentService.Id);
             QueuedTask.Run(() =>
             {

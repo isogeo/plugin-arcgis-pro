@@ -228,6 +228,9 @@
   <data name="Dont_have_an_access" xml:space="preserve">
     <value>Don't have an access?</value>
   </data>
+  <data name="Edit_metadata_online" xml:space="preserve">
+    <value>Edit in Isogeo</value>
+  </data>
   <data name="Empty" xml:space="preserve">
     <value>Empty</value>
   </data>
@@ -395,6 +398,9 @@
   </data>
   <data name="Message_Metadata_Licenses" xml:space="preserve">
     <value>Licenses</value>
+  </data>
+  <data name="Message_Missing_Map" xml:space="preserve">
+    <value>Add a new map first to add new dataset.</value>
   </data>
   <data name="Message_Query_authentication_id_mandatory" xml:space="preserve">
     <value>ID is mandatory</value>
